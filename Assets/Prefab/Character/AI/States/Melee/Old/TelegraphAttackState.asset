@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c0522a05e8edf40be3db4dc4e338f8, type: 3}
+  m_Name: TelegraphAttackState
+  m_EditorClassIdentifier: 
+  transitions:
+  - decision: {fileID: 11400000, guid: 636890ccd0bf93341a83d1ae2de3a7ff, type: 2}
+    trueState: {fileID: 11400000, guid: 6e0813c6487b8844c9ba33d202441381, type: 2}
+    falseState: {fileID: 11400000, guid: 1e253c61ccb72484f85c6364994563e2, type: 2}
+  actions:
+  - {fileID: 11400000, guid: 03c247255aba6c2499296ca726af300d, type: 2}
+  - {fileID: 11400000, guid: b98b130cea221ad4b838f5ecc149b65c, type: 2}

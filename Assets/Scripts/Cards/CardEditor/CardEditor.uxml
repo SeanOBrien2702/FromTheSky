@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
+>
+  <!-- Card -->
+  <engine:VisualElement class="container">
+    <engine:Label name="cardName" text="Card" class="title"/>
+    <engine:Label text="Flavour" class="heading"/>
+    <engine:VisualElement class="spriteContainer">
+      <engine:VisualElement class="spriteBackground"/>
+      <engine:VisualElement name="systemSprite" class="spriteImage"/>
+    </engine:VisualElement>
+    <editor:ObjectField name="systemSpriteField" label="Sprite" allow-scene-objects="false" class="text"/>
+    <engine:TextField name="flavourText" label="Flavour Text"/>
+
+    <engine:Label text="Mechanics" class="heading"/>   
+    <editor:IntegerField name="cardCost" label="Card Cost"/>
+    <editor:IntegerField name="cardRange" label="Card Range"/>
+    <engine:Toggle name="cardAtomize" label="Atomize"/>
+    <editor:EnumField name="cardTargeting" label="Targeting"/>
+    <editor:EnumField name="cardType" label="Type"/>
+    <editor:EnumField name="cardRarity" label="Rarity"/>
+    <editor:EnumField name="cardClass" label="Class"/>
+    
+    <engine:Label text="Effects" class="heading"/>
+    <!-- effectlist will contain the effect sub-inspectors -->
+    <engine:VisualElement name="effectList"/>
+    <editor:EnumField name="effectType" label="Effect Type"/>
+    <engine:Button text="Add new effect" name="btnAddNew"/>
+    <engine:Button text="Remove all effects" name="btnRemoveAll" class ="removeAll"/>
+
+  </engine:VisualElement>
+</engine:UXML>

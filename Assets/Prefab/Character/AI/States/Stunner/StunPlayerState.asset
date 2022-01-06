@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c0522a05e8edf40be3db4dc4e338f8, type: 3}
+  m_Name: StunPlayerState
+  m_EditorClassIdentifier: 
+  transitions:
+  - decision: {fileID: 11400000, guid: 0abbdaa097c8b7f469e62a0860d508c3, type: 2}
+    trueState: {fileID: 11400000, guid: 8f1ab33ec83378b46a7804523df2e5bd, type: 2}
+    falseState: {fileID: 11400000, guid: e8f96bf87d77f1e40b4cb0279fce353d, type: 2}
+  actions:
+  - {fileID: 11400000, guid: 83d4ce0dd00a6b54ab0055942bad62ce, type: 2}
+  - {fileID: 11400000, guid: 15edaf8cca57ac24984d84a8b67ab19a, type: 2}
