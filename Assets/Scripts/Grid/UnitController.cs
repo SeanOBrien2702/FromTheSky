@@ -19,7 +19,7 @@ namespace SP.Characters
         PlayerDatabase playerDatabase;
         EnemyDatabase enemyDatabase;
         TurnController turnController;
-        ObjectiveController objectiveController;
+        Core.ObjectiveUI objectiveController;
         List<Character> enemyList = new List<Character>();
         List<StateMachine> stateMachines = new List<StateMachine>();
         List<Player> playerList = new List<Player>();
@@ -101,7 +101,7 @@ namespace SP.Characters
         {
             grid = GetComponent<HexGrid>();
             gridController = GetComponent<HexGridController>();
-            objectiveController = FindObjectOfType<ObjectiveController>().GetComponent<ObjectiveController>();
+            objectiveController = FindObjectOfType<Core.ObjectiveUI>().GetComponent<Core.ObjectiveUI>();
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             enemyDatabase = FindObjectOfType<EnemyDatabase>().GetComponent<EnemyDatabase>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();

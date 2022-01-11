@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShapeGenerator 
 {
-    PlanetShape shape;
+    public PlanetShape shape;
     INoiseFilter[] noiseFilters;
     public PlanetMinMax planetMinMax;
 
@@ -19,7 +19,7 @@ public class ShapeGenerator
         planetMinMax = new PlanetMinMax();
     }
 
-    public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere)
+    public float CalculateUnscaledElevation(Vector3 pointOnUnitSphere)
     {
         float firstLayerValue = 0;
         float elevation = 0;
@@ -41,8 +41,14 @@ public class ShapeGenerator
                 elevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
             }
         }
-        elevation = shape.radius * (1 + elevation);
         planetMinMax.AddValue(elevation);
-        return pointOnUnitSphere * elevation;
+        return elevation;
+    }
+
+    public float GetScaledElevation(float unscaledElevation)
+    {
+        float elevation = Mathf.Max(0, unscaledElevation);
+        elevation = shape.radius * (1 + elevation);
+        return elevation;
     }
 }

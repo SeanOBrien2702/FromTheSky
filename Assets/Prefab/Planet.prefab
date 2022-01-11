@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoUpdate: 1
-  resolution: 12
+  resolution: 256
   material: {fileID: 2100000, guid: 8873ccf87540dde47883aae5c3109f94, type: 2}
   shape: {fileID: 11400000, guid: 167e3aa81862f6840908c09669d89b81, type: 2}
   colour: {fileID: 11400000, guid: 2fa8e034469f1d842a05ef2ea33326cb, type: 2}
-  faceRenderMask: 0
+  faceRenderMask: 3
   meshFilters:
   - {fileID: 0}
   - {fileID: 0}

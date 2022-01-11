@@ -45,6 +45,8 @@ namespace SP.Core
         }
         #endregion
 
+        
+
         public virtual void UpdateObjective(Character enemy)
         {
             Debug.Log("check objective");

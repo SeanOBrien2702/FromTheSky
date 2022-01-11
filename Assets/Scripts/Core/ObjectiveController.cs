@@ -2,111 +2,37 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
-using SP.Characters;
-using SP.Cards;
-using System.Linq;
 
 namespace SP.Core
 {
     public class ObjectiveController : MonoBehaviour
     {
-        [SerializeField] TextMeshProUGUI objectiveLabel;
-        [SerializeField] TextMeshProUGUI optionalLabel;
-        [SerializeField] Transform objectivePanel;
-        [SerializeField] List<Objective> objectivesBuffer;
-        List<Objective> objectives = new List<Objective>();
-        Dictionary<Objective, TextMeshProUGUI> textList = new Dictionary<Objective, TextMeshProUGUI>();
-        int objectiveNum;
-        bool isLevelComplete = true;
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField] Objective[] objectivesList;
+        List<Objective> currentObjectives = new List<Objective>();
+        List<MapObjective> mapObjectives;
+        [SerializeField] int numObjectives = 3;
+
+        //TODO: change this from adding each objecive to procedurally selecting them
+        public List<Objective> GetRandomObjectives()
         {
-            objectiveNum = objectives.Count;
-            Debug.Log("objectives " + objectives.Count);
-            CreateObjectiveText();
+            currentObjectives.Clear();
+            foreach (var item in objectivesList)
+            {
+                currentObjectives.Add(item);
+            }
+            return currentObjectives;
         }
 
-        private void CreateObjectiveText()
+        internal void SetObjective(List<Objective> objectives)
         {
-            bool isFirstOptional = true;
-            //List<Objective> objectives = objectivesBuffer.OrderByDescending(item => item.IsOptional).ToList();
-            objectives = objectivesBuffer.OrderBy(item => item.IsOptional).ToList();
-            for (int i = 0; i < objectives.Count; i++)
-            {
-                if (isFirstOptional && objectives[i].IsOptional)
-                {
-                    isFirstOptional = false;
-                    TextMeshProUGUI optional = Instantiate(optionalLabel);
-                    optional.transform.SetParent(objectivePanel, false);
-                }
-                TextMeshProUGUI textMesh = Instantiate(objectiveLabel);
-                textMesh.text = objectives[i].SetDescription();
-                textMesh.transform.SetParent(objectivePanel, false);
-                textMesh.color = Color.white;
-                
-                textList.Add(objectives[i], textMesh);
-            }
-            Debug.Log("objectives " + objectives.Count);
+            currentObjectives.Clear();
+            Debug.Log("objectives " + objectives);
+            currentObjectives.AddRange(objectives);
         }
 
-        // Update is called once per frame
-        void Update()
+        internal List<Objective> GetObjectiveList()
         {
-
-        }
-
-        public void CheckObjectives(Card card)
-        {
-            foreach (var objective in objectives)
-            {
-                //if (objective is CardObjective)
-                objective.UpdateObjective(card);
-            }
-            ObjectiveUpdated();
-        }
-
-        internal void UpdateObjective(Character enemy)
-        {
-            foreach (var objective in objectives)
-            {
-                if (objective is KillObjective)
-                    objective.UpdateObjective(enemy);
-
-            }
-            ObjectiveUpdated();
-        }
-
-        void ObjectiveUpdated()
-        {
-            UpdateUI();
-            int objectivesComplete = 0;
-            int objectivesRequired = objectives.Count(item => item.IsOptional == false);
-            Debug.Log("objectivesRequired " + objectivesRequired);
-            Debug.Log("objectives " + objectives.Count);
-            foreach (var objective in objectives)
-            {
-                if(objective.IsComplete && !objective.IsOptional)
-                {
-                    objectivesComplete++;
-                    break;
-                }
-            }
-
-            if(objectivesComplete >= objectivesRequired)
-            {
-                SceneManager.LoadScene("DraftScene");
-            }
-        }
-
-        
-        void UpdateUI()
-        {
-            foreach (var objective in objectives)
-            {
-                textList[objective].text = objective.SetDescription();
-            }
+            return currentObjectives;
         }
     }
 }

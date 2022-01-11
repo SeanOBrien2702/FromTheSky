@@ -100,7 +100,7 @@ namespace SP.UI
                 players.Add(item.characterClass);
             }
             playerDatabase.SetPlayers(players);
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("HubScene");
         }
 
     }

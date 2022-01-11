@@ -10,12 +10,13 @@ public class Planet : MonoBehaviour
     [SerializeField] Material material;
     [SerializeField] public PlanetShape shape;
     [SerializeField] public PlanetColour colour;
-    [SerializeField] public enum FaceRenderMask {All, Top, Bottom, Left, Right, Front, Back };
+    [SerializeField] public enum FaceRenderMask {All, Top, Left, Right, Front, Back, Bottom};
     [SerializeField] public FaceRenderMask faceRenderMask;
 
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
+    Transform[] objectivePositions;
 
     ShapeGenerator shapeGenerator = new ShapeGenerator();
     ColourGenerator colourGenerator = new ColourGenerator();
@@ -24,11 +25,21 @@ public class Planet : MonoBehaviour
     [HideInInspector] public bool shapeFoldout;
     int numFaces = 6;
 
-    void Update()
+    private void Awake()
     {
-        transform.RotateAround(transform.position, Vector3.up, 20 * Time.deltaTime);
+        GeneratePlanet();
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Debug.Log("Test");
+            GetMissionPosition();
+        }
+    }
+
+
     void Initialize()
     {
         shapeGenerator.UpdateSettings(shape);
@@ -39,7 +50,7 @@ public class Planet : MonoBehaviour
         }
         terrainFaces = new TerrainFace[numFaces];
 
-        Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
+        Vector3[] directions = { Vector3.up, Vector3.left, Vector3.right, Vector3.forward, Vector3.back, Vector3.down};
 
         for (int i = 0; i < numFaces; i++)
         {
@@ -47,7 +58,6 @@ public class Planet : MonoBehaviour
             {
                 GameObject mesh = new GameObject("mesh");
                 mesh.transform.parent = transform;
-
                 mesh.AddComponent<MeshRenderer>();
                 meshFilters[i] = mesh.AddComponent<MeshFilter>();
                 meshFilters[i].sharedMesh = new Mesh();
@@ -70,6 +80,8 @@ public class Planet : MonoBehaviour
         }
         colourGenerator.UpdateElevation(shapeGenerator.planetMinMax);
     }
+
+
 
 
     void GenerateColours()
@@ -108,5 +120,16 @@ public class Planet : MonoBehaviour
             Initialize();
             GenerateColours();
         }
+    }
+
+    public Vector3 GetMissionPosition()
+    {
+        int randomFace = Random.Range(1, 5);
+        return terrainFaces[randomFace].GetVertex();
+    }
+
+    private void OnMouseOver()
+    {
+        Debug.Log("mouse over");
     }
 }

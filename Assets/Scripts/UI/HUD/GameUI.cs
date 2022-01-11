@@ -99,7 +99,7 @@ public class GameUI : MonoBehaviour
     {
         turnController.StartCombat();
         //turnCounter.SetActive(true);
-        
+        DisablePlayerInfo();
         Destroy(startCombatButton);
     }
 

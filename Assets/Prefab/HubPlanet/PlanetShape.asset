@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15941f5f9ae1ed5488f54bb8163806fe, type: 3}
   m_Name: PlanetShape
   m_EditorClassIdentifier: 
-  radius: 1
+  radius: 2
   noiseLayers:
   - enabled: 1
     firstLayerMask: 0
     noiseSettings:
       filterType: 0
       simpleNoiseSettings:
-        strength: 0.2
-        numLayers: 4
-        baseRoughness: 1.4
-        roughness: 2.44
-        persistence: 0.55
-        center: {x: 0, y: -0.27, z: 0}
-        minValue: 1.06
+        strength: 0.1
+        numLayers: 5
+        baseRoughness: 1.5
+        roughness: 2.5
+        persistence: 0.5
+        center: {x: 1, y: 0, z: 0}
+        minValue: 0.9
       ridgidNoiseSettings:
         strength: 1
         numLayers: 1
@@ -48,8 +48,8 @@ MonoBehaviour:
         center: {x: 0, y: 4.85, z: 0}
         minValue: 1.65
       ridgidNoiseSettings:
-        strength: 0.32
-        numLayers: 5
+        strength: 0.1
+        numLayers: 3
         baseRoughness: 0.55
         roughness: 1.7
         persistence: 0.15

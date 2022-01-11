@@ -9,6 +9,7 @@ public class PlanetColour : ScriptableObject
     //[SerializeField] public Gradient gradient;
     [SerializeField] public Material planetMaterial;
     public BiomeColourSettings biomeColourSettings;
+    public Gradient oceanColour;
 
     [System.Serializable]
     public class BiomeColourSettings
