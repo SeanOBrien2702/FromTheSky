@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010bf231d4ff80c49b883dfa1ec2b970, type: 3}
   m_Name: CreateCardEffect
   m_EditorClassIdentifier: 
+  effectFoldout: 0
   card: {fileID: 11400000, guid: c9988227826bd8a4b82a9519a52b5aec, type: 2}
   isTemporary: 0
   cardLocation: 0
-  numCopies: 1
+  numCopies: 2

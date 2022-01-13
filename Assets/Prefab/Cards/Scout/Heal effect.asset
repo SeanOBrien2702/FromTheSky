@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150cb148b5cae5846b18b372bddf8576, type: 3}
   m_Name: Heal effect
   m_EditorClassIdentifier: 
-  healAmount: 4
-  area: 0
-  range: 0
+  effectFoldout: 0
+  healAmount: 5

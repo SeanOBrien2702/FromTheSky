@@ -23,6 +23,7 @@ MonoBehaviour:
   type: 0
   targeting: 1
   isAtomize: 0
+  isTemporary: 0
   onDrawEffects: []
   effects:
   - {fileID: 11400000, guid: 2c94b82cb91e4474594328c4daeb9b26, type: 2}

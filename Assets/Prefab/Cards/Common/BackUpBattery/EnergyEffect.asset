@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e49ef71e723df55479d1dc5c80ac63e4, type: 3}
   m_Name: EnergyEffect
   m_EditorClassIdentifier: 
+  effectFoldout: 0
   energyGained: 1
