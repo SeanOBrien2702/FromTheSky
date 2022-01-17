@@ -8,6 +8,7 @@ namespace SP.Cards
 {
     public abstract class Effect : ScriptableObject
     {
+        [HideInInspector] public bool effectFoldout;
         public virtual void ActivateEffect()
         {
             Debug.Log("Base effect class");

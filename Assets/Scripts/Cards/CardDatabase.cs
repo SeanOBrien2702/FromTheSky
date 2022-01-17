@@ -16,6 +16,7 @@ namespace SP.Cards
         [SerializeField] List<Card> deck = new List<Card>();
         [SerializeField] List<CardBorder> cardBorders;
         [SerializeField] CharacterClassCards[] characterClassCards;
+
         CharacterClass[] classList;
         int cardID = 0;
 
@@ -84,6 +85,11 @@ namespace SP.Cards
         internal void AddCardToDeck(Card selectedCard)
         {
             deck.Add(selectedCard);
+        }
+
+        public void UpdateDatabase()
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }
