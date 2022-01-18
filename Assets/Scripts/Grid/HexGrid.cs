@@ -651,6 +651,7 @@ namespace FTS.Grid
 
         public List<HexCell> GetArea(HexCell fromCell, int radius)
         {
+            List<HexCell> area = new List<HexCell>();
             fromCell.SetHighlight(HighlightIndex.CantReachColour);
 
             HexCoordinates startPos = fromCell.Location;
@@ -664,13 +665,13 @@ namespace FTS.Grid
                     HexCell cell = GetCell(coordinates);
                     if (cell != null)
                     {
-                        cell.SetHighlight(HighlightIndex.CantReachColour);
+                        //cell.SetHighlight(HighlightIndex.CantReachColour);
                         Debug.Log("Cell found: " + cell.Location);
-                        currentArea.Add(cell);
+                        area.Add(cell);
                     }
                 }
             }
-            return currentArea;
+            return area;
         }
 
         public void ShowArea(HexCell fromCell, int range, int radius)

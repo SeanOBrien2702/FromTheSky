@@ -58,7 +58,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 144768c176115d245b49c90e56f17d6f, type: 2}
   - {fileID: 11400000, guid: 25e4dda1a873bd7478f3662c4e8165f2, type: 2}
   - {fileID: 11400000, guid: 90621107479c2c149a092f425f51f4f6, type: 2}
-  - {fileID: 11400000, guid: e5eaad70fa5f6f54791ab4be85b118c6, type: 2}
+  - {fileID: 11400000, guid: cbdb5639f5f64404688ff5773a9409ee, type: 2}
   cardBorders:
   - characterClass: 0
     border: {fileID: 21300000, guid: 8136f43cf7e56da4f84bfd88bbe775c0, type: 3}

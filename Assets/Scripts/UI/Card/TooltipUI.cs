@@ -18,7 +18,8 @@ public class TooltipUI : MonoBehaviour
         {"energy", "Resource used to play cards"},
         {"armour", "Reduce damage taken for the turn"},
         {"barrier", "Absorb all damage from the next attack"},
-        {"temporary", "Atomized when played or at end of turn"}
+        {"temporary", "Atomized when played or at end of turn"},
+        {"heat", "Deal damage to all units around equal to heat than reduce damage by one"},
     };
     // Start is called before the first frame update
     Vector2 padding = new Vector2(8, 8);
