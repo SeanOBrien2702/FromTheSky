@@ -1,11 +1,11 @@
 #region Using Statements
-using SP.Turns;
+using FTS.Turns;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     public class StateController : MonoBehaviour
     {

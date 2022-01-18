@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 #endregion
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     [CreateAssetMenu(menuName = "PluggableAI/State")]
     public class State : ScriptableObject

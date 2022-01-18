@@ -1,4 +1,4 @@
-namespace SP.Cards
+namespace FTS.Cards
 {
     public enum DraftArchetypes
     {

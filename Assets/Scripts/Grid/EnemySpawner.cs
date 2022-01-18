@@ -1,11 +1,11 @@
 #region Using Statements
-using SP.Characters;
+using FTS.Characters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Turns;
+using FTS.Turns;
 #endregion
-namespace SP.Grid
+namespace FTS.Grid
 {
     public class EnemySpawner : MonoBehaviour
     {

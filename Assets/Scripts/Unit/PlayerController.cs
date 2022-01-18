@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using SP.Cards;
+using FTS.Cards;
 using System.Collections.Generic;
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     public class PlayerController : Character//, Character
     {

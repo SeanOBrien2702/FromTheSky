@@ -1,11 +1,11 @@
 ﻿#region Using Statements
-using SP.Turns;
+using FTS.Turns;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 #endregion
 
-namespace SP.UI
+namespace FTS.UI
 {
     public class TimeUI : MonoBehaviour
     {

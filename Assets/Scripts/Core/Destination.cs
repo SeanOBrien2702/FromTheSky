@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using SP.Grid;
+using FTS.Grid;
 
 
-namespace SP.Core
+namespace FTS.Core
 {
     //available
     [System.Serializable]

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using SP.Characters;
+using FTS.Characters;
 using TMPro;
 
 public class CharacterStatsUI : MonoBehaviour

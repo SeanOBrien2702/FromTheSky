@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SP.Events
+namespace FTS.Events
 {
     [System.Serializable]
     public abstract class Option : ScriptableObject

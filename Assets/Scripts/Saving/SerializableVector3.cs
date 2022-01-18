@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SP.Saving
+namespace FTS.Saving
 {
     [System.Serializable]
     public class SerializableVector3

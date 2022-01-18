@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using SP.Cards;
+using FTS.Cards;
 
 [CustomEditor(typeof(Card))]
 public class CardEditor : Editor

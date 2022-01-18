@@ -1,11 +1,12 @@
 ﻿#region Using Statements
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Cards;
+using FTS.Cards;
 using System.Linq;
+using System;
 #endregion
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     public class PlayerDatabase : MonoBehaviour
     {
@@ -22,6 +23,17 @@ namespace SP.Characters
             //players.Add(medicPrefab);
             //players.Add(scoutPrefab);
             //players.Add(tankPrefab);
+        }
+        #endregion
+
+        #region Public Methods
+        private void AddDefaultPlayers()
+        {
+
+            for (int i = 0; i < 3; i++)
+            {
+                players.Add(playerPrefabs[i]);
+            }
         }
         #endregion
 
@@ -46,6 +58,10 @@ namespace SP.Characters
 
         internal CharacterClass[] GetPlayerClasses()
         {
+            if (players.Count <= 0)
+            {
+                AddDefaultPlayers();
+            }
             CharacterClass[] classList = new CharacterClass[players.Count];
             int index = 0;
             foreach (var item in players)
@@ -60,7 +76,11 @@ namespace SP.Characters
         }
 
         internal Player GetUnplacedCharacter(List<Player> placedPlayers)
-        {
+        { 
+            if(players.Count <= 0)
+            {
+                AddDefaultPlayers();
+            }
             return players.Where(item => !placedPlayers
                           .Any(item2 => item2.CharacterClass == item.CharacterClass))
                           .FirstOrDefault();

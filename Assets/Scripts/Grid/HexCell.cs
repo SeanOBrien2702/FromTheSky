@@ -1,14 +1,14 @@
 ﻿#region Using Statements
-using SP.Characters;
-using SP.Core;
-using SP.UI;
+using FTS.Characters;
+using FTS.Core;
+using FTS.UI;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 #endregion
 
-namespace SP.Grid
+namespace FTS.Grid
 {
     public enum HighlightIndex
     {

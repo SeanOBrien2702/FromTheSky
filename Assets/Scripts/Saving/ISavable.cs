@@ -1,4 +1,4 @@
-﻿namespace SP.Saving
+﻿namespace FTS.Saving
 {
     public interface ISaveable
     {

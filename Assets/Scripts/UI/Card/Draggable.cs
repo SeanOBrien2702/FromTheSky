@@ -1,11 +1,11 @@
 ﻿#region Using Statements
-using SP.Cards;
+using FTS.Cards;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 #endregion
 
-namespace SP.UI
+namespace FTS.UI
 {
     public class Draggable : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
     {

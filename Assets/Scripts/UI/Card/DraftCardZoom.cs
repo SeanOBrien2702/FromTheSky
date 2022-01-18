@@ -2,7 +2,7 @@
 using UnityEngine;
 #endregion
 
-namespace SP.UI
+namespace FTS.UI
 {
     public class DraftCardZoom : MonoBehaviour
     {

@@ -1,11 +1,11 @@
 ﻿#region Using Statements
 using UnityEngine;
-using SP.Cards;
+using FTS.Cards;
 using System.Collections.Generic;
 using System;
 #endregion
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     public class Player : Character
     {

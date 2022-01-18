@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using SP.Characters;
+using FTS.Characters;
 using UnityEngine.EventSystems;
 using System;
 
-namespace SP.UI
+namespace FTS.UI
 {
     public class CharacterInfo : MonoBehaviour
     {

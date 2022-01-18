@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using SP.Characters;
+using FTS.Characters;
 
 public enum SupportType
 {
     cardDraw,
 }
 
-//namespace SP.Cards
+//namespace FTS.Cards
 //{
 //    [System.Serializable]
 //    [CreateAssetMenu(menuName = "Card/Support", fileName = "Support.asset")]

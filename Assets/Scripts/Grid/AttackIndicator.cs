@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Characters;
+using FTS.Characters;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace SP.Grid
+namespace FTS.Grid
 {
     public class AttackIndicator : INotifyCollectionChanged, INotifyPropertyChanged
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SP.Core
+namespace FTS.Core
 {
     public class ObjectiveGenerator : MonoBehaviour
     {

@@ -6,7 +6,7 @@ public enum EventType
     Exploration, Population, Resources, Special
 }
 
-namespace SP.Events
+namespace FTS.Events
 {
     public class EventController : MonoBehaviour
     {

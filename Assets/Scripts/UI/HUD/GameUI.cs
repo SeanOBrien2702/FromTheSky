@@ -1,7 +1,7 @@
 ﻿#region Using Statements
-using SP.Cards;
-using SP.Characters;
-using SP.Turns;
+using FTS.Cards;
+using FTS.Characters;
+using FTS.Turns;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

@@ -2,15 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Grid;
-using SP.Turns;
-using SP.Core;
+using FTS.Grid;
+using FTS.Turns;
+using FTS.Core;
 using System;
 using UnityEngine.SceneManagement;
 using System.Linq;
 #endregion
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     public class UnitController : MonoBehaviour
     {
@@ -27,7 +27,7 @@ namespace SP.Characters
         [Range(1, 10)]
         [SerializeField] int enemiesToSpawn = 5;
 
-        [SerializeField] SP.UI.CharacterInfo characterInfo;
+        [SerializeField] FTS.UI.CharacterInfo characterInfo;
 
         [Header("Unit prefabs")]
         [SerializeField] Character vehiclePrefab;

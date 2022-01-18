@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Turns;
+using FTS.Turns;
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     [CreateAssetMenu(menuName = "PluggableAI/Decisions/OutsideAttackRange")]
     public class OutsideAttackRangeDecision : Decision

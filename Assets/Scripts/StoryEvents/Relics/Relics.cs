@@ -10,7 +10,7 @@ public enum RelicRarity
 public class Relic : ScriptableObject
 {
     public Sprite image;
-    public string name;
+    public string relicName;
     public string description;
     public RelicRarity rarity;
 

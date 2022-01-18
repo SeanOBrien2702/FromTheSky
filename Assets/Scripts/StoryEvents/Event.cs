@@ -4,7 +4,7 @@ public enum EventRarity
 {
     common, uncommon, rare
 }
-namespace SP.Events
+namespace FTS.Events
 {
     //available
     [System.Serializable]

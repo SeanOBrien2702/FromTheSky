@@ -1,9 +1,9 @@
 ﻿#region Using Statements
 using UnityEngine;
-using SP.Cards;
+using FTS.Cards;
 #endregion
 
-namespace SP.UI
+namespace FTS.UI
 {
     //[RequireComponent(typeof(Draggable))]
     public class CardZoom : MonoBehaviour

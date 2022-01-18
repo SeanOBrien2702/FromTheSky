@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SP.Core
+namespace FTS.Core
 {
     public class PersistentObjects : MonoBehaviour
     {

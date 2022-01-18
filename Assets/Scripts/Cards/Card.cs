@@ -1,10 +1,10 @@
 ﻿#region Using Statements
-using SP.Characters;
+using FTS.Characters;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
 
-namespace SP.Cards
+namespace FTS.Cards
 {
     [System.Serializable]
     [CreateAssetMenu(menuName = "Card", fileName = "Card.asset")]

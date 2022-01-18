@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Characters;
-using SP.Grid;
+using FTS.Characters;
+using FTS.Grid;
 
-namespace SP.Cards
+namespace FTS.Cards
 {
     [System.Serializable]
     [CreateAssetMenu(menuName = "Effect/Move", fileName = "MoveEffect.asset")]

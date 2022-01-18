@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using SP.Characters;
+using FTS.Characters;
 #endregion
 
-namespace SP.Cards
+namespace FTS.Cards
 {
     public class HandController : MonoBehaviour
     {

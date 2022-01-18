@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-namespace SP.Core
+namespace FTS.Core
 {
     public class MapObjective : MonoBehaviour
     {

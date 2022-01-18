@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SP.Core
+namespace FTS.Core
 {
     public class ObjectiveController : MonoBehaviour
     {
@@ -32,6 +32,10 @@ namespace SP.Core
 
         internal List<Objective> GetObjectiveList()
         {
+            if (currentObjectives.Count <= 0)
+            {
+                GetRandomObjectives();
+            }
             return currentObjectives;
         }
     }

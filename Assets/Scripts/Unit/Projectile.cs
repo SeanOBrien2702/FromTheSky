@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Characters;
+using FTS.Characters;
 
 public class Projectile : MonoBehaviour
 {

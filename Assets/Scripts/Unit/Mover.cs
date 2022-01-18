@@ -1,6 +1,6 @@
 ﻿#region Using Statements
-using SP.Grid;
-using SP.Turns;
+using FTS.Grid;
+using FTS.Turns;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using UnityEngine;
 #endregion
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     [RequireComponent(typeof(Character))]
     public class Mover : MonoBehaviour

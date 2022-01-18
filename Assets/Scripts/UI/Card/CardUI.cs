@@ -1,5 +1,5 @@
-﻿using SP.Cards;
-using SP.Characters;
+﻿using FTS.Cards;
+using FTS.Characters;
 using System;
 using UnityEngine;
 using UnityEngine.UI;

@@ -1,7 +1,7 @@
 ﻿#region Using Statements
-using SP.Cards;
-using SP.Core;
-using SP.Characters;
+using FTS.Cards;
+using FTS.Core;
+using FTS.Characters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using UnityEngine.UI;
 using System.Linq;
 #endregion
 
-namespace SP.Grid
+namespace FTS.Grid
 {
     public class HexGrid : MonoBehaviour
     {

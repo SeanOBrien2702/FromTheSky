@@ -1,9 +1,9 @@
 ﻿#region Using Statements
 using UnityEngine;
-using SP.Grid;
+using FTS.Grid;
 #endregion
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     public class Enemy : Character
     {

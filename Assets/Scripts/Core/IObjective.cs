@@ -1,4 +1,4 @@
-using SP.Cards;
+using FTS.Cards;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,9 +1,9 @@
 using UnityEngine;
-using SP.Grid;
-using SP.Cards;
+using FTS.Grid;
+using FTS.Cards;
 using System.Collections.Generic;
 
-namespace SP.Core
+namespace FTS.Core
 {
     //available
     [System.Serializable]
@@ -14,7 +14,7 @@ namespace SP.Core
         [SerializeField] int goldReward;
         [SerializeField] Card cardReward;
         [SerializeField] bool isOptional;
-        bool isComplete = false;
+        private bool isComplete = false;
         List<HexCell> locations = new List<HexCell>();
 
         #region Properties

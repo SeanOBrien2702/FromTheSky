@@ -1,16 +1,16 @@
 ﻿#region Using Statements
-using SP.Characters;
-using SP.Cards;
+using FTS.Characters;
+using FTS.Cards;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using SP.Turns;
+using FTS.Turns;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 #endregion
 
-namespace SP.Grid
+namespace FTS.Grid
 {
     public class HexGridController : MonoBehaviour
     {
@@ -349,7 +349,6 @@ namespace SP.Grid
 
         private HexDirection GetClosesPlayerDrection(Mover mover)
         {
-            HexDirection directionToFlee;
             Mover closetPlayer = null;
             int closesDistance = 1000;
             int distanceBuffer = 0;

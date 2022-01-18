@@ -1,10 +1,10 @@
 ﻿#region Using Statements
-using SP.Saving;
+using FTS.Saving;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 #endregion
 
-namespace SP.UI
+namespace FTS.UI
 {
     public class PauseUI : MonoBehaviour
     {

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using SP.Characters;
-using SP.Grid;
+using FTS.Characters;
+using FTS.Grid;
 using System;
 
-namespace SP.Cards
+namespace FTS.Cards
 {
     public class CardDatabase : MonoBehaviour
     {
@@ -85,11 +85,6 @@ namespace SP.Cards
         internal void AddCardToDeck(Card selectedCard)
         {
             deck.Add(selectedCard);
-        }
-
-        public void UpdateDatabase()
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

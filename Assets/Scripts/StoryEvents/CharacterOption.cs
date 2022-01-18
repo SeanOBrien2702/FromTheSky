@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SP.Events
+namespace FTS.Events
 {
     [System.Serializable]
     [CreateAssetMenu(menuName = "Events/Option/Character", fileName = "CharacterOption.asset")]

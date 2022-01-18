@@ -1,10 +1,10 @@
 ﻿#region Using Statements
-using SP.Grid;
+using FTS.Grid;
 using UnityEngine;
 using UnityEngine.UI;
 #endregion
 
-namespace SP.UI
+namespace FTS.UI
 {
     public class HexUI : MonoBehaviour
     {

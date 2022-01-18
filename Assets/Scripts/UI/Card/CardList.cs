@@ -1,8 +1,8 @@
-﻿using SP.Cards;
-using SP.Turns;
+﻿using FTS.Cards;
+using FTS.Turns;
 using UnityEngine;
 
-namespace SP.UI
+namespace FTS.UI
 {
     public class CardList : MonoBehaviour
     {

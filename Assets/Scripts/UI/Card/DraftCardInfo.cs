@@ -1,5 +1,5 @@
 ﻿#region Using Statements
-using SP.Cards;
+using FTS.Cards;
 using UnityEngine;
 using UnityEngine.UI;
 #endregion

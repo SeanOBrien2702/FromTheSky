@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SP.Grid
+namespace FTS.Grid
 {
     public class HexCellPriorityQueue
     {

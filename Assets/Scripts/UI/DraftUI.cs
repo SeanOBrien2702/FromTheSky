@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using SP.Cards;
-using SP.Characters;
+using FTS.Cards;
+using FTS.Characters;
 using System.Text.RegularExpressions;
 using UnityEngine.EventSystems;
 #endregion
 
-namespace SP.UI
+namespace FTS.UI
 {
     public class DraftUI : MonoBehaviour
     {

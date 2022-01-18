@@ -1,9 +1,9 @@
 using UnityEngine;
-using SP.Grid;
-using SP.Cards;
-using SP.Characters;
+using FTS.Grid;
+using FTS.Cards;
+using FTS.Characters;
 
-namespace SP.Core
+namespace FTS.Core
 {
     //available
     [System.Serializable]

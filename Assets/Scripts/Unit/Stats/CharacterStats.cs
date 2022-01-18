@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     [System.Serializable]
     [CreateAssetMenu(fileName = "CharacterStats", menuName = "Stats/characterStats")]

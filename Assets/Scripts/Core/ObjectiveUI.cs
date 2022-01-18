@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-using SP.Characters;
-using SP.Cards;
+using FTS.Characters;
+using FTS.Cards;
 using System.Linq;
 
-namespace SP.Core
+namespace FTS.Core
 {
     public class ObjectiveUI : MonoBehaviour
     {

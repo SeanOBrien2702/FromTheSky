@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace SP.Saving
+namespace FTS.Saving
 {
     [ExecuteAlways]
     public class SaveableEntity : MonoBehaviour

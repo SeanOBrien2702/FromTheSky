@@ -1,4 +1,4 @@
-namespace SP.Turns
+namespace FTS.Turns
 {
     public enum TurnPhases
     {

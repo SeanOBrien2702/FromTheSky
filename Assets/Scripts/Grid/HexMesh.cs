@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace SP.Grid
+namespace FTS.Grid
 {
 	[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 	public class HexMesh : MonoBehaviour

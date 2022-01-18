@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Cards;
-using SP.Characters;
+using FTS.Cards;
+using FTS.Characters;
 
-namespace SP.Core
+namespace FTS.Core
 {
     public abstract class Objective : ScriptableObject
     {

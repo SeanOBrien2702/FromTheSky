@@ -1,6 +1,6 @@
 ﻿#region Using Statements
-using SP.Cards;
-using SP.Turns;
+using FTS.Cards;
+using FTS.Turns;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using UnityEngine;
 
 #endregion
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     public class Character : MonoBehaviour, IComparable
     {

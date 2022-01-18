@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     public static class RandomNameGen
     {

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-namespace SP.Grid
+namespace FTS.Grid
 {
     public static class HexMetrics
     {

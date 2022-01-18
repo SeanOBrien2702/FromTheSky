@@ -1,7 +1,7 @@
 ﻿//using UnityEngine;
-//using SP.Characters;
+//using FTS.Characters;
 
-//namespace SP.Cards
+//namespace FTS.Cards
 //{
     
 //    public class Attack : Card//, ITargetable

@@ -1,4 +1,4 @@
-﻿namespace SP.Characters
+﻿namespace FTS.Characters
 {
     public class PlayerControllerBase
     {

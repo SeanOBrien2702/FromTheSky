@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SP.Grid
+namespace FTS.Grid
 {
     public class RandomCell : MonoBehaviour
     {

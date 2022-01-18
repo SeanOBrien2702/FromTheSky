@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Characters;
+using FTS.Characters;
 using System;
 
-namespace SP.Cards
+namespace FTS.Cards
 {
     public abstract class Effect : ScriptableObject
     {

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using SP.Characters;
+using FTS.Characters;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using System;
 using UnityEngine.EventSystems;
 
-namespace SP.UI
+namespace FTS.UI
 {
     public class CharacterSelectUI : MonoBehaviour
     {

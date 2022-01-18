@@ -1,12 +1,12 @@
 ﻿#region Using Statements
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Cards;
+using FTS.Cards;
 using System.Linq;
 using System;
 #endregion
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     public class EnemyDatabase : MonoBehaviour
     {

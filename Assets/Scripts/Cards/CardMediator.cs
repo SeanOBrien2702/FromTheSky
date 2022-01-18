@@ -1,5 +1,5 @@
-﻿using SP.Cards;
-using SP.Grid;
+﻿using FTS.Cards;
+using FTS.Grid;
 
 public interface ICardMediator
 {

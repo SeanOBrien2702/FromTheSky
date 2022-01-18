@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using SP.Grid;
-using SP.Turns;
+using FTS.Grid;
+using FTS.Turns;
 #endregion
 
-namespace SP.Characters
+namespace FTS.Characters
 {
     public class StateMachine : MonoBehaviour
     {

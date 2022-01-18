@@ -1,12 +1,12 @@
 ﻿#region Using Statements
-using SP.Characters;
+using FTS.Characters;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 #endregion
 
-namespace SP.Turns
+namespace FTS.Turns
 {
     public class TurnController : MonoBehaviour
     {

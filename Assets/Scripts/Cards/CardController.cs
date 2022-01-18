@@ -1,7 +1,7 @@
 ﻿#region Using Statements
-using SP.Characters;
-using SP.Turns;
-using SP.Grid;
+using FTS.Characters;
+using FTS.Turns;
+using FTS.Grid;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 #endregion
 
-namespace SP.Cards
+namespace FTS.Cards
 {
     /*
     * CLASS:       CardController

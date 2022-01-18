@@ -1,4 +1,4 @@
-﻿namespace SP.Grid
+﻿namespace FTS.Grid
 {
     public enum HexStatus
     {

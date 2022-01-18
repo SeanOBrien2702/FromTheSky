@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Characters;
+using FTS.Characters;
 
-namespace SP.Cards
+namespace FTS.Cards
 {
     [System.Serializable]
     [CreateAssetMenu(menuName = "Effect/Create Card", fileName = "CreateCardEffect.asset")]

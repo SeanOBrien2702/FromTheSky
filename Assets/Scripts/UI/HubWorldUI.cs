@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 #endregion
 
-namespace SP.UI
+namespace FTS.UI
 {
     public class HubWorldUI : MonoBehaviour
     {

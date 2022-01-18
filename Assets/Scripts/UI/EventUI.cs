@@ -1,5 +1,5 @@
 ﻿#region Using Statements
-using SP.Events;
+using FTS.Events;
 using UnityEngine;
 using UnityEngine.UI;
 #endregion
@@ -14,7 +14,7 @@ public class EventUI : MonoBehaviour
     [SerializeField] Button option1;
     [SerializeField] Button option2;
     [SerializeField] Button option3;
-    SP.Events.Event newEvent;
+    FTS.Events.Event newEvent;
 
     #region MonoBehaviour Callbacks
     void Awake()

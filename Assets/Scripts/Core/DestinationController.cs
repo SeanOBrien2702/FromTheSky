@@ -1,14 +1,14 @@
 ﻿#region Using Statements
-using SP.Grid;
+using FTS.Grid;
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Cards;
+using FTS.Cards;
 using System.Linq;
 using UnityEngine.SceneManagement;
 #endregion
 
 
-namespace SP.Core
+namespace FTS.Core
 {
     enum DestinationTypes
     {

@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SP.Characters;
-using SP.Grid;
-using SP.Cards;
+using FTS.Characters;
+using FTS.Grid;
+using FTS.Cards;
 
-namespace SP.Cards
+namespace FTS.Cards
 {
     [System.Serializable]
     [CreateAssetMenu(menuName = "Effect/Energy", fileName = "EnergyEffect.asset")]

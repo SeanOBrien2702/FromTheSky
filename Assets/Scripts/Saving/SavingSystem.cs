@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SP.Saving
+namespace FTS.Saving
 {
     public class SavingSystem : MonoBehaviour
     {
