@@ -1,5 +1,6 @@
 ﻿#region Using Statements
 using FTS.Characters;
+using FTS.Grid;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
@@ -168,6 +169,14 @@ namespace FTS.Cards
         }
 
         public void Play(Character target)
+        {
+            foreach (Effect effect in Effects)
+            {
+                effect.ActivateEffect(target);
+            }
+        }
+
+        public void Play(HexCell target)
         {
             foreach (Effect effect in Effects)
             {

@@ -332,7 +332,14 @@ namespace FTS.Cards
                     if (IsInRange(playedCard.Type) && IsTargetValid(playedCard.Targeting))
                     {
                         CardPlayed(playedCard);
-                        playedCard.Play(target.Unit);                       
+                        if (playedCard.Targeting == CardTargeting.Unit)
+                        {
+                            playedCard.Play(target.Unit);
+                        }
+                        else
+                        {
+                            playedCard.Play(target);
+                        }
                     }
                 }
                 else

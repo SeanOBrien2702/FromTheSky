@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FTS.Characters;
+using FTS.Grid;
 using System;
 
 namespace FTS.Cards
@@ -17,6 +18,11 @@ namespace FTS.Cards
         public virtual void ActivateEffect(Character target)
         {
             Debug.Log("Base effect class with target");
+        }
+
+        public virtual void ActivateEffect(HexCell target)
+        {
+            Debug.Log("Base effect class with ground target");
         }
 
         public virtual string GetEffectText(Player player)
