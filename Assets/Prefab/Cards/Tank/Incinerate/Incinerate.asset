@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
+  m_Name: Incinerate
+  m_EditorClassIdentifier: 
+  cardName: Incinerate
+  flavourText: 
+  image: {fileID: 0}
+  border: {fileID: 0}
+  cost: 1
+  range: 2
+  cardRarity: 1
+  characterClass: 0
+  type: 1
+  targeting: 0
+  isAtomize: 0
+  isTemporary: 0
+  onDrawEffects: []
+  effects:
+  - {fileID: 11400000, guid: f56143a6fadd9d54eaeac5ee3fcb43b8, type: 2}
+  - {fileID: 11400000, guid: bb8135f28d765434a87f034141f0e5fa, type: 2}
+  onDiscardEffects: []

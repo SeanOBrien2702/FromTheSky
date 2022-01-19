@@ -28,6 +28,11 @@ namespace FTS.Characters
                 UpdateHeatText(heatLevel);
             }
         }
+        public bool FriendlyFire
+        {
+            get { return friendlyFire; }
+            set { friendlyFire = value; }
+        }
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -73,6 +78,15 @@ namespace FTS.Characters
         }
         #endregion
         #region Public Methods
+        public void TriggerHeat(int numTimes)
+        {
+            int tempHeat = heatLevel;
+            for (int i = 0; i < numTimes; i++)
+            {
+                UpdateHeat();
+                heatLevel = tempHeat;
+            }
+        }
 
         public void UpdateHeatText(int heat)
         {

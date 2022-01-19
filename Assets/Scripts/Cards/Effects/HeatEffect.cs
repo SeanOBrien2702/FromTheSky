@@ -7,18 +7,17 @@ namespace FTS.Cards
 {
     [System.Serializable]
     [CreateAssetMenu(menuName = "Effect/Heat", fileName = "HeatEffect.asset")]
-    public class HeaTEffect : Effect
+    public class HeatEffect : Effect
     {
         [SerializeField] int heatAmount;
         public override void ActivateEffect(Character target)
         {
             target.GetComponent<Heat>().HeatLevel += heatAmount;
-            Debug.Log("Heal effect");
         }
 
         public override string GetEffectText(Player player)
         {
-            return "Gain " + heatAmount + " <link=heat><color=\"red\">energy</color></link>"; 
+            return "Gain " + heatAmount + " <link=heat><color=\"red\">heat</color></link>";
         }
 
     }

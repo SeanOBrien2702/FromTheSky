@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using FTS.Cards;
 using FTS.Turns;
+using MoreMountains.Feedbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace FTS.Characters
         [SerializeField] Sprite picture;
         [SerializeField] GameObject barrier;
         UnitController unitController;
+
+        public MMFeedbacks damageFeedback;
 
         string fullName;   
         bool busy = false;
@@ -155,6 +158,7 @@ namespace FTS.Characters
         #region Public Methods
         public void CalculateDamageTaken(int damage)
         {
+            damageFeedback?.PlayFeedbacks(transform.position ,damage);
             if (!hasBarrier)
             {
                 if (armour > 0)
