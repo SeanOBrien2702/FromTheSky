@@ -674,6 +674,25 @@ namespace FTS.Grid
             return area;
         }
 
+        internal List<HexCell> GetLine(Character player, HexCell target, int length)
+        {
+            HexCell buffer = player.GetComponent<Mover>().Location;
+            HexDirection direction = GetDirection(buffer, target);
+            List<HexCell> line = new List<HexCell>();
+
+            for (int i = 0; i < length; i++)
+            {
+                if(buffer.GetNeighbor(direction) == null)
+                {
+                    break;
+                }
+                line.Add(buffer.GetNeighbor(direction));
+                buffer = buffer.GetNeighbor(direction);        
+            }
+            return line;
+        }
+
+
         public void ShowArea(HexCell fromCell, int range, int radius)
         {
             HexCoordinates startPos = fromCell.Location;

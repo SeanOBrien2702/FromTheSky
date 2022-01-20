@@ -183,6 +183,14 @@ namespace FTS.Cards
                 effect.ActivateEffect(target);
             }
         }
+
+        public void Play(Character player, HexCell target)
+        {
+            foreach (Effect effect in Effects)
+            {
+                effect.ActivateEffect(player, target);
+            }
+        }
         #endregion
     }
 }

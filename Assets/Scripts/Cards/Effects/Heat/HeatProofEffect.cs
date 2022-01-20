@@ -6,7 +6,7 @@ using FTS.Characters;
 namespace FTS.Cards
 {
     [System.Serializable]
-    [CreateAssetMenu(menuName = "Effect/HeatProof", fileName = "HeatProofEffect.asset")]
+    [CreateAssetMenu(menuName = "Effect/Heat/HeatProof", fileName = "HeatProofEffect.asset")]
     public class HeatProofEffect : Effect
     {
         public override void ActivateEffect(Character target)

@@ -95,6 +95,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 
     private void ConfigureCardType(Player player, Card card)
     {
+        
         if (card.Type == CardType.Attack)
         {
             range.text = player.GetStat(Stat.AttackRange).ToString();
@@ -173,6 +174,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 
     public void FillCardUI(Player player, Card card)
     {
+        cost.text = card.Cost.ToString();
         //Debug.Log(card.Type);
         ConfigureCardType(player, card);
         FillCardText(player, card);

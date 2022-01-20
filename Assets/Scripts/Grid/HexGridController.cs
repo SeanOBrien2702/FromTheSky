@@ -315,12 +315,18 @@ namespace FTS.Grid
                         isValidTarget = true;
                     }
                 }
-                else if (targeting == CardTargeting.Ground)
+                else if (targeting == CardTargeting.GroundOnly)
                 {
                     if (!currentCell.Unit)
                     {
                         isValidTarget = true;
                     }
+                }
+                else if (targeting == CardTargeting.Ground || targeting == CardTargeting.FromPlayer)
+                {
+
+                    isValidTarget = true;
+                    
                 }
             }
             return isValidTarget;

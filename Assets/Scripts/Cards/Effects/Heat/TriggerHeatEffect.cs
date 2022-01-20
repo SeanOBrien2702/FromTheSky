@@ -6,7 +6,7 @@ using FTS.Characters;
 namespace FTS.Cards
 {
     [System.Serializable]
-    [CreateAssetMenu(menuName = "Effect/TriggerHeat", fileName = "TriggerHeatEffect.asset")]
+    [CreateAssetMenu(menuName = "Effect/Heat/TriggerHeat", fileName = "TriggerHeatEffect.asset")]
     public class TriggerHeatEffect : Effect
     {
         [SerializeField] int numTimes;

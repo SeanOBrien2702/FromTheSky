@@ -7,7 +7,7 @@ using FTS.Grid;
 namespace FTS.Cards
 {
     [System.Serializable]
-    [CreateAssetMenu(menuName = "Effect/AreaAttack", fileName = "AreasAttackEffect.asset")]
+    [CreateAssetMenu(menuName = "Effect/Attack/AreaAttack", fileName = "AreasAttackEffect.asset")]
     public class AreaAttackEffect : Effect
     {
         //public string effectText;

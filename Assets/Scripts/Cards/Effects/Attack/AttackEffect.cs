@@ -6,7 +6,7 @@ using FTS.Characters;
 namespace FTS.Cards
 {
     [System.Serializable]
-    [CreateAssetMenu(menuName = "Effect/Attack", fileName = "AttackEffect.asset")]
+    [CreateAssetMenu(menuName = "Effect/Attack/Attack", fileName = "AttackEffect.asset")]
     public class AttackEffect : Effect
     {
         //public string effectText;

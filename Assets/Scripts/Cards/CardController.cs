@@ -35,6 +35,7 @@ namespace FTS.Cards
         HexGridController grid;
         HexCell target;
 
+        Card lastCardPlayed;
         Card cardSelected;
         int energy;
         int totalEnergy = 4;
@@ -160,6 +161,7 @@ namespace FTS.Cards
             }
             gameUI.UpdateDeckList();
             OnCardPlayed?.Invoke();
+            lastCardPlayed = playedCard;
         }
 
         private void CardDiscarded(Card discardedCard)
@@ -327,26 +329,34 @@ namespace FTS.Cards
             if(HasEnergy(playedCard.Cost) && IsCorrectClass(playedCard.CharacterClass) && playedCard.Effects.Count > 0) 
             {
                 Debug.Log(playedCard.Id);
-                if (playedCard.Targeting != CardTargeting.None)
+                if (playedCard.Targeting == CardTargeting.None)
+                {
+                    Debug.Log("played non-targeting card");
+                    CardPlayed(playedCard);
+                    playedCard.Play(unitController.GetCurrentPlayer());
+                }
+                else
                 {
                     if (IsInRange(playedCard.Type) && IsTargetValid(playedCard.Targeting))
                     {
                         CardPlayed(playedCard);
-                        if (playedCard.Targeting == CardTargeting.Unit)
+                        switch (playedCard.Targeting)
                         {
-                            playedCard.Play(target.Unit);
-                        }
-                        else
-                        {
-                            playedCard.Play(target);
+                            case CardTargeting.None:
+                                break;
+                            case CardTargeting.Unit:
+                                playedCard.Play(target.Unit);
+                                break;
+                            case CardTargeting.Ground:
+                                playedCard.Play(target);
+                                break;
+                            case CardTargeting.FromPlayer:
+                                playedCard.Play(unitController.CurrentPlayer, target);
+                                break;
+                            default:
+                                break;
                         }
                     }
-                }
-                else
-                {
-                    Debug.Log("played non-targeting card");
-                    CardPlayed(playedCard);
-                    playedCard.Play(unitController.GetCurrentPlayer());                
                 }
             }
         }
@@ -460,6 +470,39 @@ namespace FTS.Cards
                 {
                     break;
                 }
+            }
+        }
+
+        internal void ReduceCost(CostTarget costTarget, int costChange)
+        {
+            switch (costTarget)
+            {
+                case CostTarget.AllCopies:
+                    foreach (var item in deck.FindAll(item => item.name == lastCardPlayed.name))
+                    {
+                        item.Cost += costChange;
+                        if(item.Cost <= 0)
+                        {
+                            item.Cost = 0;
+                        }
+                    }
+                    break;
+                case CostTarget.ThisCard:
+                    lastCardPlayed.Cost += costChange;
+                    if (lastCardPlayed.Cost <= 0)
+                    {
+                        lastCardPlayed.Cost = 0;
+                    }
+                    break;
+                case CostTarget.Random:
+                    List<Card> cardsInHand = deck.FindAll(item => item.Location == CardLocation.Hand && item.Cost > 0);
+                    if (cardsInHand != null)
+                    {
+                        cardsInHand[Random.Range(0, cardsInHand.Count - 1)].Cost += costChange;
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
