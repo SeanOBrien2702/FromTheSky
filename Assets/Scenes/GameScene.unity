@@ -1748,7 +1748,7 @@ PrefabInstance:
     - target: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
       propertyPath: grassland
       value: 
-      objectReference: {fileID: 2100000, guid: 600667110c6e84643aa090764af6c726, type: 2}
+      objectReference: {fileID: 2100000, guid: 63205fd0b3a0e04498355d67cea6fb23, type: 2}
     - target: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
       propertyPath: mountainModel
       value: 
@@ -1868,7 +1868,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653738a3634892046806d465e6e10831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numEnemiesToSpawm: 2
+  minSpawn: 1
+  maxSpawn: 3
+  spawnLimit: 6
 --- !u!114 &1867353417224850160 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,

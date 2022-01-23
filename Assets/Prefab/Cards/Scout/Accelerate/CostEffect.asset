@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CostEffect
   m_EditorClassIdentifier: 
   effectFoldout: 0
-  costTarget: 2
+  costTarget: 1
   costChange: -1

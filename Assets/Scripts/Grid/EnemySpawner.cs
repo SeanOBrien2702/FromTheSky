@@ -13,8 +13,11 @@ namespace FTS.Grid
         UnitController unitController;
         EnemyDatabase enemyDatabase;
         List<HexCell> spawnLocations = new List<HexCell>();
-        [SerializeField] int numEnemiesToSpawm = 3;
-        
+        [SerializeField] int minSpawn = 1;
+        [SerializeField] int maxSpawn = 3;
+        [SerializeField] int spawnLimit = 8;
+        int enemiesSpawned = 0;
+
         #region Properties
 
         #endregion
@@ -47,9 +50,14 @@ namespace FTS.Grid
         private void SetSpawnPositions()
         {
             spawnLocations.Clear();
-            //numEnemiesToSpawm = 1;//Random.Range(2, 5);
+            int numEnemiesToSpawm = Random.Range(minSpawn, maxSpawn);
             for (int i = 0; i < numEnemiesToSpawm; i++)
             {
+                enemiesSpawned++;
+                if(enemiesSpawned > spawnLimit)
+                {
+                    break;
+                }
                 HexCell cell = hexGrid.FindGridEdge();
                 cell.IsSpawn = true;
                 Debug.Log("spawn cell " +cell);

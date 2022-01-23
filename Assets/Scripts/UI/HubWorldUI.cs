@@ -2,25 +2,30 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using FTS.Core;
 #endregion
 
 namespace FTS.UI
 {
     public class HubWorldUI : MonoBehaviour
     {
-        [SerializeField] Button combatButton;
-        [SerializeField] Button eventButton;
-        [SerializeField] Button draftButton;
+        [SerializeField] ObjectiveGenerator objective;
+        [SerializeField] PlanetCamera planetCamera;
 
         #region Public Methods
-        public void Combat()
+        public void StartMisstion()
         {
-            SceneManager.LoadScene("GameScene");
+            //SceneManager.LoadScene("GameScene");
         }
 
-        public void Draft()
+        public void NextMission()
         {
-            SceneManager.LoadScene("DraftScene");
+            //planetCamera.PanTo();
+        }
+
+        public void PreviousMission()
+        {
+
         }
         #endregion
     }

@@ -9,6 +9,8 @@ namespace FTS.Core
         [SerializeField] MapObjective mapObjective;
         [SerializeField] int numObjectives;
         [SerializeField] Planet planet;
+        [SerializeField] GameObject startingLocationLbl;
+        List<MapObjective> mapObjectives = new List<MapObjective>();
         // Start is called before the first frame update
         void Start()
         {
@@ -19,9 +21,14 @@ namespace FTS.Core
                 mo.transform.position = planet.GetMissionPosition();
                 mo.transform.LookAt(Vector3.zero, Vector3.forward);
                 mo.SetObjectives();
-                
-
+                mapObjectives.Add(mo);
             }
+        }
+
+
+        public void GetCurrentObjective()
+        {
+
         }
     }
 }
