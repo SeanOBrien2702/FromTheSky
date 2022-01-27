@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4252405628363071365}
   - component: {fileID: 4252405628363069561}
   - component: {fileID: 4252405628363069562}
-  - component: {fileID: 4252405628363069563}
   - component: {fileID: 4252405628363071364}
+  - component: {fileID: 178278723}
   m_Layer: 5
   m_Name: ObjectivePanel
   m_TagString: Untagged
@@ -78,18 +78,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4252405628363069563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4252405628363071366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a29b3e64feba04b994f7a98f3f96e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4252405628363071364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +104,26 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &178278723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4252405628363071366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2e0ae00334af14e81a3ae3a2e78d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveLabel: {fileID: 2789740316842736042, guid: ef5bec49434df654a89b779fc73b8066,
+    type: 3}
+  optionalLabel: {fileID: 8266778633984989388, guid: 493f2a861bac08047b428004b83c964d,
+    type: 3}
+  objectivePanel: {fileID: 4252405628363071365}
+  objectivesBuffer:
+  - {fileID: 11400000, guid: d2506fa728d9fc347851371e8522a207, type: 2}
+  - {fileID: 11400000, guid: 352929bcc742116479339b064be8bcb3, type: 2}
 --- !u!1001 &5312817361267741626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,7 +134,12 @@ PrefabInstance:
     - target: {fileID: 8266778633984989386, guid: 493f2a861bac08047b428004b83c964d,
         type: 3}
       propertyPath: m_Name
-      value: ObjectiveLabel
+      value: ObjectiveTitle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8266778633984989388, guid: 493f2a861bac08047b428004b83c964d,
+        type: 3}
+      propertyPath: m_text
+      value: Objectives
       objectReference: {fileID: 0}
     - target: {fileID: 8266778633984989389, guid: 493f2a861bac08047b428004b83c964d,
         type: 3}

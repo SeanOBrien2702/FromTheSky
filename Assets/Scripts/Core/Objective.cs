@@ -57,6 +57,11 @@ namespace FTS.Core
             Debug.Log("check objective");
         }
 
+        public virtual void UpdateObjective()
+        {
+            Debug.Log("check objective");
+        }
+
 
         public virtual string GetEffectText()
         {

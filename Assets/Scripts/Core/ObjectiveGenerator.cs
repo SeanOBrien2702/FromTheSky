@@ -10,25 +10,37 @@ namespace FTS.Core
         [SerializeField] int numObjectives;
         [SerializeField] Planet planet;
         [SerializeField] GameObject startingLocationLbl;
-        List<MapObjective> mapObjectives = new List<MapObjective>();
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField] List<MapObjective> mapObjectives = new List<MapObjective>();
+        int currentIndex = 0;
+
+        public int CurrentIndex
         {
-            MapObjective buffer = mapObjective;
-            for (int i = 0; i < numObjectives; i++)
+            get
             {
-                MapObjective mo = Instantiate(mapObjective);
-                mo.transform.position = planet.GetMissionPosition();
-                mo.transform.LookAt(Vector3.zero, Vector3.forward);
-                mo.SetObjectives();
-                mapObjectives.Add(mo);
+                if (currentIndex > mapObjectives.Count - 1)
+                {
+                    currentIndex = 0;
+                }
+                if (currentIndex < 0)
+                {
+                    currentIndex = mapObjectives.Count - 1;
+                }
+                return currentIndex;
             }
+            set { currentIndex = value; }
+        }
+        public MapObjective NextObjective
+        {
+            get { currentIndex++; return mapObjectives[CurrentIndex]; }
         }
 
-
-        public void GetCurrentObjective()
+        public MapObjective PreviousObjective
         {
-
+            get { currentIndex--; return mapObjectives[CurrentIndex]; }
+        }
+        public MapObjective CurrentObjective
+        {
+            get { return mapObjectives[CurrentIndex]; }
         }
     }
 }

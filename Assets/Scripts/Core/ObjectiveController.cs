@@ -8,9 +8,11 @@ namespace FTS.Core
     public class ObjectiveController : MonoBehaviour
     {
         [SerializeField] Objective[] objectivesList;
+        [SerializeField] Objective[] optionalObjectivesList;
         List<Objective> currentObjectives = new List<Objective>();
         List<MapObjective> mapObjectives;
-        [SerializeField] int numObjectives = 3;
+        [SerializeField] int minNumObjectives = 3;
+        //[SerializeField] int 
 
         //TODO: change this from adding each objecive to procedurally selecting them
         public List<Objective> GetRandomObjectives()

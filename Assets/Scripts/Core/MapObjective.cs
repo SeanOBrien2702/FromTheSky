@@ -10,10 +10,10 @@ namespace FTS.Core
     {
         [SerializeField] Image image;
         ObjectiveController objectiveController;
-        List<Objective> objectives = new List<Objective>();
-        Vector3 position;
+        [SerializeField] List<Objective> objectives = new List<Objective>();
         [SerializeField] Sprite sprite;
-        int DangerLevel;
+        [SerializeField] Transform planet;
+        bool overPlanet = false;
 
         public List<Objective> Objectives
         {
@@ -21,18 +21,10 @@ namespace FTS.Core
             set { objectives = value; }  
         }
 
-        public Vector3 Position { get => position; set => position = value; }
-
-        bool overPlanet = false;
-
-        private void Awake()
-        {
-            objectiveController = FindObjectOfType<ObjectiveController>().GetComponent<ObjectiveController>();
-        }
-
         void Start()
         {
-            objectives.AddRange(objectiveController.GetRandomObjectives());
+            objectiveController = FindObjectOfType<ObjectiveController>().GetComponent<ObjectiveController>();
+            transform.LookAt(planet);
             image.sprite = sprite;
         }
 
@@ -48,7 +40,7 @@ namespace FTS.Core
 
         public void SetObjectives()
         {
-            //objectiveController.SetObjective(objectives);          
+            objectiveController.SetObjective(objectives);          
         }
 
         private void OnMouseEnter()

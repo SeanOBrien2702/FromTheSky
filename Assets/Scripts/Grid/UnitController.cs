@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FTS.Grid;
 using FTS.Turns;
+using FTS.UI;
 using FTS.Core;
 using System;
 using UnityEngine.SceneManagement;
@@ -19,7 +20,7 @@ namespace FTS.Characters
         PlayerDatabase playerDatabase;
         EnemyDatabase enemyDatabase;
         TurnController turnController;
-        Core.ObjectiveUI objectiveController;
+        ObjectiveUI objectiveController;
         List<Character> enemyList = new List<Character>();
         List<StateMachine> stateMachines = new List<StateMachine>();
         List<Player> playerList = new List<Player>();
@@ -101,7 +102,7 @@ namespace FTS.Characters
         {
             grid = GetComponent<HexGrid>();
             gridController = GetComponent<HexGridController>();
-            objectiveController = FindObjectOfType<Core.ObjectiveUI>().GetComponent<Core.ObjectiveUI>();
+            objectiveController = FindObjectOfType<ObjectiveUI>().GetComponent<ObjectiveUI>();
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             enemyDatabase = FindObjectOfType<EnemyDatabase>().GetComponent<EnemyDatabase>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
