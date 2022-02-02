@@ -10,6 +10,7 @@ TagManager:
   - HexUI
   - Ship
   - Card
+  - Zoom
   layers:
   - Default
   - TransparentFX

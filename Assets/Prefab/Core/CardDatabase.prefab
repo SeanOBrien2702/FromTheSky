@@ -53,10 +53,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 90621107479c2c149a092f425f51f4f6, type: 2}
   - {fileID: 11400000, guid: cbdb5639f5f64404688ff5773a9409ee, type: 2}
   - {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f, type: 2}
-  - {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f, type: 2}
-  - {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f, type: 2}
-  - {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f, type: 2}
-  - {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f, type: 2}
+  - {fileID: 11400000, guid: 1890214413c58dd49b4d4cc14a68b3d7, type: 2}
+  - {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4, type: 2}
+  - {fileID: 11400000, guid: f358c52452844584bbd95113602e6742, type: 2}
   cardBorders:
   - characterClass: 0
     border: {fileID: 21300000, guid: 8136f43cf7e56da4f84bfd88bbe775c0, type: 3}

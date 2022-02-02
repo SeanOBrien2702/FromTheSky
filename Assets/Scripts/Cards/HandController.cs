@@ -4,34 +4,74 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using FTS.Characters;
+using FTS.UI;
+using System;
+using UnityEngine.EventSystems;
 #endregion
 
 namespace FTS.Cards
 {
+    public class HandPrefab
+    { 
+        public GameObject CardGameObject;
+        //public GameObject Zoom;
+        public RectTransform ZoomArea;
+        public Draggable draggable;
+        public string CardID;
+        public Vector3 StartPosition;
+        public Vector3 ZoomPosition;
+        public int Tilt;
+        public int SiblingIndex;
+
+        public HandPrefab(GameObject gameObject, string cardID)
+        {
+            CardGameObject = gameObject;
+            //Zoom = collider;
+            CardID = cardID;
+            ZoomArea = gameObject.GetComponent<RectTransform>();
+            draggable = gameObject.GetComponent<Draggable>();
+            ZoomPosition = Vector3.zero;
+            StartPosition = Vector3.zero;
+            Tilt = 0;
+            SiblingIndex = 0;
+        }
+    }
+
     public class HandController : MonoBehaviour
     {
         [SerializeField] CardController cardController;
         [SerializeField] UnitController unitController;
         [SerializeField] GameObject cardPrefab;
+        [SerializeField] Transform targetingPosition;
 
         [Header("Hand Position")]
         [SerializeField] Transform deckPosition;
         [SerializeField] Transform discardPosition;
         [SerializeField] GameObject handPosition;
+        [SerializeField] GameObject zoomPoistion;
 
+        [Header("Zoom Settings")]
+        [SerializeField] int zoomHeight = 300;
+        [Range(1f, 1.5f)]
+        [SerializeField] float zoomInScaling = 1.1f;
 
-        Dictionary<string, GameObject> handPrefabs = new Dictionary<string, GameObject>();
+        public static event System.Action OnCardsSpaced = delegate { };
+        List<HandPrefab> handPrefabs = new List<HandPrefab>();
         List<CardUI> cardUI = new List<CardUI>();
         int spacingIncrement = 600;
         int spacingAdjustment = 35;
         float duration = 0.5f;
         int rotationIncrement = 6;
-        float scaleModifier = 1;
+
+        Vector3 zoomScale = new Vector3(1.25f, 1.25f, 1);
         Vector3 handScale = new Vector3(1f, 1f, 1);
-        Vector3 discardScale = new Vector3(0.25f, 0.25f, 1);
+        Vector3 discardScale = new Vector3(0.05f, 0.05f, 1);
         bool lerping = false;
+        bool isTargetingZoom = false;
+        float startZoom;
+        float endZoom;
 
-
+        int currentZoom = -1;
 
         #region Properties
         public bool LERPing  // property
@@ -56,6 +96,14 @@ namespace FTS.Cards
             CardController.OnCardDrawn -= CardController_OnCardDrawn;
         }
 
+        private void Update()
+        {
+            if(UpdateCurrentZoom())
+            {
+                if(currentZoom >= 0)
+                ZoomIn(currentZoom);
+            }
+        }
         #endregion
 
         #region Private Methods
@@ -85,14 +133,31 @@ namespace FTS.Cards
             }
             if (transform.gameObject.activeSelf)
             {
-                foreach (GameObject child in handPrefabs.Values)
+                foreach (HandPrefab child in handPrefabs)
                 {
-                    StartCoroutine(LerpToHand(child, new Vector3(position, -Mathf.Abs(position) / 10, 0), handScale, Quaternion.Euler(0, 0, rotation)));
-                    child.transform.SetAsFirstSibling();
+                    Vector3 startPosition = new Vector3(position, -Mathf.Abs(position) / 10, 0);
+                    child.StartPosition = startPosition;
+                    child.ZoomPosition = new Vector3(position, zoomHeight, 0);
+                    child.Tilt = rotation;
+                    child.CardGameObject.transform.SetAsFirstSibling();
+                    StartCoroutine(LerpCard(child.CardGameObject,
+                                              startPosition,
+                                              handScale,
+                                              Quaternion.Euler(0, 0, rotation)));
+
                     rotation += rotationIncrement;
-                    position -= increment;
-                }
+                    position -= increment;                              
+                }               
             }
+        }
+
+        private void CalculateHandPixelWidth()
+        {
+            Vector3[] v = new Vector3[4];
+            handPrefabs[0].ZoomArea.GetWorldCorners(v);
+            endZoom = v[2].x;
+            handPrefabs[handPrefabs.Count - 1].ZoomArea.GetWorldCorners(v);
+            startZoom = v[1].x;
         }
 
         private void UpdateHighlight()
@@ -116,10 +181,82 @@ namespace FTS.Cards
                         {
                             item.HighlightCard(true);
                         }
-
                     }
                 }
             }
+        }
+
+        internal void ZoomOut(int index)
+        {
+            if (!isTargetingZoom)
+            {
+                HandPrefab handPrefab = handPrefabs[index];
+                handPrefab.CardGameObject.transform.SetSiblingIndex(handPrefab.SiblingIndex);
+                StartCoroutine(LerpCard(handPrefab.CardGameObject,
+                                          handPrefab.StartPosition,
+                                          handScale,
+                                          Quaternion.Euler(0, 0, handPrefab.Tilt)));
+            }
+        }
+
+        internal void ZoomIn(int index)
+        {
+            if (!isTargetingZoom)
+            {
+                HandPrefab handPrefab = handPrefabs[index];
+                handPrefab.SiblingIndex = handPrefab.CardGameObject.transform.GetSiblingIndex();
+                handPrefab.CardGameObject.transform.SetAsLastSibling();
+                StartCoroutine(LerpCard(handPrefab.CardGameObject,
+                                          handPrefab.ZoomPosition,
+                                          zoomScale,
+                                          Quaternion.Euler(Vector3.zero)));
+            }
+        }
+
+        internal void Targeting(string cardID)
+        {
+            isTargetingZoom = true;
+            currentZoom = -1;
+            HandPrefab handPrefab = handPrefabs.Find(item => item.CardID == cardID);
+            handPrefab.SiblingIndex = handPrefab.CardGameObject.transform.GetSiblingIndex();
+            handPrefab.CardGameObject.transform.SetAsLastSibling();
+            StartCoroutine(LerpCard(handPrefab.CardGameObject,
+                          targetingPosition.position,
+                          zoomScale,
+                          Quaternion.Euler(Vector3.zero)));
+        }
+
+
+        private bool UpdateCurrentZoom()
+        {
+            int zoom = MouseOverZoom();
+            if (zoom != currentZoom)
+            {
+                if (currentZoom >= 0)
+                {
+                    ZoomOut(currentZoom);
+                }
+                currentZoom = zoom;
+                return true;
+            }
+            return false;
+        }
+
+        private int MouseOverZoom()
+        {
+            PointerEventData pointerData = new PointerEventData(EventSystem.current);
+            pointerData.position = Input.mousePosition;
+
+            int index = -1;
+            if (pointerData.position.y < 150 &&
+                pointerData.position.x > startZoom &&
+                pointerData.position.x < endZoom)
+            {
+                float position = (int)pointerData.position.x - endZoom;
+                float increment = (endZoom - startZoom) / handPrefabs.Count;
+                index = (int)Math.Floor(-position / increment);
+            }
+            return index;
         }
         #endregion
 
@@ -132,9 +269,13 @@ namespace FTS.Cards
 
         public void RemoveCard(Card card)
         {
-            StartCoroutine(LerpToDiscard(handPrefabs[card.Id], discardPosition.position, discardScale));
+            HandPrefab handPrefab = handPrefabs.Find(item => item.CardID == card.Id);
+            StartCoroutine(LerpToDiscard(handPrefab.CardGameObject,
+                                         discardPosition.position,
+                                         discardScale,
+                                         Quaternion.Euler(Vector3.zero)));
             cardUI.RemoveAll(item => item.CardID == card.Id);
-            handPrefabs.Remove(card.Id);
+            handPrefabs.Remove(handPrefab);
         }
 
         public void AddCard(Card card)
@@ -147,10 +288,11 @@ namespace FTS.Cards
 
             CardUI newCardUI = drawnCard.GetComponent<CardUI>();
             newCardUI.SaveCardData(card);
-            newCardUI.FillCardUI(unitController.CurrentPlayer, card);
-            
+            newCardUI.FillCardUI(unitController.CurrentPlayer, card);           
             cardUI.Add(newCardUI);
-            handPrefabs.Add(newCardUI.CardID, drawnCard);
+
+            HandPrefab handPrefab = new HandPrefab(drawnCard, newCardUI.CardID);
+            handPrefabs.Add(handPrefab);
             SpaceHand();
         }
 
@@ -158,7 +300,10 @@ namespace FTS.Cards
         {
             foreach (var item in handPrefabs)
             {
-                StartCoroutine(LerpToDiscard(item.Value, discardPosition.position, discardScale));
+                StartCoroutine(LerpToDiscard(item.CardGameObject,
+                                             discardPosition.position,
+                                             discardScale,
+                                             Quaternion.Euler(Vector3.zero)));
             }
             cardUI.Clear();
             handPrefabs.Clear();
@@ -168,10 +313,18 @@ namespace FTS.Cards
         {
             SpaceHand();
         }
+        
+        public void SetTagetingZoom(bool zoom)
+        {
+            isTargetingZoom = zoom;
+        }
         #endregion
 
         #region Coroutines
-        IEnumerator LerpToHand(GameObject gameObject, Vector3 targetPosition, Vector3 targetScale, Quaternion targetRotation)
+        IEnumerator LerpCard(GameObject gameObject,
+                               Vector3 targetPosition,
+                               Vector3 targetScale,
+                               Quaternion targetRotation)
         {
             lerping = true;
             float time = 0;
@@ -192,28 +345,21 @@ namespace FTS.Cards
             gameObject.transform.localScale = targetScale;
 
             lerping = false;
+            CalculateHandPixelWidth();
         }
-        IEnumerator LerpToDiscard(GameObject gameObject, Vector3 targetPosition, Vector3 targetScale)
+
+        IEnumerator LerpToDiscard(GameObject gameObject,
+                                   Vector3 targetPosition,
+                                   Vector3 targetScale,
+                                   Quaternion targetRotation)
         {
-
-            lerping = true;
-            float time = 0;
-            Vector3 startPosition = gameObject.transform.position;
-            Vector3 startScale = gameObject.transform.localScale;
-
-            while (time < duration)
-            {
-                gameObject.transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
-                gameObject.transform.localScale = Vector3.Lerp(startScale, targetScale, time / duration);
-                time += UnityEngine.Time.deltaTime;
-                yield return null;
-            }
-
-            gameObject.transform.position = targetPosition;
-            gameObject.transform.localScale = targetScale;
+            yield return LerpCard(gameObject,
+                                   targetPosition,
+                                   targetScale,
+                                   targetRotation);
             Destroy(gameObject);
-            lerping = false;
         }
+
         #endregion
 
         #region Events

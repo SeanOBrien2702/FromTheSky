@@ -3,6 +3,7 @@ using FTS.Cards;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using MoreMountains.Feedbacks;
 #endregion
 
 namespace FTS.UI
@@ -16,6 +17,7 @@ namespace FTS.UI
         CardUI cardInfo;
         Transform cardPrefab;
         RectTransform m_DraggingPlane;
+        RectTransform rectTransform;
 
         [Header("Arrow Properties")]
         [Range(0,1)]
@@ -25,16 +27,19 @@ namespace FTS.UI
         [SerializeField] GameObject arrowNode;
         [SerializeField] Transform arrowStart;
 
+        [Header("MM Feedbacks")]
+        [SerializeField] MMFeedbacks dragFeedback;
+        MMFeedbackPosition position;
 
         List<RectTransform> arrowNodes = new List<RectTransform>();
         List<Vector2> controlPoints = new List<Vector2>();       
         readonly List<Vector2> controlPointFactors = new List<Vector2> { new Vector2(-0.15f, 0.4f), new Vector2(0.05f, 0.7f) };
 
         Vector2 startPosition = new Vector2(Screen.height /2, Screen.width /2);
-
+        PointerEventData pointerData;
         string cardId;
-
         bool isDragging;
+        bool select = false;
 
         #region Properties
         public bool IsDragging
@@ -51,6 +56,8 @@ namespace FTS.UI
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
             handController = FindObjectOfType<HandController>().GetComponent<HandController>();
             cardInfo = GetComponent<CardUI>();
+            pointerData = new PointerEventData(EventSystem.current);
+            rectTransform = GetComponent<RectTransform>();
 
             for (int i = 0; i < arrowNodeNum; i++)
             {
@@ -64,6 +71,45 @@ namespace FTS.UI
             {
                 controlPoints.Add(Vector2.zero);
             }
+        }
+
+        private void Update()
+        {
+            //if (isDragging)
+            //{
+            //    if (cardPrefab != null)
+            //    {
+            //        if (cardInfo.Targeting != CardTargeting.None)
+            //        {
+            //            DrawTargetLine(pointerData);
+            //            cardController.CardSelecte(cardId);
+            //            //handController.Targeting();
+
+            //        }
+            //        else
+            //        {
+            //            //DrawTargetLine(pointerData);
+
+            //            //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //            //mousePosition.z = Camera.main.transform.position.z + Camera.main.nearClipPlane;
+            //            //transform.position = mousePosition;
+            //            //SetDraggedPosition(pointerData);
+            //        }
+            //    }
+            //    if (Input.GetMouseButtonDown(0))
+            //    {
+            //        if (select)
+            //        {
+            //            Debug.Log("select");
+            //            DeSelect();
+            //        }
+            //        else
+            //        {
+            //            select = true;
+            //        }
+
+            //    }
+            //}
         }
         #endregion
 
@@ -124,25 +170,72 @@ namespace FTS.UI
         #endregion
 
         #region Public Methods
+
+        //public void Selected()
+        //{
+        //    Debug.Log("selected " + cardId);
+        //    Cursor.visible = false;
+        //    isDragging = true;
+        //    startPosition = new Vector2(arrowStart.position.x, arrowStart.position.y);
+        //    if (cardInfo.Targeting != CardTargeting.None)
+        //    {
+        //        handController.Targeting(cardId);
+        //    }
+
+        //}
+
+        //public void DeSelect()
+        //{
+        //    Cursor.visible = true;
+        //    isDragging = false;
+        //    HideArrow();
+        //    cardController.CardSelected = null;
+        //    if (cardInfo.Targeting != CardTargeting.None)
+        //    {
+        //        cardController.PlayCard(cardInfo.CardID);
+        //    }
+        //    else
+        //    {
+        //        if (transform.position.y > Screen.height / 3)
+        //        {
+        //            cardController.PlayCard(cardInfo.CardID);
+        //        }
+        //        else
+        //        {
+        //            //handController.ReadjustHand();
+        //        }
+        //    }
+        //    handController.ReadjustHand();
+        //}
+
+
         public void OnBeginDrag(PointerEventData eventData)
         {
+            Debug.Log("drag");
             Cursor.visible = false;
             isDragging = true;
             startPosition = new Vector2(arrowStart.position.x, arrowStart.position.y);
+            handController.SetTagetingZoom(true);
+            if (cardInfo.Targeting != CardTargeting.None)
+            {
+                handController.Targeting(cardId);
+            }
         }
 
-        public void OnDrag(PointerEventData data)
+        public void OnDrag(PointerEventData eventData)
         {
             if (cardPrefab != null)
             {
                 if (cardInfo.Targeting != CardTargeting.None)
-                {                  
-                    DrawTargetLine(data);
+                {
+                    DrawTargetLine(eventData);
                     cardController.CardSelecte(cardId);
+
+
                 }
                 else
                 {
-                    SetDraggedPosition(data);
+                    SetDraggedPosition(eventData);
                 }
             }
         }
@@ -170,6 +263,7 @@ namespace FTS.UI
                 }
             }
             handController.ReadjustHand();
+            handController.SetTagetingZoom(false);
         }
         #endregion
     }

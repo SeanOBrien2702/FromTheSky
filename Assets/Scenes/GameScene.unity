@@ -780,7 +780,7 @@ PrefabInstance:
     - target: {fileID: 3226755744647181497, guid: 08262d8d7452b5e42a4d2b60c55085c0,
         type: 3}
       propertyPath: cardsPerTurn
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3226755744647181497, guid: 08262d8d7452b5e42a4d2b60c55085c0,
         type: 3}
@@ -902,6 +902,12 @@ Transform:
 --- !u!224 &841452813 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2164457978420791663, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+    type: 3}
+  m_PrefabInstance: {fileID: 1541824749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &953466033 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1506698619614158083, guid: 59eb9589a92fdbe4aa22a8a39b390710,
     type: 3}
   m_PrefabInstance: {fileID: 1541824749}
   m_PrefabAsset: {fileID: 0}
@@ -1041,6 +1047,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7545b57844e4c56489552a84bc67b195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1048778101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1048778102}
+  m_Layer: 5
+  m_Name: ZoomArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1048778102
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048778101}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 953466033}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1131064948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1171,6 +1212,41 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1131064948}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1163989364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1163989365}
+  m_Layer: 5
+  m_Name: Cards
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1163989365
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163989364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 953466033}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1269445595 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3379142128138919169, guid: df8cb08f736b8c64996c2bb978d5cc11,
@@ -1231,6 +1307,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1474630628}
     m_Modifications:
+    - target: {fileID: 156084693, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541824756, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
+      propertyPath: handPosition
+      value: 
+      objectReference: {fileID: 1163989364}
+    - target: {fileID: 1541824756, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
+      propertyPath: zoomPoistion
+      value: 
+      objectReference: {fileID: 1048778101}
     - target: {fileID: 1541824756, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
       propertyPath: cardController
       value: 
@@ -1239,6 +1327,22 @@ PrefabInstance:
       propertyPath: unitController
       value: 
       objectReference: {fileID: 1867353417224850158}
+    - target: {fileID: 2020077537, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2020077537, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2020077537, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2020077537, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2164457978420791651, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
       propertyPath: m_Name
@@ -1348,6 +1452,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3243454177486615417, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3828876756728279310, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}

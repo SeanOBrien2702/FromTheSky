@@ -240,8 +240,6 @@ namespace FTS.Cards
                     canDraw = false;
                 }
             }
-            //Debug.Log("can draw " + canDraw);
-            //Debug.Log("deck size " + deck.Count);
             return canDraw;
         }
 
