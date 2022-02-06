@@ -31,6 +31,7 @@ namespace FTS.Cards
         [SerializeField] CardTargeting targeting;
         [SerializeField] bool isAtomize;
         [SerializeField] bool isTemporary;
+        [SerializeField] bool isInherent;
 
         CardLocation location = CardLocation.Deck;
         [SerializeField] List<Effect> onDrawEffects;
@@ -54,6 +55,12 @@ namespace FTS.Cards
         {
             get { return isTemporary; }   // get method
             set { isTemporary = value; }  // set method
+        }
+
+        public bool IsInherent  // property
+        {
+            get { return isInherent; }   // get method
+            set { isInherent = value; }  // set method
         }
 
         public CardLocation Location  // property

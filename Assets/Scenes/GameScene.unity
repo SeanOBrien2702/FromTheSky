@@ -398,6 +398,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &64577419 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7643241335770023123, guid: 08262d8d7452b5e42a4d2b60c55085c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 641517307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &64577420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64577419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3824e282ad1a9af43a2b59f7a938b4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &77066835
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +798,7 @@ PrefabInstance:
     - target: {fileID: 3226755744647181497, guid: 08262d8d7452b5e42a4d2b60c55085c0,
         type: 3}
       propertyPath: cardsPerTurn
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3226755744647181497, guid: 08262d8d7452b5e42a4d2b60c55085c0,
         type: 3}
@@ -800,7 +818,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 641517307}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 64577419}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d0f99a9d2b4c7a44bf1e0e9c4b20a6f, type: 3}
@@ -1312,6 +1330,11 @@ PrefabInstance:
       value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 1541824756, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
+      propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 8644709138081513897, guid: ca7f2085fbc8a8443a51dd5e1354cd36,
+        type: 3}
+    - target: {fileID: 1541824756, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
       propertyPath: handPosition
       value: 
       objectReference: {fileID: 1163989364}
@@ -1343,10 +1366,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1978006776522080884, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 6878952632401437086, guid: 2fc81fc518b3afe4a8f2e3c19232788a,
+        type: 3}
+    - target: {fileID: 1978006776522080884, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: foretellPanel
+      value: 
+      objectReference: {fileID: 1870461404}
     - target: {fileID: 2164457978420791651, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
       propertyPath: m_Name
       value: GameHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164457978420791661, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2164457978420791663, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
@@ -1456,13 +1495,28 @@ PrefabInstance:
     - target: {fileID: 3243454177486615417, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3828876756728279310, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2756327585675602680}
+    - target: {fileID: 6554108119676895288, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6554108119676895288, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6554108119676895288, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 150
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
 --- !u!114 &1541824750 stripped
@@ -1513,6 +1567,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1870461404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1870461405}
+  - component: {fileID: 1870461407}
+  - component: {fileID: 1870461408}
+  m_Layer: 5
+  m_Name: ForetellPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1870461405
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870461404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 841452813}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.2, y: 0.3}
+  m_AnchorMax: {x: 0.8, y: 0.9}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1870461407
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870461404}
+  m_CullTransparentMesh: 1
+--- !u!114 &1870461408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870461404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 1
+  m_ChildScaleHeight: 1
+  m_ReverseArrangement: 0
 --- !u!1001 &1894780778
 PrefabInstance:
   m_ObjectHideFlags: 0

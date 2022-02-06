@@ -50,7 +50,6 @@ namespace FTS.UI
                 
                 textList.Add(objectives[i], textMesh);
             }
-            Debug.Log("objectives " + objectives.Count);
         }
 
         // Update is called once per frame

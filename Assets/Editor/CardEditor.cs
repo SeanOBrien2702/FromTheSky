@@ -17,20 +17,6 @@ public class CardEditor : Editor
         using (var check = new EditorGUI.ChangeCheckScope())
         {
             base.OnInspectorGUI();
-            //    if(check.changed)
-            //    {
-            //        planet.GeneratePlanet();
-            //    }
-            //}
-
-            //if(GUILayout.Button("Generate Planet"))
-            //{
-            //    planet.GeneratePlanet();
-            //}
-
-            //DrawSettingsEditor(planet.shape, planet.OnShapeUpdate, ref planet.shapeFoldout, ref shapeEditor);
-            //DrawSettingsEditor(planet.colour, planet.OnColourUpdate, ref planet.colourFoldout, ref colourEditor);
-
             foreach (var effect in card.OnDrawEffects)
             {
                 if (!effectEditors.ContainsKey(effect))
@@ -89,40 +75,8 @@ public class CardEditor : Editor
                 {
                     CreateCachedEditor(settings, null, ref editor);
                     editor.OnInspectorGUI();
-                    //if (check.changed)
-                    //{
-                    //    if (onUpdate != null)
-                    //    {
-                    //        onUpdate();
-                    //    }
-                    //}
                 }
             }
         }
     }
-
-    void DrawSettingsEditor(Object settings, System.Action onUpdate, ref bool foldout, ref Editor editor)
-    {
-        //if (settings != null)
-        //{
-        //    foldout = EditorGUILayout.InspectorTitlebar(foldout, settings);
-        //    using (var check = new EditorGUI.ChangeCheckScope())
-        //    {
-        //        if (foldout)
-        //        {
-        //            CreateCachedEditor(settings, null, ref editor);
-        //            editor.OnInspectorGUI();
-        //            if (check.changed)
-        //            {
-        //                if (onUpdate != null)
-        //                {
-        //                    onUpdate();
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-    }
-
-
 }

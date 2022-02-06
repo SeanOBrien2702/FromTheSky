@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 #endregion
 
 namespace FTS.Cards
@@ -25,6 +26,7 @@ namespace FTS.Cards
 
         [SerializeField] int maxHandSize = 10;
         [SerializeField] int cardsPerTurn = 5;
+
 
 
         GameUI gameUI;
@@ -123,13 +125,20 @@ namespace FTS.Cards
                 if (toDiscard != null)
                 {
                     CardDiscarded(toDiscard);
-                    Debug.Log("mouse over card");
                     numberToDiscard--;
                 }
-                if(numberToDiscard <=0)
+                if (numberToDiscard <= 0)
                 {
                     handleDiscard = false;
                     gameUI.DisablePlayerInfo();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                List<Card> inDeck = deck.FindAll(item => item.Location == CardLocation.Deck);
+                foreach (var item in inDeck)
+                {
+                    Debug.Log(item.name);
                 }
             }
         }
@@ -139,7 +148,6 @@ namespace FTS.Cards
             TurnController.OnNewTurn -= TurnController_OnNewTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
-            //UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
         }
         #endregion
 
@@ -232,7 +240,7 @@ namespace FTS.Cards
             {
                 if (deck.Any(item => item.Location == CardLocation.Discard))
                 {
-                    ShuffleDeck();
+                    ShuffleDeck(0);
                     canDraw = true;
                 }
                 else
@@ -267,7 +275,7 @@ namespace FTS.Cards
         }
 
         //Fisher-Yates shuffle
-        private void ShuffleDeck()
+        private void ShuffleDeck(int ignoreCount)
         {
             foreach (Card card in deck)
             {
@@ -277,12 +285,12 @@ namespace FTS.Cards
                 }
             }
 
-            int n = deck.Count;
+            int n = deck.Count - ignoreCount;
             while (n > 1)
             {
                 n--;
 
-                int k = Random.Range(0, n + 1);
+                int k = UnityEngine.Random.Range(ignoreCount, n + 1);
                 Card value = deck[k];
                 deck[k] = deck[n];
                 deck[n] = value;
@@ -366,7 +374,7 @@ namespace FTS.Cards
             {
                 for (int i = 0; i < cardsDiscarded; i++)
                 {          
-                    Card discardedCard = handBuffer[Random.Range(0, handBuffer.Count)];
+                    Card discardedCard = handBuffer[UnityEngine.Random.Range(0, handBuffer.Count)];
                     CardDiscarded(discardedCard);
                 }
             }
@@ -410,7 +418,7 @@ namespace FTS.Cards
         public void AddCard(Card newCard)
         {
             deck.Add(Instantiate(newCard));
-            ShuffleDeck();
+            //ShuffleDeck();
         }
 
         internal void AddCard(Card card, bool isTemporary, CardLocation cardLocation)
@@ -496,13 +504,22 @@ namespace FTS.Cards
                     List<Card> cardsInHand = deck.FindAll(item => item.Location == CardLocation.Hand && item.Cost > 0);
                     if (cardsInHand != null)
                     {
-                        cardsInHand[Random.Range(0, cardsInHand.Count - 1)].Cost += costChange;
+                        cardsInHand[UnityEngine.Random.Range(0, cardsInHand.Count - 1)].Cost += costChange;
                     }
                     break;
                 default:
                     break;
             }
         }
+
+
+        internal void PlaceOnTopOfDeck(string cardID)
+        {          
+            deck = deck.OrderBy(item => Guid.NewGuid()).ToList();
+            deck = deck.OrderByDescending(item => item.Id == cardID).ToList();
+        }
+
+
 
         internal void CardSelecte(string cardId)
         {
@@ -541,6 +558,9 @@ namespace FTS.Cards
             {
                 AddCard(card);
             }
+            
+            deck = deck.OrderBy(item => Guid.NewGuid()).ToList();
+            deck = deck.OrderByDescending(item => item.IsInherent).ToList();
         }
 
         private void TurnController_OnEnemyTurn()

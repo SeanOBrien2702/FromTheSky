@@ -5,6 +5,8 @@ using FTS.Turns;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System;
 #endregion
 
 public class GameUI : MonoBehaviour
@@ -23,13 +25,17 @@ public class GameUI : MonoBehaviour
     [SerializeField] GameObject energy;
     [SerializeField] TextMeshProUGUI energyText;
 
-    [Header("Deck")]
+    [Header("Deck stacks")]
     [SerializeField] GameObject deck;
     [SerializeField] TextMeshProUGUI decksText;
     [SerializeField] GameObject discard;
     [SerializeField] TextMeshProUGUI discardText;
     [SerializeField] GameObject atomized;
     [SerializeField] TextMeshProUGUI atomizedText;
+
+    [Header("Foretell/Create")]
+    [SerializeField] GameObject foretellPanel;
+    [SerializeField] GameObject cardPrefab;
 
     UnitController unitController;
     TurnController turnController;
@@ -113,10 +119,41 @@ public class GameUI : MonoBehaviour
         playerMessagePanel.SetActive(false);
         playerMessageText.text = "";
     }
+
+    public void ToggleForetell(List<Card> cards)
+    {
+        if (cards != null && cards.Count > 0)
+        {
+            foretellPanel.SetActive(true);
+            foreach (var card in cards)
+            {
+                GameObject drawnCard = Instantiate<GameObject>(cardPrefab);
+                drawnCard.transform.SetParent(foretellPanel.transform, false);
+                drawnCard.transform.SetAsFirstSibling();
+                drawnCard.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+
+                CardUI newCardUI = drawnCard.GetComponent<CardUI>();
+                newCardUI.SaveCardData(card);
+                newCardUI.FillCardUI(unitController.CurrentPlayer, card);
+
+
+            }
+            EnablePlayerInfo("Place on top ");
+        }
+        else
+        {
+            foretellPanel.SetActive(false);
+            foreach (Transform child in foretellPanel.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+            DisablePlayerInfo();
+        }
+    }
     #endregion
 
     #region Events
-    private void CardController_OnCardDrawn()
+        private void CardController_OnCardDrawn()
     {
         UpdateDeckList();
     }

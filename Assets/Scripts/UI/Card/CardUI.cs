@@ -9,7 +9,6 @@ using UnityEngine.EventSystems;
 
 public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] GameObject keywordToolTip;
     [SerializeField] GameObject highlight;
     [SerializeField] TextMeshProUGUI cardName;
     [SerializeField] TextMeshProUGUI rulesText;
@@ -117,9 +116,13 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     }
 
     private void FillCardText(Player player, Card card)
-    { 
-        //configure rules text
+    {
         rulesText.text = "";
+        //configure rules text
+        if (card.IsInherent)
+        {
+            rulesText.text += "<link=inherent><color=\"red\">Inherent</color></link>\n";
+        }
         if (card.OnDrawEffects.Count > 0)
         {
             foreach (var item in card.OnDrawEffects)
@@ -144,7 +147,14 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         }
         if (card.IsAtomize)
         {
-            rulesText.text += "\n<link=atomize><color=\"red\">Atomize</color></link>";
+            if(card.IsTemporary)
+            {
+                rulesText.text += "\n<link=temporary><color=\"red\">Temporary</color></link>";
+            }
+            else
+            {
+                rulesText.text += "\n<link=atomize><color=\"red\">Atomize</color></link>";
+            }     
         }
     }
 

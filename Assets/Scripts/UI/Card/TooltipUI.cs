@@ -19,6 +19,8 @@ public class TooltipUI : MonoBehaviour
         {"armour", "Reduce damage taken for the turn"},
         {"barrier", "Absorb all damage from the next attack"},
         {"temporary", "Atomized when played or at end of turn"},
+        {"foretell", "Select one of the top 3 cards the deck. Shuffle then put the select card on top"},
+        {"inherent", "Starts off in your opening hand"},
         {"heat", "Deal damage to all units around equal to heat than reduce damage by one"},
     };
     // Start is called before the first frame update

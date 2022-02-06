@@ -41,20 +41,23 @@ namespace FTS.UI
             planetCamera.PanToObjective(objective.PreviousObjective);
             UpdateUI(objective.CurrentObjective);
         }
+
+        public void StartGame()
+        {
+            SceneManager.LoadScene("GameScene");
+        }
         #endregion
 
         void Start()
         {
-            //currentObjective.AddRange(FindObjectOfType<ObjectiveController>().GetComponent<ObjectiveController>().GetObjectiveList()); // objectivesBuffer.OrderBy(item => item.IsOptional).ToList();
             UpdateUI(objective.CurrentObjective);
+            planetCamera.PanToObjective(objective.CurrentObjective);
         }
 
         void UpdateUI(MapObjective currentObjective)
         {
             ClearUI();
             bool isFirstOptional = true;
-            //List<Objective> currentObjective = objectivesBuffer.OrderByDescending(item => item.IsOptional).ToList();
-            //currentObjective = objectivesBuffer.OrderBy(item => item.IsOptional).ToList();
             TextMeshProUGUI objectiveLbl = Instantiate(objectiveLabel);
             objectiveLbl.transform.SetParent(objectivePanel, false);
             for (int i = 0; i < currentObjective.Objectives.Count; i++)

@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: Attack
   flavourText: 
   image: {fileID: 0}
-  border: {fileID: 0}
+  border: {fileID: 21300000, guid: 2677b7de06f143d4cac52bcd7a1845b4, type: 3}
   cost: 1
   range: 2
   cardRarity: 0
@@ -24,6 +24,7 @@ MonoBehaviour:
   targeting: 1
   isAtomize: 0
   isTemporary: 0
+  isInherent: 0
   onDrawEffects: []
   effects:
   - {fileID: 11400000, guid: d4bc104ef27a1c24f8a61e0af23c909f, type: 2}

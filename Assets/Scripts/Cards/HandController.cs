@@ -153,11 +153,19 @@ namespace FTS.Cards
 
         private void CalculateHandPixelWidth()
         {
-            Vector3[] v = new Vector3[4];
-            handPrefabs[0].ZoomArea.GetWorldCorners(v);
-            endZoom = v[2].x;
-            handPrefabs[handPrefabs.Count - 1].ZoomArea.GetWorldCorners(v);
-            startZoom = v[1].x;
+            if (handPrefabs.Count > 0)
+            {
+                Vector3[] v = new Vector3[4];
+                handPrefabs[0].ZoomArea.GetWorldCorners(v);
+                endZoom = v[2].x;
+                handPrefabs[handPrefabs.Count - 1].ZoomArea.GetWorldCorners(v);
+                startZoom = v[1].x;
+            }
+            else
+            {
+                endZoom = 0;
+                startZoom = 0;
+            }
         }
 
         private void UpdateHighlight()
