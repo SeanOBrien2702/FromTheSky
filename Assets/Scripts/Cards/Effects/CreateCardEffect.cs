@@ -28,7 +28,7 @@ namespace FTS.Cards
             Debug.Log("Create card effect");
         }
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
             string effectText = "Add ";
             if(numCopies == 1)

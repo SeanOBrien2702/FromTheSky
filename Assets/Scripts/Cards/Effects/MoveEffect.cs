@@ -17,7 +17,7 @@ namespace FTS.Cards
             FindObjectOfType<HexGridController>().GetComponent<HexGridController>().TargetPush(target);
         }
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
             string effectText;
             if (distance == 1)

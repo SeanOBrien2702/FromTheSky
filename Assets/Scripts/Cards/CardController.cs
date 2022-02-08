@@ -211,13 +211,13 @@ namespace FTS.Cards
         }
 
 
-        private bool IsInRange(CardType type)
+        private bool IsInRange(int range)
         {
             bool isInRange = false;
             //check grid if position is valid
             target = grid.GetCardTarget();
 
-            if (target != null && grid.GetDistance(target) <= unitController.CurrentPlayer.GetCardRange(type)); //unitController.CurrentPlayer.Stats.GetStat(Stat.Range, unitController.CurrentPlayer.CharacterClass)) 
+            if (target != null && grid.GetDistance(target) <= range)
             {
                 isInRange = true;
             }
@@ -253,15 +253,12 @@ namespace FTS.Cards
 
         private void DiscardHand()
         {
-            if (characterClass != CharacterClass.Vehicle)
+            hand.DiscardHand();
+            foreach (Card card in deck)
             {
-                hand.DiscardHand();
-                foreach (Card card in deck)
+                if (card.Location == CardLocation.Hand)
                 {
-                    if (card.Location == CardLocation.Hand)
-                    {
-                        card.Location = CardLocation.Discard;
-                    }
+                    card.Location = CardLocation.Discard;
                 }
             }
         }
@@ -315,12 +312,13 @@ namespace FTS.Cards
         #endregion
 
         #region Public Methods
-        public bool CanPlay(Card card, CharacterClass characterClass)
+        public bool CanPlay(Card card)
         {
             bool canPlay = false;
             if (HasEnergy(card.Cost) && 
                 card.Effects.Count > 0 && 
-                (card.CharacterClass == CharacterClass.Common || card.CharacterClass == characterClass))
+                (card.CharacterClass == CharacterClass.Common 
+                || card.CharacterClass == characterClass))
             {
                 canPlay = true;
             }
@@ -332,7 +330,9 @@ namespace FTS.Cards
         public void PlayCard(string cardId)
         {
             Card playedCard = deck.Find(item => item.Id == cardId);
-            if(HasEnergy(playedCard.Cost) && IsCorrectClass(playedCard.CharacterClass) && playedCard.Effects.Count > 0) 
+            if(HasEnergy(playedCard.Cost) && 
+                IsCorrectClass(playedCard.CharacterClass) && 
+                playedCard.Effects.Count > 0) 
             {
                 Debug.Log(playedCard.Id);
                 if (playedCard.Targeting == CardTargeting.None)
@@ -343,7 +343,7 @@ namespace FTS.Cards
                 }
                 else
                 {
-                    if (IsInRange(playedCard.Type) && IsTargetValid(playedCard.Targeting))
+                    if (IsInRange(playedCard.Range) && IsTargetValid(playedCard.Targeting))
                     {
                         CardPlayed(playedCard);
                         switch (playedCard.Targeting)
@@ -501,7 +501,8 @@ namespace FTS.Cards
                     }
                     break;
                 case CostTarget.Random:
-                    List<Card> cardsInHand = deck.FindAll(item => item.Location == CardLocation.Hand && item.Cost > 0);
+                    List<Card> cardsInHand = deck.FindAll(item => item.Location == CardLocation.Hand && 
+                                                                  item.Cost > 0);
                     if (cardsInHand != null)
                     {
                         cardsInHand[UnityEngine.Random.Range(0, cardsInHand.Count - 1)].Cost += costChange;
@@ -553,7 +554,6 @@ namespace FTS.Cards
         #region Events
         private void TurnController_OnCombatStart()
         {
-            //Debug.Log("cards in database " + cardDatabase.GetDeck().Count);
             foreach (var card in cardDatabase.GetDeck())
             {
                 AddCard(card);

@@ -25,7 +25,7 @@ namespace FTS.Cards
             cc.ReduceCost(costTarget, costChange);         
         }
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
             string effectText = "Reduce the <link=energy><color=\"red\">energy</color></link> cost of ";
             switch (costTarget)

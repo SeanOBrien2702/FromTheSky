@@ -18,7 +18,7 @@ namespace FTS.Cards
             Debug.Log("Heal effect");
         }
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
             return "Heal " + healAmount + " damage";
         }

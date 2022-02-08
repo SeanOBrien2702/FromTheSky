@@ -264,6 +264,12 @@ namespace FTS.Characters
             }
 
         }
+
+        public Player GetPlayerByClass(CharacterClass characterClass)
+        {
+            return playerList.Find(item => item.CharacterClass == characterClass);
+        }
+
         public List<Player> GetPlayerUnits()
         {
             return playerList;

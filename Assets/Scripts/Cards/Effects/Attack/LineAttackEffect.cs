@@ -30,10 +30,8 @@ namespace FTS.Cards
             }
         }
 
-
-        public override string GetEffectText(Player player)
-        {
-            damage = player.GetStat(Stat.Damage);
+        public override string GetEffectText()
+        {           
             string effectText;
             if (numAttacks == 1)
             {
@@ -46,22 +44,5 @@ namespace FTS.Cards
             effectText += " " + length + " hexes forward";
             return effectText;
         }
-
-        public override string GetEffectText()
-        {
-            
-            string effectText;
-            if (numAttacks == 1)
-            {
-                effectText = "Deal *Character damage* damage";
-            }
-            else
-            {
-                effectText = "Deal *Character damage* damage " + numAttacks + " times";
-            }
-            effectText += " " + length + " hexes forward";
-            return effectText;
-        }
-
     }
 }

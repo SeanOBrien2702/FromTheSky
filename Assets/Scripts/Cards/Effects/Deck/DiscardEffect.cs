@@ -20,7 +20,7 @@ namespace FTS.Cards
             cc.DiscardCard(cardsDiscarded, random);
         }
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
             string effectText = "Discard " + cardsDiscarded + " card";
             if (cardsDiscarded > 1)

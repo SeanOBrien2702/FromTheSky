@@ -17,7 +17,7 @@ namespace FTS.Cards
             foretell.Foretell(foretellAmount);
         }
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
             return "<link=foretell><color=\"red\">Foretell</color></link> " + foretellAmount;
         }

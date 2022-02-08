@@ -18,7 +18,7 @@ namespace FTS.Cards
             Debug.Log("armour effect played");
         }
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
             return "Gain " + armourAmount + " <link =armour><color=\"red\">armour</color></link>";
         }

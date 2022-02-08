@@ -14,10 +14,9 @@ namespace FTS.Cards
             target.GetComponent<Heat>().FriendlyFire = false;
         }
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
-
-            return "<link=heat><color=\"red\">Heat</color></link> no longer damages aliles";
+            return "<link=heat><color=\"red\">Heat</color></link> no longer damages allies";
         }
 
     }

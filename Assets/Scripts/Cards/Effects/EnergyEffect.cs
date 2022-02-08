@@ -18,7 +18,7 @@ namespace FTS.Cards
         }
 
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
             return "Gain " + energyGained + " <link=energy><color=\"red\">energy</color></link>";
         }

@@ -232,8 +232,11 @@ namespace FTS.Grid
         {
             if (UpdateCurrentCell())
             {
+                Debug.Log("show area");
                 grid.ClearReachable();
-                grid.ShowArea(mover.Location, unitController.CurrentPlayer.GetCardRange(cardController.CardSelected.Type), 3);
+                //grid.ShowArea(mover.Location, unitController.CurrentPlayer.GetCardRange(cardController.CardSelected.Type));
+                Player player = unitController.GetPlayerByClass(cardController.CardSelected.CharacterClass);
+                grid.ShowArea(player.GetComponent<Mover>().Location, player.GetCardRange(cardController.CardSelected.Type));
             }
         }
 

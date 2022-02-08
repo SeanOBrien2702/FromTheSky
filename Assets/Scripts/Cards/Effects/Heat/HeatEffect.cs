@@ -15,10 +15,9 @@ namespace FTS.Cards
             target.GetComponent<Heat>().HeatLevel += heatAmount;
         }
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
             return "Gain " + heatAmount + " <link=heat><color=\"red\">heat</color></link>";
         }
-
     }
 }

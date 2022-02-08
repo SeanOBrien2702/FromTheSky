@@ -15,7 +15,7 @@ namespace FTS.Cards
             Debug.Log("barrier effect played");
         }
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
             return "Gain a <link=barrier><color=\"red\">barrier</color></link>"; 
         }

@@ -693,7 +693,7 @@ namespace FTS.Grid
         }
 
 
-        public void ShowArea(HexCell fromCell, int range, int radius)
+        public void ShowArea(HexCell fromCell, int range)
         {
             HexCoordinates startPos = fromCell.Location;
             for (int x = -range; x <= range; x++)

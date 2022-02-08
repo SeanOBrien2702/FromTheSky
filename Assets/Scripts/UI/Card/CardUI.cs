@@ -92,21 +92,16 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     }
 
 
-    private void ConfigureCardType(Player player, Card card)
+    private void ConfigureCardType(Card card)
     {
-        
-        if (card.Type == CardType.Attack)
-        {
-            range.text = player.GetStat(Stat.AttackRange).ToString();
-        }
-        else if (card.Type == CardType.Support)
-        {
-            range.text = player.GetStat(Stat.SupportRange).ToString();
-        }
-        else if (card.Type == CardType.Enhancement)
+        if(card.Targeting == CardTargeting.None)
         {
             rangeSymbol.SetActive(false);
             range.gameObject.SetActive(false);
+        }
+        else
+        {
+            range.text = card.Range.ToString();
         }
 
         if(card.Effects.Count <= 0)
@@ -115,7 +110,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         }
     }
 
-    private void FillCardText(Player player, Card card)
+    private void FillCardText(Card card)
     {
         rulesText.text = "";
         //configure rules text
@@ -128,13 +123,13 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
             foreach (var item in card.OnDrawEffects)
             {
                 rulesText.text += "On draw: ";
-                rulesText.text += item.GetEffectText(player) + " ";
+                rulesText.text += item.GetEffectText() + ". ";
             }
             rulesText.text += "\n";
         }
         foreach (var item in card.Effects)
         {
-            rulesText.text += item.GetEffectText(player) + " ";
+            rulesText.text += item.GetEffectText() + ". ";
         }
         if (card.OnDiscardEffects.Count > 0)
         {
@@ -142,7 +137,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
             foreach (var item in card.OnDiscardEffects)
             {
                 rulesText.text += "On discard: ";
-                rulesText.text += item.GetEffectText(player) + " ";
+                rulesText.text += item.GetEffectText() + ". ";
             }
         }
         if (card.IsAtomize)
@@ -182,12 +177,12 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         }
     }
 
-    public void FillCardUI(Player player, Card card)
+    public void FillCardUI(Card card)
     {
         cost.text = card.Cost.ToString();
         //Debug.Log(card.Type);
-        ConfigureCardType(player, card);
-        FillCardText(player, card);
+        ConfigureCardType(card);
+        FillCardText(card);
         //Keywords(card.RulesText);
     }
 

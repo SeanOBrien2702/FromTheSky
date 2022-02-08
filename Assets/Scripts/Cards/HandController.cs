@@ -170,12 +170,12 @@ namespace FTS.Cards
 
         private void UpdateHighlight()
         {
-            Player player = unitController.GetCurrentPlayer();
-            if (player != null && cardUI.Count > 0)
+            //Player player = unitController.GetCurrentPlayer();
+            if (cardUI.Count > 0)
             {
-                CharacterClass characterClass = player.CharacterClass;
-                if (characterClass != CharacterClass.Vehicle)
-                {
+                //CharacterClass characterClass = player.CharacterClass;
+                //if (characterClass != CharacterClass.Vehicle)
+                //{
                     foreach (var item in cardUI)
                     {
                         item.HighlightCard(false);
@@ -184,13 +184,14 @@ namespace FTS.Cards
                     foreach (var item in cardUI)
                     {
                         Card card = cardController.GetCard(item.CardID);
-                        item.FillCardUI(player, card);
-                        if (cardController.CanPlay(card, characterClass))
+                    //item.FillCardUI(player, card);
+                    item.FillCardUI(card);
+                    if (cardController.CanPlay(card))
                         {
                             item.HighlightCard(true);
                         }
                     }
-                }
+                //}
             }
         }
 
@@ -296,7 +297,7 @@ namespace FTS.Cards
 
             CardUI newCardUI = drawnCard.GetComponent<CardUI>();
             newCardUI.SaveCardData(card);
-            newCardUI.FillCardUI(unitController.CurrentPlayer, card);           
+            newCardUI.FillCardUI(card);           
             cardUI.Add(newCardUI);
 
             HandPrefab handPrefab = new HandPrefab(drawnCard, newCardUI.CardID);

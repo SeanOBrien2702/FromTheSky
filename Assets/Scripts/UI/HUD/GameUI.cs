@@ -134,9 +134,7 @@ public class GameUI : MonoBehaviour
 
                 CardUI newCardUI = drawnCard.GetComponent<CardUI>();
                 newCardUI.SaveCardData(card);
-                newCardUI.FillCardUI(unitController.CurrentPlayer, card);
-
-
+                newCardUI.FillCardUI(card);
             }
             EnablePlayerInfo("Place on top ");
         }

@@ -15,7 +15,7 @@ namespace FTS.Cards
             target.GetComponent<Heat>().TriggerHeat(numTimes);
         }
 
-        public override string GetEffectText(Player player)
+        public override string GetEffectText()
         {
             string effectText = "Activate <link=heat><color=\"red\">heat</color></link> instantly";
 
@@ -23,9 +23,7 @@ namespace FTS.Cards
             {
                 effectText += " " + numTimes + " number of times";
             }
-
             return effectText;
         }
-
     }
 }
