@@ -15,14 +15,16 @@ MonoBehaviour:
   cardName: Overkill
   flavourText: 
   image: {fileID: 0}
-  border: {fileID: 21300000, guid: eb7f387151d12cb47963d940a788f18d, type: 3}
+  border: {fileID: 21300000, guid: 0413a723affa0824ebc4e6b022dcec42, type: 3}
   cost: 1
-  range: 2
+  range: 5
   cardRarity: 0
   characterClass: 0
   type: 0
   targeting: 1
   isAtomize: 1
+  isTemporary: 0
+  isInherent: 0
   onDrawEffects: []
   effects:
   - {fileID: 11400000, guid: 2e9328e517972834bb04f1ce21bd4316, type: 2}

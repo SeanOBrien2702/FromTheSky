@@ -27,7 +27,8 @@ namespace FTS.Core
 
         public override string SetDescription()
         {
-            return "Survive for " + turnsToSurvive + " (" + turnController.Turn + "/" + turnsToSurvive + ")";
+            return "Survive for " + turnsToSurvive + " turns (" + 
+                turnController.Turn + "/" + turnsToSurvive + ")";
         }
     }
 }

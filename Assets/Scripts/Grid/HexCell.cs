@@ -12,10 +12,11 @@ namespace FTS.Grid
 {
     public enum HighlightIndex
     {
-        DefaultColour,
-        CanReachColour,
-        CantReachColour,
-        HighlightColour
+        Default,
+        CanReach,
+        CantReach,
+        Highlight,
+        Attack
     }
 
 
@@ -31,6 +32,7 @@ namespace FTS.Grid
         [Header("Highlight Colours")]
         [SerializeField] List<Color> highlightColours;
         [SerializeField] GameObject dangerHighlight;
+        [SerializeField] GameObject attackHighlight;
         //[SerializeField] Color canReachColour;
         //[SerializeField] Color cantReachColour;
         //[SerializeField] Color highlightColour;
@@ -269,7 +271,7 @@ namespace FTS.Grid
             }
             else
             {
-                highlight.color = highlightColours[(int)HighlightIndex.CantReachColour];
+                highlight.color = highlightColours[(int)HighlightIndex.CantReach];
             }
         }
 
@@ -279,10 +281,18 @@ namespace FTS.Grid
             {
                 highlight.color = highlightColours[(int)highlightIndex];
                 highlight.enabled = true;
+                if(highlightIndex == HighlightIndex.Attack)
+                {
+                    attackHighlight.SetActive(true);
+                }
+                else
+                {
+                    attackHighlight.SetActive(false);
+                }
             }
             else
             {
-                highlight.color = highlightColours[(int)HighlightIndex.CantReachColour];
+                highlight.color = highlightColours[(int)HighlightIndex.CantReach];
             }
         }
 

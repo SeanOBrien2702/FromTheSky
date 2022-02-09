@@ -5,6 +5,7 @@ using UnityEngine;
 using FTS.Grid;
 using FTS.Turns;
 using FTS.UI;
+using FTS.Cards;
 using FTS.Core;
 using System;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,7 @@ namespace FTS.Characters
         PlayerDatabase playerDatabase;
         EnemyDatabase enemyDatabase;
         TurnController turnController;
+        CardController cardController;
         ObjectiveUI objectiveController;
         List<Character> enemyList = new List<Character>();
         List<StateMachine> stateMachines = new List<StateMachine>();
@@ -105,6 +107,7 @@ namespace FTS.Characters
             objectiveController = FindObjectOfType<ObjectiveUI>().GetComponent<ObjectiveUI>();
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             enemyDatabase = FindObjectOfType<EnemyDatabase>().GetComponent<EnemyDatabase>();
+            cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             TurnController.OnNewTurn += TurnController_OnNewTurn;
         }
@@ -256,6 +259,7 @@ namespace FTS.Characters
             {           
                 --numberOfPlayers;
                 playerList.Remove(character as Player);
+                cardController.RemoveClass(character.CharacterClass);
                 if (playerList.Count <= 0 && gridController.UnitsPlaced)
                 {
                     Debug.Log("Game over");

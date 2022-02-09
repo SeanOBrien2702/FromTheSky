@@ -30,7 +30,6 @@ namespace FTS.Cards
 
 
         GameUI gameUI;
-        TurnController turnController;
         UnitController unitController;
         CardDatabase cardDatabase;
         HandController hand;
@@ -95,7 +94,7 @@ namespace FTS.Cards
             gameUI = FindObjectOfType<GameUI>().GetComponent<GameUI>();
             hand = FindObjectOfType<HandController>().GetComponent<HandController>();
             grid = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
-            turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
+            //turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             cardDatabase = FindObjectOfType<CardDatabase>().GetComponent<CardDatabase>();
             TurnController.OnNewTurn += TurnController_OnNewTurn;
@@ -193,30 +192,12 @@ namespace FTS.Cards
             return hasEnergy;
         }
 
-        private bool IsCorrectClass(CharacterClass characterClass)
-        {
-            bool isCorrectClass = false;
-            if (characterClass == CharacterClass.Common)
-            {
-                isCorrectClass = true;
-            }
-            else
-            {
-                if(characterClass == unitController.GetCurrentPlayer().CharacterClass)
-                {
-                    isCorrectClass = true;
-                }
-            }
-            return isCorrectClass;
-        }
-
-
         private bool IsInRange(int range)
         {
             bool isInRange = false;
             //check grid if position is valid
             target = grid.GetCardTarget();
-
+            Debug.Log("range " + range);
             if (target != null && grid.GetDistance(target) <= range)
             {
                 isInRange = true;
@@ -331,7 +312,6 @@ namespace FTS.Cards
         {
             Card playedCard = deck.Find(item => item.Id == cardId);
             if(HasEnergy(playedCard.Cost) && 
-                IsCorrectClass(playedCard.CharacterClass) && 
                 playedCard.Effects.Count > 0) 
             {
                 Debug.Log(playedCard.Id);
@@ -442,6 +422,16 @@ namespace FTS.Cards
             }
             deck.Remove(removedCard);
         }
+
+        public void RemoveClass(CharacterClass characterClass)
+        {
+            List<Card> cardsToRemove = deck.FindAll(item => item.CharacterClass == characterClass);
+            foreach (var card in cardsToRemove)
+            {
+                card.Location = CardLocation.Atomized;
+            }
+        }
+
         internal Card GetCard(string cardId)
         {
             return deck.Find(item => item.Id == cardId);

@@ -359,17 +359,17 @@ namespace FTS.Grid
                     current.SetLabel(current.Distance);
                     if (current.Distance <= movement)
                     {
-                        current.SetHighlight(HighlightIndex.CanReachColour);
+                        current.SetHighlight(HighlightIndex.CanReach);
                     }
                     else
                     {
-                        current.SetHighlight(HighlightIndex.CantReachColour);
+                        current.SetHighlight(HighlightIndex.CantReach);
                     }
                     current = current.PathFrom;
                 }
             }
             //highlight start
-            currentPathFrom.SetHighlight(HighlightIndex.HighlightColour);
+            currentPathFrom.SetHighlight(HighlightIndex.Highlight);
         }
 
         ///*
@@ -549,7 +549,7 @@ namespace FTS.Grid
 
         internal void ShowPlacementArea(Vector2Int dimentions)
         {
-            vehicleStart.SetHighlight(HighlightIndex.CantReachColour);
+            vehicleStart.SetHighlight(HighlightIndex.CantReach);
 
             HexCoordinates startPos = vehicleStart.Location;
             for (int x = -dimentions.x; x <= dimentions.x; x++)
@@ -562,7 +562,7 @@ namespace FTS.Grid
                     HexCell cell = GetCell(coordinates);
                     if (cell != null)
                     {
-                        cell.SetHighlight(HighlightIndex.CantReachColour);
+                        cell.SetHighlight(HighlightIndex.CantReach);
                         currentArea.Add(cell);
                     }
                 }
@@ -600,7 +600,7 @@ namespace FTS.Grid
                             if (neighbor.Distance <= speed && current.Distance < neighbor.Distance)
                             {
                                 frontier.Enqueue(neighbor);
-                                neighbor.SetHighlight(HighlightIndex.HighlightColour);
+                                neighbor.SetHighlight(HighlightIndex.Highlight);
                                 reachable.Add(neighbor);
                             }
                         }
@@ -615,7 +615,7 @@ namespace FTS.Grid
             {
                 foreach (HexCell cell in reachable)
                 {
-                    cell.SetHighlight(HighlightIndex.DefaultColour);
+                    cell.SetHighlight(HighlightIndex.Default);
                 }
             }
         }
@@ -652,7 +652,7 @@ namespace FTS.Grid
         public List<HexCell> GetArea(HexCell fromCell, int radius)
         {
             List<HexCell> area = new List<HexCell>();
-            fromCell.SetHighlight(HighlightIndex.CantReachColour);
+            fromCell.SetHighlight(HighlightIndex.CantReach);
 
             HexCoordinates startPos = fromCell.Location;
             for (int x = -radius; x <= radius; x++)
@@ -706,7 +706,7 @@ namespace FTS.Grid
                     HexCell cell = GetCell(coordinates);
                     if (cell != null)
                     {
-                        cell.SetHighlight(HighlightIndex.HighlightColour);
+                        cell.SetHighlight(HighlightIndex.Attack);
                         currentArea.Add(cell);
                     }
                 }
@@ -719,7 +719,7 @@ namespace FTS.Grid
             {
                 foreach (HexCell cell in currentArea)
                 {
-                    cell.SetHighlight(HighlightIndex.DefaultColour);
+                    cell.SetHighlight(HighlightIndex.Default);
                 }
             }
         }
@@ -765,22 +765,22 @@ namespace FTS.Grid
                 {                
                     if (current.Distance <= speed)
                     {
-                        current.SetHighlight(HighlightIndex.HighlightColour);
+                        current.SetHighlight(HighlightIndex.Highlight);
                     }
                     else
                     {
-                        current.SetHighlight(HighlightIndex.DefaultColour);
+                        current.SetHighlight(HighlightIndex.Default);
                     }
                     current.SetLabel(0);
                     current = current.PathFrom;
                 }
-                current.SetHighlight(HighlightIndex.DefaultColour);
+                current.SetHighlight(HighlightIndex.Default);
                 currentPathExists = false;
             }
             else if (currentPathFrom && currentPathTo)
             {
-                currentPathFrom.SetHighlight(HighlightIndex.DefaultColour);
-                currentPathTo.SetHighlight(HighlightIndex.DefaultColour);
+                currentPathFrom.SetHighlight(HighlightIndex.Default);
+                currentPathTo.SetHighlight(HighlightIndex.Default);
             }
             currentPathFrom = currentPathTo = null;
         }
@@ -791,17 +791,17 @@ namespace FTS.Grid
                 HexCell current = currentPathTo;
                 while (current != null && current != currentPathFrom)
                 {
-                    current.SetHighlight(HighlightIndex.DefaultColour);
+                    current.SetHighlight(HighlightIndex.Default);
                     current.SetLabel(0);
                     current = current.PathFrom;
                 }
-                current.SetHighlight(HighlightIndex.DefaultColour);
+                current.SetHighlight(HighlightIndex.Default);
                 currentPathExists = false;
             }
             else if (currentPathFrom && currentPathTo)
             {
-                currentPathFrom.SetHighlight(HighlightIndex.DefaultColour);
-                currentPathTo.SetHighlight(HighlightIndex.DefaultColour);
+                currentPathFrom.SetHighlight(HighlightIndex.Default);
+                currentPathTo.SetHighlight(HighlightIndex.Default);
             }
             currentPathFrom = currentPathTo = null;
         }

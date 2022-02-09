@@ -1852,11 +1852,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1aac6dc6087e880419100f314d441d29, type: 2}
     - target: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
       propertyPath: width
-      value: 9
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
       propertyPath: height
-      value: 9
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
       propertyPath: mountain
@@ -1946,7 +1946,7 @@ PrefabInstance:
     - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}
       propertyPath: enemiesToSpawn
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4335076343168363342, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}
@@ -1986,8 +1986,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSpawn: 1
-  maxSpawn: 3
-  spawnLimit: 6
+  maxSpawn: 2
+  spawnLimit: 8
 --- !u!114 &1867353417224850160 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,

@@ -45,6 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectivesList:
   - {fileID: 11400000, guid: 427e2896213cf4f478d864e4d6312fbd, type: 2}
-  - {fileID: 11400000, guid: 352929bcc742116479339b064be8bcb3, type: 2}
-  - {fileID: 11400000, guid: d2506fa728d9fc347851371e8522a207, type: 2}
-  numObjectives: 2
+  - {fileID: 11400000, guid: 3744b3c864a60ec43ac61cd3aa6ca5bb, type: 2}
+  optionalObjectivesList: []
+  minNumObjectives: 3
