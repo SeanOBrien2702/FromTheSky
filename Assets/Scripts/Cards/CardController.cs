@@ -18,7 +18,7 @@ namespace FTS.Cards
     */
     public class CardController : MonoBehaviour
     {
-        public static event System.Action OnCardPlayed = delegate { };
+        public static event System.Action<Card> OnCardPlayed = delegate { };
         public static event System.Action OnCardDrawn = delegate { };
         public static event System.Action OnCardCreated = delegate { };
         public static event System.Action OnEnergyChanged = delegate { };
@@ -167,7 +167,7 @@ namespace FTS.Cards
                 playedCard.Location = CardLocation.Discard;
             }
             gameUI.UpdateDeckList();
-            OnCardPlayed?.Invoke();
+            OnCardPlayed?.Invoke(playedCard);
             lastCardPlayed = playedCard;
         }
 

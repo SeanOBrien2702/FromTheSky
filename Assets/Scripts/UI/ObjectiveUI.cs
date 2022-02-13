@@ -17,20 +17,19 @@ namespace FTS.UI
         [SerializeField] TextMeshProUGUI optionalLabel;
         [SerializeField] Transform objectivePanel;
         [SerializeField] List<Objective> objectivesBuffer;
-        List<Objective> objectives = new List<Objective>();
+        //List<Objective> objectives = new List<Objective>();
         Dictionary<Objective, TextMeshProUGUI> textList = new Dictionary<Objective, TextMeshProUGUI>();
-        int objectiveNum;
-        bool isLevelComplete = true;
-        // Start is called before the first frame update
-        void Start()
-        {
-            objectives.AddRange(FindObjectOfType<ObjectiveController>().GetComponent<ObjectiveController>().GetObjectiveList()); // objectivesBuffer.OrderBy(item => item.IsOptional).ToList();
-            objectiveNum = objectives.Count;
-            Debug.Log("objectives " + objectives.Count);
-            CreateObjectiveText();
-        }
 
-        private void CreateObjectiveText()
+        // Start is called before the first frame update
+        //void Start()
+        //{
+        //    objectives.AddRange(FindObjectOfType<ObjectiveDatabase>().GetComponent<ObjectiveDatabase>().GetObjectiveList()); // objectivesBuffer.OrderBy(item => item.IsOptional).ToList();
+        //    //objectiveNum = objectives.Count;
+        //    Debug.Log("objectives " + objectives.Count);
+        //    CreateObjectiveText();
+        //}
+
+        public void CreateObjectiveText(List<Objective> objectives)
         {
             bool isFirstOptional = true;
             //List<Objective> objectives = objectivesBuffer.OrderByDescending(item => item.IsOptional).ToList();
@@ -51,64 +50,8 @@ namespace FTS.UI
                 textList.Add(objectives[i], textMesh);
             }
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        public void CheckObjectives(Card card)
-        {
-            foreach (var objective in objectives)
-            {
-                //if (objective is CardObjective)
-                objective.UpdateObjective(card);
-            }
-            ObjectiveUpdated();
-        }
-
-        internal void UpdateObjective(Character enemy)
-        {
-            foreach (var objective in objectives)
-            {
-                if (objective is KillObjective)
-                {
-                    objective.UpdateObjective(enemy);
-                }
-                else
-                {
-                    objective.UpdateObjective();
-                }
-
-            }
-            ObjectiveUpdated();
-        }
-
-        void ObjectiveUpdated()
-        {
-            UpdateUI();
-            int objectivesComplete = 0;
-            int objectivesRequired = objectives.Count(item => item.IsOptional == false);
-            Debug.Log("objectivesRequired " + objectivesRequired);
-            Debug.Log("objectives " + objectives.Count);
-            foreach (var objective in objectives)
-            {
-                if(objective.IsComplete && !objective.IsOptional)
-                {
-                    objectivesComplete++;
-                    break;
-                }
-            }
-
-            if(objectivesComplete >= objectivesRequired)
-            {
-                SceneManager.LoadScene("DraftScene");
-            }
-        }
-
         
-        void UpdateUI()
+        public void UpdateUI(List<Objective> objectives)
         {
             foreach (var objective in objectives)
             {

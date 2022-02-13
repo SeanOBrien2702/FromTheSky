@@ -45,9 +45,14 @@ namespace FTS.Core
         }
         #endregion
 
-        
 
-        public virtual void UpdateObjective(Character enemy)
+        public virtual void EnableObjective()
+        {
+            Debug.Log("enable objective");
+        }
+
+
+        public virtual void UpdateObjective(Enemy enemy)
         {
             Debug.Log("check objective");
         }
@@ -60,12 +65,6 @@ namespace FTS.Core
         public virtual void UpdateObjective()
         {
             Debug.Log("check objective");
-        }
-
-
-        public virtual string GetEffectText()
-        {
-            return "no effect";
         }
 
         public virtual string SetDescription()

@@ -11,19 +11,20 @@ namespace FTS.Core
         [SerializeField] int turnsToSurvive;
         TurnController turnController;
 
-        private void OnEnable()
+        public override void EnableObjective()
         {
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
+            Debug.Log("turn controller " + turnController);
         }
 
         public override void UpdateObjective()
         {
+            Debug.Log("update turn objective "+ turnController.Turn + " update turn objective " + turnsToSurvive);
             if(turnController.Turn >= turnsToSurvive)
             {
                 isComplete = true;
             }
         }
-
 
         public override string SetDescription()
         {

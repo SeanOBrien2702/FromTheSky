@@ -156,7 +156,7 @@ public class GameUI : MonoBehaviour
         UpdateDeckList();
     }
 
-    private void CardController_OnCardPlayed()
+    private void CardController_OnCardPlayed(Card card)
     {
         Debug.Log("Card played?");
         UpdateDeckList();

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goldReward: 50
   cardReward: {fileID: 0}
-  isOptional: 1
+  isOptional: 0
   enemiesToKill: 2
   enemy: {fileID: 7494323970741600098, guid: 163e612583c9e7e438693911de0491fc, type: 3}

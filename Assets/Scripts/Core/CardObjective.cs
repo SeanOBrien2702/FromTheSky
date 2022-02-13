@@ -13,8 +13,13 @@ namespace FTS.Core
         [SerializeField] int cardsToPlay;
         [SerializeField] CardType cardType;
         int currentPlayed = 0;
-        
+
         //HexCoordinates location;
+        public override void EnableObjective()
+        {
+
+        }
+
 
         public override void UpdateObjective(Card card)
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FTS.Core
 {
-    public class ObjectiveController : MonoBehaviour
+    public class ObjectiveDatabase : MonoBehaviour
     {
         [SerializeField] Objective[] objectivesList;
         [SerializeField] Objective[] optionalObjectivesList;

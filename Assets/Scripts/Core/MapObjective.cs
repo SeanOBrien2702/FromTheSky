@@ -9,7 +9,7 @@ namespace FTS.Core
     public class MapObjective : MonoBehaviour
     {
         [SerializeField] Image image;
-        ObjectiveController objectiveController;
+        ObjectiveDatabase objectiveController;
         [SerializeField] List<Objective> objectives = new List<Objective>();
         [SerializeField] Sprite sprite;
         [SerializeField] Transform planet;
@@ -23,7 +23,7 @@ namespace FTS.Core
 
         void Start()
         {
-            objectiveController = FindObjectOfType<ObjectiveController>().GetComponent<ObjectiveController>();
+            objectiveController = FindObjectOfType<ObjectiveDatabase>().GetComponent<ObjectiveDatabase>();
             transform.LookAt(planet);
             image.sprite = sprite;
         }

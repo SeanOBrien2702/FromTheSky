@@ -16,13 +16,16 @@ namespace FTS.Characters
 {
     public class UnitController : MonoBehaviour
     {
+        public static event System.Action<Character> OnEnemyKilled = delegate { };
+
+
         HexGrid grid;
         HexGridController gridController;
         PlayerDatabase playerDatabase;
         EnemyDatabase enemyDatabase;
         TurnController turnController;
         CardController cardController;
-        ObjectiveUI objectiveController;
+        ObjectiveController objectiveController;
         List<Character> enemyList = new List<Character>();
         List<StateMachine> stateMachines = new List<StateMachine>();
         List<Player> playerList = new List<Player>();
@@ -104,7 +107,7 @@ namespace FTS.Characters
         {
             grid = GetComponent<HexGrid>();
             gridController = GetComponent<HexGridController>();
-            objectiveController = FindObjectOfType<ObjectiveUI>().GetComponent<ObjectiveUI>();
+            objectiveController = FindObjectOfType<ObjectiveController>().GetComponent<ObjectiveController>();
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             enemyDatabase = FindObjectOfType<EnemyDatabase>().GetComponent<EnemyDatabase>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
@@ -250,7 +253,8 @@ namespace FTS.Characters
             {
                 Debug.Log("Enemy killed");
                 //gridController.RemoveIndicators(character);
-                objectiveController.UpdateObjective(character);
+                OnEnemyKilled?.Invoke(character);
+                //objectiveController.UpdateObjective();
                 stateMachines.Remove(character.GetComponent<StateMachine>());
                 enemyList.Remove(character);
                 UpdateTurnOrder();

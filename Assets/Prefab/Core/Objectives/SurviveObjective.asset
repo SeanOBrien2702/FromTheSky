@@ -15,4 +15,4 @@ MonoBehaviour:
   goldReward: 0
   cardReward: {fileID: 0}
   isOptional: 0
-  turnsToSurvive: 4
+  turnsToSurvive: 3
