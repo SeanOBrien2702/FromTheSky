@@ -9,7 +9,6 @@ namespace FTS.Characters
 {
     public class Player : Character
     {
-        [SerializeField] Sprite cardBoarder;
         [SerializeField] Color colour;
         bool placed = false;
 
@@ -43,10 +42,6 @@ namespace FTS.Characters
         #endregion
 
         #region Public Methods
-        public override Sprite GetBorder()
-        {
-            return cardBoarder;
-        }
         internal override void StartRound()
         {
             //Debug.Log("player turn");

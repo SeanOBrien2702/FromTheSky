@@ -1317,6 +1317,38 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1131064948}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1345432398 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1652996880, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+    type: 3}
+  m_PrefabInstance: {fileID: 1541824749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1345432399 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1652996883, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+    type: 3}
+  m_PrefabInstance: {fileID: 1541824749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1345432400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345432398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2e0ae00334af14e81a3ae3a2e78d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveLabel: {fileID: 2789740316842736042, guid: ef5bec49434df654a89b779fc73b8066,
+    type: 3}
+  optionalLabel: {fileID: 8266778633984989388, guid: 493f2a861bac08047b428004b83c964d,
+    type: 3}
+  objectivePanel: {fileID: 1345432399}
+  objectivesBuffer:
+  - {fileID: 11400000, guid: 3744b3c864a60ec43ac61cd3aa6ca5bb, type: 2}
+  - {fileID: 11400000, guid: 427e2896213cf4f478d864e4d6312fbd, type: 2}
 --- !u!1 &1474630627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,7 +1595,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 150
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5650842751897444190, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
 --- !u!114 &1541824750 stripped
 MonoBehaviour:

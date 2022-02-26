@@ -31,7 +31,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cardBoarder
       value: 
-      objectReference: {fileID: 21300000, guid: eb2c32ca91165bd46a315b413e36bff0,
+      objectReference: {fileID: 21300000, guid: f219c70e3f1cb0b46a71c7061e4fc55c,
         type: 3}
     - target: {fileID: 5869748873792558939, guid: cab9d1526ae389547ae179da95fcdd2f,
         type: 3}

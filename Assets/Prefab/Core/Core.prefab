@@ -176,6 +176,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectiveController
       objectReference: {fileID: 0}
+    - target: {fileID: 7875164455200115844, guid: 0c8f4a8f27e32004287ddb534f3b9441,
+        type: 3}
+      propertyPath: objectivesList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3744b3c864a60ec43ac61cd3aa6ca5bb,
+        type: 2}
+    - target: {fileID: 7875164455200115844, guid: 0c8f4a8f27e32004287ddb534f3b9441,
+        type: 3}
+      propertyPath: optionalObjectivesList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875164455200115844, guid: 0c8f4a8f27e32004287ddb534f3b9441,
+        type: 3}
+      propertyPath: optionalObjectivesList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 427e2896213cf4f478d864e4d6312fbd,
+        type: 2}
+    - target: {fileID: 7875164455200115844, guid: 0c8f4a8f27e32004287ddb534f3b9441,
+        type: 3}
+      propertyPath: optionalObjectivesList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3744b3c864a60ec43ac61cd3aa6ca5bb,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c8f4a8f27e32004287ddb534f3b9441, type: 3}
 --- !u!4 &6510679664790416551 stripped

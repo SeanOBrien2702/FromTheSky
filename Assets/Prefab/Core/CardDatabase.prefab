@@ -50,18 +50,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f358c52452844584bbd95113602e6742, type: 2}
   - {fileID: 11400000, guid: f358c52452844584bbd95113602e6742, type: 2}
   - {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4, type: 2}
+  - {fileID: 11400000, guid: b5f6ec4277924c64abfe6a54a34a7c5f, type: 2}
+  - {fileID: 11400000, guid: e303ab1797772a84bb78b593e21b5d60, type: 2}
+  - {fileID: 11400000, guid: 21a4259c67a5ef441b74230903080411, type: 2}
   cardBorders:
   - characterClass: 0
-    border: {fileID: 21300000, guid: 8136f43cf7e56da4f84bfd88bbe775c0, type: 3}
-    draftColor: {r: 0.9622642, g: 0.41535896, b: 0, a: 1}
+    border: {fileID: 21300000, guid: 11a18cf618c35ff4aab936afaafa86f1, type: 3}
+    draftColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   - characterClass: 1
-    border: {fileID: 21300000, guid: 0413a723affa0824ebc4e6b022dcec42, type: 3}
+    border: {fileID: 21300000, guid: cec5e44fbe4eb6f4689ac8a93fc8f14b, type: 3}
     draftColor: {r: 1, g: 0.48605132, b: 0, a: 1}
   - characterClass: 3
-    border: {fileID: 21300000, guid: 2677b7de06f143d4cac52bcd7a1845b4, type: 3}
+    border: {fileID: 21300000, guid: a04273aabbe049d4fbbcc24534c05381, type: 3}
     draftColor: {r: 0.14772677, g: 1, b: 0, a: 1}
   - characterClass: 2
-    border: {fileID: 21300000, guid: 5b922c1d91c957a4eaf7417f8d51a067, type: 3}
+    border: {fileID: 21300000, guid: f219c70e3f1cb0b46a71c7061e4fc55c, type: 3}
     draftColor: {r: 1, g: 1, b: 1, a: 1}
   characterClassCards:
   - characterClass: 0

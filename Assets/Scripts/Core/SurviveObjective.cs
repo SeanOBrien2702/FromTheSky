@@ -28,8 +28,18 @@ namespace FTS.Core
 
         public override string SetDescription()
         {
-            return "Survive for " + turnsToSurvive + " turns (" + 
-                turnController.Turn + "/" + turnsToSurvive + ")";
+            Debug.Log("turn controller " + turnController);
+            Debug.Log("turnsToSurvive " + turnsToSurvive);
+            string description = "";
+            if(turnController)
+            {
+                description = "Survive for " + turnsToSurvive + " turns (" + turnController.Turn + "/" + turnsToSurvive + ")";
+            }
+            else
+            {
+                description = "Survive for " + turnsToSurvive + " turns";
+            }
+            return description;
         }
     }
 }
