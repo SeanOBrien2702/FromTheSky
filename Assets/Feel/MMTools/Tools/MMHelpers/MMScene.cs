@@ -18,14 +18,24 @@ namespace MoreMountains.Tools
         public static Scene[] GetLoadedScenes()
         {
             int sceneCount = SceneManager.sceneCount;
-            Scene[] loadedScenes = new Scene[sceneCount];
+
+            List<Scene> loadedScenes = new List<Scene>(sceneCount);
+            // Scene[] loadedScenes = new Scene[sceneCount];
  
             for (int i = 0; i < sceneCount; i++)
             {
-                loadedScenes[i] = SceneManager.GetSceneAt(i);
+                var scene = SceneManager.GetSceneAt(i);
+                if (scene.isLoaded)
+                {
+                    loadedScenes.Add(scene);
+                }
+                else
+                {
+                    Debug.LogWarning($"{scene.name} NOT LOADED");
+                }
             }
 
-            return loadedScenes;
+            return loadedScenes.ToArray();
         }
 
         /// <summary>

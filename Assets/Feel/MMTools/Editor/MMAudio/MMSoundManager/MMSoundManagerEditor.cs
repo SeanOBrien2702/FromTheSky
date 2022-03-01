@@ -68,7 +68,7 @@ namespace MoreMountains.Tools
         /// <summary>
         /// On Enable, we initialize our button colors. Why? Because we can.
         /// </summary>
-        protected void OnEnable()
+        protected virtual void OnEnable()
         {
             _masterColorMute = MMColors.MMColorize(_baseColor, _masterColorBase, _coloringMode, 1f);
             _masterColorUnmute = MMColors.MMColorize(_baseColor, _masterColorBase, _coloringMode, 0.9f);
@@ -226,7 +226,7 @@ namespace MoreMountains.Tools
         /// <param name="track"></param>
         /// <param name="action"></param>
         /// <param name="styles"></param>
-        public void DrawColoredButton(string buttonLabel, Color buttonColor, MMSoundManager.MMSoundManagerTracks track, System.Action<MMSoundManager.MMSoundManagerTracks> action, GUIStyle styles)
+        public virtual void DrawColoredButton(string buttonLabel, Color buttonColor, MMSoundManager.MMSoundManagerTracks track, System.Action<MMSoundManager.MMSoundManagerTracks> action, GUIStyle styles)
         {
             _originalBackgroundColor = GUI.backgroundColor;
             GUI.backgroundColor = buttonColor;

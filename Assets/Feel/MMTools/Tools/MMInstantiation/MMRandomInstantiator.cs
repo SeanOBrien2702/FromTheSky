@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.Tools
 {
@@ -78,6 +79,7 @@ namespace MoreMountains.Tools
             // pick a random object and instantiates it
             int randomIndex = Random.Range(0, RandomPool.Count);
             _instantiatedGameObject = Instantiate(RandomPool[randomIndex], this.transform.position, this.transform.rotation);
+            SceneManager.MoveGameObjectToScene(_instantiatedGameObject, this.gameObject.scene);
             _instantiatedGameObject.name = InstantiatedObjectName;
             if (ParentInstantiatedToThisObject)
             {

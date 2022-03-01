@@ -103,6 +103,8 @@ namespace MoreMountains.Tools
         {
             yield return new WaitForEndOfFrame();
             DebugScrollRect.normalizedPosition = Vector2.zero;
+            CommandPrompt.ActivateInputField();
+            CommandPrompt.Select();
         }
 
         /// <summary>

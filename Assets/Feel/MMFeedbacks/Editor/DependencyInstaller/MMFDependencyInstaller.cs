@@ -27,7 +27,7 @@ namespace MoreMountains.Feedbacks
         /// <summary>
         /// Installs all dependencies listed in _packages
         /// </summary>
-        [MenuItem("Tools/More Mountains/MMFeedbacks/Install All Dependencies", false, 701)]
+        [MenuItem("Tools/More Mountains/MMFeedbacks/Install All Dependencies", false, 703)]
         public static void InstallAllDependencies()
         {
             _currentIndex = 0;

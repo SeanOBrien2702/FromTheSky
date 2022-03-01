@@ -118,7 +118,8 @@ namespace MoreMountains.Tools
                 options.SoloSingleTrack, options.SoloAllTracks, options.AutoUnSoloOnEnd,
                 options.BypassEffects, options.BypassListenerEffects, options.BypassReverbZones, options.Priority,
                 options.ReverbZoneMix,
-                options.DopplerLevel, options.Spread, options.RolloffMode, options.MinDistance, options.MaxDistance
+                options.DopplerLevel, options.Spread, options.RolloffMode, options.MinDistance, options.MaxDistance, 
+                options.DoNotAutoRecycleIfNotDonePlaying, options.PlaybackTime
             );
         }
 
@@ -163,7 +164,8 @@ namespace MoreMountains.Tools
                                         float pitch = 1f, float panStereo = 0f, float spatialBlend = 0.0f,  
                                         bool soloSingleTrack = false, bool soloAllTracks = false, bool autoUnSoloOnEnd = false,  
                                         bool bypassEffects = false, bool bypassListenerEffects = false, bool bypassReverbZones = false, int priority = 128, float reverbZoneMix = 1f,
-                                        float dopplerLevel = 1f, int spread = 0, AudioRolloffMode rolloffMode = AudioRolloffMode.Logarithmic, float minDistance = 1f, float maxDistance = 500f
+                                        float dopplerLevel = 1f, int spread = 0, AudioRolloffMode rolloffMode = AudioRolloffMode.Logarithmic, float minDistance = 1f, float maxDistance = 500f,
+                                        bool doNotAutoRecycleIfNotDonePlaying = false, float playbackTime = 0f
                                         )
         {
             if (!audioClip) { return null; }
@@ -181,7 +183,7 @@ namespace MoreMountains.Tools
                 {
                     recycleAudioSource = audioSource;
                     // we destroy the host after the clip has played (if it not tag for reusability.
-                    StartCoroutine(_pool.AutoDisableAudioSource(audioClip.length, audioSource.gameObject));
+                    StartCoroutine(_pool.AutoDisableAudioSource(audioClip.length / Mathf.Abs(pitch), audioSource, audioClip, doNotAutoRecycleIfNotDonePlaying));
                 }
             }
 
@@ -189,13 +191,13 @@ namespace MoreMountains.Tools
             if (audioSource == null)
             {
                 _tempAudioSourceGameObject = new GameObject("MMAudio_"+audioClip.name);
+                SceneManager.MoveGameObjectToScene(_tempAudioSourceGameObject, this.gameObject.scene);
                 audioSource = _tempAudioSourceGameObject.AddComponent<AudioSource>();
             }
             
             // audio source settings ---------------------------------------------------------------------------------
             
             audioSource.transform.position = location;
-            audioSource.time = 0.0f; 
             audioSource.clip = audioClip;
             audioSource.pitch = pitch;
             audioSource.spatialBlend = spatialBlend;
@@ -211,6 +213,7 @@ namespace MoreMountains.Tools
             audioSource.rolloffMode = rolloffMode;
             audioSource.minDistance = minDistance;
             audioSource.maxDistance = maxDistance;
+            audioSource.time = playbackTime; 
             
             // track and volume ---------------------------------------------------------------------------------
             
@@ -267,7 +270,7 @@ namespace MoreMountains.Tools
                 audioSource.mute = false;
                 if (autoUnSoloOnEnd)
                 {
-                    StartCoroutine(MuteAllSoundsCoroutine(audioClip.length, false));
+                    StartCoroutine(MuteAllSoundsCoroutine(audioClip.length - playbackTime, false));
                 }
             }
             
@@ -468,6 +471,22 @@ namespace MoreMountains.Tools
             }
         }
 
+        /// <summary>
+        /// Returns true if sounds are currently playing on that track
+        /// </summary>
+        /// <param name="track"></param>
+        public virtual bool HasSoundsPlaying(MMSoundManagerTracks track)
+        {
+            foreach (MMSoundManagerSound sound in _sounds)
+            {
+                if ((sound.Track == track) && (sound.Source.isPlaying))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
         /// <summary>
         /// Stops all sounds on a track, and returns them to the pool
         /// </summary>

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MoreMountains.Tools
 {
@@ -10,7 +11,7 @@ namespace MoreMountains.Tools
     [System.Serializable]
     public class MMSaveLoadTestObject
     {
-        public List<string> StringList;
+        public string SavedText;
     }
 
     /// <summary>
@@ -18,9 +19,9 @@ namespace MoreMountains.Tools
     /// </summary>
     public class MMSaveLoadTester : MonoBehaviour
     {
-        [Header("Saved object")]
-        /// a test object containing a list of strings to save and load
-        public MMSaveLoadTestObject TestObject;
+        [Header("Bindings")]
+        /// the text to save
+        public InputField TargetInputField;
 
         [Header("Save settings")]
         /// the chosen save method (json, encrypted json, binary, encrypted binary)
@@ -49,19 +50,22 @@ namespace MoreMountains.Tools
         /// <summary>
         /// Saves the contents of the TestObject into a file
         /// </summary>
-        protected virtual void Save()
+        public virtual void Save()
         {
             InitializeSaveLoadMethod();
-            MMSaveLoadManager.Save(TestObject, FileName+SaveFileExtension, FolderName);
+            MMSaveLoadTestObject testObject = new MMSaveLoadTestObject();
+            testObject.SavedText = TargetInputField.text;
+            MMSaveLoadManager.Save(testObject, FileName+SaveFileExtension, FolderName);
         }
 
         /// <summary>
         /// Loads the saved data
         /// </summary>
-        protected virtual void Load()
+        public virtual void Load()
         {
             InitializeSaveLoadMethod();
-            TestObject = (MMSaveLoadTestObject)MMSaveLoadManager.Load(typeof(MMSaveLoadTestObject), FileName + SaveFileExtension, FolderName);
+            MMSaveLoadTestObject testObject = (MMSaveLoadTestObject)MMSaveLoadManager.Load(typeof(MMSaveLoadTestObject), FileName + SaveFileExtension, FolderName);
+            TargetInputField.text = testObject.SavedText;
         }
 
         /// <summary>

@@ -47,7 +47,8 @@ namespace MoreMountains.Tools
 
 				// draws a movable handle
 				Vector3 newPoint = Handles.FreeMoveHandle(oldPoint, Quaternion.identity,.5f,new Vector3(.25f,.25f,.25f),Handles.CircleHandleCap);
-
+				newPoint = ApplyAxisLock(oldPoint, newPoint);
+				
 				// records changes
 				if (EditorGUI.EndChangeCheck())
 		        {
@@ -56,6 +57,31 @@ namespace MoreMountains.Tools
 		        }
 			}	        
 	    }
+
+		/// <summary>
+		/// Locks handles movement on x, y, or z axis
+		/// </summary>
+		/// <param name="oldPoint"></param>
+		/// <param name="newPoint"></param>
+		/// <returns></returns>
+		protected virtual Vector3 ApplyAxisLock(Vector3 oldPoint, Vector3 newPoint)
+		{
+			MMPath t = (target as MMPath);
+			if (t.LockHandlesOnXAxis)
+			{
+				newPoint.x = oldPoint.x; 
+			}
+			if (t.LockHandlesOnYAxis)
+			{
+				newPoint.y = oldPoint.y; 
+			}
+			if (t.LockHandlesOnZAxis)
+			{
+				newPoint.z = oldPoint.z; 
+			}
+
+			return newPoint;
+		}
 	}
 }
 

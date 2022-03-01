@@ -113,6 +113,7 @@ namespace MoreMountains.Tools
                         if (!string.IsNullOrEmpty(Transitions[i].TrueState))
                         {
                             _brain.TransitionToState(Transitions[i].TrueState);
+                            break;
                         }
                     }
                     else
@@ -120,6 +121,7 @@ namespace MoreMountains.Tools
                         if (!string.IsNullOrEmpty(Transitions[i].FalseState))
                         {
                             _brain.TransitionToState(Transitions[i].FalseState);
+                            break;
                         }
                     }
                 }                

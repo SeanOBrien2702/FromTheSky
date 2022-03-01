@@ -92,7 +92,7 @@ namespace MoreMountains.Tools
         /// </summary>
         protected virtual void OnEnable()
         {
-            if (ActivationMode == ActivationModes.Start)
+            if (ActivationMode == ActivationModes.OnEnable)
             {
                 StartChangeState();
             }

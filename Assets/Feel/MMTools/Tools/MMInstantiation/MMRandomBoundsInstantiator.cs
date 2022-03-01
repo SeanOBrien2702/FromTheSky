@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.Tools
 {
@@ -123,6 +124,7 @@ namespace MoreMountains.Tools
             // pick a random object and instantiates it
             int randomIndex = Random.Range(0, RandomPool.Count);
             GameObject obj = Instantiate(RandomPool[randomIndex], this.transform.position, this.transform.rotation);
+            SceneManager.MoveGameObjectToScene(obj.gameObject, this.gameObject.scene);
 
             // we pick a random point within the bounds then move it to account for rotation/scale
             obj.transform.position = MMBoundsExtensions.MMRandomPointInBounds(_collider.bounds);

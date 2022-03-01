@@ -4,6 +4,7 @@ using UnityEngine;
 using MoreMountains.Tools;
 using System;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.Tools
 {
@@ -245,6 +246,7 @@ namespace MoreMountains.Tools
             {
 #if !UNITY_WEBGL
                 GameObject audioSourceGo = new GameObject("Microphone");
+                SceneManager.MoveGameObjectToScene(audioSourceGo, this.gameObject.scene);
                 audioSourceGo.transform.SetParent(this.gameObject.transform);
                 TargetAudioSource = audioSourceGo.AddComponent<AudioSource>();                
                 //UNCOMMENT_MICROPHONE string _microphone = Microphone.devices[MicrophoneID].ToString();

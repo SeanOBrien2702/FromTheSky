@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Reflection;
 using System.Linq;
+using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -489,14 +490,14 @@ namespace MoreMountains.Tools
 		/// <param name="debug">If set to <c>true</c> debug.</param>
 		/// <param name="color">Color.</param>
 		/// <param name="drawGizmo">If set to <c>true</c> draw gizmo.</param>
-		public static RaycastHit Raycast3D(Vector3 rayOriginPoint, Vector3 rayDirection, float rayDistance, LayerMask mask, Color color,bool drawGizmo=false)
+		public static RaycastHit Raycast3D(Vector3 rayOriginPoint, Vector3 rayDirection, float rayDistance, LayerMask mask, Color color,bool drawGizmo=false, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
 		{
 			if (drawGizmo && DebugDrawEnabled) 
 			{
 				Debug.DrawRay (rayOriginPoint, rayDirection * rayDistance, color);
 			}
 			RaycastHit hit;
-			Physics.Raycast(rayOriginPoint, rayDirection, out hit, rayDistance, mask);	
+			Physics.Raycast(rayOriginPoint, rayDirection, out hit, rayDistance, mask, queryTriggerInteraction);	
 			return hit;
 		}
 
@@ -555,7 +556,6 @@ namespace MoreMountains.Tools
 	            // we try to find one in the scene
 	            _console = (MMDebugOnScreenConsole) GameObject.FindObjectOfType(typeof(MMDebugOnScreenConsole));
             }
-
 
             if (_console == null)
 			{	

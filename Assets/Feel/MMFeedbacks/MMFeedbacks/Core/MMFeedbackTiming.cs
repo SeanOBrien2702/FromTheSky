@@ -23,6 +23,14 @@ namespace MoreMountains.Feedbacks
         [Tooltip("whether we're working on scaled or unscaled time")]
         public TimescaleModes TimescaleMode = TimescaleModes.Scaled;
         
+        [Header("Exceptions")]
+        /// if this is true, holding pauses won't wait for this feedback to finish 
+        [Tooltip("if this is true, holding pauses won't wait for this feedback to finish")]
+        public bool ExcludeFromHoldingPauses = false;
+        /// whether to count this feedback in the parent MMFeedbacks(Player) total duration or not
+        [Tooltip("whether to count this feedback in the parent MMFeedbacks(Player) total duration or not")]
+        public bool ContributeToTotalDuration = true;
+
         [Header("Delays")]
         /// the initial delay to apply before playing the delay (in seconds)
         [Tooltip("the initial delay to apply before playing the delay (in seconds)")]
@@ -30,9 +38,6 @@ namespace MoreMountains.Feedbacks
         /// the cooldown duration mandatory between two plays
         [Tooltip("the cooldown duration mandatory between two plays")]
         public float CooldownDuration = 0f;
-        /// if this is true, holding pauses won't wait for this feedback to finish 
-        [Tooltip("if this is true, holding pauses won't wait for this feedback to finish")]
-        public bool ExcludeFromHoldingPauses = false;
 
         [Header("Stop")]
         /// if this is true, this feedback will interrupt itself when Stop is called on its parent MMFeedbacks, otherwise it'll keep running

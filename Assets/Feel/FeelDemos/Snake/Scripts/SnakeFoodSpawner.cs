@@ -33,6 +33,7 @@ namespace MoreMountains.Feel
             for (int i = 0; i < AmountOfFood; i++)
             {
                 SnakeFood food = Instantiate(SnakeFoodPrefab);
+                SceneManager.MoveGameObjectToScene(food.gameObject, this.gameObject.scene);
                 food.transform.position = DetermineSpawnPosition();
                 food.Spawner = this;
                 Foods.Add(food);

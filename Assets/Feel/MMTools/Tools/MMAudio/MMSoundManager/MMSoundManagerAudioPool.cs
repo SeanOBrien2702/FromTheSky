@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.Tools
 {
@@ -39,6 +40,7 @@ namespace MoreMountains.Tools
             for (int i = 0; i < poolSize; i++)
             {
                 GameObject temporaryAudioHost = new GameObject("MMAudioSourcePool_"+i);
+                SceneManager.MoveGameObjectToScene(temporaryAudioHost.gameObject, parent.gameObject.scene);
                 AudioSource tempSource = temporaryAudioHost.AddComponent<AudioSource>();
                 temporaryAudioHost.transform.SetParent(parent);
                 temporaryAudioHost.SetActive(false);
@@ -52,10 +54,21 @@ namespace MoreMountains.Tools
         /// <param name="duration"></param>
         /// <param name="targetObject"></param>
         /// <returns></returns>
-        public virtual IEnumerator AutoDisableAudioSource(float duration, GameObject targetObject)
+        public virtual IEnumerator AutoDisableAudioSource(float duration, AudioSource source, AudioClip clip, bool doNotAutoRecycleIfNotDonePlaying)
         {
             yield return MMCoroutine.WaitFor(duration);
-            targetObject.SetActive(false);
+            if (source.clip != clip)
+            {
+                yield break;
+            }
+            if (doNotAutoRecycleIfNotDonePlaying)
+            {
+                while (source.time < source.clip.length)
+                {
+                    yield return null;
+                }
+            }
+            source.gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -78,6 +91,7 @@ namespace MoreMountains.Tools
             if (poolCanExpand)
             {
                 GameObject temporaryAudioHost = new GameObject("MMAudioSourcePool_"+_pool.Count);
+                SceneManager.MoveGameObjectToScene(temporaryAudioHost.gameObject, parent.gameObject.scene);
                 AudioSource tempSource = temporaryAudioHost.AddComponent<AudioSource>();
                 temporaryAudioHost.transform.SetParent(parent);
                 temporaryAudioHost.SetActive(true);

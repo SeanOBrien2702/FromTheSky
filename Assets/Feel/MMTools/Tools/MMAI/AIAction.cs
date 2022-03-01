@@ -23,17 +23,9 @@ namespace MoreMountains.Tools
         }
 
         /// <summary>
-        /// On Start we trigger our init method
-        /// </summary>
-        protected virtual void Start()
-        {
-            Initialization();
-        }
-
-        /// <summary>
         /// Initializes the action. Meant to be overridden
         /// </summary>
-        protected virtual void Initialization()
+        public virtual void Initialization()
         {
 
         }

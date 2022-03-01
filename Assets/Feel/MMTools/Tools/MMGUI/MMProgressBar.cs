@@ -242,6 +242,11 @@ namespace MoreMountains.Tools
                 Initialization();
             }
             
+            if (!this.gameObject.activeInHierarchy)
+            {
+	            this.gameObject.SetActive(true);    
+            }
+            
 	        _newPercent = MMMaths.Remap(currentValue, minValue, maxValue, MinimumBarFillValue, MaximumBarFillValue);
 	        
 	        _actualUpdate = (BarTarget != _newPercent);
@@ -301,17 +306,17 @@ namespace MoreMountains.Tools
 		    {
 			    StopCoroutine(_coroutine);
 		    }
-		    _coroutineShouldRun = true;
+		    _coroutineShouldRun = true;     
 		    
-		    if (!this.gameObject.activeInHierarchy)
-            {
-                this.gameObject.SetActive(true);    
-		    }
 
-            if (this.gameObject.activeInHierarchy)
-            {
-                _coroutine = StartCoroutine(UpdateBarsCo());
-            }                
+		    if (this.gameObject.activeInHierarchy)
+		    {
+			    _coroutine = StartCoroutine(UpdateBarsCo());
+		    }
+		    else
+		    {
+			    SetBar(currentValue, minValue, maxValue);
+		    }
 
             UpdateText();
         }

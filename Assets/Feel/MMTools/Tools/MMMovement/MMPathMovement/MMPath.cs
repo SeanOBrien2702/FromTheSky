@@ -47,9 +47,18 @@ namespace MoreMountains.Tools
 		public MovementDirection LoopInitialMovementDirection = MovementDirection.Ascending;
 		/// the points that make up the path the object will follow
 		public List<MMPathMovementElement> PathElements;
-        
+		/// another MMPath that you can reference. If set, the reference MMPath's data will replace this MMPath's
+		public MMPath ReferenceMMPath;
+		/// if this is true, this object will move to the 0 position of the reference path
+		public bool AbsoluteReferencePath = false;
         /// the minimum distance to a point at which we'll arbitrarily decide the point's been reached
 		public float MinDistanceToGoal = .1f;
+
+        [Header("Gizmos")] 
+        public bool LockHandlesOnXAxis = false;
+        public bool LockHandlesOnYAxis = false;
+        public bool LockHandlesOnZAxis = false;
+        
 		/// the original position of the transform, hidden and shouldn't be accessed
 		protected Vector3 _originalTransformPosition;
 		/// internal flag, hidden and shouldn't be accessed
@@ -91,8 +100,18 @@ namespace MoreMountains.Tools
 			_endReached = false;
             CanMove = true;
 
+            // we copy our reference if needed
+            if ((ReferenceMMPath != null) && (ReferenceMMPath.PathElements != null || ReferenceMMPath.PathElements.Count > 0))
+            {
+	            if (AbsoluteReferencePath)
+	            {
+		            this.transform.position = ReferenceMMPath.transform.position;
+	            }
+	            PathElements = ReferenceMMPath.PathElements;
+            }
+
 			// if the path is null we exit
-			if(PathElements == null || PathElements.Count < 1)
+			if (PathElements == null || PathElements.Count < 1)
 			{
 				return;
 			}

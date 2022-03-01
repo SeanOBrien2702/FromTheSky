@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.Feedbacks
 {
@@ -12,16 +12,43 @@ namespace MoreMountains.Feedbacks
         public int PoolSize = 20;
         /// if true, the pool will automatically add objects to the itself if needed
         public bool PoolCanExpand = true;
-
         /// if this is true, the pool will try not to create a new waiting pool if it finds one with the same name.
         public bool MutualizeWaitingPools = false;
         /// if this is true, all waiting and active objects will be regrouped under an empty game object. Otherwise they'll just be at top level in the hierarchy
         public bool NestWaitingPool = true;
-
+        
         /// this object is just used to group the pooled objects
         protected GameObject _waitingPool = null;
         protected MMMiniObjectPool _objectPool;
         protected List<GameObject> _pooledGameObjects;
+        protected const int _initialPoolsListCapacity = 5;
+        
+        static List<MMMiniObjectPool> _pools = new List<MMMiniObjectPool>(_initialPoolsListCapacity);
+
+        /// <summary>
+        /// Adds a pooler to the static list if needed
+        /// </summary>
+        /// <param name="pool"></param>
+        public static void AddPool(MMMiniObjectPool pool)
+        {
+            if (_pools == null)
+            {
+                _pools = new List<MMMiniObjectPool>(_initialPoolsListCapacity);    
+            }
+            if (!_pools.Contains(pool))
+            {
+                _pools.Add(pool);
+            }
+        }
+
+        /// <summary>
+        /// Removes a pooler from the static list
+        /// </summary>
+        /// <param name="pool"></param>
+        public static void RemovePool(MMMiniObjectPool pool)
+        {
+            _pools?.Remove(pool);
+        }
 
         /// <summary>
         /// On awake we fill our object pool
@@ -30,38 +57,76 @@ namespace MoreMountains.Feedbacks
         {
             FillObjectPool();
         }
+        
+        /// <summary>
+        /// On Destroy we remove ourselves from the list of poolers 
+        /// </summary>
+        private void OnDestroy()
+        {
+            if (_objectPool != null)
+            {
+                RemovePool(_objectPool);    
+            }
+        }
+        
+        /// <summary>
+        /// Looks for an existing pooler for the same object, returns it if found, returns null otherwise
+        /// </summary>
+        /// <param name="objectToPool"></param>
+        /// <returns></returns>
+        public virtual MMMiniObjectPool ExistingPool(string poolName)
+        {
+            if (_pools == null)
+            {
+                _pools = new List<MMMiniObjectPool>(_initialPoolsListCapacity);    
+            }
+            
+            if (_pools.Count == 0)
+            {
+                var pools = FindObjectsOfType<MMMiniObjectPool>();
+                if (pools.Length > 0)
+                {
+                    _pools.AddRange(pools);
+                }
+            }
+            foreach (MMMiniObjectPool pool in _pools)
+            {
+                if ((pool != null) && (pool.name == poolName) && (pool.gameObject.scene == this.gameObject.scene))
+                {
+                    return pool;
+                }
+            }
+            return null;
+        }
 
         /// <summary>
         /// Creates the waiting pool or tries to reuse one if there's already one available
         /// </summary>
         protected virtual void CreateWaitingPool()
         {
-            if (!NestWaitingPool)
-            {
-                return;
-            }
-
             if (!MutualizeWaitingPools)
             {
                 // we create a container that will hold all the instances we create
-                _waitingPool = new GameObject(DetermineObjectPoolName());
-                _objectPool = _waitingPool.AddComponent<MMMiniObjectPool>();
+                _objectPool = this.gameObject.AddComponent<MMMiniObjectPool>();
                 _objectPool.PooledGameObjects = new List<GameObject>();
                 return;
             }
             else
             {
-                GameObject waitingPool = GameObject.Find(DetermineObjectPoolName());
+                MMMiniObjectPool waitingPool = ExistingPool(DetermineObjectPoolName(GameObjectToPool));
+                
                 if (waitingPool != null)
                 {
-                    _waitingPool = waitingPool;
-                    _objectPool = _waitingPool.MMFGetComponentNoAlloc<MMMiniObjectPool>();
+                    _waitingPool = waitingPool.gameObject;
+                    _objectPool = waitingPool;
                 }
                 else
                 {
-                    _waitingPool = new GameObject(DetermineObjectPoolName());
-                    _objectPool = _waitingPool.AddComponent<MMMiniObjectPool>();
+                    GameObject newPool = new GameObject();
+                    newPool.name = DetermineObjectPoolName(GameObjectToPool);
+                    _objectPool = newPool.AddComponent<MMMiniObjectPool>();
                     _objectPool.PooledGameObjects = new List<GameObject>();
+                    AddPool(_objectPool);
                 }
             }
         }
@@ -70,9 +135,9 @@ namespace MoreMountains.Feedbacks
         /// Determines the name of the object pool.
         /// </summary>
         /// <returns>The object pool name.</returns>
-        protected virtual string DetermineObjectPoolName()
+        public static string DetermineObjectPoolName(GameObject gameObjectToPool)
         {
-            return ("[MiniObjectPool] " + this.name);
+            return (gameObjectToPool.name + "_pool");
         }
 
         /// <summary>
@@ -142,9 +207,10 @@ namespace MoreMountains.Feedbacks
             }
             GameObject newGameObject = (GameObject)Instantiate(GameObjectToPool);
             newGameObject.gameObject.SetActive(false);
+            SceneManager.MoveGameObjectToScene(newGameObject, this.gameObject.scene);
             if (NestWaitingPool)
             {
-                newGameObject.transform.SetParent(_waitingPool.transform);
+                newGameObject.transform.SetParent(_objectPool.transform);
             }
             newGameObject.name = GameObjectToPool.name + "-" + _pooledGameObjects.Count;
 

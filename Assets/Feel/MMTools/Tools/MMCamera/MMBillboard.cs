@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.Tools
 {
@@ -50,6 +51,7 @@ namespace MoreMountains.Tools
         protected virtual void NestThisObject()
 		{
 			_parentContainer = new GameObject();
+			SceneManager.MoveGameObjectToScene(_parentContainer, this.gameObject.scene);
 			_parentContainer.name = "Parent"+transform.gameObject.name;
 			_parentContainer.transform.position = transform.position;
 			transform.parent = _parentContainer.transform;

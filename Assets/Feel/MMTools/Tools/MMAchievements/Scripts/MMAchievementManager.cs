@@ -28,12 +28,9 @@ namespace MoreMountains.Tools
 		/// <summary>
 		/// You'll need to call this method to initialize the manager
 		/// </summary>
-		public static void LoadAchievementList()
+		public static void LoadAchievementList(MMAchievementList achievementList)
 		{
 			_achievements = new List<MMAchievement> ();
-
-			// the Achievement List scriptable object must be in a Resources folder inside your project, like so : Resources/Achievements/PUT_SCRIPTABLE_OBJECT_HERE
-			MMAchievementList achievementList = (MMAchievementList) Resources.Load("Achievements/AchievementList");
 
 			if (achievementList == null)
 			{
@@ -148,7 +145,6 @@ namespace MoreMountains.Tools
 
 		public static void ResetAllAchievements()
 		{
-			LoadAchievementList ();
 			ResetAchievements (_listID);
 		}
 

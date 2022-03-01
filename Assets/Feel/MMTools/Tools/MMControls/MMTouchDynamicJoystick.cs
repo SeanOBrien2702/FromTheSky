@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.Tools
 {
@@ -39,6 +40,7 @@ namespace MoreMountains.Tools
 			if (JoystickKnobImage!=null)
 			{
 				GameObject knob = new GameObject();
+				SceneManager.MoveGameObjectToScene(knob, this.gameObject.scene);
 				knob.transform.SetParent(gameObject.transform);
 				knob.name="DynamicJoystickKnob";
 				knob.transform.position = transform.position;

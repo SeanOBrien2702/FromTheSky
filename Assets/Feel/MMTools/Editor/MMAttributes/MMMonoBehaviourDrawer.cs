@@ -239,7 +239,7 @@ namespace MoreMountains.Tools
                 {
                     return;
                 }
-                EditorGUILayout.PropertyField(groupData.PropertiesList[i], new GUIContent(ObjectNames.NicifyVariableName(groupData.PropertiesList[i].name)), true);
+                EditorGUILayout.PropertyField(groupData.PropertiesList[i], new GUIContent(ObjectNames.NicifyVariableName(groupData.PropertiesList[i].name), tooltip:groupData.PropertiesList[i].tooltip), true);
             }
         }
         

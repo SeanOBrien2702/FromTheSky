@@ -6,12 +6,20 @@ using FTS.Core;
 using TMPro;
 using System.Collections.Generic;
 using System;
+using MoreMountains.Feedbacks;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using MoreMountains.Feedbacks;
+using UnityEngine.Events;
 #endregion
 
 namespace FTS.UI
 {
     public class HubWorldUI : MonoBehaviour
     {
+        [SerializeField] MMFeedbacks sceneFeedback;
+
         [SerializeField] ObjectiveGenerator objective;
         [SerializeField] PlanetCamera planetCamera;
 
@@ -44,7 +52,8 @@ namespace FTS.UI
 
         public void StartGame()
         {
-            SceneManager.LoadScene("GameScene");
+            //SceneManager.LoadScene("GameScene");
+            ///sceneFeedback?.Pla;
         }
         #endregion
 

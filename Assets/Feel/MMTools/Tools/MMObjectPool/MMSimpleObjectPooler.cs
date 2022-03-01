@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.Tools
 {
@@ -56,7 +57,7 @@ namespace MoreMountains.Tools
 		/// <returns>The object pool name.</returns>
 		protected override string DetermineObjectPoolName()
 		{
-			return ("[SimpleObjectPooler] " + this.name);	
+			return ("[SimpleObjectPooler] " + GameObjectToPool.name);	
 		}
 	    	
 	    /// <summary>
@@ -95,6 +96,7 @@ namespace MoreMountains.Tools
 				return null;
 			}
 			GameObject newGameObject = (GameObject)Instantiate(GameObjectToPool);
+			SceneManager.MoveGameObjectToScene(newGameObject, this.gameObject.scene);
 			newGameObject.gameObject.SetActive(false);
 			if (NestWaitingPool)
 			{

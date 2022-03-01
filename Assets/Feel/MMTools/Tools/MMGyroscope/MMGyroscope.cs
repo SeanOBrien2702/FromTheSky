@@ -9,6 +9,7 @@ namespace MoreMountains.Tools
     {
         public enum TimeScales { Scaled, Unscaled }
 
+        public static bool GyroscopeActive = true;
         public static TimeScales TimeScale = TimeScales.Scaled;
         public static Vector2 Clamps = new Vector2(-1f, 1f);
         public static float LerpSpeed = 1f;
@@ -148,6 +149,10 @@ namespace MoreMountains.Tools
 
         protected virtual void Update()
         {
+            if (!GyroscopeActive)
+            {
+                return;
+            }
             HandleTestMode();
             GetValues();
             _GyroscopeAttitude = m_GyroscopeAttitude;

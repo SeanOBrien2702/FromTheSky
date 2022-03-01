@@ -26,6 +26,7 @@ namespace MoreMountains.Feedbacks
 		public bool Lerp;
 		public float LerpSpeed;
         public bool Infinite;
+        public override string ToString() => $"REQUESTED ts={TimeScale} time={Duration} lerp={Lerp} speed={LerpSpeed} keep={Infinite}";
 	}
 
     public struct MMTimeScaleEvent
@@ -75,11 +76,20 @@ namespace MoreMountains.Feedbacks
     /// </summary>
     [AddComponentMenu("More Mountains/Feedbacks/Shakers/Various/MMTimeManager")]
     public class MMTimeManager : MonoBehaviour
-	{		
+	{	
+		[Header("Default Values")]
 		[MMFInformationAttribute("Put this component in your scene and it'll catch MMFreezeFrameEvents and MMTimeScaleEvents, allowing you to control the flow of time.", MMFInformationAttribute.InformationType.Info, false)]
 		/// The reference timescale, to which the system will go back to after all time is changed
 		[Tooltip("The reference timescale, to which the system will go back to after all time is changed")]
 		public float NormalTimescale = 1f;
+		/// The reference timescale, to which the system will go back to after all time is changed
+		[Tooltip("The reference timescale, to which the system will go back to after all time is changed")]
+		public float DefaultLerpSpeed = 1f;
+		/// The reference timescale, to which the system will go back to after all time is changed
+		[Tooltip("The reference timescale, to which the system will go back to after all time is changed")]
+		public bool DefaultLerpTimescale = false;
+		
+		[Header("Debug")]
 		/// the current, real time, time scale
 		[Tooltip("the current, real time, time scale")]
 		[MMFReadOnly]
@@ -130,6 +140,7 @@ namespace MoreMountains.Feedbacks
             _initialFixedDeltaTime = Time.fixedDeltaTime;
             _initialMaximumDeltaTime = Time.maximumDeltaTime;
             ApplyTimeScale(NormalTimescale);
+            if (LerpSpeed <= 0) { LerpSpeed = 1; }
         }
 
 		/// <summary>
@@ -138,7 +149,7 @@ namespace MoreMountains.Feedbacks
 		protected virtual void Update()
 		{      
             // if we have things in our stack, we handle them, otherwise we reset to the normal timescale
-            if (_timeScaleProperties.Count > 0)
+            while (_timeScaleProperties.Count > 0)
 			{
 				_currentProperty = _timeScaleProperties.Peek();
 				TargetTimeScale = _currentProperty.TimeScale;
@@ -149,20 +160,28 @@ namespace MoreMountains.Feedbacks
 				_timeScaleProperties.Pop();
 				_timeScaleProperties.Push(_currentProperty);
 
-				if (_currentProperty.Duration <= 0f && !_currentProperty.Infinite)
+				if(_currentProperty.Duration > 0f || _currentProperty.Infinite)
 				{
-					Unfreeze();
+					break; // keep current property values
+				}
+				else
+				{
+					Unfreeze(); // pop current property
 				}
 			}
-			else
+
+            if (_timeScaleProperties.Count == 0)
 			{
 				TargetTimeScale = NormalTimescale;
-            }
+				LerpTimescale = DefaultLerpTimescale;
+				LerpSpeed = DefaultLerpSpeed;
+			}
 
             // we apply our timescale
             if (LerpTimescale)
 			{
-                ApplyTimeScale(Mathf.Lerp(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime * LerpSpeed));
+				if (LerpSpeed <= 0) { LerpSpeed = 1; }
+				ApplyTimeScale(Mathf.Lerp(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime * LerpSpeed));
 			}
 			else
 			{

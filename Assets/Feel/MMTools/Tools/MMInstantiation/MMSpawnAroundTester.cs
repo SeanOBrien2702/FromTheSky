@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.Tools
 {
@@ -50,6 +51,7 @@ namespace MoreMountains.Tools
         public virtual void Spawn()
         {
             _gameObject = Instantiate(ObjectToInstantiate);
+            SceneManager.MoveGameObjectToScene(_gameObject, this.gameObject.scene);
             MMSpawnAround.ApplySpawnAroundProperties(_gameObject, SpawnProperties, this.transform.position);
         }
 

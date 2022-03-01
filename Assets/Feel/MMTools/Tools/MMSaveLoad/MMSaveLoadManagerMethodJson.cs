@@ -23,7 +23,6 @@ namespace MoreMountains.Tools
             streamWriter.Write(json);
             streamWriter.Close();
             saveFile.Close();
-            Debug.Log(objectToSave.GetType());
         }
 
         /// <summary>
@@ -37,7 +36,6 @@ namespace MoreMountains.Tools
             object savedObject; // = System.Activator.CreateInstance(objectType);
             StreamReader streamReader = new StreamReader(saveFile, Encoding.UTF8);
             string json = streamReader.ReadToEnd();
-            Debug.Log(json);
             savedObject = JsonUtility.FromJson(json, objectType);
             // if you prefer using NewtonSoft's JSON lib uncomment the line below and commment the line above
             //savedObject = Newtonsoft.Json.JsonConvert.DeserializeObject(json,objectType);

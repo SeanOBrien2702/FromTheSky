@@ -42,6 +42,7 @@ namespace MoreMountains.Tools
         public Vector2 RandomDecisionFrequency = new Vector2(0.5f, 1f);
 
         protected AIDecision[] _decisions;
+        protected AIAction[] _actions;
         protected float _lastActionsUpdate = 0f;
         protected float _lastDecisionsUpdate = 0f;
         protected AIState _initialState;
@@ -68,6 +69,7 @@ namespace MoreMountains.Tools
                 state.SetBrain(this);
             }
             _decisions = GetAttachedDecisions();
+            _actions = GetAttachedActions();
             if (RandomizeFrequencies)
             {
                 ActionsFrequency = Random.Range(RandomActionFrequency.x, RandomActionFrequency.y);
@@ -97,6 +99,11 @@ namespace MoreMountains.Tools
             {
                 CurrentState.PerformActions();
                 _lastActionsUpdate = Time.time;
+            }
+            
+            if (!BrainActive)
+            {
+                return;
             }
             
             if (Time.time - _lastDecisionsUpdate > DecisionFrequency)
@@ -162,6 +169,21 @@ namespace MoreMountains.Tools
         }
 
         /// <summary>
+        /// Initializes all actions
+        /// </summary>
+        protected virtual void InitializeActions()
+        {
+            if (_actions == null)
+            {
+                _actions = GetAttachedActions();
+            }
+            foreach(AIAction action in _actions)
+            {
+                action.Initialization();
+            }
+        }
+
+        /// <summary>
         /// Returns a state based on the specified state name
         /// </summary>
         /// <param name="stateName"></param>
@@ -199,6 +221,9 @@ namespace MoreMountains.Tools
         public virtual void ResetBrain()
         {
             InitializeDecisions();
+            InitializeActions();
+            BrainActive = true;
+            this.enabled = true;
 
             if (CurrentState != null)
             {

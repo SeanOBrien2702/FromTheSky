@@ -18,6 +18,10 @@ namespace MoreMountains.Tools
 	[Serializable]
 	public class MMAdditiveSceneLoadingManagerSettings
 	{
+		
+		/// the possible ways to unload scenes
+		public enum UnloadMethods { None, ActiveScene, AllScenes };
+		
 		/// the name of the MMSceneLoadingManager scene you want to use when in additive mode
 		[Tooltip("the name of the MMSceneLoadingManager scene you want to use when in additive mode")]
 		public string LoadingSceneName = "MMAdditiveLoadingScreen";
@@ -57,6 +61,9 @@ namespace MoreMountains.Tools
 		/// when in additive loading mode, the selective additive fade mode
 		[Tooltip("when in additive loading mode, the selective additive fade mode")]
 		public MMAdditiveSceneLoadingManager.FadeModes FadeMode = MMAdditiveSceneLoadingManager.FadeModes.FadeInThenOut;
+		/// the chosen way to unload scenes (none, only the active scene, all loaded scenes)
+		[Tooltip("the chosen way to unload scenes (none, only the active scene, all loaded scenes)")]
+		public UnloadMethods UnloadMethod = UnloadMethods.AllScenes;
 	}
 	
 	/// <summary>
@@ -65,6 +72,7 @@ namespace MoreMountains.Tools
 	/// </summary>
 	public class MMAdditiveSceneLoadingManager : MonoBehaviour 
 	{
+		[SerializeField] Material skybox;
 		/// The possible orders in which to play fades (depends on the fade you've set in your loading screen
 		public enum FadeModes { FadeInThenOut, FadeOutThenIn }
 
@@ -151,6 +159,7 @@ namespace MoreMountains.Tools
         protected bool _setRealtimeProgressValueIsNull;
         protected bool _setInterpolatedProgressValueIsNull;
         protected const float _asyncProgressLimit = 0.9f;
+        protected MMSceneLoadingAntiSpill _antiSpill = new MMSceneLoadingAntiSpill();
 
         /// <summary>
         /// Call this static method to load a scene from anywhere (packed settings signature)
@@ -161,7 +170,7 @@ namespace MoreMountains.Tools
         {
 	        LoadScene(sceneToLoadName, settings.LoadingSceneName, settings.ThreadPriority, settings.SecureLoad, settings.InterpolateProgress,
 		        settings.BeforeEntryFadeDelay, settings.EntryFadeDuration, settings.AfterEntryFadeDelay, settings.BeforeExitFadeDelay,
-		        settings.ExitFadeDuration, settings.EntryFadeTween, settings.ExitFadeTween, settings.ProgressBarSpeed, settings.FadeMode);
+		        settings.ExitFadeDuration, settings.EntryFadeTween, settings.ExitFadeTween, settings.ProgressBarSpeed, settings.FadeMode, settings.UnloadMethod);
         }
         
         /// <summary>
@@ -178,7 +187,8 @@ namespace MoreMountains.Tools
                                         float exitFadeDuration = 0.2f, 
                                         MMTweenType entryFadeTween = null, MMTweenType exitFadeTween = null,
                                         float progressBarSpeed = 5f, 
-                                        FadeModes fadeMode = FadeModes.FadeInThenOut)
+                                        FadeModes fadeMode = FadeModes.FadeInThenOut,
+                                        MMAdditiveSceneLoadingManagerSettings.UnloadMethods unloadMethod = MMAdditiveSceneLoadingManagerSettings.UnloadMethods.AllScenes)
         {
 	        if (_loadingInProgress)
             {
@@ -215,7 +225,7 @@ namespace MoreMountains.Tools
             }
 
             _loadingInProgress = true;
-            _initialScenes = MMScene.GetLoadedScenes();
+            _initialScenes = GetScenesToUnload(unloadMethod);
 
             Application.backgroundLoadingPriority = threadPriority;
             _sceneToLoadName = sceneToLoadName;					
@@ -233,6 +243,25 @@ namespace MoreMountains.Tools
 
             SceneManager.LoadScene(_loadingScreenSceneName, LoadSceneMode.Additive);
 		}
+        
+        private static Scene[] GetScenesToUnload(MMAdditiveSceneLoadingManagerSettings.UnloadMethods unloaded)
+        {
+	        
+	        switch (unloaded) {
+		        case MMAdditiveSceneLoadingManagerSettings.UnloadMethods.None:
+			        _initialScenes = new Scene[0];
+			        break;
+		        case MMAdditiveSceneLoadingManagerSettings.UnloadMethods.ActiveScene:
+			        _initialScenes = new Scene[1] {SceneManager.GetActiveScene()};
+			        break;
+		        default:
+		        case MMAdditiveSceneLoadingManagerSettings.UnloadMethods.AllScenes:
+			        _initialScenes = MMScene.GetLoadedScenes();
+			        break;
+	        }
+	        return _initialScenes;
+        }
+
 
 		/// <summary>
 		/// On Start(), we start loading the new level asynchronously
@@ -265,8 +294,7 @@ namespace MoreMountains.Tools
             {
 	            return;
             }
-            
-            StartCoroutine(LoadSequence());
+			StartCoroutine(LoadSequence(skybox));     
         }
 
 		/// <summary>
@@ -289,7 +317,7 @@ namespace MoreMountains.Tools
 
 			if (_interpolateProgress)
 			{
-				_interpolatedLoadProgress = MMMaths.Approach(_interpolatedLoadProgress, _loadProgress, Time.deltaTime * _progressInterpolationSpeed);
+				_interpolatedLoadProgress = MMMaths.Approach(_interpolatedLoadProgress, _loadProgress, Time.unscaledDeltaTime * _progressInterpolationSpeed);
 				if (!_setInterpolatedProgressValueIsNull)
 				{
 					SetInterpolatedProgressValue.Invoke(_interpolatedLoadProgress);	
@@ -304,8 +332,19 @@ namespace MoreMountains.Tools
 		/// <summary>
 		/// Loads the scene to load asynchronously.
 		/// </summary>
-		protected virtual IEnumerator LoadSequence()
+		protected virtual IEnumerator LoadSequence(Material skybox)
 		{
+			if(skybox != null)
+            {
+				Debug.Log("skybox");
+				_antiSpill?.PrepareAntiFill(_sceneToLoadName, skybox);
+			}
+            else
+            {
+				Debug.Log("no skybox");
+				_antiSpill?.PrepareAntiFill(_sceneToLoadName);
+			}
+			
 			InitiateLoad();
 			yield return ProcessDelayBeforeEntryFade();
 			yield return EntryFade();
@@ -345,7 +384,7 @@ namespace MoreMountains.Tools
 				MMSceneLoadingManager.LoadingSceneEvent.Trigger(_sceneToLoadName, MMSceneLoadingManager.LoadingStatus.BeforeEntryFade);
 				OnBeforeEntryFade?.Invoke();
 				
-				yield return MMCoroutine.WaitFor(_beforeEntryFadeDelay);
+				yield return MMCoroutine.WaitForUnscaled(_beforeEntryFadeDelay);
 			}
 		}
 
@@ -372,7 +411,7 @@ namespace MoreMountains.Tools
 					MMFadeInEvent.Trigger(_entryFadeDuration, _entryFadeTween, FaderID, true);
 				}           
 
-				yield return MMCoroutine.WaitFor(_entryFadeDuration);
+				yield return MMCoroutine.WaitForUnscaled(_entryFadeDuration);
 			}
 		}
 
@@ -388,7 +427,7 @@ namespace MoreMountains.Tools
 				MMSceneLoadingManager.LoadingSceneEvent.Trigger(_sceneToLoadName, MMSceneLoadingManager.LoadingStatus.AfterEntryFade);
 				OnAfterEntryFade?.Invoke();
 				
-				yield return MMCoroutine.WaitFor(_afterEntryFadeDelay);
+				yield return MMCoroutine.WaitForUnscaled(_afterEntryFadeDelay);
 			}
 		}
 
@@ -404,6 +443,11 @@ namespace MoreMountains.Tools
 				MMSceneLoadingManager.LoadingSceneEvent.Trigger(_sceneToLoadName, MMSceneLoadingManager.LoadingStatus.UnloadOriginScene);
 				OnUnloadOriginScene?.Invoke();
 				
+				if (!scene.IsValid() || !scene.isLoaded)
+				{
+					Debug.LogWarning("MMLoadingSceneManagerAdditive : invalid scene : " + scene.name);
+					continue;
+				}
 				
 				_unloadOriginAsyncOperation = SceneManager.UnloadSceneAsync(scene);
 				SetAudioListener(true);
@@ -468,7 +512,7 @@ namespace MoreMountains.Tools
 				MMSceneLoadingManager.LoadingSceneEvent.Trigger(_sceneToLoadName, MMSceneLoadingManager.LoadingStatus.BeforeExitFade);
 				OnBeforeExitFade?.Invoke();
 				
-				yield return MMCoroutine.WaitFor(_beforeExitFadeDelay);
+				yield return MMCoroutine.WaitForUnscaled(_beforeExitFadeDelay);
 			}
 		}
 
@@ -493,7 +537,7 @@ namespace MoreMountains.Tools
 				{
 					MMFadeOutEvent.Trigger(_exitFadeDuration, _exitFadeTween, FaderID, true);
 				}
-				yield return MMCoroutine.WaitFor(_exitFadeDuration);
+				yield return MMCoroutine.WaitForUnscaled(_exitFadeDuration);
 			}
 		}
 

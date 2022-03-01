@@ -31,10 +31,9 @@ namespace MoreMountains.Feedbacks
             string conditionPath = propertyPath.Replace(property.name, enumConditionAttribute.ConditionEnum);
             SerializedProperty sourcePropertyValue = property.serializedObject.FindProperty(conditionPath);
 
-            if (sourcePropertyValue != null)
+            if ((sourcePropertyValue != null) && (sourcePropertyValue.propertyType == SerializedPropertyType.Enum))
             {
                 int currentEnum = sourcePropertyValue.enumValueIndex;
-
                 enabled = enumConditionAttribute.ContainsBitFlag(currentEnum);
             }
             else
@@ -49,14 +48,19 @@ namespace MoreMountains.Feedbacks
         {
             MMFEnumConditionAttribute enumConditionAttribute = (MMFEnumConditionAttribute)attribute;
             bool enabled = GetConditionAttributeResult(enumConditionAttribute, property);
-
+            
             if (!enumConditionAttribute.Hidden || enabled)
             {
                 return EditorGUI.GetPropertyHeight(property, label);
             }
             else
             {
-                return -EditorGUIUtility.standardVerticalSpacing;
+                int multiplier = 1; // this multiplier fixes issues in differing property spacing between MMFeedbacks and MMF_Player
+                if (property.depth > 0)
+                {
+                    multiplier = property.depth;
+                }
+                return -EditorGUIUtility.standardVerticalSpacing * multiplier;
             }
         }
     }
@@ -108,7 +112,12 @@ namespace MoreMountains.Feedbacks
             }
             else
             {
-                return -EditorGUIUtility.standardVerticalSpacing;
+                int multiplier = 1; // this multiplier fixes issues in differing property spacing between MMFeedbacks and MMF_Player
+                if (property.depth > 0)
+                {
+                    multiplier = property.depth;
+                }
+                return -EditorGUIUtility.standardVerticalSpacing * multiplier;
             }
         }
     }

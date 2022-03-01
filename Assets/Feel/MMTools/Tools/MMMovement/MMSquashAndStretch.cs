@@ -55,6 +55,19 @@ namespace MoreMountains.Tools
         /// the maximum intensity of the squash
         [MMVector("Min", "Max")]
         public Vector2 SquashIntensity = new Vector2(0f, 1f);
+
+        [Header("Spring")] 
+        /// whether or not to add extra spring to the squash and stretch
+        public bool Spring = false;
+        /// the damping to apply to the spring
+        [MMCondition("Spring", true)]
+        public float SpringDamping = 0.3f;
+        /// the spring's frequency
+        [MMCondition("Spring", true)] 
+        public float SpringFrequency = 3f;
+        /// the speed of the spring
+        [MMCondition("Spring", true)] 
+        public float SpringSpeed = 10f;
         
         [Header("Debug")]
         [MMReadOnly]
@@ -87,6 +100,8 @@ namespace MoreMountains.Tools
 
         protected bool _movementStarted = false;
         protected float _lastVelocity = 0f;
+        protected Vector3 _springScale;
+        protected Vector3 _springVelocity = Vector3.zero;
 
 
         /// <summary>
@@ -103,6 +118,7 @@ namespace MoreMountains.Tools
         protected virtual void Initialization()
         {
             _initialScale = this.transform.localScale;
+            _springScale = _initialScale;
 
             _rigidbody = this.transform.parent.GetComponent<Rigidbody>();
             _rigidbody2D = this.transform.parent.GetComponent<Rigidbody2D>();
@@ -195,7 +211,7 @@ namespace MoreMountains.Tools
             this.transform.rotation = _newRotation;
             _childTransform.rotation = _deltaRotation;
         }
-
+        
         /// <summary>
         /// Computes a new local scale for this object
         /// </summary>
@@ -223,6 +239,12 @@ namespace MoreMountains.Tools
 
             _newLocalScale.x = Mathf.Clamp(_newLocalScale.x, MinimumScale.x, MaximumScale.x);
             _newLocalScale.y = Mathf.Clamp(_newLocalScale.y, MinimumScale.y, MaximumScale.y);
+
+            if (Spring)
+            {
+                MMMaths.Spring(ref _springScale, _newLocalScale, ref _springVelocity, SpringDamping, SpringFrequency, SpringSpeed, Time.deltaTime);
+                _newLocalScale = _springScale;
+            }
 
             this.transform.localScale = _newLocalScale;
         }

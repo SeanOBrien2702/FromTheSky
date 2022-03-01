@@ -46,7 +46,7 @@ namespace MoreMountains.Tools
         /// <param name="this"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T MMGetComponentAround<T>(this GameObject @this) where T : Component
+        public static T MMGetComponentAroundOrAdd<T>(this GameObject @this) where T : Component
         {
             T component = @this.GetComponentInChildren<T>(true);
             if (component == null)

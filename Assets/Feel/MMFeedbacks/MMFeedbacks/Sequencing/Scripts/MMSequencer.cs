@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.Feedbacks
 {
@@ -99,6 +100,7 @@ namespace MoreMountains.Feedbacks
             if (MetronomeSound != null)
             {
                 GameObject go = new GameObject();
+                SceneManager.MoveGameObjectToScene(go, this.gameObject.scene);
                 go.name = "BeatSoundAudioSource";
                 go.transform.SetParent(this.transform);
                 _beatSoundAudiosource = go.AddComponent<AudioSource>();

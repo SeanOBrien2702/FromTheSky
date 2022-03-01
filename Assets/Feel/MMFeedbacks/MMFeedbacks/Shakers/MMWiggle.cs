@@ -210,7 +210,7 @@ namespace MoreMountains.Feedbacks
         /// <summary>
         /// On init we get the start values and trigger our coroutines for each property
         /// </summary>
-        protected virtual void Initialization()
+        public virtual void Initialization()
         {
             _positionInternalProperties.initialValue = transform.localPosition;
             _positionInternalProperties.startValue = this.transform.localPosition;

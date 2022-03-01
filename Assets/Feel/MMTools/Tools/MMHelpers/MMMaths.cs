@@ -426,6 +426,20 @@ namespace MoreMountains.Tools
 		}
 
 		/// <summary>
+		/// Computes and returns the direction between two vector3, used to check if a vector is pointing left or right of another one
+		/// </summary>
+		/// <returns>The <see cref="System.Single"/>.</returns>
+		/// <param name="vectorA">Vector a.</param>
+		/// <param name="vectorB">Vector b.</param>
+		public static float AngleDirection(Vector3 vectorA, Vector3 vectorB, Vector3 up)
+		{
+			Vector3 cross = Vector3.Cross(vectorA, vectorB);
+			float direction = Vector3.Dot(cross, up);
+
+			return direction;
+		}
+
+		/// <summary>
 		/// Returns the distance between a point and a line.
 		/// </summary>
 		/// <returns>The between point and line.</returns>

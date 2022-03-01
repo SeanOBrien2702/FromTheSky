@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using MoreMountains.Tools;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace MoreMountains.Tools
@@ -131,7 +133,20 @@ namespace MoreMountains.Tools
             Initialization();
 		}
 
-        public virtual void Initialization()
+		/// <summary>
+		/// On enable, initializes the bar again
+		/// </summary>
+		protected void OnEnable()
+		{
+			_finalHideStarted = false;
+
+			if (!AlwaysVisible && (_progressBar != null))
+			{
+				_progressBar.gameObject.SetActive(false);
+			}
+		}
+
+		public virtual void Initialization()
         {
             _finalHideStarted = false;
 
@@ -149,6 +164,7 @@ namespace MoreMountains.Tools
                     return;
                 }
                 _progressBar = Instantiate(HealthBarPrefab, transform.position + HealthBarOffset, transform.rotation) as MMProgressBar;
+                SceneManager.MoveGameObjectToScene(_progressBar.gameObject, this.gameObject.scene);
                 _progressBar.transform.SetParent(this.transform);
                 _progressBar.gameObject.name = "HealthBar";
             }
@@ -176,6 +192,7 @@ namespace MoreMountains.Tools
 		protected virtual void DrawHealthBar()
 		{
 			GameObject newGameObject = new GameObject();
+			SceneManager.MoveGameObjectToScene(newGameObject, this.gameObject.scene);
 			newGameObject.name = "HealthBar|"+this.gameObject.name;
 
             if (NestDrawnHealthBar)
@@ -188,6 +205,7 @@ namespace MoreMountains.Tools
 			_followTransform = newGameObject.AddComponent<MMFollowTarget>();
 			_followTransform.Offset = HealthBarOffset;
 			_followTransform.Target = this.transform;
+			_followTransform.FollowRotation = false; 
             _followTransform.InterpolatePosition = false;
             _followTransform.InterpolateRotation = false;
             _followTransform.UpdateMode = FollowTargetMode;
@@ -307,7 +325,8 @@ namespace MoreMountains.Tools
 			_finalHideStarted = true;
 			if (InstantiatedOnDeath != null)
 			{
-				Instantiate(InstantiatedOnDeath, this.transform.position + HealthBarOffset, this.transform.rotation);
+				GameObject instantiatedOnDeath = Instantiate(InstantiatedOnDeath, this.transform.position + HealthBarOffset, this.transform.rotation);
+				SceneManager.MoveGameObjectToScene(instantiatedOnDeath.gameObject, this.gameObject.scene);
 			}
             if (HideBarAtZeroDelay == 0)
             {

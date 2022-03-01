@@ -430,6 +430,36 @@ namespace MoreMountains.Tools
         }
 
         /// <summary>
+        /// Use this method to change the FromColor value
+        /// </summary>
+        /// <param name="newColor"></param>
+        public void SetFromColor(Color newColor) { FromColor = newColor; }
+
+        /// <summary>
+        /// Use this method to change the ToColor value
+        /// </summary>
+        /// <param name="newColor"></param>
+        public void SetToColor(Color newColor) { ToColor = newColor; }
+
+        /// <summary>
+        /// Use this method to change the OneTimeRemapMin value
+        /// </summary>
+        /// <param name="newValue"></param>
+        public virtual void SetRemapOneTimeMin(float newValue) { OneTimeRemapMin = newValue; }
+
+        /// <summary>
+        /// Use this method to change the OneTimeRemapMax value
+        /// </summary>
+        /// <param name="newValue"></param>
+        public virtual void SetRemapOneTimeMax(float newValue) { OneTimeRemapMax = newValue; }
+
+        /// <summary>
+        /// Use this method to change the ToDestinationValue 
+        /// </summary>
+        /// <param name="newValue"></param>
+        public virtual void SetToDestinationValue(float newValue) { ToDestinationValue = newValue; }
+
+        /// <summary>
         /// Returns the relevant delta time
         /// </summary>
         /// <returns></returns>

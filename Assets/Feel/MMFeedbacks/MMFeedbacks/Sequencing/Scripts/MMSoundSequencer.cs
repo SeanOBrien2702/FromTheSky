@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.Feedbacks
 {
@@ -28,6 +29,7 @@ namespace MoreMountains.Feedbacks
             foreach(AudioClip sound in Sounds)
             {
                 GameObject asGO = new GameObject();
+                SceneManager.MoveGameObjectToScene(asGO, this.gameObject.scene);
                 asGO.name = "AudioSource - " + sound.name;
                 asGO.transform.SetParent(this.transform);
                 AudioSource source = asGO.AddComponent<AudioSource>();

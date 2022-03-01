@@ -2,6 +2,7 @@
 using MoreMountains.Tools;
 using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace MoreMountains.Feel
@@ -162,6 +163,10 @@ namespace MoreMountains.Feel
         {
             // instantiating the block and setting its name
             _receiver = Instantiate(GroundPrefabToInstantiate, newPosition, Quaternion.identity,  ParentContainer);
+            if (ParentContainer == null)
+            {
+                SceneManager.MoveGameObjectToScene(_receiver.gameObject, this.gameObject.scene);    
+            }
             _receiver.name = newName;
 
             // setting its receiver settings

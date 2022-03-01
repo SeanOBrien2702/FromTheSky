@@ -26,14 +26,6 @@ namespace MoreMountains.Tools
         }
 
         /// <summary>
-        /// On Start we initialize our Decision
-        /// </summary>
-        protected virtual void Start()
-        {
-            Initialization();
-        }
-
-        /// <summary>
         /// Meant to be overridden, called when the game starts
         /// </summary>
         public virtual void Initialization()

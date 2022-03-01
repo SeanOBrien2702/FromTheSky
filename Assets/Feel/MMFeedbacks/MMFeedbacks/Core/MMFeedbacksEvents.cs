@@ -34,7 +34,7 @@ namespace  MoreMountains.Feedbacks
     /// </summary>
     public struct MMFeedbacksEvent
     {
-        public enum EventTypes { Play, Pause, Resume, Revert, Complete }
+        public enum EventTypes { Play, Pause, Resume, Revert, Complete, Skip }
         
         public delegate void Delegate(MMFeedbacks source, EventTypes type);
         static private event Delegate OnEvent;
@@ -132,6 +132,23 @@ namespace  MoreMountains.Feedbacks
             if (TriggerMMFeedbacksEvents)
             {
                 MMFeedbacksEvent.Trigger(source, MMFeedbacksEvent.EventTypes.Pause);
+            }
+        }
+
+        /// <summary>
+        /// Fires skip events if needed
+        /// </summary>
+        /// <param name="source"></param>
+        public virtual void TriggerOnSkip(MMFeedbacks source)
+        {
+            if (!OnPauseIsNull && TriggerUnityEvents)
+            {
+                OnPause.Invoke();
+            }
+
+            if (TriggerMMFeedbacksEvents)
+            {
+                MMFeedbacksEvent.Trigger(source, MMFeedbacksEvent.EventTypes.Skip);
             }
         }
 

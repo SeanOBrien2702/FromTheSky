@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace MoreMountains.Feel
@@ -217,6 +218,7 @@ namespace MoreMountains.Feel
             if (SnakePoints < MaxAmountOfBodyParts - 1)
             {
                 SnakeBodyPart part = Instantiate(BodyPartPrefab);
+                SceneManager.MoveGameObjectToScene(part.gameObject, this.gameObject.scene);
                 part.transform.position = this.transform.position;
                 part.TargetRecorder = _recorder;
                 part.Offset = ((SnakePoints) * BodyPartsOffset) + BodyPartsOffset + 1;

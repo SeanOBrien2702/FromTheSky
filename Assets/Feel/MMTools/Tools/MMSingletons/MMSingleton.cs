@@ -9,6 +9,8 @@ namespace MoreMountains.Tools
 	{
 		protected static T _instance;
 		public static bool HasInstance => _instance != null;
+		public static T TryGetInstance() => HasInstance ? _instance : null;
+		public static T Current => _instance;
 
 		/// <summary>
 		/// Singleton design pattern
@@ -24,6 +26,7 @@ namespace MoreMountains.Tools
 					if (_instance == null)
 					{
 						GameObject obj = new GameObject ();
+						obj.name = typeof(T).Name + "_AutoCreated";
 						_instance = obj.AddComponent<T> ();
 					}
 				}

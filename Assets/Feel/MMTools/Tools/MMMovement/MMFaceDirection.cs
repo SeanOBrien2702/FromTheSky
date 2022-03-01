@@ -32,6 +32,11 @@ namespace  MoreMountains.Tools
         public ForwardVectors ForwardVector = ForwardVectors.Forward;
         /// the angles by which to rotate the direction (in degrees)
         public Vector3 DirectionRotationAngles = Vector3.zero;
+
+        [Header("Axis Locks")] 
+        public bool LockXAxis = false;
+        public bool LockYAxis = false;
+        public bool LockZAxis = false;
         
         [Header("Timing")]
         /// the possible Updates this script should run at
@@ -43,6 +48,7 @@ namespace  MoreMountains.Tools
         protected Vector3 _positionLastFrame;
         protected Transform _transform;
         protected Vector3 _upwards;
+        protected Vector3 _targetPosition;
 
         /// <summary>
         /// On Awake we initialize our behaviour
@@ -80,7 +86,12 @@ namespace  MoreMountains.Tools
         {
             if (FacingMode == FacingModes.Target)
             {
-                _direction = FacingTarget.position - _transform.position;
+	            _targetPosition = FacingTarget.position;
+	            if (LockXAxis) { _targetPosition.x = _transform.position.x; }
+	            if (LockYAxis) { _targetPosition.y = _transform.position.y; }
+	            if (LockZAxis) { _targetPosition.z = _transform.position.z; }
+	            
+                _direction = _targetPosition - _transform.position;
                 _direction = Quaternion.Euler(DirectionRotationAngles.x, DirectionRotationAngles.y, DirectionRotationAngles.z) * _direction;
                 ApplyRotation();
             }
@@ -88,6 +99,9 @@ namespace  MoreMountains.Tools
             if (FacingMode == FacingModes.MovementDirection)
             {
                 _direction = (_transform.position - _positionLastFrame).normalized;
+                if (LockXAxis) { _direction.x = 0; }
+                if (LockYAxis) { _direction.y = 0; }
+                if (LockZAxis) { _direction.z = 0; }
                 _direction = Quaternion.Euler(DirectionRotationAngles.x, DirectionRotationAngles.y, DirectionRotationAngles.z) * _direction;
                 
                 if (Vector3.Distance(_transform.position, _positionLastFrame) > MinimumMovementThreshold)

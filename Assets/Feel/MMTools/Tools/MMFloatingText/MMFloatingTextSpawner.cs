@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 namespace MoreMountains.Tools
@@ -323,6 +323,7 @@ namespace MoreMountains.Tools
                 return;
             }
             GameObject newPooler = new GameObject();
+            SceneManager.MoveGameObjectToScene(newPooler, this.gameObject.scene);
             newPooler.name = PooledSimpleMMFloatingText.name + "_Pooler";
             newPooler.transform.SetParent(this.transform);
             MMSimpleObjectPooler simplePooler = newPooler.AddComponent<MMSimpleObjectPooler>();
@@ -341,6 +342,7 @@ namespace MoreMountains.Tools
         protected virtual void InstantiateMultiplePool()
         {
             GameObject newPooler = new GameObject();
+            SceneManager.MoveGameObjectToScene(newPooler, this.gameObject.scene);
             newPooler.name = this.name + "_Pooler";
             newPooler.transform.SetParent(this.transform);
             MMMultipleObjectPooler multiplePooler = newPooler.AddComponent<MMMultipleObjectPooler>();

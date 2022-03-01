@@ -38,6 +38,8 @@ namespace MoreMountains.Tools
         public AudioMixerGroup AudioGroup;
         /// The pitch of the audio source.
         public float Pitch;
+        /// The time (in seconds) at which to play the sound
+        public float PlaybackTime;
         /// Pans a playing sound in a stereo way (left or right). This only applies to sounds that are Mono or Stereo.
         public float PanStereo;
         /// Sets how much this AudioSource is affected by 3D spatialisation calculations (attenuation, doppler etc). 0.0 makes the sound full 2D, 1.0 makes it full 3D.
@@ -68,6 +70,8 @@ namespace MoreMountains.Tools
         public float MinDistance;
         /// (Logarithmic rolloff) MaxDistance is the distance a sound stops attenuating at.
         public float MaxDistance;
+        /// Whether or not the source should be auto recycled if not done playing
+        public bool DoNotAutoRecycleIfNotDonePlaying;
         
         /// <summary>
         /// A default set of options, meant to suit most common cases.
@@ -118,6 +122,7 @@ namespace MoreMountains.Tools
                 defaultOptions.RolloffMode = AudioRolloffMode.Logarithmic;
                 defaultOptions.MinDistance = 1f;
                 defaultOptions.MaxDistance = 500f;
+                defaultOptions.DoNotAutoRecycleIfNotDonePlaying = false;
                 return defaultOptions;
             }
         }
