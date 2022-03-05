@@ -50,8 +50,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f358c52452844584bbd95113602e6742, type: 2}
   - {fileID: 11400000, guid: f358c52452844584bbd95113602e6742, type: 2}
   - {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4, type: 2}
-  - {fileID: 11400000, guid: b5f6ec4277924c64abfe6a54a34a7c5f, type: 2}
-  - {fileID: 11400000, guid: e303ab1797772a84bb78b593e21b5d60, type: 2}
   - {fileID: 11400000, guid: 21a4259c67a5ef441b74230903080411, type: 2}
   cardBorders:
   - characterClass: 0

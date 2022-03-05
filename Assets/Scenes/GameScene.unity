@@ -547,9 +547,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -657,6 +658,7 @@ MonoBehaviour:
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -1977,6 +1979,16 @@ PrefabInstance:
         type: 3}
       propertyPath: panLimit.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423583888143536895, guid: d043b55505582814486fe9a133cef8da,
+        type: 3}
+      propertyPath: rotateSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423583888143536895, guid: d043b55505582814486fe9a133cef8da,
+        type: 3}
+      propertyPath: rotationStep
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d043b55505582814486fe9a133cef8da, type: 3}

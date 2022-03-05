@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -8,6 +9,41 @@ namespace FTS.Saving
 {
     public class SavingSystem : MonoBehaviour
     {
+        string defaultFile = "save";
+        int hasCurrentGame;
+
+        public int HasCurrentGame { get => hasCurrentGame; set => hasCurrentGame = value; }
+
+        private void Awake()
+        {
+            hasCurrentGame = PlayerPrefs.GetInt("CurrentGameState", 0);
+        }
+
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.L))
+            {
+                Load(defaultFile);
+            }
+
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                Save(defaultFile);
+            }
+        }
+
+
+        internal void Continue()
+        {
+            PlayerPrefs.SetInt("CurrentGameState", 0);
+        }
+
+        internal void NewGame()
+        {
+            PlayerPrefs.SetInt("CurrentGameState", 1);
+        }
+
         //public IEnumerator LoadLastScene(string saveFile)
         //{
         //    Dictionary<string, object> state = LoadFile(saveFile);

@@ -117,6 +117,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3040276854161007569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918363082321941229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4ea74556979cf43b95c332e7f2d9b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 940074b8-add6-4da5-9830-a0fc6d54b4fa
 --- !u!114 &5869748873792558939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,5 +149,4 @@ MonoBehaviour:
   picture: {fileID: 0}
   barrier: {fileID: 6094887887503405183}
   damageFeedback: {fileID: 6708430611498093871}
-  cardBoarder: {fileID: 0}
   colour: {r: 0, g: 0, b: 0, a: 0}

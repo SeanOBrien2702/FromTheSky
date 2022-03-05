@@ -1,13 +1,14 @@
 ﻿#region Using Statements
 using UnityEngine;
 using FTS.Cards;
+using FTS.Saving;
 using System.Collections.Generic;
 using System;
 #endregion
 
 namespace FTS.Characters
 {
-    public class Player : Character
+    public class Player : Character, ISaveable
     {
         [SerializeField] Color colour;
         bool placed = false;
@@ -66,6 +67,20 @@ namespace FTS.Characters
                     break;
             }
             return range;
+        }
+        #endregion
+
+        #region Saving Methods
+        public object CaptureState()
+        {
+            Debug.Log("save health " + Health + " " + CharacterClass);
+            return Health;
+        }
+
+        public void RestoreState(object state)
+        {
+            Health = (int)state;
+            Debug.Log("load health " + Health + " " + CharacterClass);
         }
         #endregion
     }

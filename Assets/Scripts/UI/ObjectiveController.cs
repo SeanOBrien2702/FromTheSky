@@ -110,22 +110,26 @@ namespace FTS.Core
 
         void CheckObjectives()
         {
-            objectiveUI.UpdateUI(objectives);
-            int objectivesComplete = 0;
-            int objectivesRequired = objectives.Count(item => item.IsOptional == false);
-            foreach (var objective in objectives)
+            //TODO: fix object UI being null sometimes
+            if (objectiveUI != null)
             {
-                Debug.Log("objective complete: " + objective.name);
-                Debug.Log("objective complete: " + objective.IsComplete);
-                if(objective.IsComplete && !objective.IsOptional)
+                objectiveUI.UpdateUI(objectives);
+                int objectivesComplete = 0;
+                int objectivesRequired = objectives.Count(item => item.IsOptional == false);
+                foreach (var objective in objectives)
                 {
-                    objectivesComplete++;
+                    Debug.Log("objective complete: " + objective.name);
+                    Debug.Log("objective complete: " + objective.IsComplete);
+                    if (objective.IsComplete && !objective.IsOptional)
+                    {
+                        objectivesComplete++;
+                    }
                 }
-            }
-            Debug.Log("objective complete: " + objectivesRequired);
-            if (objectivesComplete >= objectivesRequired)
-            {
-                SceneManager.LoadScene("DraftScene");
+                Debug.Log("objective complete: " + objectivesRequired);
+                if (objectivesComplete >= objectivesRequired)
+                {
+                    SceneManager.LoadScene("DraftScene");
+                }
             }
         }
 
