@@ -79,7 +79,7 @@ namespace FTS.Characters
 
         public void RestoreState(object state)
         {
-            Health = (int)state;
+            Health = Convert.ToInt32(state);
             Debug.Log("load health " + Health + " " + CharacterClass);
         }
         #endregion

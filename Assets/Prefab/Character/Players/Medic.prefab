@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3658990017584045375, guid: cab9d1526ae389547ae179da95fcdd2f,
+        type: 3}
+      propertyPath: uniqueIdentifier
+      value: medic
+      objectReference: {fileID: 0}
     - target: {fileID: 5869748873792558939, guid: cab9d1526ae389547ae179da95fcdd2f,
         type: 3}
       propertyPath: colour.b

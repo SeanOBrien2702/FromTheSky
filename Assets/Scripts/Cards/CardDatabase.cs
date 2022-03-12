@@ -5,18 +5,22 @@ using UnityEngine;
 using FTS.Characters;
 using FTS.Grid;
 using System;
+using FTS.Saving;
+using Bayat.SaveSystem;
+using Bayat.Core;
+using Bayat;
 
 namespace FTS.Cards
 {
-    public class CardDatabase : MonoBehaviour
+    public class CardDatabase : MonoBehaviour, ISaveable
     {
         PlayerDatabase playerDatabase;
-        //List<Card> deck = new List<Card>();
         Dictionary<CharacterClass, List<Card>> lookupTable = null;
         [SerializeField] List<Card> deck = new List<Card>();
         [SerializeField] List<CardBorder> cardBorders;
         [SerializeField] CharacterClassCards[] characterClassCards;
-
+        [SerializeField] Card testCard;
+        Card instCard;
         CharacterClass[] classList;
         int cardID = 0;
 
@@ -85,6 +89,18 @@ namespace FTS.Cards
         internal void AddCardToDeck(Card selectedCard)
         {
             deck.Add(selectedCard);
+        }
+
+        public object CaptureState()
+        {
+            object test = deck;
+            return deck;
+        }
+
+        public void RestoreState(object state)
+        { 
+            deck.Clear();
+            deck.AddRange((List<Card>)state);
         }
         #endregion
     }

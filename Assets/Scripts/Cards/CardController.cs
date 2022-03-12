@@ -548,7 +548,6 @@ namespace FTS.Cards
             {
                 AddCard(card);
             }
-            
             deck = deck.OrderBy(item => Guid.NewGuid()).ToList();
             deck = deck.OrderByDescending(item => item.IsInherent).ToList();
         }

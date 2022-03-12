@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace FTS.Saving
 {
@@ -39,14 +41,13 @@ namespace FTS.Saving
         }
 
 #if UNITY_EDITOR
-        private void Update()
-        {
+        private void Update() {
             if (Application.IsPlaying(gameObject)) return;
-            //if (string.IsNullOrEmpty(gameObject.scene.path)) return;
+            if (string.IsNullOrEmpty(gameObject.scene.path)) return;
 
             SerializedObject serializedObject = new SerializedObject(this);
             SerializedProperty property = serializedObject.FindProperty("uniqueIdentifier");
-
+            
             if (string.IsNullOrEmpty(property.stringValue) || !IsUnique(property.stringValue))
             {
                 property.stringValue = System.Guid.NewGuid().ToString();

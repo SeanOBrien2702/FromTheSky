@@ -42,6 +42,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8697713050240454995}
     m_Modifications:
+    - target: {fileID: 3048186788251823961, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: id
+      value: 86e21004-b643-4644-9bce-d79bd63753f0
+      objectReference: {fileID: 0}
     - target: {fileID: 5137199243803290258, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: m_RootOrder
@@ -102,7 +107,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardDatabase
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3048186788251823961, guid: b1a586b67a531014d84bd3cd2f5282b3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b1a586b67a531014d84bd3cd2f5282b3, type: 3}
 --- !u!4 &6187855896716172873 stripped
 Transform:

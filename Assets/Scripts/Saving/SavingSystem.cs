@@ -1,7 +1,17 @@
-﻿using System;
+/*
+* File: SavingSystem.cs
+* Project: Simulation and Game Development Solo Assignment
+* Programmer: Sean O'Brien
+* Description: This script saves the current state of objects to a .sav file. 
+*              The SavingWrapper is used to control when the .sav file is 
+*              created/updated, loaded and deleted.
+*/
+using Bayat.SaveSystem;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +22,8 @@ namespace FTS.Saving
         string defaultFile = "save";
         int hasCurrentGame;
 
+        Dictionary<string, object> state = new Dictionary<string, object>();
+
         public int HasCurrentGame { get => hasCurrentGame; set => hasCurrentGame = value; }
 
         private void Awake()
@@ -19,10 +31,9 @@ namespace FTS.Saving
             hasCurrentGame = PlayerPrefs.GetInt("CurrentGameState", 0);
         }
 
-
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(KeyCode.L))
             {
                 Load(defaultFile);
             }
@@ -32,8 +43,6 @@ namespace FTS.Saving
                 Save(defaultFile);
             }
         }
-
-
         internal void Continue()
         {
             PlayerPrefs.SetInt("CurrentGameState", 0);
@@ -44,28 +53,15 @@ namespace FTS.Saving
             PlayerPrefs.SetInt("CurrentGameState", 1);
         }
 
-        //public IEnumerator LoadLastScene(string saveFile)
-        //{
-        //    Dictionary<string, object> state = LoadFile(saveFile);
-        //    int buildIndex = SceneManager.GetActiveScene().buildIndex;
-        //    if (state.ContainsKey("lastSceneBuildIndex"))
-        //    {
-        //        buildIndex = (int)state["lastSceneBuildIndex"];
-        //    }
-        //    yield return SceneManager.LoadSceneAsync(buildIndex);
-        //    RestoreState(state);
-        //}
 
         public void Save(string saveFile)
         {
-            Dictionary<string, object> state = LoadFile(saveFile);
-            CaptureState(state);
-            SaveFile(saveFile, state);
+            CaptureState();
         }
 
         public void Load(string saveFile)
         {
-            RestoreState(LoadFile(saveFile));
+            RestoreState();
         }
 
         public void Delete(string saveFile)
@@ -73,50 +69,21 @@ namespace FTS.Saving
             File.Delete(GetPathFromSaveFile(saveFile));
         }
 
-        private Dictionary<string, object> LoadFile(string saveFile)
-        {
-            string path = GetPathFromSaveFile(saveFile);
-            if (!File.Exists(path))
+        private void CaptureState()
+       {
+            foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
             {
-                return new Dictionary<string, object>();
-            }
-            using (FileStream stream = File.Open(path, FileMode.Open))
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                return (Dictionary<string, object>)formatter.Deserialize(stream);
+                SaveSystemAPI.SaveAsync(saveable.GetUniqueIdentifier(), saveable.CaptureState());
+                Debug.Log("Data saved successfully");
             }
         }
 
-        private void SaveFile(string saveFile, object state)
-        {
-            string path = GetPathFromSaveFile(saveFile);
-            print("Saving to " + path);
-            using (FileStream stream = File.Open(path, FileMode.Create))
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, state);
-            }
-        }
-
-        private void CaptureState(Dictionary<string, object> state)
+        private async void RestoreState()
         {
             foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
             {
-                state[saveable.GetUniqueIdentifier()] = saveable.CaptureState();
-            }
-
-            state["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;
-        }
-
-        private void RestoreState(Dictionary<string, object> state)
-        {
-            foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
-            {
-                string id = saveable.GetUniqueIdentifier();
-                if (state.ContainsKey(id))
-                {
-                    saveable.RestoreState(state[id]);
-                }
+                object loadedObject = await SaveSystemAPI.LoadAsync<object>(saveable.GetUniqueIdentifier());
+                saveable.RestoreState(loadedObject);
             }
         }
 

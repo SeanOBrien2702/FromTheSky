@@ -232,7 +232,7 @@ namespace FTS.Grid
         {
             if (UpdateCurrentCell())
             {
-                Debug.Log("show area");
+                //Debug.Log("show area");
                 grid.ClearReachable();
                 grid.ClearArea();
                 //grid.ShowArea(mover.Location, unitController.CurrentPlayer.GetCardRange(cardController.CardSelected.Type));

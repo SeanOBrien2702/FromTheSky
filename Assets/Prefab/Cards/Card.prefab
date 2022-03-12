@@ -358,6 +358,7 @@ MonoBehaviour:
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -395,9 +396,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -802,7 +804,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e725063d216004a827c64211df5266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keywordToolTip: {fileID: 0}
   highlight: {fileID: 2536027501492860206}
   cardName: {fileID: 3124163510263690239}
   rulesText: {fileID: 8653546025217371009}
