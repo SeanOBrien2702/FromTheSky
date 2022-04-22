@@ -133,7 +133,9 @@ namespace FTS.Grid
                 if (Input.GetMouseButtonDown(0) && MouseOverGrid())
                 {
                     DoSelection();
+                    Debug.Log(mover);
                 }
+                //Debug.Log(mover);
                 if (mover)
                 {
                     if (Input.GetMouseButtonDown(1))
@@ -145,14 +147,20 @@ namespace FTS.Grid
                     {
                         if (cardController.CardSelected)
                         {
-
+                            Debug.Log("card area");
                             DoCardArea();
                         }
                         else
                         {
+
                             if (mover.CanMove)
                             {
+                                Debug.Log("pathfinding");
                                 DoPathfinding();
+                            }
+                            else
+                            {
+                                Debug.Log("cant pathfind");
                             }
                         }
                     }
@@ -163,8 +171,7 @@ namespace FTS.Grid
         private bool CanControlUnit()
         {
             return EventSystem.current.IsPointerOverGameObject()
-                && (turnController.TurnPhase == TurnPhases.PlayerTurn
-                || turnController.TurnPhase == TurnPhases.VehicleAction);
+                && unitController.IsPlayer();
         }
 
         private bool MouseOverGrid()
@@ -192,7 +199,7 @@ namespace FTS.Grid
             UpdateCurrentCell();
             if (currentCell.Unit && selectedUnit != currentCell.Unit)
             {
-                //Debug.Log("Select");
+                Debug.Log("Select");
                 if (currentCell && currentCell.Unit)
                 {
                     unitController.SetCurrentUnit(currentCell.Unit as Player);
@@ -215,8 +222,10 @@ namespace FTS.Grid
 
         void DoPathfinding()
         {
-            if (UpdateCurrentCell() && turnController.TurnPhase == TurnPhases.PlayerTurn)
+            Debug.Log("check pathfinding");
+            if (UpdateCurrentCell())// && turnController.TurnPhase == TurnPhases.PlayerTurn)
             {
+                Debug.Log("can pathfinding?");
                 if (currentCell && mover.IsValidDestination(currentCell))
                 {
                     grid.FindPath(mover.Location, currentCell, mover.MovementLeft, true);
@@ -292,9 +301,13 @@ namespace FTS.Grid
         public void SelectNextUnit()
         {
             DeselectUnit();
-            selectedUnit = unitController.GetCurrentPlayer();
+            
+            //selectedUnit = unitController.GetCurrentPlayer();
+            selectedUnit = unitController.GetCurrentUnit();
+            Debug.Log("Selected unit: " + selectedUnit);
             mover = selectedUnit.GetComponent<Mover>();
             selectedUnit.StartRound();
+            Debug.Log("move camera to next character");
             StartCoroutine(cameraController.MoveToPosition(selectedUnit.transform.localPosition));
             grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
         }

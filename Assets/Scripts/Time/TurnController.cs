@@ -10,13 +10,14 @@ namespace FTS.Turns
 {
     public class TurnController : MonoBehaviour
     {
-        //UnitController unitController;
+        UnitController unitController;
         StateController stateController;
         int turnOrderPosition = 0;
         [SerializeField] int turn = 0;
         [SerializeField] Button endTurnButton;
         [SerializeField] TextMeshProUGUI turnText;
         [SerializeField] Text turnInfoText;
+        [SerializeField] TurnOrderUI turnOrderUI;
         bool hasCombatStarted = false;
         TurnPhases turnPhase;
 
@@ -46,7 +47,7 @@ namespace FTS.Turns
         #region MonoBehaviour Callbacks
         void Start()
         {
-            //unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
+            unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             //stateController = FindObjectOfType<StateController>().GetComponent<StateController>();
             turnPhase = TurnPhases.Placement;
             turnInfoText.text = "Place Units";
@@ -78,13 +79,6 @@ namespace FTS.Turns
             turnInfoText.text = "Player Turn";
         }
 
-        private void Enviorment()
-        {
-            
-            turnPhase = TurnPhases.Environment;
-            turnInfoText.text = "Environment Turn";
-        }
-
         private void EnemyAction()
         {
             Debug.Log("enemy turn starts");
@@ -93,14 +87,6 @@ namespace FTS.Turns
             //stateController.UpdateStateMachine();
             turnInfoText.text = "Enemy actions"; 
             EndTurn();
-        }
-
-        private void VehicleAction()
-        {
-            EndTurn();
-            turnPhase = TurnPhases.VehicleAction;
-            //unitController.SelectVehicle();
-            turnInfoText.text = "Vehicle turn";
         }
 
         private void NewTurn()
@@ -130,33 +116,44 @@ namespace FTS.Turns
 
         public void UpdatePhase()
         {
-            switch (turnPhase)
+            //unitController.SetCurrentUnit(turnOrderPosition);
+            unitController.StartTurn(turnOrderPosition);
+            turnOrderPosition++;
+            if(turnOrderPosition >= unitController.NumberOfUnits)
             {
-                case TurnPhases.Placement:
-                    //EnemyTelegraph();
-                    PlayerTurn();
-                    break;
-                //case TurnPhases.EnemyTelegraph:
-                //    PlayerTurn();
-                //    break;
-                case TurnPhases.PlayerTurn:
-                    //Enviorment();
-                    EnemyAction();
-                    break;
-                case TurnPhases.Environment:
-                    EnemyAction();
-                    break;
-                case TurnPhases.EnemyActions:
-                    //VehicleAction();
-                    PlayerTurn();
-                    break;
-                //case TurnPhases.VehicleAction:
-                //    EnemyTelegraph();
-                //    break;
-                default:
-                    break;
+                turnOrderPosition = 0;
             }
         }
+
+        //public void UpdatePhase()
+        //{
+        //    switch (turnPhase)
+        //    {
+        //        case TurnPhases.Placement:
+        //            //EnemyTelegraph();
+        //            PlayerTurn();
+        //            break;
+        //        //case TurnPhases.EnemyTelegraph:
+        //        //    PlayerTurn();
+        //        //    break;
+        //        case TurnPhases.PlayerTurn:
+        //            //Enviorment();
+        //            EnemyAction();
+        //            break;
+        //        case TurnPhases.Environment:
+        //            EnemyAction();
+        //            break;
+        //        case TurnPhases.EnemyActions:
+        //            //VehicleAction();
+        //            PlayerTurn();
+        //            break;
+        //        //case TurnPhases.VehicleAction:
+        //        //    EnemyTelegraph();
+        //        //    break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
         public void StartPlayerTurn()
         {
@@ -172,8 +169,12 @@ namespace FTS.Turns
         internal void StartCombat()
         {
             //EnemyTelegraph();
+            Debug.Log("start combat");
             OnCombatStart?.Invoke();
-            PlayerTurn();
+            turnOrderUI.FillUI();
+            UpdatePhase();
+            NewTurn();       
+            //PlayerTurn();
             hasCombatStarted = true;
         }
         #endregion

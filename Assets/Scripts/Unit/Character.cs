@@ -29,7 +29,7 @@ namespace FTS.Characters
         int health = 0;
         int maxHealth = 0;
         int initiative = 0;
-        int maxInitiative = 200;
+        int maxInitiative = 20;
         int energy = 4;
         int maxEnergy = 4;
         int armour = 0;
@@ -194,7 +194,7 @@ namespace FTS.Characters
 
         internal void RollInitive()
         {
-            initiative = UnityEngine.Random.Range(0, maxInitiative) + stats.GetStat(Stat.Movement, characterClass) * 2;
+            initiative = UnityEngine.Random.Range(0, maxInitiative) + stats.GetStat(Stat.Movement, characterClass);
         }
 
         public void Die()

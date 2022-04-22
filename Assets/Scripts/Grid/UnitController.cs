@@ -27,7 +27,9 @@ namespace FTS.Characters
         CardController cardController;
         ObjectiveController objectiveController;
         List<Character> enemyList = new List<Character>();
-        List<StateMachine> stateMachines = new List<StateMachine>();
+        List<Character> units = new List<Character>();
+        //Dictionary<Character, StateMachine> stateMachines = new Dictionary<Character, StateMachine>();
+        //List<StateMachine> stateMachines = new List<StateMachine>();
         List<Player> playerList = new List<Player>();
         Character vehicle;
         [Range(1, 10)]
@@ -165,12 +167,17 @@ namespace FTS.Characters
             } while (cell.Unit != null || cell.IsObstacle);
             CreateUnit(newCharacter, cell);
         }
+
+        internal bool IsPlayer()
+        {
+            bool isPlayer = currentUnit is Player ? true : false;
+            //Debug.Log(isPlayer);
+            return isPlayer;
+        }
+
         private void UpdateTurnOrder()
         {
-            enemyList.Sort(delegate (Character x, Character y)
-            {
-                return x.Initiative.CompareTo(y.Initiative);
-            });
+            units = units.OrderByDescending(x => x.Initiative).ToList();
         }
         #endregion
 
@@ -186,43 +193,69 @@ namespace FTS.Characters
 
             ++numberOfUnits;
 
-            if (character is Player)
+            units.Add(newCharacter);
+
+            if(newCharacter is Enemy)
             {
-                if (character.CharacterClass == CharacterClass.Vehicle)
-                {
-                    vehicle = newCharacter as Player;
-                }
-                else
-                {
-                    playerList.Add(newCharacter as Player);
-                    ++numberOfPlayers;
-                }
+                enemyList.Add(newCharacter);
+                //stateMachines.Add(newCharacter, new StateMachine());
+                ++numberOfEnemies;
             }
             else
             {
-                enemyList.Add(newCharacter);
-                stateMachines.Add(newCharacter.GetComponent<StateMachine>());
-                ++numberOfEnemies;
-                UpdateTurnOrder();
+                playerList.Add(newCharacter as Player);
+                ++numberOfPlayers;
             }
-
+            UpdateTurnOrder();
         }
+
+
+        public void StartTurn(int index)
+        {
+            currentUnit = units[index];
+            Debug.Log("Start turn: " + currentUnit);
+            if (currentUnit is Player)
+            {
+                OnPlayerSelected?.Invoke();
+                characterInfo.EnableUI(currentUnit);
+            }
+            else
+            {
+                OnPlayerSelected?.Invoke();
+                StartCoroutine(UpdateEnemyStateMachines());
+            }
+        }
+
+        //public void SetCurrentUnit(int index)
+        //{
+        //    currentUnit = units[index];
+        //    if(currentUnit is Player)
+        //    {
+        //        OnPlayerSelected?.Invoke();
+        //        characterInfo.EnableUI(currentUnit);
+        //    }
+        //    else
+        //    {
+        //        currentUnit.
+        //    }
+        //}
 
         public void SetCurrentUnit(Player player)
         {
             currentPlayer = player;
+            OnPlayerSelected?.Invoke();
             if (player != null)
             {
-                OnPlayerSelected?.Invoke();
+                //OnPlayerSelected?.Invoke();
                 characterInfo.EnableUI(player);
             }
         }
 
-        internal void SelectVehicle()
-        {
-            currentPlayer = vehicle as Player;
-            OnPlayerSelected?.Invoke();
-        }
+        //internal void SelectVehicle()
+        //{
+        //    currentPlayer = vehicle as Player;
+        //    OnPlayerSelected?.Invoke();
+        //}
 
         internal void PlacePlayer(HexCell cell)
         {
@@ -245,6 +278,11 @@ namespace FTS.Characters
             return currentPlayer;
         }
 
+        internal Character GetCurrentUnit()
+        {
+            return currentUnit;
+        }
+
         public void RemoveUnit(Character character)
         {
             Debug.Log("unit removed");
@@ -252,12 +290,10 @@ namespace FTS.Characters
             if (character is Enemy)
             {
                 Debug.Log("Enemy killed");
-                //gridController.RemoveIndicators(character);
                 OnEnemyKilled?.Invoke(character);
                 //objectiveController.UpdateObjective();
-                stateMachines.Remove(character.GetComponent<StateMachine>());
+                //stateMachines.Remove(character);
                 enemyList.Remove(character);
-                UpdateTurnOrder();
             }
             else
             {           
@@ -270,7 +306,7 @@ namespace FTS.Characters
                     SceneManager.LoadScene("MainMenu");
                 }
             }
-
+            UpdateTurnOrder();
         }
 
         public Player GetPlayerByClass(CharacterClass characterClass)
@@ -287,6 +323,12 @@ namespace FTS.Characters
         {
             return enemyList;
         }
+
+        public List<Character> GetUnits()
+        {
+            return units;
+        } 
+
         public CharacterClass[] GetPlayerClasses()
         {
             CharacterClass[] classList = new CharacterClass[numberOfPlayers];
@@ -309,22 +351,32 @@ namespace FTS.Characters
             //StartCoroutine(UpdateEnemyStateMachines());
         }
 
-        internal List<StateMachine> GetStateMachines()
-        {
-            return stateMachines;
-        }
+        //internal List<StateMachine> GetStateMachines()
+        //{
+        //    return stateMachines.Values;
+        //}
         #endregion
 
         #region Coroutines
         IEnumerator UpdateEnemyStateMachines()
         {
-            foreach (StateMachine stateMachine in stateMachines)
-            {
-                actionDone = false;
-                stateMachine.UpdateState();
-                yield return new WaitUntil(() => actionDone == true || Input.GetKeyDown(KeyCode.N));
-            }
+            //foreach (StateMachine stateMachine in stateMachines.Values)
+            //{
+            //    actionDone = false;
+            //    stateMachine.UpdateState();
+            //    yield return new WaitUntil(() => actionDone == true || Input.GetKeyDown(KeyCode.N));
+            //}
+            Debug.Log("enemy turn");
+            //actionDone = false;
+            Debug.Log("update state");
+            //ToDO cashe state machine
+            yield return new WaitForSeconds(2);
+            //yield return StartCoroutine(currentUnit.GetComponent<StateMachine>().UpdateState());
+            //stateMachines[currentUnit].UpdateState();
+            Debug.Log("updated");
+            //yield return new WaitUntil(() => actionDone == true || Input.GetKeyDown(KeyCode.N));
             turnController.UpdatePhase();
+            Debug.Log("enemy turn done");
         }
         #endregion
 
