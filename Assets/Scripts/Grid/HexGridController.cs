@@ -52,7 +52,7 @@ namespace FTS.Grid
             unitController = GetComponent<UnitController>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
-            UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
+            UnitController.OnUnitTurn += UnitController_OnUnitTurn;
             TurnController.OnNewTurn += TurnController_OnNewTurn;
             TurnController.OnEndTurn += TurnController_OnEndTurn;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
@@ -74,7 +74,7 @@ namespace FTS.Grid
 
         private void OnDestroy()
         {
-            UnitController.OnPlayerSelected -= UnitController_OnPlayerSelected;
+            UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
             TurnController.OnNewTurn -= TurnController_OnNewTurn;
             TurnController.OnEndTurn -= TurnController_OnEndTurn; 
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
@@ -147,7 +147,7 @@ namespace FTS.Grid
                     {
                         if (cardController.CardSelected)
                         {
-                            Debug.Log("card area");
+                            //Debug.Log("card area");
                             DoCardArea();
                         }
                         else
@@ -155,12 +155,12 @@ namespace FTS.Grid
 
                             if (mover.CanMove)
                             {
-                                Debug.Log("pathfinding");
+                                //Debug.Log("pathfinding");
                                 DoPathfinding();
                             }
                             else
                             {
-                                Debug.Log("cant pathfind");
+                                //Debug.Log("cant pathfind");
                             }
                         }
                     }
@@ -222,10 +222,10 @@ namespace FTS.Grid
 
         void DoPathfinding()
         {
-            Debug.Log("check pathfinding");
+            //Debug.Log("check pathfinding");
             if (UpdateCurrentCell())// && turnController.TurnPhase == TurnPhases.PlayerTurn)
             {
-                Debug.Log("can pathfinding?");
+                //Debug.Log("can pathfinding?");
                 if (currentCell && mover.IsValidDestination(currentCell))
                 {
                     grid.FindPath(mover.Location, currentCell, mover.MovementLeft, true);
@@ -477,10 +477,21 @@ namespace FTS.Grid
             unitsPlaced = true;
         }
 
-        private void UnitController_OnPlayerSelected()
+        //private void UnitController_OnPlayerSelected()
+        //{
+        //    SelectNextUnit();
+        //}
+
+        private void UnitController_OnUnitTurn(bool obj)
         {
             SelectNextUnit();
         }
+
+
+        //private void UnitController_OnPlayerSelected()
+        //{
+        //    SelectNextUnit();
+        //}
 
         private void TurnController_OnNewTurn()
         {

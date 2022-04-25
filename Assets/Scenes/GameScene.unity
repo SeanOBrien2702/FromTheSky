@@ -416,6 +416,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3824e282ad1a9af43a2b59f7a938b4a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &75340903 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2020077536, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+    type: 3}
+  m_PrefabInstance: {fileID: 1541824749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &77066835
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,17 +1530,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1345432398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf2e0ae00334af14e81a3ae3a2e78d68, type: 3}
+  m_Script: {fileID: 11500000, guid: a4a29b3e64feba04b994f7a98f3f96e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveLabel: {fileID: 2789740316842736042, guid: ef5bec49434df654a89b779fc73b8066,
-    type: 3}
-  optionalLabel: {fileID: 8266778633984989388, guid: 493f2a861bac08047b428004b83c964d,
-    type: 3}
+  objectiveLabel: {fileID: 75340903}
+  optionalLabel: {fileID: 75340903}
   objectivePanel: {fileID: 1345432399}
   objectivesBuffer:
-  - {fileID: 11400000, guid: 3744b3c864a60ec43ac61cd3aa6ca5bb, type: 2}
-  - {fileID: 11400000, guid: 427e2896213cf4f478d864e4d6312fbd, type: 2}
+  - {fileID: 11400000, guid: 65a46cd1f2c05d04d9e64ee483e77089, type: 2}
+  - {fileID: 11400000, guid: 6161858ea1f3ae744ba864ad295c1b81, type: 2}
 --- !u!1 &1474630627
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,6 +51,7 @@ namespace FTS.Characters
         float changeCooldown = 0.5f;
 
         public static event System.Action OnPlayerSelected = delegate { };
+        public static event System.Action<bool> OnUnitTurn = delegate { };
 
         #region Properties
 
@@ -214,14 +215,15 @@ namespace FTS.Characters
         {
             currentUnit = units[index];
             Debug.Log("Start turn: " + currentUnit);
+            //OnPlayerSelected?.Invoke();
             if (currentUnit is Player)
             {
-                OnPlayerSelected?.Invoke();
+                OnUnitTurn?.Invoke(true);
                 characterInfo.EnableUI(currentUnit);
             }
             else
             {
-                OnPlayerSelected?.Invoke();
+                OnUnitTurn?.Invoke(false);
                 StartCoroutine(UpdateEnemyStateMachines());
             }
         }
@@ -366,17 +368,17 @@ namespace FTS.Characters
             //    stateMachine.UpdateState();
             //    yield return new WaitUntil(() => actionDone == true || Input.GetKeyDown(KeyCode.N));
             //}
-            Debug.Log("enemy turn");
+            //Debug.Log("enemy turn");
             //actionDone = false;
-            Debug.Log("update state");
+            //Debug.Log("update state");
             //ToDO cashe state machine
             yield return new WaitForSeconds(2);
             //yield return StartCoroutine(currentUnit.GetComponent<StateMachine>().UpdateState());
             //stateMachines[currentUnit].UpdateState();
-            Debug.Log("updated");
+            //Debug.Log("updated");
             //yield return new WaitUntil(() => actionDone == true || Input.GetKeyDown(KeyCode.N));
             turnController.UpdatePhase();
-            Debug.Log("enemy turn done");
+            //Debug.Log("enemy turn done");
         }
         #endregion
 

@@ -48,6 +48,7 @@ public class GameUI : MonoBehaviour
         CardController.OnCardDrawn += CardController_OnCardDrawn;
         CardController.OnCardCreated += CardController_OnCardCreated;
         CardController.OnEnergyChanged += CardController_OnEnergyChanged;
+        UnitController.OnUnitTurn += UnitController_OnUnitTurn;
         TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
         TurnController.OnNewTurn += TurnController_OnNewTurn;
         TurnController.OnEndTurn += TurnController_OnEndTurn;
@@ -67,6 +68,7 @@ public class GameUI : MonoBehaviour
         CardController.OnCardDrawn -= CardController_OnCardDrawn;
         CardController.OnCardCreated -= CardController_OnCardCreated;
         CardController.OnEnergyChanged -= CardController_OnEnergyChanged;
+        UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
         TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
         TurnController.OnNewTurn -= TurnController_OnNewTurn;
         TurnController.OnEndTurn -= TurnController_OnEndTurn;
@@ -156,6 +158,13 @@ public class GameUI : MonoBehaviour
         UpdateDeckList();
     }
 
+    private void UnitController_OnUnitTurn(bool isPlayer)
+    {
+        //if(isPlayer)
+        //{
+            endTurnButton.SetActive(isPlayer);
+        //}
+    }
     private void CardController_OnCardPlayed(Card card)
     {
         Debug.Log("Card played?");
@@ -175,6 +184,7 @@ public class GameUI : MonoBehaviour
 
     private void TurnController_OnNewTurn()
     {
+        Debug.Log("end turn?");
         UpdateEnergy();
         UpdateDeckList();
         ToggleUI(true);
@@ -182,6 +192,7 @@ public class GameUI : MonoBehaviour
     }
     private void TurnController_OnEndTurn()
     {
+        Debug.Log("end turn");
         ToggleUI(true);
         //endTurnButton.SetActive(false);
     }
