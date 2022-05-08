@@ -24,6 +24,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5869748873792558939, guid: cab9d1526ae389547ae179da95fcdd2f,
         type: 3}
+      propertyPath: portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e3fa90ef861e1c48b3a02a9b80e59c2,
+        type: 3}
+    - target: {fileID: 5869748873792558939, guid: cab9d1526ae389547ae179da95fcdd2f,
+        type: 3}
       propertyPath: cardBoarder
       value: 
       objectReference: {fileID: 21300000, guid: 2466abe4bcb9e484fae3aced5e7e3662,
