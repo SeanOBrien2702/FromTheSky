@@ -28,6 +28,7 @@ namespace FTS.Grid
 
         HexCell currentCell;
 
+        Character currentUnit;
         Character selectedUnit;
         Mover mover;
         bool unitsPlaced = false;
@@ -130,6 +131,7 @@ namespace FTS.Grid
         {
             if (CanControlUnit())
             {
+                //Debug.Log("can do unit control");
                 if (Input.GetMouseButtonDown(0) && MouseOverGrid())
                 {
                     DoSelection();
@@ -140,7 +142,7 @@ namespace FTS.Grid
                 {
                     if (Input.GetMouseButtonDown(1))
                     {
-                        Debug.Log("Move");
+                        //Debug.Log("Move");
                         DoMove();
                     }
                     else
@@ -195,28 +197,37 @@ namespace FTS.Grid
 
         void DoSelection()
         {
-            grid.ClearReachable();
+            //grid.ClearReachable();
             UpdateCurrentCell();
-            if (currentCell.Unit && selectedUnit != currentCell.Unit)
+            if(currentCell.Unit)
             {
-                Debug.Log("Select");
-                if (currentCell && currentCell.Unit)
-                {
-                    unitController.SetCurrentUnit(currentCell.Unit as Player);
-                }
+                characterInfo.EnableUI(currentCell.Unit);
             }
             else
             {
-                unitController.SetCurrentUnit(null);
-                DeselectUnit();
+                characterInfo.EnableUI(unitController.GetCurrentUnit());
+
             }
+            //if (currentCell.Unit && currentUnit != currentCell.Unit)
+            //{
+            //    Debug.Log("Select");
+            //    if (currentCell && currentCell.Unit)
+            //    {
+            //        unitController.SetCurrentUnit(currentCell.Unit as Player);
+            //    }
+            //}
+            //else
+            //{
+            //    unitController.SetCurrentUnit(null);
+            //    DeselectUnit();
+            //}
         }
 
         void DeselectUnit()
         {
             grid.ClearReachable();
             grid.ClearPath();
-            selectedUnit = null;
+            currentUnit = null;
             mover = null;
         }
 
@@ -303,12 +314,12 @@ namespace FTS.Grid
             DeselectUnit();
             
             //selectedUnit = unitController.GetCurrentPlayer();
-            selectedUnit = unitController.GetCurrentUnit();
-            Debug.Log("Selected unit: " + selectedUnit);
-            mover = selectedUnit.GetComponent<Mover>();
-            selectedUnit.StartRound();
-            Debug.Log("move camera to next character");
-            StartCoroutine(cameraController.MoveToPosition(selectedUnit.transform.localPosition));
+            currentUnit = unitController.GetCurrentUnit();
+            //Debug.Log("Selected unit: " + selectedUnit);
+            mover = currentUnit.GetComponent<Mover>();
+            //Debug.Log("move camera to next character");
+            StartCoroutine(cameraController.MoveToPosition(currentUnit.transform.localPosition));
+            if(currentUnit is Player)
             grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
         }
 
@@ -482,7 +493,7 @@ namespace FTS.Grid
         //    SelectNextUnit();
         //}
 
-        private void UnitController_OnUnitTurn(bool obj)
+        private void UnitController_OnUnitTurn(Character character)
         {
             SelectNextUnit();
         }

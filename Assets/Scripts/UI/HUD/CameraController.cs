@@ -125,14 +125,14 @@ public class CameraController : MonoBehaviour
     #region Public Methods
     internal void StartCharacterFollow(Transform mover)
     {
-        Debug.Log("start following");
+        //Debug.Log("start following");
         currentCharacter = mover;
         isFollowing = true;
         isEnabled = false;
     }
     internal void StopCharacterFollow()
     {
-        Debug.Log("stop following");
+        //Debug.Log("stop following");
         currentCharacter = null;
         isFollowing = false;
         isEnabled = true;
@@ -142,7 +142,7 @@ public class CameraController : MonoBehaviour
     #region Coroutines
     public IEnumerator MoveToPosition(Vector3 moveTo)
     {
-        Debug.Log("move to position");
+        //Debug.Log("move to position");
         float duration = 0.5f;
         float time = 0;
         Vector3 startPosition = transform.position;

@@ -84,14 +84,14 @@ namespace FTS.Cards
         #region MonoBehaviour Callbacks
         private void Start()
         {   
-            UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
+            //UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
             CardController.OnEnergyChanged += CardController_OnEnergyChanged;
             CardController.OnCardDrawn += CardController_OnCardDrawn;
         }
 
         private void OnDestroy()
         {
-            UnitController.OnPlayerSelected -= UnitController_OnPlayerSelected;
+            //UnitController.OnPlayerSelected -= UnitController_OnPlayerSelected;
             CardController.OnEnergyChanged -= CardController_OnEnergyChanged;
             CardController.OnCardDrawn -= CardController_OnCardDrawn;
         }
@@ -372,11 +372,11 @@ namespace FTS.Cards
         #endregion
 
         #region Events
-        private void UnitController_OnPlayerSelected()
-        {
-            UpdateHighlight();
+        //private void UnitController_OnPlayerSelected()
+        //{
+        //    UpdateHighlight();
 
-        }
+        //}
 
         private void CardController_OnEnergyChanged()
         {

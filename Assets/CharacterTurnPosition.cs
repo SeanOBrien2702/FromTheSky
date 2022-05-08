@@ -7,6 +7,7 @@ using FTS.Characters;
 
 public class CharacterTurnPosition : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI positionText;
     [SerializeField] Image profilePicture;
     // Start is called before the first frame update
@@ -21,18 +22,12 @@ public class CharacterTurnPosition : MonoBehaviour
         
     }
 
-
-    public void SetPositionText(Character unit)
-    {
-        positionText.text = unit.name +" "+ unit.Initiative;
-    }
-
     public void SetPositionText(int position)
     {
         positionText.text = position.ToString();
     }
 
-    public void SetProfilePic(Sprite profile)
+    public void SetPortrait(Sprite profile)
     {
         profilePicture.sprite = profile;
     }

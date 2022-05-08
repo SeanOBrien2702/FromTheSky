@@ -51,7 +51,7 @@ namespace FTS.Characters
         float changeCooldown = 0.5f;
 
         public static event System.Action OnPlayerSelected = delegate { };
-        public static event System.Action<bool> OnUnitTurn = delegate { };
+        public static event System.Action<Character> OnUnitTurn = delegate { };
 
         #region Properties
 
@@ -172,7 +172,6 @@ namespace FTS.Characters
         internal bool IsPlayer()
         {
             bool isPlayer = currentUnit is Player ? true : false;
-            //Debug.Log(isPlayer);
             return isPlayer;
         }
 
@@ -214,16 +213,17 @@ namespace FTS.Characters
         public void StartTurn(int index)
         {
             currentUnit = units[index];
-            Debug.Log("Start turn: " + currentUnit);
+            OnUnitTurn?.Invoke(currentUnit);
             //OnPlayerSelected?.Invoke();
             if (currentUnit is Player)
             {
-                OnUnitTurn?.Invoke(true);
+                Debug.Log("player start turn: " + currentUnit);           
                 characterInfo.EnableUI(currentUnit);
             }
             else
             {
-                OnUnitTurn?.Invoke(false);
+                Debug.Log("enemy start turn: " + currentUnit);
+                //OnUnitTurn?.Invoke(false);
                 StartCoroutine(UpdateEnemyStateMachines());
             }
         }

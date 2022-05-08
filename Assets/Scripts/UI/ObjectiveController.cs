@@ -118,14 +118,14 @@ namespace FTS.Core
                 int objectivesRequired = objectives.Count(item => item.IsOptional == false);
                 foreach (var objective in objectives)
                 {
-                    Debug.Log("objective complete: " + objective.name);
-                    Debug.Log("objective complete: " + objective.IsComplete);
+                    //Debug.Log("objective complete: " + objective.name);
+                    //Debug.Log("objective complete: " + objective.IsComplete);
                     if (objective.IsComplete && !objective.IsOptional)
                     {
                         objectivesComplete++;
                     }
                 }
-                Debug.Log("objective complete: " + objectivesRequired);
+                //Debug.Log("objective complete: " + objectivesRequired);
                 if (objectivesComplete >= objectivesRequired)
                 {
                     SceneManager.LoadScene("DraftScene");

@@ -17,7 +17,7 @@ namespace FTS.Characters
         [SerializeField] CharacterClass characterClass;
         [SerializeField] CharacterStats stats;
         [SerializeField] UnitUI unitUI;
-        [SerializeField] Sprite picture;
+        [SerializeField] Sprite portrait;
         [SerializeField] GameObject barrier;
         UnitController unitController;
 
@@ -70,9 +70,9 @@ namespace FTS.Characters
             get { return stats; }   // get method
         }
 
-        public Sprite Picture  // property
+        public Sprite Portrait  // property
         {
-            get { return Picture; }   // get method
+            get { return portrait; }   // get method
         }
 
         public CharacterClass CharacterClass  // property
@@ -125,6 +125,7 @@ namespace FTS.Characters
 
         private void Start()
         {
+            fullName = characterClass.ToString();
             //Debug.Log("character placed");
             //unitUI.UpdateHealth(health, maxHealth);
             //Debug.Log("hello?");
@@ -206,7 +207,7 @@ namespace FTS.Characters
 
         internal virtual void StartRound()
         {
-            Debug.Log("Character turn");
+            //Debug.Log("Character turn");
         }
 
         public int CompareTo(object obj)

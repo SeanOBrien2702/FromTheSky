@@ -158,12 +158,16 @@ public class GameUI : MonoBehaviour
         UpdateDeckList();
     }
 
-    private void UnitController_OnUnitTurn(bool isPlayer)
+    private void UnitController_OnUnitTurn(Character character)
     {
-        //if(isPlayer)
-        //{
-            endTurnButton.SetActive(isPlayer);
-        //}
+        if (character is Player)
+        {
+            endTurnButton.SetActive(true);
+        }
+        else
+        {
+            endTurnButton.SetActive(false);
+        }
     }
     private void CardController_OnCardPlayed(Card card)
     {

@@ -100,7 +100,7 @@ namespace FTS.Cards
             TurnController.OnNewTurn += TurnController_OnNewTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
-            //UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
+            UnitController.OnUnitTurn += UnitController_OnUnitTurn;
         }
 
         /*
@@ -146,7 +146,8 @@ namespace FTS.Cards
         {
             TurnController.OnNewTurn -= TurnController_OnNewTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
-            TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
+            TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
+            UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
         }
         #endregion
 
@@ -217,7 +218,9 @@ namespace FTS.Cards
             {
                 canDraw = false;
             }
-            else if (!deck.Any(item => item.Location == CardLocation.Deck))
+            else if (!deck.Any(item => item.Location == CardLocation.Deck &&
+                    (item.CharacterClass == CharacterClass.Common ||
+                     item.CharacterClass == unitController.GetCurrentUnit().CharacterClass)))
             {
                 if (deck.Any(item => item.Location == CardLocation.Discard))
                 {
@@ -246,6 +249,7 @@ namespace FTS.Cards
 
         private void DrawNewHand()
         {
+            Debug.Log("draw hand");
             for (int i = 0; i < cardsPerTurn; i++)
             {
                 DrawCard();
@@ -319,7 +323,8 @@ namespace FTS.Cards
                 {
                     Debug.Log("played non-targeting card");
                     CardPlayed(playedCard);
-                    playedCard.Play(unitController.GetCurrentPlayer());
+                    playedCard.Play(unitController.GetCurrentUnit());
+                    //playedCard.Play(unitController.GetCurrentPlayer());
                 }
                 else
                 {
@@ -443,7 +448,9 @@ namespace FTS.Cards
             if (canDraw())
             {
                 //Debug.Log("can draw?");
-                Card card = deck.FirstOrDefault(item => item.Location == CardLocation.Deck);
+                Card card = deck.FirstOrDefault(item => item.Location == CardLocation.Deck && 
+                                                (item.CharacterClass == CharacterClass.Common ||
+                                                item.CharacterClass == unitController.GetCurrentUnit().CharacterClass));
                 card.Location = CardLocation.Hand;
                 hand.AddCard(card);
                 OnCardDrawn?.Invoke();
@@ -542,6 +549,17 @@ namespace FTS.Cards
         #endregion
 
         #region Events
+
+        private void UnitController_OnUnitTurn(Character character)
+        {
+            DiscardHand();
+            if (character is Player)
+            {
+                energy = totalEnergy;
+                DrawNewHand();
+            }
+        }
+
         private void TurnController_OnCombatStart()
         {
             foreach (var card in cardDatabase.GetDeck())
@@ -562,8 +580,8 @@ namespace FTS.Cards
         private void TurnController_OnNewTurn()
         {
             //Debug.Log("new turn?");
-            energy = totalEnergy;
-            DrawNewHand();
+            //energy = totalEnergy;
+            //DrawNewHand();
         }
         #endregion
     }

@@ -23,6 +23,7 @@ namespace FTS.Turns
 
         public static event System.Action OnNewTurn = delegate { };
         public static event System.Action OnEndTurn = delegate { };
+        //public static event System.Action<Character> OnUnitTurn = delegate { };
         public static event System.Action OnEnemyTurn = delegate { };
         public static event System.Action OnCombatStart = delegate { };
 
@@ -122,6 +123,7 @@ namespace FTS.Turns
             if(turnOrderPosition >= unitController.NumberOfUnits)
             {
                 turnOrderPosition = 0;
+                NewTurn();
             }
         }
 
