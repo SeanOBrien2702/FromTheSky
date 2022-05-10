@@ -101,9 +101,10 @@ namespace FTS.Characters
         internal void Travel(List<HexCell> path, Vector3 lookTowards)
         {
             movementLeft -= DistanceTraveled(path);
-            
+           
             if (path != null)
             {
+                Debug.Log("path: " + path);
                 Location = path[path.Count - 1];
                 pathToTravel = path;
                 StopAllCoroutines();
@@ -219,7 +220,7 @@ namespace FTS.Characters
             {
                 yield return LookAt(lookTowards);
             }
-            //Debug.Log("mover action complete");
+            Debug.Log("mover action complete");
             cameraController.StopCharacterFollow();
             stateController.ActionDone = true;
   

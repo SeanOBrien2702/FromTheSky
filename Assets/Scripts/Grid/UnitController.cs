@@ -372,8 +372,8 @@ namespace FTS.Characters
             //actionDone = false;
             //Debug.Log("update state");
             //ToDO cashe state machine
-            yield return new WaitForSeconds(2);
-            //yield return StartCoroutine(currentUnit.GetComponent<StateMachine>().UpdateState());
+            //yield return new WaitForSeconds(2);
+            yield return StartCoroutine(currentUnit.GetComponent<StateMachine>().UpdateState());
             //stateMachines[currentUnit].UpdateState();
             //Debug.Log("updated");
             //yield return new WaitUntil(() => actionDone == true || Input.GetKeyDown(KeyCode.N));

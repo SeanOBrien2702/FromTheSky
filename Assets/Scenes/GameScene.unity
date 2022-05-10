@@ -1515,12 +1515,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1541824749}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &1345432399 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1652996883, guid: 59eb9589a92fdbe4aa22a8a39b390710,
-    type: 3}
-  m_PrefabInstance: {fileID: 1541824749}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1345432400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1530,15 +1524,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1345432398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf2e0ae00334af14e81a3ae3a2e78d68, type: 3}
+  m_Script: {fileID: 11500000, guid: a4a29b3e64feba04b994f7a98f3f96e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectiveLabel: {fileID: 75340903}
   optionalLabel: {fileID: 75340903}
-  objectivePanel: {fileID: 1345432399}
-  objectivesBuffer:
-  - {fileID: 11400000, guid: 427e2896213cf4f478d864e4d6312fbd, type: 2}
-  - {fileID: 11400000, guid: 6161858ea1f3ae744ba864ad295c1b81, type: 2}
+  objectivesBuffer: []
 --- !u!1 &1474630627
 GameObject:
   m_ObjectHideFlags: 0
@@ -2403,7 +2394,7 @@ PrefabInstance:
     - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}
       propertyPath: enemiesToSpawn
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4335076343168363342, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}

@@ -239,11 +239,12 @@ namespace FTS.Grid
                 //Debug.Log("can pathfinding?");
                 if (currentCell && mover.IsValidDestination(currentCell))
                 {
-                    grid.FindPath(mover.Location, currentCell, mover.MovementLeft, true);
+                    //Debug.Log("pathfinding");
+                    //grid.FindPath(mover.Location, currentCell, mover.MovementLeft, true);
                 }
                 else
                 {
-                    grid.ClearPath(mover.MovementLeft);
+                    //grid.ClearPath(mover.MovementLeft);
                 }
             }
         }
@@ -370,8 +371,17 @@ namespace FTS.Grid
         internal void TravelToTarget(Mover AIMover, int AIRange, HexCell target, Vector3 lookAt)
         {
             mover = AIMover;
-            grid.FindPath(AIMover.Location, target, AIMover.MovementLeft, false);          
-            mover.Travel(grid.GetPath(mover.MovementLeft), lookAt);
+            if(grid.FindPath(AIMover.Location, target, AIMover.MovementLeft, false))
+            {
+                Debug.Log("movement left: " + mover.MovementLeft + mover.gameObject.name);
+
+                mover.Travel(grid.GetPath(mover.MovementLeft), lookAt);
+            }
+            else
+            {
+                Debug.Log("path not found");
+            }
+
         }
 
         internal void Flee(Mover AIMover)

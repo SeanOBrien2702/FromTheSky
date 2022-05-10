@@ -15,7 +15,6 @@ namespace FTS.UI
     {
         [SerializeField] TextMeshProUGUI objectiveLabel;
         [SerializeField] TextMeshProUGUI optionalLabel;
-        [SerializeField] Transform objectivePanel;
         [SerializeField] List<Objective> objectivesBuffer;
         //List<Objective> objectives = new List<Objective>();
         Dictionary<Objective, TextMeshProUGUI> textList = new Dictionary<Objective, TextMeshProUGUI>();
@@ -40,11 +39,11 @@ namespace FTS.UI
                 {
                     isFirstOptional = false;
                     TextMeshProUGUI optional = Instantiate(optionalLabel);
-                    optional.transform.SetParent(objectivePanel, false);
+                    optional.transform.SetParent(transform, false);
                 }
                 TextMeshProUGUI textMesh = Instantiate(objectiveLabel);
                 textMesh.text = objectives[i].SetDescription();
-                textMesh.transform.SetParent(objectivePanel, false);
+                textMesh.transform.SetParent(transform, false);
                 textMesh.color = Color.white;
                 
                 textList.Add(objectives[i], textMesh);

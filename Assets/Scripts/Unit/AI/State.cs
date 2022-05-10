@@ -14,8 +14,9 @@ namespace FTS.Characters
 
 
         #region Private Methods
-        public IEnumerator DoActions(StateController controller, StateMachine machine)
-        {          
+        public IEnumerator DoActions(StateController controller, StateMachine machine, CameraController camera)
+        {
+            yield return new WaitUntil(() => camera.IsEnabled == true);
             for (int i = 0; i < actions.Length; i++)
             {
                 controller.ActionDone = false;

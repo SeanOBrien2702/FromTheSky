@@ -84,7 +84,7 @@ namespace FTS.UI
 
                 textList.Add(currentObjective.Objectives[i], textMesh);
             }
-            Debug.Log("currentObjective " + currentObjective.Objectives.Count);
+            //Debug.Log("currentObjective " + currentObjective.Objectives.Count);
 
             foreach (var objective in currentObjective.Objectives)
             {

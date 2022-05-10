@@ -129,7 +129,7 @@ namespace FTS.Grid
             HexCell cell;
             //Create cell position
             cell = cells[i] = Instantiate<HexCell>(cellPrefab);
-            int randomNumber = UnityEngine.Random.Range(0, 100);
+            int randomNumber = UnityEngine.Random.Range(0, 80);
 
             if (randomNumber <= 70)
             {
@@ -296,10 +296,10 @@ namespace FTS.Grid
             fromCell.SearchPhase = searchFrontierPhase;
             fromCell.Distance = 0;
             searchFrontier.Enqueue(fromCell);
-
+            HexCell current = null;
             while (searchFrontier.Count > 0)
             {
-                HexCell current = searchFrontier.Dequeue();
+                current = searchFrontier.Dequeue();
                 current.SearchPhase += 1;
                 if (current == toCell)
                 {
@@ -337,6 +337,17 @@ namespace FTS.Grid
                         searchFrontier.Change(neighbor, oldPriority);
                     }
                 }
+            }
+            if(pathExists)
+            {
+                Debug.Log("path exists " + current.Location);
+                toCell.SetHighlight(HighlightIndex.Highlight, true);
+            }
+            else
+            {
+                Debug.Log("path does not exists " + current.Location + " to cell "+ toCell.Location);
+                Debug.Log("path does not exists " + current.Unit + " to cell " + toCell.Unit);
+                toCell.SetHighlight(HighlightIndex.CantReach, true);
             }
             return pathExists;
         }
@@ -500,7 +511,7 @@ namespace FTS.Grid
             return cells.Last().transform.position;
         }
         
-        public void FindPath(HexCell fromCell, HexCell toCell, int speed , bool isPlayer)
+        public bool FindPath(HexCell fromCell, HexCell toCell, int speed , bool isPlayer)
         {
             if (isPlayer)
             {
@@ -513,6 +524,7 @@ namespace FTS.Grid
             {
                 ShowPath(speed);
             }
+            return currentPathExists;
         }
 
         //need to fix the parameters for what is passed into this function.
@@ -738,6 +750,7 @@ namespace FTS.Grid
             }
             currentPath.Add(currentPathFrom);
             currentPath.Reverse();
+            Debug.Log("path length: " + currentPath.Count);
             return currentPath;
         }
 
