@@ -17,7 +17,7 @@ namespace FTS.Characters
     public class UnitController : MonoBehaviour
     {
         public static event System.Action<Character> OnEnemyKilled = delegate { };
-
+        public static event System.Action<Character> OnPlayerKilled = delegate { };
 
         HexGrid grid;
         HexGridController gridController;
@@ -47,6 +47,7 @@ namespace FTS.Characters
         Character currentUnit;
         Player currentPlayer;
         private int currentIndex = 0;
+        private int currentUnitIndex = 0;
         float timeSinceChangingUnits = 0;
         float changeCooldown = 0.5f;
 
@@ -94,6 +95,37 @@ namespace FTS.Characters
         public Player CurrentPlayer
         {
             get { return currentPlayer; }
+        }
+
+        public int CurrentUnitIndex
+        {
+            get
+            {
+                if (currentUnitIndex > units.Count - 1)
+                {
+                    currentUnitIndex = 0;
+                }
+                if (currentUnitIndex < 0)
+                {
+                    currentUnitIndex = units.Count - 1;
+                }
+                return currentUnitIndex;
+            }
+            set { currentUnitIndex = value; }
+        }
+        public Character NextUnit
+        {
+            get { currentUnitIndex++; return units[CurrentUnitIndex]; }
+        }
+
+        public Character PreviousUnit
+        {
+            get { currentUnitIndex--; return units[CurrentUnitIndex]; }
+        }
+
+        public Character CurrentUnit
+        {
+            get { return currentUnit; }
         }
 
         public Character Vehicle
@@ -210,9 +242,9 @@ namespace FTS.Characters
         }
 
 
-        public void StartTurn(int index)
+        public void StartTurn()
         {
-            currentUnit = units[index];
+            currentUnit = NextUnit;
             OnUnitTurn?.Invoke(currentUnit);
             //OnPlayerSelected?.Invoke();
             if (currentUnit is Player)
@@ -302,12 +334,14 @@ namespace FTS.Characters
                 --numberOfPlayers;
                 playerList.Remove(character as Player);
                 cardController.RemoveClass(character.CharacterClass);
+                OnPlayerKilled?.Invoke(character);
                 if (playerList.Count <= 0 && gridController.UnitsPlaced)
                 {
                     Debug.Log("Game over");
                     SceneManager.LoadScene("MainMenu");
                 }
             }
+            units.Remove(character);
             UpdateTurnOrder();
         }
 

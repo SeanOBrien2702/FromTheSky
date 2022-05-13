@@ -10,6 +10,7 @@ public class CharacterTurnPosition : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI positionText;
     [SerializeField] Image profilePicture;
+    public float testvalue = 1;
     // Start is called before the first frame update
     void Start()
     {

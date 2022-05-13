@@ -118,7 +118,9 @@ namespace FTS.Turns
         public void UpdatePhase()
         {
             //unitController.SetCurrentUnit(turnOrderPosition);
-            unitController.StartTurn(turnOrderPosition);
+            //unitController.StartTurn(turnOrderPosition);
+            unitController.StartTurn();
+
             turnOrderPosition++;
             if(turnOrderPosition >= unitController.NumberOfUnits)
             {

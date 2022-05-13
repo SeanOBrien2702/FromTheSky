@@ -1516,7 +1516,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1541824749}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1345432400
+--- !u!114 &1345432399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1525,13 +1525,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1345432398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf2e0ae00334af14e81a3ae3a2e78d68, type: 3}
+  m_Script: {fileID: 11500000, guid: a4a29b3e64feba04b994f7a98f3f96e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectiveLabel: {fileID: 75340903}
-  optionalLabel: {fileID: 0}
+  optionalLabel: {fileID: 75340903}
   objectivesBuffer:
-  - {fileID: 11400000, guid: 6161858ea1f3ae744ba864ad295c1b81, type: 2}
+  - {fileID: 11400000, guid: 427e2896213cf4f478d864e4d6312fbd, type: 2}
   - {fileID: 11400000, guid: 3744b3c864a60ec43ac61cd3aa6ca5bb, type: 2}
 --- !u!1 &1474630627
 GameObject:

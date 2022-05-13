@@ -15,9 +15,29 @@ public class TurnOrderUI : MonoBehaviour
     {
         TurnController.OnCombatStart += TurnController_OnCombatStart;
         UnitController.OnUnitTurn += UnitController_OnUnitTurn;
-        
+        UnitController.OnEnemyKilled += UnitController_OnEnemyKilled;
+        UnitController.OnPlayerKilled += UnitController_OnPlayerKilled;
     }
 
+    private void UnitController_OnPlayerKilled(Character player)
+    {
+        Destroy(turnPositions[player].gameObject);
+        turnPositions.Remove(player);
+    }
+
+    private void UnitController_OnEnemyKilled(Character enemy)
+    {
+        Destroy(turnPositions[enemy].gameObject);
+        turnPositions.Remove(enemy);
+    }
+
+    private void OnDestroy()
+    {
+        TurnController.OnCombatStart -= TurnController_OnCombatStart;
+        UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
+        UnitController.OnEnemyKilled -= UnitController_OnEnemyKilled;
+        UnitController.OnPlayerKilled -= UnitController_OnPlayerKilled;
+    }
     private void TurnController_OnCombatStart()
     {
         //
@@ -35,11 +55,6 @@ public class TurnOrderUI : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        TurnController.OnCombatStart -= TurnController_OnCombatStart;
-        UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
-    }
 
     //private void TurnController_OnUnitTurn(Character obj)
     //{
