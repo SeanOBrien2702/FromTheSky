@@ -240,11 +240,11 @@ namespace FTS.Grid
                 if (currentCell && mover.IsValidDestination(currentCell))
                 {
                     //Debug.Log("pathfinding");
-                    //grid.FindPath(mover.Location, currentCell, mover.MovementLeft, true);
+                    grid.FindPath(mover.Location, currentCell, mover.MovementLeft, true);
                 }
                 else
                 {
-                    //grid.ClearPath(mover.MovementLeft);
+                    grid.ClearPath(mover.MovementLeft);
                 }
             }
         }
@@ -256,7 +256,7 @@ namespace FTS.Grid
                 //Debug.Log("show area");
                 grid.ClearReachable();
                 grid.ClearArea();
-                //grid.ShowArea(mover.Location, unitController.CurrentPlayer.GetCardRange(cardController.CardSelected.Type));
+                grid.ShowArea(mover.Location, unitController.CurrentPlayer.GetCardRange(cardController.CardSelected.Type));
                 Player player = unitController.GetPlayerByClass(cardController.CardSelected.CharacterClass);
                 grid.ShowArea(player.GetComponent<Mover>().Location, cardController.CardSelected.Range);
             }
@@ -465,6 +465,7 @@ namespace FTS.Grid
             HexCell target = null;
             int shortestDistance = 1000;
             List<Player> players = unitController.GetPlayerUnits();
+            Debug.Log(players.Count +"===============================");
             foreach (var player in players)
             {              
                 Mover bufferMover = player.GetComponent<Mover>();

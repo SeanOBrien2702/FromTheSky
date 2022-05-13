@@ -338,17 +338,6 @@ namespace FTS.Grid
                     }
                 }
             }
-            if(pathExists)
-            {
-                Debug.Log("path exists " + current.Location);
-                toCell.SetHighlight(HighlightIndex.Highlight, true);
-            }
-            else
-            {
-                Debug.Log("path does not exists " + current.Location + " to cell "+ toCell.Location);
-                Debug.Log("path does not exists " + current.Unit + " to cell " + toCell.Unit);
-                toCell.SetHighlight(HighlightIndex.CantReach, true);
-            }
             return pathExists;
         }
 
@@ -441,13 +430,16 @@ namespace FTS.Grid
             int shortestDistance = 1000;
             foreach (var offSet in offSets)
             {
-                FindPath(enemyCell, offSet, 10, false);
-
-                int distance = GetPathDistance();
-                if (distance < shortestDistance)
+                if (offSet.Unit == null && !offSet.IsObstacle)
                 {
-                    shortestDistance = distance;
-                    target = offSet;
+                    FindPath(enemyCell, offSet, 10, false);
+
+                    int distance = GetPathDistance();
+                    if (distance < shortestDistance)
+                    {
+                        shortestDistance = distance;
+                        target = offSet;
+                    }
                 }
             }
             return target;
