@@ -16,7 +16,7 @@ namespace FTS.Characters
         [SerializeField] bool friendlyFire = false;
         [SerializeField] int range = 1;
         int heatLevel = 5;
-
+        Character character;
         Mover mover;
         HexGrid hexGrid;
 
@@ -40,12 +40,23 @@ namespace FTS.Characters
         {
             mover = GetComponent<Mover>();
             hexGrid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
+            character = GetComponent<Character>();
+            UnitController.OnUnitTurn += UnitController_OnUnitTurn;
             TurnController.OnEndTurn += TurnController_OnEndTurn;
             //UpdateHeat();
         }
 
+        private void UnitController_OnUnitTurn(Character currrentChar)
+        {
+            if (character == currrentChar)
+            {
+                UpdateHeat();
+            }
+        }
+
         private void OnDestroy()
         {
+            UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
             TurnController.OnEndTurn -= TurnController_OnEndTurn;
         }
 

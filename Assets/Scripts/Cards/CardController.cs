@@ -249,7 +249,7 @@ namespace FTS.Cards
 
         private void DrawNewHand()
         {
-            Debug.Log("draw hand");
+            //Debug.Log("draw hand");
             for (int i = 0; i < cardsPerTurn; i++)
             {
                 DrawCard();
@@ -318,10 +318,10 @@ namespace FTS.Cards
             if(HasEnergy(playedCard.Cost) && 
                 playedCard.Effects.Count > 0) 
             {
-                Debug.Log(playedCard.Id);
+                //Debug.Log(playedCard.Id);
                 if (playedCard.Targeting == CardTargeting.None)
                 {
-                    Debug.Log("played non-targeting card");
+                    //Debug.Log("played non-targeting card");
                     CardPlayed(playedCard);
                     playedCard.Play(unitController.GetCurrentUnit());
                     //playedCard.Play(unitController.GetCurrentPlayer());

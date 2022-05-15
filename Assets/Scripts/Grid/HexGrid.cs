@@ -315,7 +315,11 @@ namespace FTS.Grid
                     {
                         continue;
                     }
-                    if (neighbor.IsObstacle || neighbor.Unit)
+                    if (neighbor.IsObstacle)
+                    {
+                        continue;
+                    }
+                    if(neighbor.Unit && !neighbor.IsFrendlyUnit())
                     {
                         continue;
                     }
@@ -669,8 +673,7 @@ namespace FTS.Grid
                     HexCell cell = GetCell(coordinates);
                     if (cell != null)
                     {
-                        //cell.SetHighlight(HighlightIndex.CantReachColour);
-                        Debug.Log("Cell found: " + cell.Location);
+                        cell.SetHighlight(HighlightIndex.CantReach);
                         area.Add(cell);
                     }
                 }
@@ -742,7 +745,6 @@ namespace FTS.Grid
             }
             currentPath.Add(currentPathFrom);
             currentPath.Reverse();
-            Debug.Log("path length: " + currentPath.Count);
             return currentPath;
         }
 

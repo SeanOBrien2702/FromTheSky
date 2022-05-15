@@ -45,7 +45,7 @@ public class TurnOrderUI : MonoBehaviour
 
     private void UnitController_OnUnitTurn(Character obj)
     {
-        Debug.Log("turn order ui " + transform.GetChild(0).name);
+        //Debug.Log("turn order ui " + transform.GetChild(0).name);
         transform.GetChild(0).transform.SetAsLastSibling();
         int index = 1;
         foreach (Transform item in transform)
@@ -54,13 +54,6 @@ public class TurnOrderUI : MonoBehaviour
             index++;
         }
     }
-
-
-    //private void TurnController_OnUnitTurn(Character obj)
-    //{
-        
-    //    transform.GetChild(0).transform.SetAsLastSibling();
-    //}
 
     internal void FillUI()
     {
@@ -72,9 +65,8 @@ public class TurnOrderUI : MonoBehaviour
             newTurnPosition.transform.SetParent(transform, false);
             turnPositions.Add(unit, newTurnPosition);
             turnPositions[unit].SetPortrait(unit.Portrait);
-
+            //Debug.Log("unit: " + unit.gameObject.name);
         }
-        Debug.Log(transform.childCount);
         transform.GetChild(transform.childCount - 1).SetAsFirstSibling();
     }
 }

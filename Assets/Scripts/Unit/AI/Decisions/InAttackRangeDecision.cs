@@ -11,7 +11,7 @@ namespace FTS.Characters
     {
         public override bool Decide(StateMachine controller)
         {
-            Debug.Log("in attack range?");
+            //Debug.Log("in attack range?");
             //controller.playerTarget = controller.gridController.GetClosestPLayer
             controller.newEnemyPosition = controller.gridController.GetNewEnemyPosition(controller.mover, controller.Targeting, controller.enemy);
             //Debug.Log("set new position to move to " + controller.newEnemyPosition);

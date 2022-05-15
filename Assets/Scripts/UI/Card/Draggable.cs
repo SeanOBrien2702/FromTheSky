@@ -211,7 +211,7 @@ namespace FTS.UI
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            Debug.Log("drag");
+            //Debug.Log("drag");
             Cursor.visible = false;
             isDragging = true;
             startPosition = new Vector2(arrowStart.position.x, arrowStart.position.y);

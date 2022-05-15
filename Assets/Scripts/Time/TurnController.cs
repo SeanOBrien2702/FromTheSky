@@ -23,7 +23,7 @@ namespace FTS.Turns
 
         public static event System.Action OnNewTurn = delegate { };
         public static event System.Action OnEndTurn = delegate { };
-        //public static event System.Action<Character> OnUnitTurn = delegate { };
+        //public static event System.Action<Character> OnTurnEnd = delegate { };
         public static event System.Action OnEnemyTurn = delegate { };
         public static event System.Action OnCombatStart = delegate { };
 

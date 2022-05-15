@@ -270,7 +270,7 @@ namespace FTS.Grid
                 mover.Travel(grid.GetPath(mover.MovementLeft));
                 grid.ClearPath(mover.MovementLeft);
                 grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
-                characterInfo.UpdateUI(unitController.CurrentPlayer);
+                //characterInfo.UpdateUI(unitController.CurrentPlayer);
             }
         }
 
@@ -373,8 +373,6 @@ namespace FTS.Grid
             mover = AIMover;
             if(grid.FindPath(AIMover.Location, target, AIMover.MovementLeft, false))
             {
-                Debug.Log("movement left: " + mover.MovementLeft + mover.gameObject.name);
-
                 mover.Travel(grid.GetPath(mover.MovementLeft), lookAt);
             }
             else
@@ -465,7 +463,6 @@ namespace FTS.Grid
             HexCell target = null;
             int shortestDistance = 1000;
             List<Player> players = unitController.GetPlayerUnits();
-            Debug.Log(players.Count +"===============================");
             foreach (var player in players)
             {              
                 Mover bufferMover = player.GetComponent<Mover>();

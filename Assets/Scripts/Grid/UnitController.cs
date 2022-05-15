@@ -148,6 +148,7 @@ namespace FTS.Characters
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             TurnController.OnNewTurn += TurnController_OnNewTurn;
+            TurnController.OnCombatStart += TurnController_OnCombatStart;
         }
 
         private void Start()
@@ -156,6 +157,7 @@ namespace FTS.Characters
             {
                 CreateUnitInRandomPosition(GetRandomCharacter());
             }
+           
             //CreateUnit(vehiclePrefab, grid.VehicleStart);
         }
 
@@ -180,7 +182,8 @@ namespace FTS.Characters
 
         private void OnDestroy()
         {
-            TurnController.OnNewTurn -= TurnController_OnNewTurn;
+            TurnController.OnNewTurn -= TurnController_OnNewTurn; 
+            TurnController.OnCombatStart -= TurnController_OnCombatStart;
         }
         #endregion
 
@@ -244,17 +247,19 @@ namespace FTS.Characters
 
         public void StartTurn()
         {
+            //Debug.Log("previous unit " + currentUnit.gameObject.name);
             currentUnit = NextUnit;
+            //Debug.Log("current unit " + currentUnit.gameObject.name);
             OnUnitTurn?.Invoke(currentUnit);
             //OnPlayerSelected?.Invoke();
             if (currentUnit is Player)
             {
-                Debug.Log("player start turn: " + currentUnit);           
+                //Debug.Log("player start turn: " + currentUnit);           
                 characterInfo.EnableUI(currentUnit);
             }
             else
             {
-                Debug.Log("enemy start turn: " + currentUnit);
+                //Debug.Log("enemy start turn: " + currentUnit);
                 //OnUnitTurn?.Invoke(false);
                 StartCoroutine(UpdateEnemyStateMachines());
             }
@@ -342,7 +347,7 @@ namespace FTS.Characters
                 }
             }
             units.Remove(character);
-            UpdateTurnOrder();
+            //UpdateTurnOrder();
         }
 
         public Player GetPlayerByClass(CharacterClass characterClass)
@@ -420,6 +425,12 @@ namespace FTS.Characters
         private void TurnController_OnNewTurn()
         {
             currentPlayer = playerList.First();
+        }
+
+        private void TurnController_OnCombatStart()
+        {
+            currentUnit = units.First();
+            currentUnit = PreviousUnit;
         }
         #endregion
     }

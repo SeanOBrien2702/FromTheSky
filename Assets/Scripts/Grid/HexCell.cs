@@ -60,6 +60,7 @@ namespace FTS.Grid
         Canvas canvas;
         HexMesh hexMesh;
         MeshRenderer meshRenderer;
+        UnitController unitController;
 
 
         #region Properties
@@ -147,6 +148,7 @@ namespace FTS.Grid
             meshRenderer = GetComponent<MeshRenderer>();
             RNGController = GetComponent<RandomCell>();
             destination= FindObjectOfType<DestinationController>().GetComponent<DestinationController>();
+            unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
         }
         #endregion
 
@@ -326,6 +328,20 @@ namespace FTS.Grid
         internal void SetLabel(int turns)
         {
             label.text = turns == 0 ? "" : turns.ToString();
+        }
+
+        internal bool IsFrendlyUnit()
+        {
+            bool isFriendly = false;
+            if(unit is Player && unitController.CurrentUnit is Player)
+            {
+                isFriendly = true;
+            }
+            else if(unit is Enemy && unitController.CurrentUnit is Enemy)
+            {
+                isFriendly = true;
+            }
+            return isFriendly;
         }
         #endregion
     }

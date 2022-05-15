@@ -71,9 +71,9 @@ namespace FTS.Characters
         #region Coroutines
         public IEnumerator UpdateState()
         {
-            Debug.Log("old state: "+currentState);
+            //Debug.Log("old state: "+currentState);
             currentState.CheckTransitions(this);
-            Debug.Log("new state: " +currentState);
+            //Debug.Log("new state: " +currentState);
             yield return StartCoroutine(currentState.DoActions(stateController, this, camera));
             //Debug.Log("action complete");
         }

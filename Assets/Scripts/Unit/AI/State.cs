@@ -20,11 +20,11 @@ namespace FTS.Characters
             for (int i = 0; i < actions.Length; i++)
             {
                 controller.ActionDone = false;
-                Debug.Log("do action");
+                //Debug.Log("do action");
                 actions[i].Act(controller, machine);
                 
                 yield return new WaitUntil(() => controller.ActionDone == true || Input.GetKeyDown(KeyCode.M));
-                Debug.Log("action done");
+                //Debug.Log("action done");
             }
             yield return new WaitForSeconds(0.5f);
         }
