@@ -15,4 +15,4 @@ MonoBehaviour:
   effectFoldout: 0
   numAttacks: 1
   range: 3
-  area: 1
+  area: 3

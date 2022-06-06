@@ -23,7 +23,8 @@ namespace FTS.Cards
 
         [Header("Mechanics")]
         [SerializeField] int cost = 1;
-        [SerializeField] int range = 2;      
+        [SerializeField] int range = 2;
+        [SerializeField] int area = 1;
         [SerializeField] CardRarity cardRarity;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] CardType type;
@@ -96,6 +97,12 @@ namespace FTS.Cards
         {
             get { return range; }   // get method
             set { range = value; }  // set method
+        }
+
+        public int Area  // property
+        {
+            get { return area; }   // get method
+            set { area = value; }  // set method
         }
 
         public Sprite Image   // property

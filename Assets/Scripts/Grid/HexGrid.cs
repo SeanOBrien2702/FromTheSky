@@ -700,7 +700,7 @@ namespace FTS.Grid
         }
 
 
-        public void ShowArea(HexCell fromCell, int range)
+        public void ShowArea(HexCell fromCell, int range, HighlightIndex highlight)
         {
             HexCoordinates startPos = fromCell.Location;
             for (int x = -range; x <= range; x++)
@@ -713,7 +713,7 @@ namespace FTS.Grid
                     HexCell cell = GetCell(coordinates);
                     if (cell != null)
                     {
-                        cell.SetHighlight(HighlightIndex.Attack);
+                        cell.SetHighlight(highlight);
                         currentArea.Add(cell);
                     }
                 }

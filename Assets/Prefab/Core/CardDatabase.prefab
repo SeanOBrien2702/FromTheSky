@@ -45,9 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deck:
-  - {fileID: 11400000, guid: e303ab1797772a84bb78b593e21b5d60, type: 2}
-  - {fileID: 11400000, guid: e303ab1797772a84bb78b593e21b5d60, type: 2}
-  - {fileID: 11400000, guid: b5f6ec4277924c64abfe6a54a34a7c5f, type: 2}
+  - {fileID: 11400000, guid: 8f11cc8251c6df34987ca6a97d773229, type: 2}
+  - {fileID: 11400000, guid: 8f11cc8251c6df34987ca6a97d773229, type: 2}
+  - {fileID: 11400000, guid: 8f11cc8251c6df34987ca6a97d773229, type: 2}
+  - {fileID: 11400000, guid: 8f11cc8251c6df34987ca6a97d773229, type: 2}
+  - {fileID: 11400000, guid: 8f11cc8251c6df34987ca6a97d773229, type: 2}
   - {fileID: 11400000, guid: 144768c176115d245b49c90e56f17d6f, type: 2}
   - {fileID: 11400000, guid: 29f1c1d8d4730614fb31f136c193de55, type: 2}
   - {fileID: 11400000, guid: 1890214413c58dd49b4d4cc14a68b3d7, type: 2}

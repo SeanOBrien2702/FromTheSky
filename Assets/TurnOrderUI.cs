@@ -27,8 +27,8 @@ public class TurnOrderUI : MonoBehaviour
 
     private void UnitController_OnEnemyKilled(Character enemy)
     {
-        Destroy(turnPositions[enemy].gameObject);
-        turnPositions.Remove(enemy);
+        //Destroy(turnPositions[enemy].gameObject);
+       // turnPositions.Remove(enemy);
     }
 
     private void OnDestroy()

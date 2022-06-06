@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Popup03
+  m_text: How to Play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d9b454495b7d24a7a933eb61bdfa0607, type: 2}
   m_sharedMaterial: {fileID: 7409485994217783921, guid: d9b454495b7d24a7a933eb61bdfa0607,
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
+  m_pageToDisplay: 2
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -596,7 +596,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2782683055802095489}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SP.UI.MainMenuUIController, Assembly-CSharp
+        m_MethodName: HowToPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4059147648063355404
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,10 +641,10 @@ RectTransform:
   m_Father: {fileID: 2782683055472568756}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 292.34717, y: 82.98096}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -115}
+  m_SizeDelta: {x: -100, y: -330}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8678601634188967660
 CanvasRenderer:
@@ -662,7 +674,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: sadfjsdkljsdkl;aslk
+  m_text: "The objective of the game is to protect your vehicle from the enemy while
+    traveling across the land. Far end of the map is the exit marked by a flag. When
+    the vehicle reaches the flag, the battle is over and new cards are drafted into
+    your deck.  \n\nPlace units by left clicking on the map. Right click on a unit
+    to remove and place it somewhere else. Once all 3 units are placed you can start
+    the battle.\n\nOnce the battle has begun, cards are used to control the actions
+    of the units. To play a card you drag it to the target you want to hit or above
+    the hand on screen if the card does not target something. Cards are highlighted
+    if they can be used by that unit and enough energy is available.\n\nPressing
+    tab or shift will cycle through which unit is selected. Left clicking on a unit
+    will also select it. Right clicking on the map will move the selected towards
+    that position.\n\nThis game is still in the early alpha phase.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d9b454495b7d24a7a933eb61bdfa0607, type: 2}
   m_sharedMaterial: {fileID: 7409485994217783921, guid: d9b454495b7d24a7a933eb61bdfa0607,
@@ -697,8 +720,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

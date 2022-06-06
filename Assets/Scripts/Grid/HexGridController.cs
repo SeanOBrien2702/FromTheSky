@@ -256,9 +256,13 @@ namespace FTS.Grid
                 //Debug.Log("show area");
                 grid.ClearReachable();
                 grid.ClearArea();
-                grid.ShowArea(mover.Location, unitController.CurrentPlayer.GetCardRange(cardController.CardSelected.Type));
+                //grid.ShowArea(mover.Location, unitController.CurrentPlayer.GetCardRange(cardController.CardSelected.Type));
                 Player player = unitController.GetPlayerByClass(cardController.CardSelected.CharacterClass);
-                grid.ShowArea(player.GetComponent<Mover>().Location, cardController.CardSelected.Range);
+                grid.ShowArea(player.GetComponent<Mover>().Location, cardController.CardSelected.Range, HighlightIndex.Attack);
+                if(cardController.CardSelected.Area > 1)
+                {
+                    grid.ShowArea(currentCell, cardController.CardSelected.Area, HighlightIndex.CanReach);
+                }
             }
         }
 

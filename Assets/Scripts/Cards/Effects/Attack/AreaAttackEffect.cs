@@ -17,25 +17,22 @@ namespace FTS.Cards
         [SerializeField] bool friendlyFire = false;
 
         HexGrid hexGrid;
-        void Start()
-        {
-            //mover = GetComponent<Mover>();
-            hexGrid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
-        }
-
 
         int damage = 5;
         public override void ActivateEffect(HexCell target)
         {
-            List<HexCell> area = hexGrid.GetArea(target, radius);
+            hexGrid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
+            List<HexCell> area = FindObjectOfType<HexGrid>().GetComponent<HexGrid>().GetArea(target, radius);
             Debug.Log("area size " + area.Count);
             foreach (var cell in area)
             {
                 for (int i = 0; i < numAttacks; i++)
                 {
-                    cell.Unit.CalculateDamageTaken(damage);
+                    if(cell.Unit)
+                        cell.Unit.CalculateDamageTaken(damage);
                 }
             }
+            hexGrid.ClearArea();
         }
 
         public override string GetEffectText()
