@@ -10,13 +10,7 @@ using UnityEngine.SceneManagement;
 
 namespace FTS.Core
 {
-    enum DestinationTypes
-    {
-        Shop,
-        Event,
-        Draft,
-        Treasure
-    }
+
     public class DestinationController : MonoBehaviour
     {
         [SerializeField] GameObject destinationPrefab;

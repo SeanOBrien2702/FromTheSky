@@ -214,6 +214,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HowToPlayBtn
       objectReference: {fileID: 0}
+    - target: {fileID: 4858931987986315659, guid: 67c8298076be44bcc9e4a33e688194bf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4858931987986315660, guid: 67c8298076be44bcc9e4a33e688194bf,
         type: 3}
       propertyPath: m_Pivot.x
@@ -554,7 +559,7 @@ PrefabInstance:
     - target: {fileID: 4858931987986315660, guid: 67c8298076be44bcc9e4a33e688194bf,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 500
+      value: 401
       objectReference: {fileID: 0}
     - target: {fileID: 4858931987986315660, guid: 67c8298076be44bcc9e4a33e688194bf,
         type: 3}
@@ -1705,7 +1710,7 @@ PrefabInstance:
     - target: {fileID: 4858931987986315660, guid: 67c8298076be44bcc9e4a33e688194bf,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 400
+      value: 301
       objectReference: {fileID: 0}
     - target: {fileID: 4858931987986315660, guid: 67c8298076be44bcc9e4a33e688194bf,
         type: 3}

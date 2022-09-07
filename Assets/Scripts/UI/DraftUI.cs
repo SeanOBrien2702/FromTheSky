@@ -60,12 +60,12 @@ namespace FTS.UI
         {
             Debug.Log(card.name);
             cardDB.AddCardToDeck(card);
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("EncounterSelection");
         }
 
         public void Skip()
         {
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("EncounterSelection");
         }
         #endregion
     }
