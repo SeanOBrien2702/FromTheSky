@@ -9,7 +9,18 @@ namespace FTS.Cards
 {
     public abstract class Effect : ScriptableObject
     {
+        protected HexGrid grid;
+        protected HexGridController gridController;
+        protected CardController cardController;
         [HideInInspector] public bool effectFoldout;
+
+        private void Awake()
+        {
+            grid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
+            gridController = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
+            cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
+        }
+
         public virtual void ActivateEffect()
         {
             Debug.Log("Base effect class");

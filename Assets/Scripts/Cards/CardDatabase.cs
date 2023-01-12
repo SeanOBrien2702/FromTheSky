@@ -1,14 +1,11 @@
-using System.Collections;
+#region Using Statements
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using FTS.Characters;
-using FTS.Grid;
 using System;
 using FTS.Saving;
-using Bayat.SaveSystem;
-using Bayat.Core;
-using Bayat;
+#endregion
 
 namespace FTS.Cards
 {
@@ -20,7 +17,6 @@ namespace FTS.Cards
         [SerializeField] List<CardBorder> cardBorders;
         [SerializeField] CharacterClassCards[] characterClassCards;
         [SerializeField] Card testCard;
-        Card instCard;
         CharacterClass[] classList;
         int cardID = 0;
 
@@ -56,7 +52,6 @@ namespace FTS.Cards
         #endregion
 
         #region Public Methods
-        //TODO: populate buckets based on archetypes
         public List<Card> PopulateBucket()
         {
             classList = playerDatabase.GetPlayerClasses();
@@ -80,7 +75,6 @@ namespace FTS.Cards
             {
                 card.Id = cardID.ToString();
                 card.Border = cardBorders.Find(item => item.characterClass == card.CharacterClass).border;
-                //Debug.Log(card.Id);
                 cardID++;
             }
             return deck;
@@ -93,7 +87,6 @@ namespace FTS.Cards
 
         public object CaptureState()
         {
-            object test = deck;
             return deck;
         }
 

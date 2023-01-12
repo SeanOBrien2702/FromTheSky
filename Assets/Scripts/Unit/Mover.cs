@@ -1,7 +1,6 @@
 ﻿#region Using Statements
 using FTS.Grid;
 using FTS.Turns;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +15,13 @@ namespace FTS.Characters
         CameraController cameraController;
         Character character;
         StateController stateController;
-        UnitController unitController;
 
-        private Vector3 offset = new Vector3(0, 14, 0);
         [SerializeField] float travelSpeed = 2f;
         [SerializeField] float pushSpeed = 0.1f;
         [SerializeField] float rotationSpeed = 180f;
         [SerializeField] Animator animator;
 
         HexCell location;
-        private float orientation;
         List<HexCell> pathToTravel;
 
         bool canMove = true;
@@ -33,25 +29,9 @@ namespace FTS.Characters
         int movementLeft;
 
         #region Properties
-        public bool CanMove   // property
+        public HexCell Location
         {
-            get { return canMove; }   // get method
-            set { canMove = value; }  // set method
-        }
-        public int Speed   // property
-        {
-            get { return speed; }   // get method
-            set { speed = value; }  // set method
-        }
-
-        public int MovementLeft   // property
-        {
-            get { return movementLeft; }   // get method
-            set { movementLeft = value; }  // set method
-        }
-        public HexCell Location   // property
-        {
-            get { return location; }   // get method
+            get { return location; }
             set
             {
                 if (location)
@@ -60,9 +40,15 @@ namespace FTS.Characters
                 }
                 location = value;
                 value.Unit = character;
-                transform.localPosition = value.transform.localPosition;// + offset;
-            } // set method
+                transform.localPosition = value.transform.localPosition;
+            }
         }
+
+        public bool CanMove { get => canMove; set => canMove = value; }
+
+        public int Speed { get => speed; set => speed = value; }
+
+        public int MovementLeft { get => movementLeft; set => movementLeft = value; }
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -70,12 +56,12 @@ namespace FTS.Characters
         {
             cameraController = FindObjectOfType<CameraController>().GetComponent<CameraController>();
             stateController = FindObjectOfType<StateController>().GetComponent<StateController>();
-            unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             character = GetComponent<Character>();
             speed = character.Stats.GetStat(Stat.Movement, character.CharacterClass);
             movementLeft = speed;
             TurnController.OnNewTurn += TurnController_OnNewTurn;
         }
+
         private void OnDestroy()
         {
             TurnController.OnNewTurn -= TurnController_OnNewTurn;
@@ -104,7 +90,6 @@ namespace FTS.Characters
            
             if (path != null)
             {
-                //Debug.Log("path: " + path);
                 Location = path[path.Count - 1];
                 pathToTravel = path;
                 StopAllCoroutines();
@@ -125,6 +110,7 @@ namespace FTS.Characters
             StopAllCoroutines();
             StartCoroutine(TravelPath(Vector3.zero));
         }
+
         internal bool IsValidDestination(HexCell cell)
         {
             return !cell.Unit;
@@ -136,19 +122,9 @@ namespace FTS.Characters
             StartCoroutine(TravelPush(newLocation.transform.localPosition));
             Location = newLocation;
         }
-        internal void Flee()
-        {
-            Debug.Log("Run away");
-        }
-
-        internal void TravelToVehicle()
-        {
-            Debug.Log("move to car");
-        }
 
         public void LookAtTarget(Vector3 target)
         {
-            Debug.Log("Look at?");
             StartCoroutine(LookAt(target));
         }
         #endregion
@@ -182,21 +158,21 @@ namespace FTS.Characters
             {
                 animator.SetTrigger("Walk");
             }
-            float t = UnityEngine.Time.deltaTime * travelSpeed;
+            float time = Time.deltaTime * travelSpeed;
             for (int i = 1; i < pathToTravel.Count; i++)
             {
                 a = c;
                 b = pathToTravel[i - 1].transform.localPosition;
                 c = (b + pathToTravel[i].transform.localPosition) * 0.5f;
-                for (; t < 1f; t += UnityEngine.Time.deltaTime * travelSpeed)
+                for (; time < 1f; time += Time.deltaTime * travelSpeed)
                 {
-                    transform.localPosition = Bezier.GetPoint(a, b, c, t);
-                    Vector3 d = Bezier.GetDerivative(a, b, c, t);
+                    transform.localPosition = Bezier.GetPoint(a, b, c, time);
+                    Vector3 d = Bezier.GetDerivative(a, b, c, time);
                     d.y = 0f;
                     transform.localRotation = Quaternion.LookRotation(d);
                     yield return null;
                 }
-                t -= 1f;
+                time -= 1f;
             }
             if (animator != null)
             {
@@ -205,22 +181,21 @@ namespace FTS.Characters
             a = c;
             b = pathToTravel[pathToTravel.Count - 1].transform.localPosition;
             c = b;
-            for (; t < 1f; t += UnityEngine.Time.deltaTime * travelSpeed)
+            for (; time < 1f; time += Time.deltaTime * travelSpeed)
             {
-                transform.localPosition = Bezier.GetPoint(a, b, c, t);
-                Vector3 d = Bezier.GetDerivative(a, b, c, t);
+                transform.localPosition = Bezier.GetPoint(a, b, c, time);
+                Vector3 d = Bezier.GetDerivative(a, b, c, time);
                 d.y = 0f;
                 transform.localRotation = Quaternion.LookRotation(d);
                 yield return null;
             }
             transform.localPosition = location.transform.localPosition;
-            orientation = transform.localRotation.eulerAngles.y;
             pathToTravel = null;
             if (lookTowards != Vector3.zero)
             {
                 yield return LookAt(lookTowards);
             }
-            //Debug.Log("mover action complete");
+            
             cameraController.StopCharacterFollow();
             stateController.ActionDone = true;
   
@@ -246,7 +221,6 @@ namespace FTS.Characters
             }
 
             transform.LookAt(point);
-            orientation = transform.localRotation.eulerAngles.y;
         }
         #endregion
 

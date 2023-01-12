@@ -18,11 +18,6 @@ namespace FTS.Core
         List<HexCell> locations = new List<HexCell>();
 
         #region Properties
-        //public string ObjectiveDescription   // property
-        //{
-        //    get { return objectiveDescription; }   // get method
-        //    set { objectiveDescription = value; }  // set method
-        //}
         public int GoldReward   // property
         {
             get { return goldReward; }   // get method

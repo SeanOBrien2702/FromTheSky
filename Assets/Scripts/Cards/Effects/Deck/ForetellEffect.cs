@@ -1,6 +1,4 @@
 using FTS.Characters;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FTS.Cards
@@ -9,11 +7,17 @@ namespace FTS.Cards
     [CreateAssetMenu(menuName = "Effect/Deck/Foretell", fileName = "ForetellEffect.asset")]
     public class ForetellEffect : Effect
     {
-        [Range(2,5)]
+        [Range(2, 5)]
         [SerializeField] int foretellAmount;
+        ForetellController foretell;
+
+        private void Awake()
+        {
+            foretell = FindObjectOfType<ForetellController>().GetComponent<ForetellController>();
+        }
+
         public override void ActivateEffect(Character target)
         {
-            ForetellController foretell = FindObjectOfType<ForetellController>().GetComponent<ForetellController>();
             foretell.Foretell(foretellAmount);
         }
 

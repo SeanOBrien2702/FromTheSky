@@ -1,6 +1,5 @@
 ﻿#region Using Statements
 using FTS.Characters;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -75,7 +74,6 @@ namespace FTS.Turns
         private void PlayerTurn()
         {
             NewTurn();
-            //Debug.Log("player turn starts");
             turnPhase = TurnPhases.PlayerTurn;
             turnInfoText.text = "Player Turn";
         }
@@ -92,7 +90,6 @@ namespace FTS.Turns
 
         private void NewTurn()
         {
-            //Debug.Log("New turn");
             OnNewTurn?.Invoke();
             turn++;
             turnText.text = "Turn: " + turn.ToString();
@@ -100,10 +97,7 @@ namespace FTS.Turns
 
         private void EndTurn()
         {
-            //Debug.Log("END TURN?");
             OnEndTurn?.Invoke();
-            //turn++;
-            //turnText.text = "Turn: " + turn.ToString();
         }
         #endregion
 
@@ -117,8 +111,6 @@ namespace FTS.Turns
 
         public void UpdatePhase()
         {
-            //unitController.SetCurrentUnit(turnOrderPosition);
-            //unitController.StartTurn(turnOrderPosition);
             unitController.StartTurn();
 
             turnOrderPosition++;
@@ -173,7 +165,6 @@ namespace FTS.Turns
         internal void StartCombat()
         {
             //EnemyTelegraph();
-            Debug.Log("start combat");
             OnCombatStart?.Invoke();
             turnOrderUI.FillUI();
             UpdatePhase();

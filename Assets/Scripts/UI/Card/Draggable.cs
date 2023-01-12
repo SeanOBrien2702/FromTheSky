@@ -16,7 +16,7 @@ namespace FTS.UI
         HandController handController;
         CardUI cardInfo;
         Transform cardPrefab;
-        RectTransform m_DraggingPlane;
+        RectTransform draggingPlane;
         RectTransform rectTransform;
 
         [Header("Arrow Properties")]
@@ -158,10 +158,10 @@ namespace FTS.UI
         {
             //https://www.codegrepper.com/code-examples/csharp/how+to+get+2D+object+drag+with+mouse+unity
             if (dragOnSurfaces && data.pointerEnter != null && data.pointerEnter.transform as RectTransform != null)
-                m_DraggingPlane = data.pointerEnter.transform as RectTransform;
+                draggingPlane = data.pointerEnter.transform as RectTransform;
 
             Vector3 globalMousePos;
-            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(m_DraggingPlane, data.position, data.pressEventCamera, out globalMousePos))
+            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(draggingPlane, data.position, data.pressEventCamera, out globalMousePos))
             {
                 cardPrefab.transform.position = globalMousePos;
                 //rt.rotation = m_DraggingPlane.rotation;

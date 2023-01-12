@@ -1,11 +1,8 @@
 ﻿using FTS.Cards;
-using FTS.Characters;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
-
 
 public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -91,7 +88,6 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         }
     }
 
-
     private void ConfigureCardType(Card card)
     {
         if(card.Targeting == CardTargeting.None)
@@ -157,13 +153,8 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     {
         cardName.text = card.CardName;
         cost.text = card.Cost.ToString();
-        //Debug.Log(card.Border);
         border.sprite = card.Border;
-        if (card.Image == null)
-        {
-            //cardArt.gameObject.SetActive(false);
-        }
-        else
+        if (card.Image)
         {
             cardArt.sprite = card.Image;
         }
@@ -180,10 +171,8 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     public void FillCardUI(Card card)
     {
         cost.text = card.Cost.ToString();
-        //Debug.Log(card.Type);
         ConfigureCardType(card);
         FillCardText(card);
-        //Keywords(card.RulesText);
     }
 
     public void HighlightCard(bool enable)
@@ -203,7 +192,6 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                 Debug.Log(linkID);
                 tooltipUI.ShowToolTip(linkID);
             }
-
         }
     }
 

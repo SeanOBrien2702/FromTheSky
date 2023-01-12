@@ -1,8 +1,6 @@
-using System.Collections;
+using FTS.Grid;
 using System.Collections.Generic;
 using UnityEngine;
-using FTS.Characters;
-using FTS.Grid;
 
 namespace FTS.Cards
 {
@@ -10,29 +8,26 @@ namespace FTS.Cards
     [CreateAssetMenu(menuName = "Effect/Attack/AreaAttack", fileName = "AreasAttackEffect.asset")]
     public class AreaAttackEffect : Effect
     {
-        //public string effectText;
         [Header("Combat")]
         [SerializeField] int numAttacks = 1;
         [SerializeField] int radius = 2;
         [SerializeField] bool friendlyFire = false;
-
-        HexGrid hexGrid;
-
         int damage = 5;
+
         public override void ActivateEffect(HexCell target)
         {
-            hexGrid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
-            List<HexCell> area = FindObjectOfType<HexGrid>().GetComponent<HexGrid>().GetArea(target, radius);
+            grid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
+            List<HexCell> area = grid.GetArea(target, radius);
             Debug.Log("area size " + area.Count);
             foreach (var cell in area)
             {
                 for (int i = 0; i < numAttacks; i++)
                 {
-                    if(cell.Unit)
+                    if (cell.Unit)
                         cell.Unit.CalculateDamageTaken(damage);
                 }
             }
-            hexGrid.ClearArea();
+            grid.ClearArea();
         }
 
         public override string GetEffectText()

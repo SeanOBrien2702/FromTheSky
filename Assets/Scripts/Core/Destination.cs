@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using FTS.Grid;
 
-
 namespace FTS.Core
 {
-    //available
     [System.Serializable]
     [CreateAssetMenu(menuName = "Destination", fileName = "Destination.asset")]
     public class Destination : ScriptableObject

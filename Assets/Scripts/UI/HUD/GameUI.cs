@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System;
 #endregion
 
 public class GameUI : MonoBehaviour

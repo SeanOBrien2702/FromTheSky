@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using FTS.Characters;
 
@@ -14,15 +12,12 @@ namespace FTS.Cards
     [CreateAssetMenu(menuName = "Effect/Cost", fileName = "CostEffect.asset")]
     public class CostEffect : Effect
     {
-        CardController cc;
         [SerializeField] CostTarget costTarget;
         [SerializeField] int costChange = -1;
 
         public override void ActivateEffect(Character target)
         {
-            cc = FindObjectOfType<CardController>().GetComponent<CardController>();
-       
-            cc.ReduceCost(costTarget, costChange);         
+            cardController.ReduceCost(costTarget, costChange);         
         }
 
         public override string GetEffectText()

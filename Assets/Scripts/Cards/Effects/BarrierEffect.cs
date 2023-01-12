@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FTS.Characters;
+using UnityEngine;
 
 namespace FTS.Cards
 {
@@ -17,7 +15,7 @@ namespace FTS.Cards
 
         public override string GetEffectText()
         {
-            return "Gain a <link=barrier><color=\"red\">barrier</color></link>"; 
+            return "Gain a <link=barrier><color=\"red\">barrier</color></link>";
         }
     }
 }

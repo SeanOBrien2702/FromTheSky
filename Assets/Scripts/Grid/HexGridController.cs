@@ -1,13 +1,11 @@
 ﻿#region Using Statements
-using FTS.Characters;
 using FTS.Cards;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using FTS.Characters;
 using FTS.Turns;
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 #endregion
 
 namespace FTS.Grid
@@ -77,7 +75,7 @@ namespace FTS.Grid
         {
             UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
             TurnController.OnNewTurn -= TurnController_OnNewTurn;
-            TurnController.OnEndTurn -= TurnController_OnEndTurn; 
+            TurnController.OnEndTurn -= TurnController_OnEndTurn;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
         }
@@ -89,7 +87,7 @@ namespace FTS.Grid
         {
             if (Input.GetMouseButtonDown(0) && MouseOverGrid())
             {
-                PlaceUnit();                  
+                PlaceUnit();
             }
             else if (Input.GetMouseButtonDown(1) && MouseOverGrid())
             {
@@ -100,7 +98,7 @@ namespace FTS.Grid
         private void RemoveUnit()
         {
             UpdateCurrentCell();
-            if (currentCell && currentCell.Unit is Player 
+            if (currentCell && currentCell.Unit is Player
                 && currentCell.Unit.CharacterClass != CharacterClass.Vehicle)
             {
                 currentCell.Unit.Die();
@@ -131,25 +129,21 @@ namespace FTS.Grid
         {
             if (CanControlUnit())
             {
-                //Debug.Log("can do unit control");
                 if (Input.GetMouseButtonDown(0) && MouseOverGrid())
                 {
                     DoSelection();
                     Debug.Log(mover);
                 }
-                //Debug.Log(mover);
                 if (mover)
                 {
                     if (Input.GetMouseButtonDown(1))
                     {
-                        //Debug.Log("Move");
                         DoMove();
                     }
                     else
                     {
                         if (cardController.CardSelected)
                         {
-                            //Debug.Log("card area");
                             DoCardArea();
                         }
                         else
@@ -157,12 +151,7 @@ namespace FTS.Grid
 
                             if (mover.CanMove)
                             {
-                                //Debug.Log("pathfinding");
                                 DoPathfinding();
-                            }
-                            else
-                            {
-                                //Debug.Log("cant pathfind");
                             }
                         }
                     }
@@ -199,7 +188,7 @@ namespace FTS.Grid
         {
             //grid.ClearReachable();
             UpdateCurrentCell();
-            if(currentCell.Unit)
+            if (currentCell.Unit)
             {
                 characterInfo.EnableUI(currentCell.Unit);
             }
@@ -233,13 +222,10 @@ namespace FTS.Grid
 
         void DoPathfinding()
         {
-            //Debug.Log("check pathfinding");
-            if (UpdateCurrentCell())// && turnController.TurnPhase == TurnPhases.PlayerTurn)
+            if (UpdateCurrentCell())
             {
-                //Debug.Log("can pathfinding?");
                 if (currentCell && mover.IsValidDestination(currentCell))
                 {
-                    //Debug.Log("pathfinding");
                     grid.FindPath(mover.Location, currentCell, mover.MovementLeft, true);
                 }
                 else
@@ -253,13 +239,11 @@ namespace FTS.Grid
         {
             if (UpdateCurrentCell())
             {
-                //Debug.Log("show area");
                 grid.ClearReachable();
                 grid.ClearArea();
-                //grid.ShowArea(mover.Location, unitController.CurrentPlayer.GetCardRange(cardController.CardSelected.Type));
                 Player player = unitController.GetPlayerByClass(cardController.CardSelected.CharacterClass);
                 grid.ShowArea(player.GetComponent<Mover>().Location, cardController.CardSelected.Range, HighlightIndex.Attack);
-                if(cardController.CardSelected.Area > 1)
+                if (cardController.CardSelected.Area > 1)
                 {
                     grid.ShowArea(currentCell, cardController.CardSelected.Area, HighlightIndex.CanReach);
                 }
@@ -292,7 +276,7 @@ namespace FTS.Grid
         internal void Push(Character character, HexDirection direction)
         {
             Mover mover = character.GetComponent<Mover>();
-            Debug.Log("Target to be moved " +mover.Location.Unit);
+            Debug.Log("Target to be moved " + mover.Location.Unit);
             HexCell neighbor = mover.Location.GetNeighbor(direction);
             if (neighbor != null)
             {
@@ -303,7 +287,7 @@ namespace FTS.Grid
                 else
                 {
                     character.Health -= 2;
-                    if(neighbor.Unit)
+                    if (neighbor.Unit)
                     {
                         neighbor.Unit.Health -= 2;
                     }
@@ -317,22 +301,19 @@ namespace FTS.Grid
         public void SelectNextUnit()
         {
             DeselectUnit();
-            
-            //selectedUnit = unitController.GetCurrentPlayer();
+
             currentUnit = unitController.GetCurrentUnit();
-            //Debug.Log("Selected unit: " + selectedUnit);
             mover = currentUnit.GetComponent<Mover>();
-            //Debug.Log("move camera to next character");
             StartCoroutine(cameraController.MoveToPosition(currentUnit.transform.localPosition));
-            if(currentUnit is Player)
-            grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
+            if (currentUnit is Player)
+                grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
         }
 
         internal HexCell GetCardTarget()
         {
             UpdateCurrentCell();
             grid.ClearArea();
-            grid.ShowReachableHexes(mover.Location, mover.MovementLeft);    
+            grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
             return currentCell;
         }
 
@@ -359,7 +340,7 @@ namespace FTS.Grid
                 {
 
                     isValidTarget = true;
-                    
+
                 }
             }
             return isValidTarget;
@@ -375,7 +356,7 @@ namespace FTS.Grid
         internal void TravelToTarget(Mover AIMover, int AIRange, HexCell target, Vector3 lookAt)
         {
             mover = AIMover;
-            if(grid.FindPath(AIMover.Location, target, AIMover.MovementLeft, false))
+            if (grid.FindPath(AIMover.Location, target, AIMover.MovementLeft, false))
             {
                 mover.Travel(grid.GetPath(mover.MovementLeft), lookAt);
             }
@@ -412,7 +393,7 @@ namespace FTS.Grid
             return grid.GetDirection(closetPlayer.Location, mover.Location);
         }
 
- 
+
         internal void TargetPush(Character target)
         {
             HexCell attacker = unitController.GetCurrentPlayer().GetComponent<Mover>().Location;
@@ -440,7 +421,7 @@ namespace FTS.Grid
             foreach (var item in unitController.GetPlayerUnits())
             {
                 //TODO: clean this up
-                if(enemy.GetComponent<Mover>().Location.Location.DistanceTo(item.GetComponent<Mover>().Location.Location) <= enemy.Range - 1)
+                if (enemy.GetComponent<Mover>().Location.Location.DistanceTo(item.GetComponent<Mover>().Location.Location) <= enemy.Range - 1)
                 {
                     playerInRange = true;
                     break;
@@ -468,10 +449,10 @@ namespace FTS.Grid
             int shortestDistance = 1000;
             List<Player> players = unitController.GetPlayerUnits();
             foreach (var player in players)
-            {              
+            {
                 Mover bufferMover = player.GetComponent<Mover>();
                 HexCell buffer = grid.FindPath(bufferMover.Location, AIMover.Location, AIMover.MovementLeft, enemy.Range - 1);
- 
+
                 int distance = grid.GetPathDistance();
                 if (distance < shortestDistance)
                 {
@@ -482,7 +463,6 @@ namespace FTS.Grid
             }
             return target;
         }
-
 
         internal bool IsAttackNotBlocked(Enemy enemy)
         {
@@ -500,21 +480,10 @@ namespace FTS.Grid
             unitsPlaced = true;
         }
 
-        //private void UnitController_OnPlayerSelected()
-        //{
-        //    SelectNextUnit();
-        //}
-
         private void UnitController_OnUnitTurn(Character character)
         {
             SelectNextUnit();
         }
-
-
-        //private void UnitController_OnPlayerSelected()
-        //{
-        //    SelectNextUnit();
-        //}
 
         private void TurnController_OnNewTurn()
         {
@@ -535,10 +504,6 @@ namespace FTS.Grid
             grid.ClearPath();
             grid.ClearReachable();
         }
-        #endregion
-
-        #region Coroutines
-
         #endregion
     }
 }

@@ -14,7 +14,7 @@ namespace FTS.Characters
 
         private void Flee(StateMachine controller)
         {
-            controller.mover.Flee();
+            //controller.mover.Flee();
             controller.gridController.Flee(controller.mover);
         }
     }

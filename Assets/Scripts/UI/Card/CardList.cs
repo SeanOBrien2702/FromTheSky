@@ -7,7 +7,6 @@ namespace FTS.UI
     public class CardList : MonoBehaviour
     {
         [SerializeField] private GameObject image;
-
         [SerializeField] private CardController cardController;
         Canvas canvas;
 
@@ -24,8 +23,6 @@ namespace FTS.UI
 
         public void ToggleUI()
         {
-
-            //transform.gameObject.SetActive(true);
             if (!canvas.enabled)
             {
                 canvas.enabled = true;
@@ -39,7 +36,6 @@ namespace FTS.UI
 
         public void Populate()
         {
-
             //foreach (Transform child in this.transform)
             //{
             //    Destroy(child.gameObject);

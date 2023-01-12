@@ -10,8 +10,6 @@ namespace FTS.UI
 {
     public class MainMenuUIController : MonoBehaviour
     {
-        int newGame = 0;
-        int continueGame = 1;
         [SerializeField] Animator transition;
         [SerializeField] GameObject panel;
         SavingSystem saving;
@@ -20,9 +18,6 @@ namespace FTS.UI
         [SerializeField] Button continueButton;     
         [SerializeField] GameObject newGameButton;
         [SerializeField] TextMeshProUGUI newGameText;
-
-
-
 
         private void Start()
         {
@@ -37,19 +32,18 @@ namespace FTS.UI
                 continueButton.interactable = true;
                 newGameText.text = "Start over";
             }
+            panel.SetActive(false);
         }
 
         #region Public Methods
         public void Continue()
         {
-            ///StartCoroutine(LoadGame());
             saving.Continue();
             SceneManager.LoadScene("GameScene");
         }
 
         public void NewGame()
         {
-            //StartCoroutine(LoadGame());
             saving.NewGame();
             SceneManager.LoadScene("CharacterSelectScene");
         }

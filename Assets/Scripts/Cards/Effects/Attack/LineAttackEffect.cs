@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FTS.Characters;
 using FTS.Grid;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace FTS.Cards
 {
@@ -12,12 +11,12 @@ namespace FTS.Cards
     {
         [SerializeField] int numAttacks = 1;
         [SerializeField] int length = 2;
-
         int damage = 5;
-        public override void ActivateEffect(Character player,  HexCell target)
+
+        public override void ActivateEffect(Character player, HexCell target)
         {
-            List<HexCell> area = FindObjectOfType<HexGrid>().GetComponent<HexGrid>().GetLine(player, target, length);
-  
+            List<HexCell> area = grid.GetLine(player, target, length);
+
             foreach (var cell in area)
             {
                 if (cell.Unit)
@@ -31,7 +30,7 @@ namespace FTS.Cards
         }
 
         public override string GetEffectText()
-        {           
+        {
             string effectText;
             if (numAttacks == 1)
             {

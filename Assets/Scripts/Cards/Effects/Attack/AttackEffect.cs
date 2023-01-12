@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FTS.Characters;
+using UnityEngine;
 
 namespace FTS.Cards
 {
@@ -9,7 +7,6 @@ namespace FTS.Cards
     [CreateAssetMenu(menuName = "Effect/Attack/Attack", fileName = "AttackEffect.asset")]
     public class AttackEffect : Effect
     {
-        //public string effectText;
         [Header("Combat")]
         [SerializeField] int numAttacks = 1;
         [SerializeField] int range = 3;
@@ -26,7 +23,7 @@ namespace FTS.Cards
 
         public override string GetEffectText()
         {
-            
+
             string effectText;
             if (numAttacks == 1)
             {
@@ -38,6 +35,5 @@ namespace FTS.Cards
             }
             return effectText;
         }
-
     }
 }

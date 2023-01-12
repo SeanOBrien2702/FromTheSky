@@ -168,7 +168,6 @@ namespace FTS.Cards
         public Card()
         {
             id = System.Guid.NewGuid().ToString();
-            //Debug.Log("new card id:  " + id);
             location = CardLocation.Deck;
         }
         #endregion

@@ -1,23 +1,21 @@
 #region Using Statements
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using FTS.Cards;
 using FTS.Grid;
 using FTS.Turns;
-using FTS.UI;
-using FTS.Cards;
-using FTS.Core;
 using System;
-using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 #endregion
 
 namespace FTS.Characters
 {
     public class UnitController : MonoBehaviour
     {
-        public static event System.Action<Character> OnEnemyKilled = delegate { };
-        public static event System.Action<Character> OnPlayerKilled = delegate { };
+        public static event Action<Character> OnEnemyKilled = delegate { };
+        public static event Action<Character> OnPlayerKilled = delegate { };
 
         HexGrid grid;
         HexGridController gridController;
@@ -25,23 +23,17 @@ namespace FTS.Characters
         EnemyDatabase enemyDatabase;
         TurnController turnController;
         CardController cardController;
-        ObjectiveController objectiveController;
         List<Character> enemyList = new List<Character>();
         List<Character> units = new List<Character>();
-        //Dictionary<Character, StateMachine> stateMachines = new Dictionary<Character, StateMachine>();
-        //List<StateMachine> stateMachines = new List<StateMachine>();
         List<Player> playerList = new List<Player>();
-        Character vehicle;
         [Range(1, 10)]
         [SerializeField] int enemiesToSpawn = 5;
 
-        [SerializeField] FTS.UI.CharacterInfo characterInfo;
+        [SerializeField] UI.CharacterInfo characterInfo;
 
         [Header("Unit prefabs")]
         [SerializeField] Character vehiclePrefab;
 
-        bool actionDone = false;
-        int numberOfEnemies;
         int numberOfPlayers;
         int numberOfUnits;
         Character currentUnit;
@@ -52,20 +44,13 @@ namespace FTS.Characters
         float changeCooldown = 0.5f;
 
         public static event System.Action OnPlayerSelected = delegate { };
-        public static event System.Action<Character> OnUnitTurn = delegate { };
+        public static event Action<Character> OnUnitTurn = delegate { };
 
         #region Properties
+        public int NumberOfPlayers { get => numberOfPlayers; set => numberOfPlayers = value; }
 
-        public int NumberOfPlayers   // property
-        {
-            get { return numberOfPlayers; }   // get method
-        }
+        public int NumberOfUnits { get => numberOfUnits; set => numberOfUnits = value; }
 
-        public int NumberOfUnits   // property
-        {
-            get { return numberOfUnits; }   // get method
-            set { numberOfUnits = value; }  // set method
-        }
         public int CurrentIndex
         {
             get
@@ -127,14 +112,6 @@ namespace FTS.Characters
         {
             get { return currentUnit; }
         }
-
-        public Character Vehicle
-        {
-            get { return vehicle; }
-            //get { return playerList[CurrentIndex]; }
-        }
-
-
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -142,7 +119,6 @@ namespace FTS.Characters
         {
             grid = GetComponent<HexGrid>();
             gridController = GetComponent<HexGridController>();
-            objectiveController = FindObjectOfType<ObjectiveController>().GetComponent<ObjectiveController>();
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             enemyDatabase = FindObjectOfType<EnemyDatabase>().GetComponent<EnemyDatabase>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
@@ -157,8 +133,6 @@ namespace FTS.Characters
             {
                 CreateUnitInRandomPosition(GetRandomCharacter());
             }
-           
-            //CreateUnit(vehiclePrefab, grid.VehicleStart);
         }
 
         private void Update()
@@ -182,7 +156,7 @@ namespace FTS.Characters
 
         private void OnDestroy()
         {
-            TurnController.OnNewTurn -= TurnController_OnNewTurn; 
+            TurnController.OnNewTurn -= TurnController_OnNewTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
         }
         #endregion
@@ -230,11 +204,9 @@ namespace FTS.Characters
 
             units.Add(newCharacter);
 
-            if(newCharacter is Enemy)
+            if (newCharacter is Enemy)
             {
                 enemyList.Add(newCharacter);
-                //stateMachines.Add(newCharacter, new StateMachine());
-                ++numberOfEnemies;
             }
             else
             {
@@ -247,37 +219,18 @@ namespace FTS.Characters
 
         public void StartTurn()
         {
-            //Debug.Log("previous unit " + currentUnit.gameObject.name);
             currentUnit = NextUnit;
-            //Debug.Log("current unit " + currentUnit.gameObject.name);
             OnUnitTurn?.Invoke(currentUnit);
-            //OnPlayerSelected?.Invoke();
             if (currentUnit is Player)
             {
-                //Debug.Log("player start turn: " + currentUnit);           
                 characterInfo.EnableUI(currentUnit);
             }
             else
             {
-                //Debug.Log("enemy start turn: " + currentUnit);
-                //OnUnitTurn?.Invoke(false);
                 StartCoroutine(UpdateEnemyStateMachines());
             }
         }
 
-        //public void SetCurrentUnit(int index)
-        //{
-        //    currentUnit = units[index];
-        //    if(currentUnit is Player)
-        //    {
-        //        OnPlayerSelected?.Invoke();
-        //        characterInfo.EnableUI(currentUnit);
-        //    }
-        //    else
-        //    {
-        //        currentUnit.
-        //    }
-        //}
 
         public void SetCurrentUnit(Player player)
         {
@@ -285,20 +238,12 @@ namespace FTS.Characters
             OnPlayerSelected?.Invoke();
             if (player != null)
             {
-                //OnPlayerSelected?.Invoke();
                 characterInfo.EnableUI(player);
             }
         }
 
-        //internal void SelectVehicle()
-        //{
-        //    currentPlayer = vehicle as Player;
-        //    OnPlayerSelected?.Invoke();
-        //}
-
         internal void PlacePlayer(HexCell cell)
         {
-            //TODO: get player from list of chosen characters not database of all characters
             currentPlayer = playerDatabase.GetUnplacedCharacter(playerList);
             if (currentPlayer != null)
             {
@@ -324,30 +269,24 @@ namespace FTS.Characters
 
         public void RemoveUnit(Character character)
         {
-            Debug.Log("unit removed");
             --numberOfUnits;
             if (character is Enemy)
             {
-                Debug.Log("Enemy killed");
                 OnEnemyKilled?.Invoke(character);
-                //objectiveController.UpdateObjective();
-                //stateMachines.Remove(character);
                 enemyList.Remove(character);
             }
             else
-            {           
+            {
                 --numberOfPlayers;
                 playerList.Remove(character as Player);
                 cardController.RemoveClass(character.CharacterClass);
                 OnPlayerKilled?.Invoke(character);
                 if (playerList.Count <= 0 && gridController.UnitsPlaced)
                 {
-                    Debug.Log("Game over");
                     SceneManager.LoadScene("MainMenu");
                 }
             }
             units.Remove(character);
-            //UpdateTurnOrder();
         }
 
         public Player GetPlayerByClass(CharacterClass characterClass)
@@ -368,7 +307,7 @@ namespace FTS.Characters
         public List<Character> GetUnits()
         {
             return units;
-        } 
+        }
 
         public CharacterClass[] GetPlayerClasses()
         {
@@ -381,43 +320,13 @@ namespace FTS.Characters
             }
             return classList;
         }
-
-        internal HexCell GetVehiclePosition()
-        {
-            return vehicle.GetComponent<Mover>().Location;
-        }
-
-        public void UpdateStateMachine()
-        {
-            //StartCoroutine(UpdateEnemyStateMachines());
-        }
-
-        //internal List<StateMachine> GetStateMachines()
-        //{
-        //    return stateMachines.Values;
-        //}
         #endregion
 
         #region Coroutines
         IEnumerator UpdateEnemyStateMachines()
         {
-            //foreach (StateMachine stateMachine in stateMachines.Values)
-            //{
-            //    actionDone = false;
-            //    stateMachine.UpdateState();
-            //    yield return new WaitUntil(() => actionDone == true || Input.GetKeyDown(KeyCode.N));
-            //}
-            //Debug.Log("enemy turn");
-            //actionDone = false;
-            //Debug.Log("update state");
-            //ToDO cashe state machine
-            //yield return new WaitForSeconds(2);
             yield return StartCoroutine(currentUnit.GetComponent<StateMachine>().UpdateState());
-            //stateMachines[currentUnit].UpdateState();
-            //Debug.Log("updated");
-            //yield return new WaitUntil(() => actionDone == true || Input.GetKeyDown(KeyCode.N));
             turnController.UpdatePhase();
-            //Debug.Log("enemy turn done");
         }
         #endregion
 

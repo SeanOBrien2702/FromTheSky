@@ -15,6 +15,7 @@ namespace FTS.Grid
                 return count;
             }
         }
+
         #region Public Methods
         public void Enqueue(HexCell cell)
         {

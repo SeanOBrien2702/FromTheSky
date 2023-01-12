@@ -159,7 +159,7 @@ namespace FTS.Characters
         #region Public Methods
         public void CalculateDamageTaken(int damage)
         {
-            damageFeedback?.PlayFeedbacks(transform.position ,damage);
+            damageFeedback?.PlayFeedbacks(transform.position ,damage); //damage text animation
             if (!hasBarrier)
             {
                 if (armour > 0)

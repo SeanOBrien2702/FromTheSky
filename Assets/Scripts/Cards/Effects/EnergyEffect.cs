@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FTS.Characters;
-using FTS.Grid;
-using FTS.Cards;
+using UnityEngine;
 
 namespace FTS.Cards
 {
@@ -14,9 +10,8 @@ namespace FTS.Cards
         [SerializeField] int energyGained;
         public override void ActivateEffect(Character character)
         {
-            FindObjectOfType<CardController>().GetComponent<CardController>().Energy += energyGained;
+            cardController.Energy += energyGained;
         }
-
 
         public override string GetEffectText()
         {

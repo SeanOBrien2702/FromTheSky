@@ -2596,6 +2596,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: InfoPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 7086003622896021973, guid: 3ea08ee7bbb16bc43b981b1b0e9a0adb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ea08ee7bbb16bc43b981b1b0e9a0adb, type: 3}
 --- !u!1001 &5363114412989047978

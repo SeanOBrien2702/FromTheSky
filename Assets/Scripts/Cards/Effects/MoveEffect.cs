@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FTS.Characters;
-using FTS.Grid;
+using UnityEngine;
 
 namespace FTS.Cards
 {
@@ -14,7 +11,7 @@ namespace FTS.Cards
         public override void ActivateEffect(Character target)
         {
             //TODO: allow characters to be moved different distances
-            FindObjectOfType<HexGridController>().GetComponent<HexGridController>().TargetPush(target);
+            gridController.TargetPush(target);
         }
 
         public override string GetEffectText()

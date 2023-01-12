@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FTS.Characters;
+using UnityEngine;
 
 namespace FTS.Cards
 {
@@ -18,6 +16,5 @@ namespace FTS.Cards
         {
             return "<link=heat><color=\"red\">Heat</color></link> no longer damages allies";
         }
-
     }
 }
