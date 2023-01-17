@@ -166,7 +166,6 @@ namespace FTS.Grid
         private void CheckDestination()
         {
             if (unit &&
-                unit.CharacterClass == CharacterClass.Vehicle &&
                 IsDestination)
             {
                 destination.ReachedDestination(location);

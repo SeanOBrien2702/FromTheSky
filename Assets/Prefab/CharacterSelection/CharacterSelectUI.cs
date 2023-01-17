@@ -7,89 +7,110 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using System;
 using UnityEngine.EventSystems;
+using System.Security.Cryptography;
 
 namespace FTS.UI
 {
     public class CharacterSelectUI : MonoBehaviour
     {
         [SerializeField] AnimatorOverrideController characterSelectAnimator; 
-        int numPlayerChar = 3;
+        int numPlayerChar = 2;
         PlayerDatabase playerDatabase;
         [SerializeField] Transform[] playerPositions;
         [SerializeField] CharacterStatsUI[] playerUI;
         List<PlayerModel> playerModels = new List<PlayerModel>();
-        [SerializeField] Button continueButton;
+        int numClasses = Enum.GetValues(typeof(CharacterClass)).Length - 1;
 
-        // Start is called before the first frame update
         void Start()
         {
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
-            
-        }
-
-        void AddPlayer(Player player)
-        {
-            //Debug.Log("Add player " + player.CharacterClass);
-            //Debug.Log(EventSystem.current.currentSelectedGameObject.name);
-            if (playerModels.Count < numPlayerChar)
+            Player startingPlayer;
+            for (int i = 1; i <= numPlayerChar; i++)
             {
-                PlayerModel playerModel;
-                playerModel.position = FindFirstFreePosition();
-                playerModel.characterClass = player.CharacterClass;
-
-                playerModel.model = Instantiate(player.transform.GetChild(0).gameObject);
-                playerModel.model.transform.SetParent(playerPositions[playerModel.position], false);
-                playerModels.Add(playerModel);
-
-                playerUI[playerModel.position].gameObject.SetActive(true);
-                playerUI[playerModel.position].UpdateUI(player);
-                Animator animator = playerModel.model.GetComponent<Animator>();
-                animator.runtimeAnimatorController = characterSelectAnimator;
-            }
-
-            if (playerModels.Count >= numPlayerChar)
-            {
-                continueButton.interactable = true;
+                startingPlayer = playerDatabase.GetPlayer((CharacterClass)i);
+                AddPlayer(startingPlayer, i - 1);
             }
         }
 
-        private int FindFirstFreePosition()
+        void AddPlayer(Player player, int position)
         {
-            int freePosition = 0;
-            foreach (var position in playerPositions)
-            {
-                if (position.childCount < 1)
-                {
-                    break;
-                }
-                freePosition++;
-            }
-            return freePosition;
+            PlayerModel playerModel;
+            playerModel.position = position;
+            playerModel.characterClass = player.CharacterClass;
+
+            playerModel.model = Instantiate(player.transform.GetChild(0).gameObject);
+            playerModel.model.transform.SetParent(playerPositions[playerModel.position], false);
+            playerModels.Add(playerModel);
+
+            playerUI[playerModel.position].gameObject.SetActive(true);
+            playerUI[playerModel.position].UpdateUI(player);
+            Animator animator = playerModel.model.GetComponent<Animator>();
+            animator.runtimeAnimatorController = characterSelectAnimator;
         }
 
-        void RemovePlayer(Player player)
+        void ChangePlayer(Player player, int position)
         {
-            Debug.Log("remove player " + player.CharacterClass);
-            PlayerModel playerModel = playerModels.Find(item => item.characterClass == player.CharacterClass);
-            playerUI[playerModel.position].gameObject.SetActive(false);
+            PlayerModel playerModel = playerModels.Find(item => item.position == position);
             Destroy(playerModel.model);
-            playerModels.Remove(playerModel);
-            continueButton.interactable = false;
+            playerUI[playerModel.position].UpdateUI(player);
+
+            playerModel.characterClass = player.CharacterClass;
+            playerModel.model = Instantiate(player.transform.GetChild(0).gameObject);
+            playerModel.model.transform.SetParent(playerPositions[playerModel.position], false);
+
+            playerModels[position] = playerModel;
         }
 
-        public void SelectCharacter(int classIndex)
+        private void SwitchCharacter(int position, int direction)
         {
-            Player player = playerDatabase.GetPlayer((CharacterClass)classIndex);
+            PlayerModel playerModel = playerModels.Find(item => item.position == position);
+            ChangePlayer(GetPlayerClass(playerModel, direction), position);
+        }
 
-            if(playerModels.Any(item => item.characterClass == player.CharacterClass))
-            {
-                RemovePlayer(player);
-            }
-            else
-            {
-                AddPlayer(player);
-            }
+        private Player GetPlayerClass(PlayerModel playerModel, int direction)
+        {
+            int charClass = (int)playerModel.characterClass;
             
+            charClass += direction;
+            if(IsAlreadySelected(playerModel, direction))
+            {
+                charClass += direction;
+            }
+
+            if(charClass < 1)
+            {
+                charClass = numClasses;
+            }
+            else if(charClass >= numClasses)
+            {
+                charClass = 1;
+            }
+            Debug.Log(charClass);
+            return playerDatabase.GetPlayer((CharacterClass)charClass);
+        }
+
+        private bool IsAlreadySelected(PlayerModel playerModel, int direction)
+        {
+            bool isSelected = false;
+            int position = playerModel.position;
+            PlayerModel otherModel = playerModels.First(item => item.position != playerModel.position);
+
+            if (otherModel.characterClass == playerModel.characterClass + direction)
+            {
+                isSelected = true;
+            }
+
+            return isSelected;
+        }
+
+        public void PreviousCharacter(int position)
+        {
+            SwitchCharacter(position, -1);
+        }
+
+        public void NextCharacter(int position)
+        {
+            SwitchCharacter(position, 1);
         }
 
         public void Continue()
@@ -102,7 +123,6 @@ namespace FTS.UI
             playerDatabase.SetPlayers(players);
             SceneManager.LoadScene("HubScene");
         }
-
     }
 
     struct PlayerModel

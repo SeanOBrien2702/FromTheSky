@@ -33,7 +33,7 @@ namespace FTS.Grid
 
         //List<AttackIndicator> attackIndicators = new List<AttackIndicator>();
 
-        int maxNumUnits = 3;
+        int maxNumPLayers = 2;
 
 
         #region Properties
@@ -98,13 +98,12 @@ namespace FTS.Grid
         private void RemoveUnit()
         {
             UpdateCurrentCell();
-            if (currentCell && currentCell.Unit is Player
-                && currentCell.Unit.CharacterClass != CharacterClass.Vehicle)
+            if (currentCell && currentCell.Unit is Player)
             {
                 currentCell.Unit.Die();
                 currentCell.Unit = null;
                 Debug.Log(unitController.NumberOfUnits);
-                if (unitController.NumberOfPlayers <= 2)
+                if (unitController.NumberOfPlayers < maxNumPLayers)
                 {
                     startButton.interactable = false;
                 }
@@ -118,7 +117,7 @@ namespace FTS.Grid
             if (currentCell && !currentCell.IsObstacle && !currentCell.Unit)
             {
                 unitController.PlacePlayer(currentCell);
-                if (unitController.NumberOfPlayers >= 3)
+                if (unitController.NumberOfPlayers >= maxNumPLayers)
                 {
                     startButton.interactable = true;
                 }

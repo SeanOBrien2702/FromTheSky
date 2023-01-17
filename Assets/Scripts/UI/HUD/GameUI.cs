@@ -152,7 +152,7 @@ public class GameUI : MonoBehaviour
     #endregion
 
     #region Events
-        private void CardController_OnCardDrawn()
+    private void CardController_OnCardDrawn()
     {
         UpdateDeckList();
     }

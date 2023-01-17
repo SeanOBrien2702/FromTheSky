@@ -7,7 +7,6 @@
         Medic,
         Tank,
         Engineer,
-        Sniper,
-        Vehicle
+        Sniper
     }
 }
