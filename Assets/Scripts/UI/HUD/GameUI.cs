@@ -184,7 +184,6 @@ public class GameUI : MonoBehaviour
         UpdateEnergy();
     }
 
-
     private void TurnController_OnNewTurn()
     {
         Debug.Log("end turn?");

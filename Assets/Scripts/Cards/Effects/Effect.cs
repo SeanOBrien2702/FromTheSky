@@ -16,6 +16,13 @@ namespace FTS.Cards
 
         private void Awake()
         {
+            Debug.Log("intilize effect");
+            
+        }
+
+        public void Initialize()
+        {
+            Debug.Log("intilize effect");
             grid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
             gridController = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();

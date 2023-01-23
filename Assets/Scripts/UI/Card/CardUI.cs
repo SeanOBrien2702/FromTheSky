@@ -26,7 +26,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     Card cardInfo;
     bool overTooltip = false;
     string currentTooltip = null;
-    TooltipUI tooltipUI;
+    //TooltipUI tooltipUI;
 
     public Card CardInfos // property
     {
@@ -64,7 +64,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 
     private void Start()
     {
-        tooltipUI = FindObjectOfType<TooltipUI>().GetComponent<TooltipUI>();
+        //tooltipUI = FindObjectOfType<TooltipUI>().GetComponent<TooltipUI>();
     }
 
     private void Update()
@@ -78,13 +78,13 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
             {
                 //Debug.Log("show tool tip");
                 currentTooltip = linkID;
-                tooltipUI.ShowToolTip(currentTooltip);
+                //tooltipUI.ShowToolTip(currentTooltip);
             }
         }
         else if(currentTooltip != null)
         {
             currentTooltip = null;
-            tooltipUI.HideTooltip();
+            //tooltipUI.HideTooltip();
         }
     }
 
@@ -190,7 +190,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                 TMP_LinkInfo linkInfo = rulesText.textInfo.linkInfo[linkIndex];
                 string linkID = linkInfo.GetLinkText();
                 Debug.Log(linkID);
-                tooltipUI.ShowToolTip(linkID);
+                //tooltipUI.ShowToolTip(linkID);
             }
         }
     }

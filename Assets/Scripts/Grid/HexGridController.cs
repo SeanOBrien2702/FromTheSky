@@ -33,7 +33,7 @@ namespace FTS.Grid
 
         //List<AttackIndicator> attackIndicators = new List<AttackIndicator>();
 
-        int maxNumPLayers = 2;
+        int maxNumPLayers = 0;
 
 
         #region Properties

@@ -11,6 +11,7 @@ namespace FTS.Characters
     public class PlayerDatabase : MonoBehaviour
     {
         List<Player> players = new List<Player>();
+        Player playerCharacter;
         [SerializeField] List<Player> playerPrefabs = new List<Player>();
 
         #region Properties
@@ -38,12 +39,9 @@ namespace FTS.Characters
         #endregion
 
         #region Public Methods
-        public void SetPlayers(List<CharacterClass> selectedClass)
+        public void SetPlayer(CharacterClass selectedClass)
         {
-            foreach (var selected in selectedClass)
-            {
-                players.Add(playerPrefabs.Find(player => player.CharacterClass == selected));
-            }
+            players.Add(playerPrefabs.Find(player => player.CharacterClass == selectedClass));
         }
 
         internal List<Player> GetPlayers()

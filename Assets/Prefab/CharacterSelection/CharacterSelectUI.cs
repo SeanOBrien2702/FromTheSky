@@ -13,122 +13,62 @@ namespace FTS.UI
 {
     public class CharacterSelectUI : MonoBehaviour
     {
-        [SerializeField] AnimatorOverrideController characterSelectAnimator; 
-        int numPlayerChar = 2;
+        [SerializeField] AnimatorOverrideController characterSelectAnimator;
+        [SerializeField] GameObject orbitSupportDraft;
         PlayerDatabase playerDatabase;
-        [SerializeField] Transform[] playerPositions;
-        [SerializeField] CharacterStatsUI[] playerUI;
-        List<PlayerModel> playerModels = new List<PlayerModel>();
-        int numClasses = Enum.GetValues(typeof(CharacterClass)).Length - 1;
+        [SerializeField] Transform playerPosition;
+        [SerializeField] CharacterStatsUI playerUI;
+        PlayerModel playerModel = new PlayerModel();
 
         void Start()
         {
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
-            Player startingPlayer;
-            for (int i = 1; i <= numPlayerChar; i++)
-            {
-                startingPlayer = playerDatabase.GetPlayer((CharacterClass)i);
-                AddPlayer(startingPlayer, i - 1);
-            }
+            AddPlayer(playerDatabase.GetPlayer((CharacterClass)1));
+            orbitSupportDraft.SetActive(false);
         }
 
-        void AddPlayer(Player player, int position)
+        void AddPlayer(Player player)
         {
-            PlayerModel playerModel;
-            playerModel.position = position;
             playerModel.characterClass = player.CharacterClass;
 
             playerModel.model = Instantiate(player.transform.GetChild(0).gameObject);
-            playerModel.model.transform.SetParent(playerPositions[playerModel.position], false);
-            playerModels.Add(playerModel);
+            playerModel.model.transform.SetParent(playerPosition, false);
 
-            playerUI[playerModel.position].gameObject.SetActive(true);
-            playerUI[playerModel.position].UpdateUI(player);
+            playerUI.gameObject.SetActive(true);
+            playerUI.UpdateUI(player);
             Animator animator = playerModel.model.GetComponent<Animator>();
             animator.runtimeAnimatorController = characterSelectAnimator;
         }
 
-        void ChangePlayer(Player player, int position)
+        void ChangePlayer(Player player)
         {
-            PlayerModel playerModel = playerModels.Find(item => item.position == position);
+            PlayerModel newPlayerModel = new PlayerModel();
             Destroy(playerModel.model);
-            playerUI[playerModel.position].UpdateUI(player);
+            playerUI.UpdateUI(player);
 
-            playerModel.characterClass = player.CharacterClass;
-            playerModel.model = Instantiate(player.transform.GetChild(0).gameObject);
-            playerModel.model.transform.SetParent(playerPositions[playerModel.position], false);
+            newPlayerModel.characterClass = player.CharacterClass;
+            newPlayerModel.model = Instantiate(player.transform.GetChild(0).gameObject);
+            newPlayerModel.model.transform.SetParent(playerPosition, false);
 
-            playerModels[position] = playerModel;
+            playerModel = newPlayerModel;
         }
 
-        private void SwitchCharacter(int position, int direction)
+        public void SelectCharacter(int index)
         {
-            PlayerModel playerModel = playerModels.Find(item => item.position == position);
-            ChangePlayer(GetPlayerClass(playerModel, direction), position);
-        }
-
-        private Player GetPlayerClass(PlayerModel playerModel, int direction)
-        {
-            int charClass = (int)playerModel.characterClass;
-            
-            charClass += direction;
-            if(IsAlreadySelected(playerModel, direction))
-            {
-                charClass += direction;
-            }
-
-            if(charClass < 1)
-            {
-                charClass = numClasses;
-            }
-            else if(charClass >= numClasses)
-            {
-                charClass = 1;
-            }
-            Debug.Log(charClass);
-            return playerDatabase.GetPlayer((CharacterClass)charClass);
-        }
-
-        private bool IsAlreadySelected(PlayerModel playerModel, int direction)
-        {
-            bool isSelected = false;
-            int position = playerModel.position;
-            PlayerModel otherModel = playerModels.First(item => item.position != playerModel.position);
-
-            if (otherModel.characterClass == playerModel.characterClass + direction)
-            {
-                isSelected = true;
-            }
-
-            return isSelected;
-        }
-
-        public void PreviousCharacter(int position)
-        {
-            SwitchCharacter(position, -1);
-        }
-
-        public void NextCharacter(int position)
-        {
-            SwitchCharacter(position, 1);
+            Player player = playerDatabase.GetPlayer((CharacterClass)index);
+            ChangePlayer(player);
         }
 
         public void Continue()
         {
-            List<CharacterClass> players = new List<CharacterClass>();
-            foreach (var item in playerModels)
-            {
-                players.Add(item.characterClass);
-            }
-            playerDatabase.SetPlayers(players);
-            SceneManager.LoadScene("HubScene");
+            playerDatabase.SetPlayer(playerModel.characterClass);
+            orbitSupportDraft.SetActive(true);
         }
     }
 
     struct PlayerModel
     {
         public GameObject model;
-        public int position;
         public CharacterClass characterClass;
     }
 }

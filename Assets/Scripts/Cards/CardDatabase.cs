@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using FTS.Characters;
-using System;
 using FTS.Saving;
+using FTS.Turns;
 #endregion
 
 namespace FTS.Cards
@@ -25,6 +25,12 @@ namespace FTS.Cards
         {
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             BuildLookup();
+            TurnController.OnCombatStart += TurnController_OnCombatStart;
+        }
+
+        private void OnDestroy()
+        {
+            TurnController.OnCombatStart -= TurnController_OnCombatStart;
         }
         #endregion
 
@@ -42,8 +48,7 @@ namespace FTS.Cards
                     {
                         card.Border = cardBorders.Find(item => item.characterClass == characterClass.characterClass).border;
                         card.DraftBorder = cardBorders.Find(item => item.characterClass == characterClass.characterClass).draftColor;
-                        statLookupTable.Add(card);  
-                        
+                        statLookupTable.Add(card);                   
                     }
                     lookupTable[characterClass.characterClass] = statLookupTable;
                 }
@@ -52,21 +57,35 @@ namespace FTS.Cards
         #endregion
 
         #region Public Methods
-        public List<Card> PopulateBucket()
+        public List<Card> PopulateDraftPicks(int numPicks)
         {
             classList = playerDatabase.GetPlayerClasses();
             List<Card> bucket = new List<Card>();
-            foreach (CharacterClass characterClass in classList)
+
+            for (int i = 0; i < numPicks; i++)
             {
-                bucket.Add(lookupTable[characterClass].OrderBy(o => System.Guid.NewGuid())
-                                                      .FirstOrDefault());
+                bucket.Add(lookupTable[classList[Random.Range(0, classList.Length)]].OrderBy(o => System.Guid.NewGuid())
+                                                     .FirstOrDefault());
+            }
+            return bucket;
+        }
+
+        internal List<Card> GetOrbitalCards()
+        {
+            classList = playerDatabase.GetPlayerClasses();
+            List<Card> bucket = new List<Card>();
+
+            for (int i = 0; i < 2; i++)
+            {
+                bucket.Add(lookupTable[classList[Random.Range(0, classList.Length)]].OrderBy(o => System.Guid.NewGuid())
+                                                     .FirstOrDefault());
             }
             return bucket;
         }
 
         internal Card GetRandomCard()
         {
-            return deck.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+            return deck.OrderBy(x => System.Guid.NewGuid()).FirstOrDefault();
         }
 
         internal List<Card> GetDeck()
@@ -96,6 +115,20 @@ namespace FTS.Cards
             deck.AddRange((List<Card>)state);
         }
         #endregion
+
+        private void TurnController_OnCombatStart()
+        {
+            foreach(CharacterClassCards characterClass in characterClassCards)
+            {
+                foreach (Card card in characterClass.cards)
+                {
+                    foreach (Effect effect in card.Effects)
+                    {
+                        effect.Initialize();
+                    }
+                }
+            }  
+        }
     }
 
     [System.Serializable]

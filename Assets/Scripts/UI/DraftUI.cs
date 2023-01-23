@@ -19,9 +19,11 @@ namespace FTS.UI
         int numCards = 3;
 
         CardDatabase cardDB;
+        PlayerDatabase playerDB;
 
         [SerializeField] Transform cardPanel;
         [SerializeField] GameObject cardPrefab;
+        [SerializeField] bool isOrbital = false;
 
         #region MonoBehaviour Callbacks
         void Awake()
@@ -31,18 +33,22 @@ namespace FTS.UI
 
         void Start()
         {
-            FillPanel();
+            if (!isOrbital)
+            {
+                cards = cardDB.PopulateDraftPicks(numCards);
+                FillPanel();
+            }
         }
         #endregion
 
         #region Private Methods
         void FillPanel()
         {
-            for (int i = 0; i < numCards; i++)
+            //playerDB = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
+            
+
+            foreach (Card card in cards)
             {
-                int index = i;
-                Card card = cardDB.GetRandomCard();
-                cards.Add(card);
                 GameObject go = (GameObject)Instantiate(cardPrefab);
                 go.transform.SetParent(cardPanel, false);
                 go.GetComponentInChildren<CardUI>().SaveCardData(card);
@@ -60,12 +66,19 @@ namespace FTS.UI
         {
             Debug.Log(card.name);
             cardDB.AddCardToDeck(card);
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("HubScene");
         }
 
         public void Skip()
         {
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("HubScene");
+        }
+
+        //Click when slecting characters
+        public void OrbitFillPanel()
+        {
+            cards = cardDB.GetOrbitalCards();
+            FillPanel();
         }
         #endregion
     }
