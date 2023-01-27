@@ -32,7 +32,7 @@ namespace FTS.Core
             objectiveNum = objectives.Count;
             Debug.Log("objectives " + objectives.Count);
             objectiveUI.CreateObjectiveText(objectives);
-            TurnController.OnNewTurn += TurnController_OnNewTurn;
+            TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             CardController.OnCardPlayed += CardController_OnCardPlayed;
             UnitController.OnEnemyKilled += UnitController_OnEnemyKilled;
             foreach (var objective in objectives)
@@ -47,7 +47,7 @@ namespace FTS.Core
 
         private void OnDestroy()
         {
-            TurnController.OnNewTurn -= TurnController_OnNewTurn;
+            TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             CardController.OnCardPlayed += CardController_OnCardPlayed;
             UnitController.OnEnemyKilled -= UnitController_OnEnemyKilled;
         }

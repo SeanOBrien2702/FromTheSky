@@ -13,12 +13,12 @@ namespace FTS.UI
         private void Start()
         {
             canvas = GameObject.FindGameObjectWithTag("DeckUI").GetComponent<Canvas>();
-            TurnController.OnNewTurn += Populate;
+            TurnController.OnPlayerTurn += Populate;
         }
 
         private void OnDestroy()
         {
-            TurnController.OnNewTurn -= Populate;
+            TurnController.OnPlayerTurn -= Populate;
         }
 
         public void ToggleUI()

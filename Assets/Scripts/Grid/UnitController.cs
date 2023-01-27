@@ -23,7 +23,9 @@ namespace FTS.Characters
         EnemyDatabase enemyDatabase;
         TurnController turnController;
         CardController cardController;
+        StateController stateController;
         List<Character> enemyList = new List<Character>();
+        List <StateMachine> stateMachines = new List<StateMachine>();
         List<Character> units = new List<Character>();
         List<Player> playerList = new List<Player>();
         [Range(1, 10)]
@@ -44,7 +46,7 @@ namespace FTS.Characters
         float changeCooldown = 0.5f;
 
         public static event System.Action OnPlayerSelected = delegate { };
-        public static event Action<Character> OnUnitTurn = delegate { };
+       //public static event Action<Character> OnUnitTurn = delegate { };
 
         #region Properties
         public int NumberOfPlayers { get => numberOfPlayers; set => numberOfPlayers = value; }
@@ -119,11 +121,12 @@ namespace FTS.Characters
         {
             grid = GetComponent<HexGrid>();
             gridController = GetComponent<HexGridController>();
+            stateController = GetComponent<StateController>();
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             enemyDatabase = FindObjectOfType<EnemyDatabase>().GetComponent<EnemyDatabase>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
-            TurnController.OnNewTurn += TurnController_OnNewTurn;
+            TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
         }
 
@@ -156,7 +159,7 @@ namespace FTS.Characters
 
         private void OnDestroy()
         {
-            TurnController.OnNewTurn -= TurnController_OnNewTurn;
+            TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
         }
         #endregion
@@ -207,6 +210,7 @@ namespace FTS.Characters
             if (newCharacter is Enemy)
             {
                 enemyList.Add(newCharacter);
+                stateMachines.Add(newCharacter.GetComponent<StateMachine>());
             }
             else
             {
@@ -220,14 +224,10 @@ namespace FTS.Characters
         public void StartTurn()
         {
             currentUnit = NextUnit;
-            OnUnitTurn?.Invoke(currentUnit);
+            //OnUnitTurn?.Invoke(currentUnit);
             if (currentUnit is Player)
             {
                 characterInfo.EnableUI(currentUnit);
-            }
-            else
-            {
-                StartCoroutine(UpdateEnemyStateMachines());
             }
         }
 
@@ -273,6 +273,7 @@ namespace FTS.Characters
             if (character is Enemy)
             {
                 OnEnemyKilled?.Invoke(character);
+                stateMachines.Remove(character.GetComponent<StateMachine>());
                 enemyList.Remove(character);
             }
             else
@@ -320,13 +321,9 @@ namespace FTS.Characters
             }
             return classList;
         }
-        #endregion
-
-        #region Coroutines
-        IEnumerator UpdateEnemyStateMachines()
+        internal List<StateMachine> GetStateMachines()
         {
-            yield return StartCoroutine(currentUnit.GetComponent<StateMachine>().UpdateState());
-            turnController.UpdatePhase();
+            return stateMachines;
         }
         #endregion
 
@@ -334,12 +331,12 @@ namespace FTS.Characters
         private void TurnController_OnNewTurn()
         {
             currentPlayer = playerList.First();
+            currentUnit = currentPlayer;
         }
 
         private void TurnController_OnCombatStart()
         {
-            currentUnit = units.First();
-            currentUnit = PreviousUnit;
+            currentUnit = enemyList.First();
         }
         #endregion
     }

@@ -47,10 +47,8 @@ public class GameUI : MonoBehaviour
         CardController.OnCardDrawn += CardController_OnCardDrawn;
         CardController.OnCardCreated += CardController_OnCardCreated;
         CardController.OnEnergyChanged += CardController_OnEnergyChanged;
-        UnitController.OnUnitTurn += UnitController_OnUnitTurn;
         TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
-        TurnController.OnNewTurn += TurnController_OnNewTurn;
-        TurnController.OnEndTurn += TurnController_OnEndTurn;
+        TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
         unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
     }
@@ -67,10 +65,8 @@ public class GameUI : MonoBehaviour
         CardController.OnCardDrawn -= CardController_OnCardDrawn;
         CardController.OnCardCreated -= CardController_OnCardCreated;
         CardController.OnEnergyChanged -= CardController_OnEnergyChanged;
-        UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
         TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
-        TurnController.OnNewTurn -= TurnController_OnNewTurn;
-        TurnController.OnEndTurn -= TurnController_OnEndTurn;
+        TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
     }
     #endregion
 
@@ -186,21 +182,13 @@ public class GameUI : MonoBehaviour
 
     private void TurnController_OnNewTurn()
     {
-        Debug.Log("end turn?");
         UpdateEnergy();
         UpdateDeckList();
         ToggleUI(true);
-        //endTurnButton.SetActive(true);
     }
-    private void TurnController_OnEndTurn()
+
+    private void TurnController_OnEnemyTurn(bool isTelegraph)
     {
-        Debug.Log("end turn");
-        ToggleUI(true);
-        //endTurnButton.SetActive(false);
-    }
-    private void TurnController_OnEnemyTurn()
-    {
-        //ToggleUI(false);
         endTurnButton.SetActive(false);
     }
     #endregion

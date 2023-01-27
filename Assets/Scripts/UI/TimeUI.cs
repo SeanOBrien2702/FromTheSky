@@ -16,7 +16,7 @@ namespace FTS.UI
         #region MonoBehaviour Callbacks
         void Start()
         {
-            TurnController.OnNewTurn += UpdateUI;
+            TurnController.OnPlayerTurn += UpdateUI;
             buttons = new List<Button>(GetComponentsInChildren<Button>());
             dateTime = GetComponentInChildren<Text>();
             dateTime.text = "This is a test";
@@ -24,7 +24,7 @@ namespace FTS.UI
 
         private void OnDestroy()
         {
-            TurnController.OnNewTurn -= UpdateUI;
+            TurnController.OnPlayerTurn -= UpdateUI;
         }
         #endregion
 

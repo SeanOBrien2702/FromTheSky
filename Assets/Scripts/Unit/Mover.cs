@@ -59,12 +59,14 @@ namespace FTS.Characters
             character = GetComponent<Character>();
             speed = character.Stats.GetStat(Stat.Movement, character.CharacterClass);
             movementLeft = speed;
-            TurnController.OnNewTurn += TurnController_OnNewTurn;
+            TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
+            TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }
 
         private void OnDestroy()
         {
-            TurnController.OnNewTurn -= TurnController_OnNewTurn;
+            TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
+            TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
         }
         #endregion
 
@@ -122,11 +124,6 @@ namespace FTS.Characters
             StartCoroutine(TravelPush(newLocation.transform.localPosition));
             Location = newLocation;
         }
-
-        public void LookAtTarget(Vector3 target)
-        {
-            StartCoroutine(LookAt(target));
-        }
         #endregion
 
         #region Coroutines
@@ -153,7 +150,6 @@ namespace FTS.Characters
             cameraController.StartCharacterFollow(this.transform);
             Vector3 a, b, c = pathToTravel[0].transform.localPosition;
             transform.localPosition = c;
-            yield return LookAt(pathToTravel[1].transform.localPosition);
             if(animator != null)
             {
                 animator.SetTrigger("Walk");
@@ -191,10 +187,6 @@ namespace FTS.Characters
             }
             transform.localPosition = location.transform.localPosition;
             pathToTravel = null;
-            if (lookTowards != Vector3.zero)
-            {
-                yield return LookAt(lookTowards);
-            }
             
             cameraController.StopCharacterFollow();
             stateController.ActionDone = true;
@@ -202,30 +194,16 @@ namespace FTS.Characters
             if (movementLeft >= 1)
                 canMove = true;
         }
-
-        IEnumerator LookAt(Vector3 point)
-        {
-            point.y = transform.localPosition.y;
-            Quaternion fromRotation = transform.localRotation;
-            Quaternion toRotation = Quaternion.LookRotation(point - transform.localPosition);
-            float angle = Quaternion.Angle(fromRotation, toRotation);
-
-            if (angle > 0f)
-            {
-                float speed = rotationSpeed / angle;
-                for (float t = Time.deltaTime * speed; t < 1f; t += Time.deltaTime * speed)
-                {
-                    transform.localRotation = Quaternion.Slerp(fromRotation, toRotation, t);
-                    yield return null;
-                }
-            }
-
-            transform.LookAt(point);
-        }
         #endregion
 
         #region Events
         private void TurnController_OnNewTurn()
+        {
+            canMove = true;
+            movementLeft = speed;
+        }
+
+        private void TurnController_OnEnemyTurn(bool isTelegraph)
         {
             canMove = true;
             movementLeft = speed;

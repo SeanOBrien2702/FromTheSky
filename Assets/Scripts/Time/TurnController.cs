@@ -20,11 +20,10 @@ namespace FTS.Turns
         bool hasCombatStarted = false;
         TurnPhases turnPhase;
 
-        public static event System.Action OnNewTurn = delegate { };
-        public static event System.Action OnEndTurn = delegate { };
-        //public static event System.Action<Character> OnTurnEnd = delegate { };
-        public static event System.Action OnEnemyTurn = delegate { };
         public static event System.Action OnCombatStart = delegate { };
+        public static event System.Action<bool> OnEnemyTurn = delegate { };
+        public static event System.Action OnPlayerTurn = delegate { };
+        //public static event System.Action OnEnemyAction = delegate { };
 
         #region Properties
         public TurnPhases TurnPhase   // property
@@ -48,108 +47,71 @@ namespace FTS.Turns
         void Start()
         {
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
-            //stateController = FindObjectOfType<StateController>().GetComponent<StateController>();
             turnPhase = TurnPhases.Placement;
             turnInfoText.text = "Place Units";
-        }
-
-        void Update()
-        {
-            if (Input.GetKeyDown("space") && hasCombatStarted)
-            {
-                UpdatePhase();
-            }
         }
         #endregion
 
         #region Private Methods
         private void EnemyTelegraph()
         {
-            OnEnemyTurn?.Invoke();
-            turnPhase = TurnPhases.EnemyTelegraph;
-            //stateController.UpdateStateMachine();
+            OnEnemyTurn?.Invoke(true);
             turnInfoText.text = "Enemy planning";
         }
 
         private void PlayerTurn()
         {
             NewTurn();
-            turnPhase = TurnPhases.PlayerTurn;
             turnInfoText.text = "Player Turn";
         }
 
         private void EnemyAction()
         {
-            Debug.Log("enemy turn starts");
-            turnPhase = TurnPhases.EnemyActions;
-            OnEnemyTurn?.Invoke();
-            //stateController.UpdateStateMachine();
+            OnEnemyTurn?.Invoke(false);
             turnInfoText.text = "Enemy actions"; 
-            EndTurn();
         }
 
         private void NewTurn()
         {
-            OnNewTurn?.Invoke();
+            OnPlayerTurn?.Invoke();
             turn++;
             turnText.text = "Turn: " + turn.ToString();
-        }
-
-        private void EndTurn()
-        {
-            OnEndTurn?.Invoke();
         }
         #endregion
 
         #region Public Methods
-
         //end turn button
         public void EndRound()
         {
-            UpdatePhase();
+            if(turnPhase == TurnPhases.PlayerTurn)
+                UpdatePhase();
         }
 
         public void UpdatePhase()
         {
-            unitController.StartTurn();
-
-            turnOrderPosition++;
-            if(turnOrderPosition >= unitController.NumberOfUnits)
+            turnPhase++;
+            if (turnPhase > TurnPhases.EnemyActions)
             {
-                turnOrderPosition = 0;
-                NewTurn();
+                turnPhase = TurnPhases.EnemyTelegraph;
+            }
+            switch (turnPhase)
+            {
+                case TurnPhases.EnemyTelegraph:
+                    EnemyTelegraph();
+                    break;
+                case TurnPhases.PlayerTurn:
+                    PlayerTurn();              
+                    break;
+                case TurnPhases.Environment:
+                    UpdatePhase();
+                    break;
+                case TurnPhases.EnemyActions:
+                    EnemyAction();
+                    break;
+                default:
+                    break;
             }
         }
-
-        //public void UpdatePhase()
-        //{
-        //    switch (turnPhase)
-        //    {
-        //        case TurnPhases.Placement:
-        //            //EnemyTelegraph();
-        //            PlayerTurn();
-        //            break;
-        //        //case TurnPhases.EnemyTelegraph:
-        //        //    PlayerTurn();
-        //        //    break;
-        //        case TurnPhases.PlayerTurn:
-        //            //Enviorment();
-        //            EnemyAction();
-        //            break;
-        //        case TurnPhases.Environment:
-        //            EnemyAction();
-        //            break;
-        //        case TurnPhases.EnemyActions:
-        //            //VehicleAction();
-        //            PlayerTurn();
-        //            break;
-        //        //case TurnPhases.VehicleAction:
-        //        //    EnemyTelegraph();
-        //        //    break;
-        //        default:
-        //            break;
-        //    }
-        //}
 
         public void StartPlayerTurn()
         {
@@ -164,12 +126,9 @@ namespace FTS.Turns
         //start button
         internal void StartCombat()
         {
-            //EnemyTelegraph();
             OnCombatStart?.Invoke();
             turnOrderUI.FillUI();
             UpdatePhase();
-            NewTurn();       
-            //PlayerTurn();
             hasCombatStarted = true;
         }
         #endregion

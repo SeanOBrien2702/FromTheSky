@@ -120,7 +120,7 @@ namespace FTS.Characters
         {
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             health = maxHealth = stats.GetStat(Stat.Health, characterClass);
-            TurnController.OnNewTurn += TurnController_OnNewTurn;
+            TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }
 
         private void Start()
@@ -134,7 +134,7 @@ namespace FTS.Characters
 
         private void OnDestroy()
         {
-            TurnController.OnNewTurn -= TurnController_OnNewTurn;
+            TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
         }
         #endregion
 

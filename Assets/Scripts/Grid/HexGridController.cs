@@ -2,6 +2,7 @@
 using FTS.Cards;
 using FTS.Characters;
 using FTS.Turns;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -51,9 +52,7 @@ namespace FTS.Grid
             unitController = GetComponent<UnitController>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
-            UnitController.OnUnitTurn += UnitController_OnUnitTurn;
-            TurnController.OnNewTurn += TurnController_OnNewTurn;
-            TurnController.OnEndTurn += TurnController_OnEndTurn;
+            TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
             grid.ShowPlacementArea(placementArea);
@@ -73,9 +72,7 @@ namespace FTS.Grid
 
         private void OnDestroy()
         {
-            UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
-            TurnController.OnNewTurn -= TurnController_OnNewTurn;
-            TurnController.OnEndTurn -= TurnController_OnEndTurn;
+            TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
         }
@@ -161,7 +158,7 @@ namespace FTS.Grid
         private bool CanControlUnit()
         {
             return EventSystem.current.IsPointerOverGameObject()
-                && unitController.IsPlayer();
+                && turnController.TurnPhase == TurnPhases.PlayerTurn;//unitController.IsPlayer();
         }
 
         private bool MouseOverGrid()
@@ -304,8 +301,11 @@ namespace FTS.Grid
             currentUnit = unitController.GetCurrentUnit();
             mover = currentUnit.GetComponent<Mover>();
             StartCoroutine(cameraController.MoveToPosition(currentUnit.transform.localPosition));
+            grid.ClearReachable();
             if (currentUnit is Player)
+            {
                 grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
+            }
         }
 
         internal HexCell GetCardTarget()
@@ -392,6 +392,24 @@ namespace FTS.Grid
             return grid.GetDirection(closetPlayer.Location, mover.Location);
         }
 
+        internal Player GetClosestPlayer(Mover mover)
+        {
+            Player closetPlayer = null;
+            int closesDistance = 1000;
+            int distanceBuffer = 0;
+            foreach (var item in unitController.GetPlayerUnits())
+            {
+                Player buffer = item;
+                distanceBuffer = mover.Location.Location.DistanceTo(item.GetComponent<Mover>().Location.Location);
+                if (closesDistance > distanceBuffer)
+                {
+                    closetPlayer = buffer;
+                    closesDistance = distanceBuffer;
+                }
+            }
+
+            return closetPlayer;
+        }
 
         internal void TargetPush(Character target)
         {
@@ -479,25 +497,12 @@ namespace FTS.Grid
             unitsPlaced = true;
         }
 
-        private void UnitController_OnUnitTurn(Character character)
-        {
-            SelectNextUnit();
-        }
-
         private void TurnController_OnNewTurn()
-        {
+        { 
             SelectNextUnit();
         }
 
-
-        private void TurnController_OnEnemyTurn()
-        {
-            grid.ClearArea();
-            grid.ClearPath();
-            grid.ClearReachable();
-        }
-
-        private void TurnController_OnEndTurn()
+        private void TurnController_OnEnemyTurn(bool isTelegraph)
         {
             grid.ClearArea();
             grid.ClearPath();

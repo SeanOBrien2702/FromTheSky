@@ -29,8 +29,8 @@ namespace FTS.Grid
             hexGrid = GetComponent<HexGrid>();
             unitController = GetComponent<UnitController>();
             enemyDatabase = FindObjectOfType<EnemyDatabase>().GetComponent<EnemyDatabase>();
-            TurnController.OnNewTurn += TurnController_OnNewTurn;
-            TurnController.OnEndTurn += TurnController_OnEndTurn;
+            TurnController.OnPlayerTurn += TurnController_OnNewTurn;
+            TurnController.OnEnemyTurn += TurnController_OnEndTurn;
         }
 
         // Update is called once per frame
@@ -41,8 +41,8 @@ namespace FTS.Grid
 
         private void OnDestroy()
         {
-            TurnController.OnNewTurn -= TurnController_OnNewTurn;
-            TurnController.OnEndTurn -= TurnController_OnEndTurn;
+            TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
+            TurnController.OnEnemyTurn -= TurnController_OnEndTurn;
         }
         #endregion
 
@@ -93,9 +93,10 @@ namespace FTS.Grid
             SetSpawnPositions();
         }
 
-        private void TurnController_OnEndTurn()
+        private void TurnController_OnEndTurn(bool isTelegraph)
         {
-            SpawnEnemies();
+            if(isTelegraph)
+                SpawnEnemies();
         }
         #endregion
     }

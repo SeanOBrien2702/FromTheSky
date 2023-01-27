@@ -1126,7 +1126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &833733023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1612,21 +1612,25 @@ PrefabInstance:
       propertyPath: unitController
       value: 
       objectReference: {fileID: 1867353417224850158}
+    - target: {fileID: 1652996880, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2020077537, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2020077537, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2020077537, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2020077537, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 1978006776522080884, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
@@ -1784,6 +1788,11 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3639789061757368167, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3828876756728279310, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1924,7 +1933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1852959857
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2412,7 +2421,7 @@ PrefabInstance:
     - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}
       propertyPath: enemiesToSpawn
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4335076343168363342, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}
@@ -2451,9 +2460,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653738a3634892046806d465e6e10831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpawn: 1
-  maxSpawn: 2
-  spawnLimit: 8
+  minSpawn: 0
+  maxSpawn: 0
+  spawnLimit: 0
 --- !u!114 &1867353417224850160 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,

@@ -41,38 +41,19 @@ namespace FTS.Characters
             mover = GetComponent<Mover>();
             hexGrid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
             character = GetComponent<Character>();
-            UnitController.OnUnitTurn += UnitController_OnUnitTurn;
-            TurnController.OnEndTurn += TurnController_OnEndTurn;
-            //UpdateHeat();
-        }
-
-        private void UnitController_OnUnitTurn(Character currrentChar)
-        {
-            if (character == currrentChar)
-            {
-                UpdateHeat();
-            }
+            TurnController.OnEnemyTurn += TurnController_OnEndTurn;
         }
 
         private void OnDestroy()
         {
-            UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
-            TurnController.OnEndTurn -= TurnController_OnEndTurn;
+            TurnController.OnEnemyTurn -= TurnController_OnEndTurn;
         }
-
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         #endregion
+
         #region Private Methods
         private void UpdateHeat()
         {
             List<HexCell> area = hexGrid.GetArea(mover.Location, range);
-            Debug.Log("area size " + area.Count);
             foreach (var cell in area)
             {
                 if(cell.Unit && cell != mover.Location)
@@ -88,6 +69,7 @@ namespace FTS.Characters
             UpdateHeatText(heatLevel);
         }
         #endregion
+
         #region Public Methods
         public void TriggerHeat(int numTimes)
         {
@@ -114,13 +96,13 @@ namespace FTS.Characters
 
         }
         #endregion
+
         #region Events
-        private void TurnController_OnEndTurn()
+        private void TurnController_OnEndTurn(bool isTelegraph)
         {
-            UpdateHeat();
+            if(!isTelegraph)
+                UpdateHeat();
         }
-
-
         #endregion
     }
 }

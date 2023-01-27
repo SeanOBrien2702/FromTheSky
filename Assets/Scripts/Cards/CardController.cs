@@ -97,10 +97,10 @@ namespace FTS.Cards
             //turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             cardDatabase = FindObjectOfType<CardDatabase>().GetComponent<CardDatabase>();
-            TurnController.OnNewTurn += TurnController_OnNewTurn;
+            TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
-            UnitController.OnUnitTurn += UnitController_OnUnitTurn;
+            //UnitController.OnUnitTurn += UnitController_OnUnitTurn;
         }
 
         /*
@@ -144,10 +144,10 @@ namespace FTS.Cards
 
         private void OnDestroy()
         {
-            TurnController.OnNewTurn -= TurnController_OnNewTurn;
+            TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
-            UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
+            //UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
         }
         #endregion
 
@@ -550,15 +550,15 @@ namespace FTS.Cards
 
         #region Events
 
-        private void UnitController_OnUnitTurn(Character character)
-        {
-            DiscardHand();
-            if (character is Player)
-            {
-                energy = totalEnergy;
-                DrawNewHand();
-            }
-        }
+        //private void UnitController_OnUnitTurn(Character character)
+        //{
+        //    DiscardHand();
+        //    if (character is Player)
+        //    {
+        //        energy = totalEnergy;
+        //        DrawNewHand();
+        //    }
+        //}
 
         private void TurnController_OnCombatStart()
         {
@@ -570,18 +570,21 @@ namespace FTS.Cards
             deck = deck.OrderByDescending(item => item.IsInherent).ToList();
         }
 
-        private void TurnController_OnEnemyTurn()
+        private void TurnController_OnEnemyTurn(bool isTelegraph)
         {
-            DiscardHand();
-            handleDiscard = false;
-            numberToDiscard = 0;
+            if (!isTelegraph)
+            {
+                DiscardHand();
+                handleDiscard = false;
+                numberToDiscard = 0;
+            }
         }
 
         private void TurnController_OnNewTurn()
         {
-            //Debug.Log("new turn?");
-            //energy = totalEnergy;
-            //DrawNewHand();
+            //Debug.Log("draw new hard?");
+            energy = totalEnergy;
+            DrawNewHand();
         }
         #endregion
     }
