@@ -127,7 +127,7 @@ namespace FTS.Turns
         internal void StartCombat()
         {
             OnCombatStart?.Invoke();
-            turnOrderUI.FillUI();
+            //turnOrderUI.FillUI();
             UpdatePhase();
             hasCombatStarted = true;
         }

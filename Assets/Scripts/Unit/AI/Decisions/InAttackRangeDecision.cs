@@ -12,8 +12,11 @@ namespace FTS.Characters
         public override bool Decide(StateMachine controller)
         {
             //Debug.Log("in attack range?");
-            //controller.playerTarget = controller.gridController.GetClosestPLayer
-            controller.newEnemyPosition = controller.gridController.GetNewEnemyPosition(controller.mover, controller.Targeting, controller.enemy);
+            controller.enemy.Target = controller.gridController.GetClosestPlayer(controller.mover);
+            //Debug.Log(controller.Target.name);
+            controller.newEnemyPosition = controller.gridController.GetNewEnemyPosition(controller.enemy, controller.enemy.Target);
+
+            controller.newEnemyPosition.SetDangerIndicator(true);
             //Debug.Log("set new position to move to " + controller.newEnemyPosition);
             return CanReach(controller) && !IsInRange(controller);// && IsAttackNotBlocked(controller); && IsTelegraphPhase(controller);
         }

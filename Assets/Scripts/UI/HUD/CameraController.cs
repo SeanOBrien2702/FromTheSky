@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        newPos = grid.VehicleStart.transform.position;
+        //newPos = grid.VehicleStart.transform.position;
         panLimit = grid.GetLastCellPosition();
     }
 

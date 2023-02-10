@@ -55,7 +55,7 @@ namespace FTS.Grid
         [HideInInspector] public HexCell pathFrom;
         public HexCell NextWithSamePriority { get; set; }
         public int SearchPhase { get; set; }
-        private Character unit;
+        private Unit unit;
         HexUI hexUI;
         Canvas canvas;
         HexMesh hexMesh;
@@ -83,7 +83,7 @@ namespace FTS.Grid
             get { return pathFrom; }   // get method
             set { pathFrom = value; }  // set method
         }
-        public Character Unit  // property
+        public Unit Unit  // property
         {
             get { return unit; }   // get method
             set { unit = value;
@@ -147,7 +147,6 @@ namespace FTS.Grid
             hexMesh = GetComponent<HexMesh>();
             meshRenderer = GetComponent<MeshRenderer>();
             RNGController = GetComponent<RandomCell>();
-            destination= FindObjectOfType<DestinationController>().GetComponent<DestinationController>();
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
         }
         #endregion

@@ -22,7 +22,7 @@ PrefabInstance:
         type: 3}
       propertyPath: currentState
       value: 
-      objectReference: {fileID: 11400000, guid: 9edd547289822424091b27141a4a1346,
+      objectReference: {fileID: 11400000, guid: f0f6b8f1c52418e41b0b96399e134022,
         type: 2}
     - target: {fileID: 4141323274225437201, guid: 014ede208cc899e4ca1367e7c0162a5a,
         type: 3}

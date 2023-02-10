@@ -27,12 +27,12 @@ namespace FTS.Grid
 
         HexCell currentCell;
 
-        Character currentUnit;
+        Unit currentUnit;
         Character selectedUnit;
         Mover mover;
         bool unitsPlaced = false;
 
-        //List<AttackIndicator> attackIndicators = new List<AttackIndicator>();
+        Dictionary<Enemy, AttackIndicator> attackIndicators = new Dictionary<Enemy, AttackIndicator>();
 
         int maxNumPLayers = 0;
 
@@ -392,23 +392,23 @@ namespace FTS.Grid
             return grid.GetDirection(closetPlayer.Location, mover.Location);
         }
 
-        internal Player GetClosestPlayer(Mover mover)
+        internal Unit GetClosestPlayer(Mover mover)
         {
-            Player closetPlayer = null;
+            Unit closetUnit = null;
             int closesDistance = 1000;
             int distanceBuffer = 0;
-            foreach (var item in unitController.GetPlayerUnits())
+            foreach (var item in unitController.GetTargetableUnits())
             {
-                Player buffer = item;
-                distanceBuffer = mover.Location.Location.DistanceTo(item.GetComponent<Mover>().Location.Location);
+                Unit buffer = item;
+                distanceBuffer = mover.Location.Location.DistanceTo(item.Location.Location);
                 if (closesDistance > distanceBuffer)
                 {
-                    closetPlayer = buffer;
+                    closetUnit = buffer;
                     closesDistance = distanceBuffer;
                 }
             }
 
-            return closetPlayer;
+            return closetUnit;
         }
 
         internal void TargetPush(Character target)
@@ -425,9 +425,9 @@ namespace FTS.Grid
             for (HexDirection direction = HexDirection.NE; direction <= HexDirection.NW; direction++)
             {
                 HexCell neighbor = target.GetNeighbor(direction);
-                if (neighbor.Unit)
+                if (neighbor.Unit is Character)
                 {
-                    Push(neighbor.Unit, direction);
+                    Push((Character)neighbor.Unit, direction);
                 }
             }
         }
@@ -435,10 +435,11 @@ namespace FTS.Grid
         internal bool PlayerInRange(Enemy enemy)
         {
             bool playerInRange = false;
-            foreach (var item in unitController.GetPlayerUnits())
+            foreach (Unit item in unitController.GetTargetableUnits())
             {
                 //TODO: clean this up
-                if (enemy.GetComponent<Mover>().Location.Location.DistanceTo(item.GetComponent<Mover>().Location.Location) <= enemy.Range - 1)
+                //if (enemy.GetComponent<Mover>().Location.Location.DistanceTo(item.GetComponent<Mover>().Location.Location) <= enemy.Range - 1)
+                if (enemy.Location.Location.DistanceTo(item.Location.Location) <= enemy.Range - 1)
                 {
                     playerInRange = true;
                     break;
@@ -453,31 +454,31 @@ namespace FTS.Grid
             bool canReach = false;
             mover = enemy.GetComponent<Mover>();
             int distanceToEndpoint = targetCell.Location.DistanceTo(mover.Location.Location);
-            int distanceToTarget = targetCell.Location.DistanceTo(enemy.Target.Location);
+            int distanceToTarget = targetCell.Location.DistanceTo(enemy.Target.Location.Location);
             if (distanceToTarget < enemy.Range && distanceToEndpoint <= mover.MovementLeft)
                 canReach = true;
 
             return canReach;
         }
 
-        internal HexCell GetNewEnemyPosition(Mover AIMover, EnemyTargeting targeting, Enemy enemy) //int range)
+        internal HexCell GetNewEnemyPosition(Enemy enemy, Unit enemyTarget) //int range)
         {
             HexCell target = null;
             int shortestDistance = 1000;
-            List<Player> players = unitController.GetPlayerUnits();
-            foreach (var player in players)
-            {
-                Mover bufferMover = player.GetComponent<Mover>();
-                HexCell buffer = grid.FindPath(bufferMover.Location, AIMover.Location, AIMover.MovementLeft, enemy.Range - 1);
+            //List<Player> players = unitController.GetPlayerUnits();
+            //foreach (var player in players)
+            //{
+                //Mover bufferMover = player.GetComponent<Mover>();
+                HexCell buffer = grid.FindPath(enemyTarget.Location, enemy.Location, enemy.GetComponent<Mover>().MovementLeft, enemy.Range - 1);
 
                 int distance = grid.GetPathDistance();
                 if (distance < shortestDistance)
                 {
                     shortestDistance = distance;
                     target = buffer;
-                    enemy.Target = bufferMover.Location;
+                    //enemy.Target = bufferMover.Location;
                 }
-            }
+            //}
             return target;
         }
 
@@ -487,6 +488,34 @@ namespace FTS.Grid
 
 
             return isAttackNotBlocked;
+        }
+
+        public void TelegraphAttack(Enemy enemy ,HexCell enemyPosition, HexCell target)
+        {
+            //List<HexCell> attack = 
+
+            AttackIndicator indicator = grid.GetLine(enemyPosition, target);
+
+            foreach(HexCell cell in indicator.Line)
+            {
+                cell.SetDangerIndicator(true);
+            }
+            attackIndicators.Add(enemy, indicator);
+        }
+
+        public void Attack(Enemy enemy)
+        {
+            foreach (HexCell cell in attackIndicators[enemy].Line)
+            {
+                cell.SetDangerIndicator(false);
+                if(cell.Unit)
+                {
+                    int damage = enemy.Stats.GetStat(Stat.Damage, enemy.CharacterClass);
+                    Debug.Log("damage " + damage);
+                    cell.Unit.CalculateDamageTaken(damage);
+                }
+            } 
+            attackIndicators.Remove(enemy);
         }
         #endregion
 

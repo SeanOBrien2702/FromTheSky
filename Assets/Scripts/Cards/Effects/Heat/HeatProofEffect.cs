@@ -7,7 +7,7 @@ namespace FTS.Cards
     [CreateAssetMenu(menuName = "Effect/Heat/HeatProof", fileName = "HeatProofEffect.asset")]
     public class HeatProofEffect : Effect
     {
-        public override void ActivateEffect(Character target)
+        public override void ActivateEffect(Unit target)
         {
             target.GetComponent<Heat>().FriendlyFire = false;
         }

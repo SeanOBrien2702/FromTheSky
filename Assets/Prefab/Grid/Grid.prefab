@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 992893204}
   - component: {fileID: 1601976389}
   - component: {fileID: 1867353417224850158}
-  - component: {fileID: 148491710}
+  - component: {fileID: 1867353417224850159}
+  - component: {fileID: 1867353417224850161}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -46,18 +47,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ededc420a3b36c5488b3a1a1f94782ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 17
-  height: 12
+  width: 13
+  height: 13
   cellPrefab: {fileID: 5138482395789491347, guid: 25b172e32351cdf44849376a65efc2ed,
     type: 3}
   startHex: {fileID: 1233889998786750, guid: 78f1277a93dae4847844292d206f6a5f, type: 3}
-  mountainModel: {fileID: 0}
-  grassland: {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
-  water: {fileID: 1829116461306768, guid: cd4f2cbde7d033f45a5d96afb77a69e1, type: 3}
-  mountain: {fileID: 1558740971366590, guid: 1c1d07a4036f32e4db71385ea172b294, type: 3}
+  mountainModel: {fileID: 1082868720469738, guid: 81d0b563b01a9e54da5fb7a2190d0dc1,
+    type: 3}
+  grassland: {fileID: 2100000, guid: 63205fd0b3a0e04498355d67cea6fb23, type: 2}
+  water: {fileID: 2100000, guid: 1aac6dc6087e880419100f314d441d29, type: 2}
+  mountain: {fileID: 2100000, guid: 3ad7d49c376e7b0499a7182bd29e8878, type: 2}
   DestinationUI: {fileID: 6464508352238980620, guid: 789ec8c4a901d7f44a14ddc020d53834,
     type: 3}
   cellLabel: {fileID: 0}
+  minSpawn: 2
+  maxSpawn: 4
+  building: {fileID: 6704699207053019554, guid: 5509c7786732f36408786ad6f8576d90,
+    type: 3}
 --- !u!114 &1601976389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +96,7 @@ MonoBehaviour:
   characterInfo: {fileID: 0}
   vehiclePrefab: {fileID: 3775709426359113830, guid: f61f14558ecc5c04d951708812476863,
     type: 3}
---- !u!114 &148491710
+--- !u!114 &1867353417224850159
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,14 +105,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4335076343168363342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6892cdcd38a412c43b6f1e7d7e6428f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 653738a3634892046806d465e6e10831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinationPrefab: {fileID: 6464508352238980620, guid: 789ec8c4a901d7f44a14ddc020d53834,
-    type: 3}
-  destinationSO:
-  - {fileID: 11400000, guid: 51a4a3f7ed790e2418c500cac4f815dd, type: 2}
-  - {fileID: 11400000, guid: 339858156ef422546824266e8b33becf, type: 2}
-  - {fileID: 11400000, guid: 4ebbe7e4ba3bee641a468ed82a93d505, type: 2}
-  - {fileID: 11400000, guid: 16c67ff765385134cb3800c998f66063, type: 2}
-  - {fileID: 11400000, guid: c9001db9a44198444976406c1b5f7326, type: 2}
+  minSpawn: 2
+  maxSpawn: 3
+  spawnLimit: 2
+--- !u!114 &1867353417224850161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4335076343168363342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd3bacc3addff3419137a34de6f4b3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

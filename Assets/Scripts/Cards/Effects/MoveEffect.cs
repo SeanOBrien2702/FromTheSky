@@ -8,10 +8,11 @@ namespace FTS.Cards
     public class MoveEffect : Effect
     {
         [SerializeField] int distance = 1;
-        public override void ActivateEffect(Character target)
+        public override void ActivateEffect(Unit target)
         {
             //TODO: allow characters to be moved different distances
-            gridController.TargetPush(target);
+            if(target is Character)
+                gridController.TargetPush((Character)target);
         }
 
         public override string GetEffectText()

@@ -6,8 +6,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 #endregion
 
 namespace FTS.Characters
@@ -26,19 +28,23 @@ namespace FTS.Characters
         StateController stateController;
         List<Character> enemyList = new List<Character>();
         List <StateMachine> stateMachines = new List<StateMachine>();
-        List<Character> units = new List<Character>();
+        List<Unit> units = new List<Unit>();
+        List<Unit> targetableUnits = new List<Unit>();
+        
         List<Player> playerList = new List<Player>();
         [Range(1, 10)]
         [SerializeField] int enemiesToSpawn = 5;
 
         [SerializeField] UI.CharacterInfo characterInfo;
 
-        [Header("Unit prefabs")]
-        [SerializeField] Character vehiclePrefab;
+        [Header("Buildings")]
+        [SerializeField] int minSpawn = 2;
+        [SerializeField] int maxSpawn = 4;
+        [SerializeField] Building building;
 
         int numberOfPlayers;
         int numberOfUnits;
-        Character currentUnit;
+        Unit currentUnit;
         Player currentPlayer;
         private int currentIndex = 0;
         private int currentUnitIndex = 0;
@@ -100,17 +106,17 @@ namespace FTS.Characters
             }
             set { currentUnitIndex = value; }
         }
-        public Character NextUnit
+        public Unit NextUnit
         {
             get { currentUnitIndex++; return units[CurrentUnitIndex]; }
         }
 
-        public Character PreviousUnit
+        public Unit PreviousUnit
         {
             get { currentUnitIndex--; return units[CurrentUnitIndex]; }
         }
 
-        public Character CurrentUnit
+        public Unit CurrentUnit
         {
             get { return currentUnit; }
         }
@@ -132,6 +138,7 @@ namespace FTS.Characters
 
         private void Start()
         {
+            SpawnBuildings();
             for (int i = 0; i < enemiesToSpawn; i++)
             {
                 CreateUnitInRandomPosition(GetRandomCharacter());
@@ -181,6 +188,42 @@ namespace FTS.Characters
             CreateUnit(newCharacter, cell);
         }
 
+
+        /*
+        * FUNCTION    : SpawnBuildings
+        * DESCRIPTION : Set position of buildings
+        * PARAMETERS  : void
+        * RETURNS     : void
+        */
+        private void SpawnBuildings()
+        {
+            List<HexCell> spawnLocations = grid.GetRandomPosition(UnityEngine.Random.Range(minSpawn, maxSpawn));
+
+            foreach (HexCell cell in spawnLocations)
+            {
+                if (!cell.Unit)
+                {
+                    CreateUnit(building, cell);
+                    //Building newCharacter = Instantiate(building);
+                    //newCharacter.transform.SetParent(transform, false);
+                    //newCharacter.Location = cell;
+                    //cell.Unit = newCharacter;
+                    ////newCharacter.RollInitive();
+                    //newCharacter.CreateHeathBar();
+
+                    ////++numberOfUnits;
+
+                    //units.Add(newCharacter);
+
+                    
+                    
+                    //targetableUnits.Add(newCharacter);
+                    
+                    ////cell.SetModel(building.gameObject);
+                    ////cell.IsObstacle = true;
+                }
+            }
+        }
         internal bool IsPlayer()
         {
             bool isPlayer = currentUnit is Player ? true : false;
@@ -189,18 +232,27 @@ namespace FTS.Characters
 
         private void UpdateTurnOrder()
         {
-            units = units.OrderByDescending(x => x.Initiative).ToList();
+            //units = units.OrderByDescending(x => x.Initiative).ToList();
         }
         #endregion
 
         #region Public Methods
-        public void CreateUnit(Character character, HexCell cell)
+        public void CreateUnit(Unit character, HexCell cell)
         {
-            Character newCharacter = Instantiate(character);
+            Unit newCharacter = Instantiate(character);
             newCharacter.transform.SetParent(transform, false);
-            newCharacter.GetComponent<Mover>().Location = cell;
+            if(newCharacter is Building)
+            {
+                newCharacter.Location = cell;
+            }
+            else
+            {
+                newCharacter.GetComponent<Mover>().Location = cell;
+            }
+
+            
             cell.Unit = newCharacter;
-            newCharacter.RollInitive();
+            //newCharacter.RollInitive();
             newCharacter.CreateHeathBar();
 
             ++numberOfUnits;
@@ -209,16 +261,23 @@ namespace FTS.Characters
 
             if (newCharacter is Enemy)
             {
-                enemyList.Add(newCharacter);
+                enemyList.Add((Character)newCharacter);
                 stateMachines.Add(newCharacter.GetComponent<StateMachine>());
             }
-            else
+            else if(newCharacter is Player)
             {
+                targetableUnits.Add(newCharacter);
                 playerList.Add(newCharacter as Player);
                 ++numberOfPlayers;
             }
+            else
+            {
+                targetableUnits.Add(newCharacter);
+            }
             UpdateTurnOrder();
         }
+
+
 
 
         public void StartTurn()
@@ -262,32 +321,42 @@ namespace FTS.Characters
             return currentPlayer;
         }
 
-        internal Character GetCurrentUnit()
+        internal Unit GetCurrentUnit()
         {
             return currentUnit;
         }
 
-        public void RemoveUnit(Character character)
+        public void RemoveUnit(Unit unit)
         {
             --numberOfUnits;
-            if (character is Enemy)
+            if (unit is Enemy)
             {
-                OnEnemyKilled?.Invoke(character);
-                stateMachines.Remove(character.GetComponent<StateMachine>());
-                enemyList.Remove(character);
+                OnEnemyKilled?.Invoke((Enemy)unit);
+                stateMachines.Remove(unit.GetComponent<StateMachine>());
+                enemyList.Remove((Enemy)unit);
             }
             else
             {
-                --numberOfPlayers;
-                playerList.Remove(character as Player);
-                cardController.RemoveClass(character.CharacterClass);
-                OnPlayerKilled?.Invoke(character);
-                if (playerList.Count <= 0 && gridController.UnitsPlaced)
+                if (unit is Player)
                 {
-                    SceneManager.LoadScene("MainMenu");
+                    --numberOfPlayers;
+
+                    Player player = (Player)unit;
+                    playerList.Remove(player);
+                    cardController.RemoveClass(player.CharacterClass);
+                    OnPlayerKilled?.Invoke((Player)unit);
+                    if (playerList.Count <= 0 && gridController.UnitsPlaced)
+                    {
+                        SceneManager.LoadScene("MainMenu");
+                    }
                 }
+                //else
+                //{
+
+                //}
+                targetableUnits.Remove(unit);
             }
-            units.Remove(character);
+            units.Remove(unit);
         }
 
         public Player GetPlayerByClass(CharacterClass characterClass)
@@ -305,9 +374,14 @@ namespace FTS.Characters
             return enemyList;
         }
 
-        public List<Character> GetUnits()
+        public List<Unit> GetUnits()
         {
             return units;
+        }
+
+        public List<Unit> GetTargetableUnits()
+        {
+            return targetableUnits;
         }
 
         public CharacterClass[] GetPlayerClasses()

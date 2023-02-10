@@ -13,7 +13,7 @@ namespace FTS.Cards
         [SerializeField] int area = 1;
 
         int damage = 2;
-        public override void ActivateEffect(Character target)
+        public override void ActivateEffect(Unit target)
         {
             for (int i = 0; i < numAttacks; i++)
             {

@@ -8,7 +8,7 @@ namespace FTS.Cards
     public class TriggerHeatEffect : Effect
     {
         [SerializeField] int numTimes;
-        public override void ActivateEffect(Character target)
+        public override void ActivateEffect(Unit target)
         {
             target.GetComponent<Heat>().TriggerHeat(numTimes);
         }

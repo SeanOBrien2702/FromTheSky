@@ -72,7 +72,7 @@ namespace FTS.UI
             return enableUI;
         }
 
-        public void UpdateUI(Character character)
+        public void UpdateUI(Unit character)
         {
             Mover mover = character.GetComponent<Mover>();
             health.text = "Health: " + character.Health + "/" + character.MaxHealth;
@@ -93,7 +93,7 @@ namespace FTS.UI
 
         }
 
-        public void EnableUI(Character character)
+        public void EnableUI(Unit character)
         {
             canvas.enabled = true;
             UpdateUI(character);

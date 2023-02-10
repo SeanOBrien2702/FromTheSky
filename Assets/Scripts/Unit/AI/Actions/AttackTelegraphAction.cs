@@ -9,14 +9,14 @@ namespace FTS.Characters
     {
         public override void Act(StateController controller, StateMachine machine)
         {
-            //TelegraphAttack(machine);
-            //controller.ActionDone = true;
+            TelegraphAttack(machine);
+            controller.ActionDone = true;
         }
 
-        //private void TelegraphAttack(StateMachine machine)
-        //{
-        //    machine.gridController.TelegraphVehicleAttack(machine.mover.Location, machine.AttackRange);
-        //    machine.enemy.IsAttacking = true;
-        //}
+        private void TelegraphAttack(StateMachine machine)
+        {
+            machine.gridController.TelegraphAttack(machine.enemy, machine.mover.Location, machine.enemy.Target.Location);
+            machine.enemy.IsAttacking = true;
+        }
     }
 }

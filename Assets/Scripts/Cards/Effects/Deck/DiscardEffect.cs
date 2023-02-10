@@ -11,7 +11,7 @@ namespace FTS.Cards
         [SerializeField] bool random = false;
 
         //TODO: dont depend on passing a useless parameter when adding discard to a card with a target
-        public override void ActivateEffect(Character characters)
+        public override void ActivateEffect(Unit characters)
         {
             cardController.DiscardCard(cardsDiscarded, random);
         }

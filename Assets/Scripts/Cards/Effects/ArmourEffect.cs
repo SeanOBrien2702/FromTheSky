@@ -9,7 +9,7 @@ namespace FTS.Cards
     {
         [SerializeField] int armourAmount;
 
-        public override void ActivateEffect(Character target)
+        public override void ActivateEffect(Unit target)
         {
             target.Armour += armourAmount;
         }

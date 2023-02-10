@@ -39,6 +39,7 @@ namespace FTS.Characters
                     location.Unit = null;
                 }
                 location = value;
+                character.Location = value;
                 value.Unit = character;
                 transform.localPosition = value.transform.localPosition;
             }
@@ -52,11 +53,15 @@ namespace FTS.Characters
         #endregion
 
         #region MonoBehaviour Callbacks
+        private void Awake()
+        {
+            character = GetComponent<Character>();
+        }
+
         void Start()
         {
             cameraController = FindObjectOfType<CameraController>().GetComponent<CameraController>();
-            stateController = FindObjectOfType<StateController>().GetComponent<StateController>();
-            character = GetComponent<Character>();
+            stateController = FindObjectOfType<StateController>().GetComponent<StateController>();       
             speed = character.Stats.GetStat(Stat.Movement, character.CharacterClass);
             movementLeft = speed;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;

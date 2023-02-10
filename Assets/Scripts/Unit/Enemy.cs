@@ -9,7 +9,7 @@ namespace FTS.Characters
     {
         bool isAttacking = false;
         bool canAttack = true;
-        HexCell target;
+        Unit target;
         [SerializeField] bool isArchAttack = false;
         [SerializeField] GameObject projectileStart;
         [SerializeField] GameObject projectile;
@@ -28,7 +28,7 @@ namespace FTS.Characters
             set { canAttack = value; }  // set method
         }
 
-        public HexCell Target   // property
+        public Unit Target   // property
         {
             get { return target; }   // get method
             set { target = value; }  // set method

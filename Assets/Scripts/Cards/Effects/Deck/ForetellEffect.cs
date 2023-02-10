@@ -16,7 +16,7 @@ namespace FTS.Cards
             foretell = FindObjectOfType<ForetellController>().GetComponent<ForetellController>();
         }
 
-        public override void ActivateEffect(Character target)
+        public override void ActivateEffect(Unit target)
         {
             foretell.Foretell(foretellAmount);
         }

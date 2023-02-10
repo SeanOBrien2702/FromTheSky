@@ -26,7 +26,7 @@ namespace FTS.Cards
             Debug.Log("Base effect class");
         }
 
-        public virtual void ActivateEffect(Character target)
+        public virtual void ActivateEffect(Unit target)
         {
             Debug.Log("Base effect class with target");
         }
@@ -36,7 +36,7 @@ namespace FTS.Cards
             Debug.Log("Base effect class with ground target");
         }
 
-        public virtual void ActivateEffect(Character player, HexCell target)
+        public virtual void ActivateEffect(Unit player, HexCell target)
         {
             Debug.Log("Base effect class with ground target");
         }

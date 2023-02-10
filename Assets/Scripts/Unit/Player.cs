@@ -4,6 +4,7 @@ using FTS.Cards;
 using FTS.Saving;
 using System.Collections.Generic;
 using System;
+using FTS.Turns;
 #endregion
 
 namespace FTS.Characters
@@ -12,6 +13,9 @@ namespace FTS.Characters
     {
         [SerializeField] Color colour;
         bool placed = false;
+
+        int energy = 4;
+        int maxEnergy = 4;
 
         #region Properties
         public Color Colour   // property
@@ -24,6 +28,18 @@ namespace FTS.Characters
         {
             get { return placed; }   // get method
             set { placed = value; }  // set method
+        }
+
+        public int Energy   // property
+        {
+            get { return energy; }   // get method
+            set { energy = value; }  // set method
+        }
+
+        public int MaxEnergy   // property
+        {
+            get { return maxEnergy; }   // get method
+            set { maxEnergy = value; }  // set method
         }
         #endregion
 
@@ -39,6 +55,11 @@ namespace FTS.Characters
         //    Debug.Log("hello?????");
         //    unitUI.UpdateHealth(health, maxHealth);
         //    Debug.Log("hello?");
+        //}
+
+        //private void OnDestroy()
+        //{
+        //    TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
         //}
         #endregion
 
@@ -81,6 +102,13 @@ namespace FTS.Characters
         {
             Health = Convert.ToInt32(state);
             Debug.Log("load health " + Health + " " + CharacterClass);
+        }
+        #endregion
+
+        #region Events
+        protected override void TurnController_OnNewTurn()
+        {
+            energy = maxEnergy;
         }
         #endregion
     }

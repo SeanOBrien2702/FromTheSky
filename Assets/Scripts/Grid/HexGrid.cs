@@ -30,7 +30,6 @@ namespace FTS.Grid
         [SerializeField] Material mountain;
         [SerializeField] GameObject DestinationUI;
         [SerializeField] Text cellLabel;
-        DestinationController destinationController;
 
         int hexSides = 6;
         int heuristicModifier = 1;
@@ -44,8 +43,6 @@ namespace FTS.Grid
         List<HexCell> reachable = new List<HexCell>();
         List<HexCell> currentArea = new List<HexCell>();
 
-        List<HexCell> vehicleDestinations = new List<HexCell>();
-
         HexCell currentPathFrom, currentPathTo, vehicleStart;
         bool currentPathExists;
 
@@ -54,10 +51,7 @@ namespace FTS.Grid
         {
             get { return currentPathExists; }
         }
-        public HexCell VehicleStart
-        {
-            get { return vehicleStart; }
-        }
+
         public int Width   // property
         {
             get { return width; }   // get method
@@ -75,16 +69,8 @@ namespace FTS.Grid
         */
         private void Awake()
         {
-            
-            destinationController = GetComponent<DestinationController>();
             CreateGrid();
             numOfCells = cells.Length;
-            SetVehicleDestinations();
-        }
-
-        void Start()
-        {
-            //hexMesh.Triangulate(cells);
         }
         #endregion
 
@@ -178,29 +164,6 @@ namespace FTS.Grid
         }
 
         /*
-        * FUNCTION    : SetVehicleDestinations()
-        * DESCRIPTION : Set the 2-3 destinations 
-        * PARAMETERS  : void
-        * RETURNS     : void
-        */
-        private void SetVehicleDestinations()
-        {
-            //TODO: set different effects when reaching the end of the level. Currently just draft for testing purposes
-            //int numDestinations = UnityEngine.Random.Range(2, 3);
-            HexCell fromCell = FindGridEdge(true);           
-            vehicleStart = fromCell;
-
-            //for (int i = 0; i < numDestinations; i++)
-            //{
-            //    HexCell toCell = FindGridEdge(false);
-            //    vehicleDestinations.Add(toCell);
-            //}
-
-            //destinationController.SetDestination(vehicleDestinations);
-            destinationController.SetDestination(FindGridEdge(false));
-        }
-
-        /*
         * FUNCTION    : FindGridEdge(bool bottom)
         * DESCRIPTION : Randomly find a hex at the top and bottom of the map for 
         *               the vehicles path. Bottom position is set within a range 
@@ -222,7 +185,7 @@ namespace FTS.Grid
                 randomNumber = UnityEngine.Random.Range(numOfCells - width, numOfCells);
             }
             cell = cells[randomNumber];
-            if (cell.IsObstacle && !vehicleDestinations.Contains(cell))
+            if (cell.IsObstacle)
             {
                 cell = FindGridEdge(bottom);
             }
@@ -270,7 +233,26 @@ namespace FTS.Grid
             return cell;
         }
 
+        public List<HexCell> GetRandomPosition(int numPositions)
+        {
+            List<HexCell> area = GetArea(cells[width*height/2], width/4);
 
+            List<HexCell> randomPostions = new List<HexCell>();
+            HexCell cell;
+            do
+            {
+                int randomNumber = UnityEngine.Random.Range(0, area.Count);           
+                cell = area[randomNumber];
+
+                if (!cell.IsObstacle || !cell.Unit &&
+                    !randomPostions.Contains(cell))
+                {
+                    randomPostions.Add(cell);
+                }
+            }
+            while (randomPostions.Count < numPositions);
+            return randomPostions;
+        }
 
 
         /*
@@ -376,39 +358,36 @@ namespace FTS.Grid
             currentPathFrom.SetHighlight(HighlightIndex.Highlight);
         }
 
-        ///*
-        //* FUNCTION    : GetRangeOffset(HexCell targetCell, int range)
-        //* DESCRIPTION : Find the position enemy units need to reach for them to
-        //*               be within range of attacking
-        //* PARAMETERS  : HexCell targetCell - target enemy is attacking
-        //*               int range - range of the enemies attack
-        //* RETURNS     : HexCell - Position for attacking
-        //*/
-        //private HexCell GetRangeOffset(HexCell fromCell, HexCell targetCell, int range)
-        //{
-        //    List<HexCell> offSets = new List<HexCell>();
+        /*
+        * FUNCTION    : GetRangeOffset(HexCell targetCell, int range)
+        * DESCRIPTION : Find the position enemy units need to reach for them to
+        *               be within range of attacking
+        * PARAMETERS  : HexCell targetCell - target enemy is attacking
+        *               int range - range of the enemies attack
+        * RETURNS     : HexCell - Position for attacking
+        */
+        private HexCell GetRangeOffset(HexCell fromCell, HexCell targetCell, int range)
+        {
+            List<HexCell> offSets = new List<HexCell>();
 
-        //    for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
-        //    {
-        //        HexCell neighbor = targetCell.GetNeighbor(d);
-        //        if (neighbor != null && !neighbor.IsObstacle)
-        //            if (IsCellAvailable(neighbor))
-        //            {
-        //                for (int i = 0; i < range; i++)
-        //                {
-        //                    if (!IsCellAvailable(neighbor))
-        //                        if (neighbor.GetNeighbor(d) == null || neighbor.GetNeighbor(d).IsObstacle || neighbor.GetNeighbor(d).Unit)
-        //                        {
-        //                            break;
-        //                        }
-        //                    neighbor = neighbor.GetNeighbor(d);
-        //                }
-        //                offSets.Add(neighbor);
-        //            }
-        //    }
-
-        //    return ClosesToUnit(fromCell, targetCell, offSets);
-        //}
+            for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
+            {
+                HexCell neighbor = fromCell.GetNeighbor(d);
+                for (int i = 0; i < range; i++)
+                {
+                    if(IsCellAvailable(neighbor))
+                    {
+                        offSets.Add(neighbor);
+                        neighbor = neighbor.GetNeighbor(d);
+                    }
+                    else
+                    {
+                        break;
+                    }    
+                }
+            }
+            return ClosesToUnit(fromCell, targetCell, offSets);
+        }
 
         /*
         * FUNCTION    : GetRangeOffset(HexCell targetCell, int range)
@@ -418,7 +397,7 @@ namespace FTS.Grid
         *               int range - range of the enemies attack
         * RETURNS     : HexCell - Position for attacking
         */
-        private HexCell GetRangeOffset(HexCell playerCell, HexCell enemyCell, int range)
+        private HexCell GetRingOffset(HexCell playerCell, HexCell enemyCell, int range)
         {
             List<HexCell> ring = new List<HexCell>();
 
@@ -454,7 +433,7 @@ namespace FTS.Grid
         {
             return (cell != null
                 && !cell.IsObstacle
-                && cell.Unit != null);
+                && cell.Unit == null);
         }
         #endregion
 
@@ -535,6 +514,7 @@ namespace FTS.Grid
 
             return currentPathTo;
         }
+
         internal bool FindPathAway(HexCell fromCell, HexDirection direction , int movementLeft)
         {
             currentPathFrom = fromCell;
@@ -557,9 +537,8 @@ namespace FTS.Grid
 
         internal void ShowPlacementArea(Vector2Int dimentions)
         {
-            vehicleStart.SetHighlight(HighlightIndex.CantReach);
+            HexCoordinates startPos = cells[width/2].Location;
 
-            HexCoordinates startPos = vehicleStart.Location;
             for (int x = -dimentions.x; x <= dimentions.x; x++)
             {
                 for (int z = 0; z <= dimentions.y; z++)
@@ -628,7 +607,6 @@ namespace FTS.Grid
             }
         }
 
-
         public List<HexCell> GetRing(HexCell fromCell, int radius)
         {
             List<HexCell> ring = new List<HexCell>();
@@ -655,12 +633,9 @@ namespace FTS.Grid
             return ring;
         }
 
-
-
         public List<HexCell> GetArea(HexCell fromCell, int radius)
         {
             List<HexCell> area = new List<HexCell>();
-            fromCell.SetHighlight(HighlightIndex.CantReach);
 
             HexCoordinates startPos = fromCell.Location;
             for (int x = -radius; x <= radius; x++)
@@ -673,7 +648,6 @@ namespace FTS.Grid
                     HexCell cell = GetCell(coordinates);
                     if (cell != null)
                     {
-                        cell.SetHighlight(HighlightIndex.CantReach);
                         area.Add(cell);
                     }
                 }
@@ -681,7 +655,7 @@ namespace FTS.Grid
             return area;
         }
 
-        internal List<HexCell> GetLine(Character player, HexCell target, int length)
+        internal List<HexCell> GetLine(Unit player, HexCell target, int length)
         {
             HexCell buffer = player.GetComponent<Mover>().Location;
             HexDirection direction = GetDirection(buffer, target);
@@ -697,6 +671,25 @@ namespace FTS.Grid
                 buffer = buffer.GetNeighbor(direction);        
             }
             return line;
+        }
+
+        internal AttackIndicator GetLine(HexCell origin, HexCell target)
+        {
+            HexDirection direction = GetDirection(origin, target);
+            List<HexCell> line = new List<HexCell>();
+
+            do
+            {
+                if (origin.GetNeighbor(direction) == null)
+                {
+                    break;
+                }
+                line.Add(origin.GetNeighbor(direction));
+                origin = origin.GetNeighbor(direction);
+            }
+            while (line.Last() != target);
+
+            return new AttackIndicator(line, direction);
         }
 
 
@@ -729,6 +722,7 @@ namespace FTS.Grid
                     cell.SetHighlight(HighlightIndex.Default);
                 }
             }
+            currentArea.Clear();
         }
 
         public List<HexCell> GetPath(int speed)
@@ -762,7 +756,6 @@ namespace FTS.Grid
             return distance;
         }
         
-
         public void ClearPath(int speed)
         {
             if (currentPathExists)
@@ -854,7 +847,6 @@ namespace FTS.Grid
             }
             return direction;
         }
-
         #endregion
     }
 }
