@@ -91,7 +91,7 @@ namespace FTS.Characters
         #endregion
 
         #region Public Methods
-        internal void Travel(List<HexCell> path, Vector3 lookTowards)
+        internal HexCell Travel(List<HexCell> path)//, Vector3 lookTowards)
         {
             movementLeft -= DistanceTraveled(path);
            
@@ -100,22 +100,14 @@ namespace FTS.Characters
                 Location = path[path.Count - 1];
                 pathToTravel = path;
                 StopAllCoroutines();
-                StartCoroutine(TravelPath(lookTowards));
+                StartCoroutine(TravelPath(Vector3.zero));
             }
             else
             {
                 Debug.LogWarning("path not found");
                 stateController.ActionDone = true;
             }
-        }
-
-        public void Travel(List<HexCell> path)
-        {
-            movementLeft -= DistanceTraveled(path);
-            Location = path[path.Count - 1];
-            pathToTravel = path;
-            StopAllCoroutines();
-            StartCoroutine(TravelPath(Vector3.zero));
+            return Location;
         }
 
         internal bool IsValidDestination(HexCell cell)

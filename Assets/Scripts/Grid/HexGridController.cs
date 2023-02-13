@@ -4,6 +4,7 @@ using FTS.Characters;
 using FTS.Turns;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -251,7 +252,7 @@ namespace FTS.Grid
             if (grid.HasPath)
             {
                 grid.ClearReachable();
-                mover.Travel(grid.GetPath(mover.MovementLeft));
+                Travel(mover);                
                 grid.ClearPath(mover.MovementLeft);
                 grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
                 //characterInfo.UpdateUI(unitController.CurrentPlayer);
@@ -291,6 +292,43 @@ namespace FTS.Grid
             }
         }
 
+        private void UpdateIndicators(Enemy character)
+        {
+            foreach (HexCell cell in attackIndicators[character].Line)
+            {
+                cell.SetDangerIndicator(false);
+            }
+            attackIndicators[character].Line = grid.GetLine(character.Location, attackIndicators[character].Direction);
+            foreach (HexCell cell in attackIndicators[character].Line)
+            {
+                cell.SetDangerIndicator(true);
+            }
+        }
+
+        private void UpdateIndicators(HexCell oldLocation, HexCell newLocation)
+        {
+            foreach (var indicator in attackIndicators)
+            {
+                if (indicator.Value.Line.Contains(oldLocation) ||
+                    indicator.Value.Line.Contains(newLocation))
+                {
+                    foreach (HexCell cell in indicator.Value.Line)
+                    {
+                        cell.SetDangerIndicator(false);
+                    }
+                    indicator.Value.Line = grid.GetLine(indicator.Key.Location, indicator.Value.Direction);
+                    foreach (HexCell cell in indicator.Value.Line)
+                    {
+                        cell.SetDangerIndicator(true);
+                    }
+                }          
+            }
+        }
+
+        void Travel(Mover mover)
+        {
+            UpdateIndicators(mover.Location, mover.Travel(grid.GetPath(mover.MovementLeft)));
+        }
         #endregion
 
         #region Public Methods
@@ -352,18 +390,17 @@ namespace FTS.Grid
                     + Mathf.Abs(target.Location.Z - mover.Location.Location.Z)) / 2;
         }
 
-        internal void TravelToTarget(Mover AIMover, int AIRange, HexCell target, Vector3 lookAt)
+        internal void TravelToTarget(Mover AIMover, int AIRange, HexCell target)
         {
             mover = AIMover;
             if (grid.FindPath(AIMover.Location, target, AIMover.MovementLeft, false))
             {
-                mover.Travel(grid.GetPath(mover.MovementLeft), lookAt);
+                Travel(AIMover);
             }
             else
             {
                 Debug.Log("path not found");
             }
-
         }
 
         internal void Flee(Mover AIMover)
@@ -417,6 +454,8 @@ namespace FTS.Grid
             Mover mover = target.GetComponent<Mover>();
             HexDirection direction = grid.GetDirection(attacker, mover.Location);
             Push(target, direction);
+            if(target is Enemy)
+                UpdateIndicators((Enemy)target);
         }
 
 
@@ -437,8 +476,6 @@ namespace FTS.Grid
             bool playerInRange = false;
             foreach (Unit item in unitController.GetTargetableUnits())
             {
-                //TODO: clean this up
-                //if (enemy.GetComponent<Mover>().Location.Location.DistanceTo(item.GetComponent<Mover>().Location.Location) <= enemy.Range - 1)
                 if (enemy.Location.Location.DistanceTo(item.Location.Location) <= enemy.Range - 1)
                 {
                     playerInRange = true;
@@ -465,20 +502,14 @@ namespace FTS.Grid
         {
             HexCell target = null;
             int shortestDistance = 1000;
-            //List<Player> players = unitController.GetPlayerUnits();
-            //foreach (var player in players)
-            //{
-                //Mover bufferMover = player.GetComponent<Mover>();
-                HexCell buffer = grid.FindPath(enemyTarget.Location, enemy.Location, enemy.GetComponent<Mover>().MovementLeft, enemy.Range - 1);
+            HexCell buffer = grid.FindPath(enemyTarget.Location, enemy.Location, enemy.GetComponent<Mover>().MovementLeft, enemy.Range - 1);
 
-                int distance = grid.GetPathDistance();
-                if (distance < shortestDistance)
-                {
-                    shortestDistance = distance;
-                    target = buffer;
-                    //enemy.Target = bufferMover.Location;
-                }
-            //}
+            int distance = grid.GetPathDistance();
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                target = buffer;                    
+            }
             return target;
         }
 
@@ -492,8 +523,6 @@ namespace FTS.Grid
 
         public void TelegraphAttack(Enemy enemy ,HexCell enemyPosition, HexCell target)
         {
-            //List<HexCell> attack = 
-
             AttackIndicator indicator = grid.GetLine(enemyPosition, target);
 
             foreach(HexCell cell in indicator.Line)

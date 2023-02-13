@@ -16,7 +16,7 @@ namespace FTS.Characters
             //Debug.Log(controller.Target.name);
             controller.newEnemyPosition = controller.gridController.GetNewEnemyPosition(controller.enemy, controller.enemy.Target);
 
-            controller.newEnemyPosition.SetDangerIndicator(true);
+            //controller.newEnemyPosition.SetDangerIndicator(true);
             //Debug.Log("set new position to move to " + controller.newEnemyPosition);
             return CanReach(controller) && !IsInRange(controller);// && IsAttackNotBlocked(controller); && IsTelegraphPhase(controller);
         }

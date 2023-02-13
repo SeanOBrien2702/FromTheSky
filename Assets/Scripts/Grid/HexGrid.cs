@@ -375,7 +375,7 @@ namespace FTS.Grid
                 HexCell neighbor = fromCell.GetNeighbor(d);
                 for (int i = 0; i < range; i++)
                 {
-                    if(IsCellAvailable(neighbor))
+                    if(neighbor && neighbor.IsCellAvailable())
                     {
                         offSets.Add(neighbor);
                         neighbor = neighbor.GetNeighbor(d);
@@ -426,14 +426,6 @@ namespace FTS.Grid
                 }
             }
             return target;
-        }
-
-
-        bool IsCellAvailable(HexCell cell)
-        {
-            return (cell != null
-                && !cell.IsObstacle
-                && cell.Unit == null);
         }
         #endregion
 
@@ -673,11 +665,29 @@ namespace FTS.Grid
             return line;
         }
 
+        internal List<HexCell> GetLine(HexCell origin, HexDirection direction)
+        {
+            List<HexCell> line = new List<HexCell>();
+            origin = origin.GetNeighbor(direction);
+
+            while (origin)
+            {
+                if (!origin.IsCellAvailable())
+                {
+                    line.Add(origin);
+                    break;
+                }
+                line.Add(origin);
+                origin = origin.GetNeighbor(direction);
+            }         
+            return line;
+        }
+
         internal AttackIndicator GetLine(HexCell origin, HexCell target)
         {
             HexDirection direction = GetDirection(origin, target);
             List<HexCell> line = new List<HexCell>();
-
+            
             do
             {
                 if (origin.GetNeighbor(direction) == null)

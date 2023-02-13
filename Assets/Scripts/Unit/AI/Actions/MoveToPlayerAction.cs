@@ -14,12 +14,7 @@ namespace FTS.Characters
 
         private void MoveToPlayer(StateMachine controller)
         {
-            //controller.gridController.TravelClosestToPlayer(controller.mover, controller.AttackRange);
-            //controller.newEnemyPosition = controller.gridController.GetNewEnemyPosition(controller.mover, controller.Targeting, controller.enemy);
-            //Debug.Log("enemy position: " + controller.mover.Location.Location);
-            //Debug.Log("move to player target: " + controller.newEnemyPosition.Location);
-            //controller.newEnemyPosition.SetDangerIndicator(true);
-            controller.gridController.TravelToTarget(controller.mover, controller.AttackRange, controller.newEnemyPosition, Vector3.zero);
+            controller.gridController.TravelToTarget(controller.mover, controller.AttackRange, controller.newEnemyPosition);
         }
     }
 }

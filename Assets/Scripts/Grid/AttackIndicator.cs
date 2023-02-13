@@ -13,9 +13,11 @@ namespace FTS.Grid
     {
         private Character attacker;
         private HexDirection direction;
-        public List<HexCell> Line;
+        private List<HexCell> line;
 
         public Character Attacker { get => attacker; set => attacker = value; }
+        public HexDirection Direction { get => direction; set => direction = value; }
+        public List<HexCell> Line { get => line; set => line = value; }
 
         public AttackIndicator(Character attacker, HexDirection direction)
         {

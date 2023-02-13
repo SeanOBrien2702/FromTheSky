@@ -341,6 +341,11 @@ namespace FTS.Grid
             }
             return isFriendly;
         }
+        public bool IsCellAvailable()
+        {
+            return (!isObstacle
+                && Unit == null);
+        }
         #endregion
     }
 }
