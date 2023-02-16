@@ -369,6 +369,7 @@ namespace FTS.Grid
         private HexCell GetRangeOffset(HexCell fromCell, HexCell targetCell, int range)
         {
             List<HexCell> offSets = new List<HexCell>();
+            offSets.Add(targetCell);
 
             for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
             {
@@ -386,7 +387,7 @@ namespace FTS.Grid
                     }    
                 }
             }
-            return ClosesToUnit(fromCell, targetCell, offSets);
+            return ClosesToUnit(targetCell, offSets);
         }
 
         /*
@@ -403,10 +404,10 @@ namespace FTS.Grid
 
             ring = GetRing(playerCell, range);
 
-            return ClosesToUnit(playerCell, enemyCell, ring);
+            return ClosesToUnit(enemyCell, ring);
         }
 
-        private HexCell ClosesToUnit(HexCell playerCell, HexCell enemyCell, List<HexCell> offSets)
+        private HexCell ClosesToUnit(HexCell enemyCell, List<HexCell> offSets)
         {
             HexCell target = null;
             List<HexCell> shortestPath = new List<HexCell>();
@@ -701,7 +702,6 @@ namespace FTS.Grid
 
             return new AttackIndicator(line, direction);
         }
-
 
         public void ShowArea(HexCell fromCell, int range, HighlightIndex highlight)
         {

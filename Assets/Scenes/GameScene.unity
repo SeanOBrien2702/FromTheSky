@@ -2419,18 +2419,43 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}
+      propertyPath: maxSpawn
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
+        type: 3}
+      propertyPath: minSpawn
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
+        type: 3}
       propertyPath: characterInfo
       value: 
       objectReference: {fileID: 1046113878}
     - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}
       propertyPath: enemiesToSpawn
-      value: 1
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867353417224850159, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
+        type: 3}
+      propertyPath: maxSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867353417224850159, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
+        type: 3}
+      propertyPath: minSpawn
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1867353417224850159, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867353417224850159, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
+        type: 3}
+      propertyPath: spawnLimit
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4335076343168363342, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}

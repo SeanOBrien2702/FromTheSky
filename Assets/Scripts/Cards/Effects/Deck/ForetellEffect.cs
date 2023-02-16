@@ -9,12 +9,6 @@ namespace FTS.Cards
     {
         [Range(2, 5)]
         [SerializeField] int foretellAmount;
-        ForetellController foretell;
-
-        private void Awake()
-        {
-            foretell = FindObjectOfType<ForetellController>().GetComponent<ForetellController>();
-        }
 
         public override void ActivateEffect(Unit target)
         {

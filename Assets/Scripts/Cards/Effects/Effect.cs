@@ -12,6 +12,8 @@ namespace FTS.Cards
         protected HexGrid grid;
         protected HexGridController gridController;
         protected CardController cardController;
+        protected ForetellController foretell;
+        protected UnitController unitController;
         [HideInInspector] public bool effectFoldout;
 
         public void Initialize()
@@ -19,6 +21,8 @@ namespace FTS.Cards
             grid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
             gridController = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
+            unitController= FindObjectOfType<UnitController>().GetComponent<UnitController>();
+            foretell = FindObjectOfType<ForetellController>().GetComponent<ForetellController>();
         }
 
         public virtual void ActivateEffect()

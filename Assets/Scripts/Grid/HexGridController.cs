@@ -532,6 +532,15 @@ namespace FTS.Grid
             attackIndicators.Add(enemy, indicator);
         }
 
+        internal void RemoveIndicator(Enemy unit)
+        {
+            foreach (HexCell cell in attackIndicators[unit].Line)
+            {
+                cell.SetDangerIndicator(false);
+            }
+            attackIndicators.Remove(unit);
+        }
+
         public void Attack(Enemy enemy)
         {
             foreach (HexCell cell in attackIndicators[enemy].Line)

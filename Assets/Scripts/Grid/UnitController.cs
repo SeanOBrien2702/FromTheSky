@@ -334,6 +334,7 @@ namespace FTS.Characters
                 OnEnemyKilled?.Invoke((Enemy)unit);
                 stateMachines.Remove(unit.GetComponent<StateMachine>());
                 enemyList.Remove((Enemy)unit);
+                gridController.RemoveIndicator((Enemy)unit);
             }
             else
             {

@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
-  m_Name: RailGun
+  m_Name: Create Pawn
   m_EditorClassIdentifier: 
-  cardName: RailGun
+  cardName: Create Pawn
   flavourText: 
   image: {fileID: 0}
-  border: {fileID: 21300000, guid: 11a18cf618c35ff4aab936afaafa86f1, type: 3}
+  border: {fileID: 21300000, guid: cec5e44fbe4eb6f4689ac8a93fc8f14b, type: 3}
   cost: 1
   range: 2
   area: 1
   cardRarity: 1
   characterClass: 1
-  type: 0
-  targeting: 3
-  isAtomize: 0
+  type: 1
+  targeting: 2
+  isAtomize: 1
   isTemporary: 0
   isInherent: 0
   onDrawEffects: []
   effects:
-  - {fileID: 11400000, guid: c6bcba5ef14f23a4d8214fe2428aa3a3, type: 2}
+  - {fileID: 11400000, guid: ac38b29afad835544a31490a7468a9d3, type: 2}
   onDiscardEffects: []

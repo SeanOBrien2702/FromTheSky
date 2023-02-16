@@ -48,14 +48,10 @@ namespace FTS.Characters
             get { return targeting; }
         }
 
-        
+
         #endregion
 
         #region MonoBehaviour Callbacks
-        //private void Start()
-        //{
-        //    Debug.Log("enemy placed");
-        //}
         #endregion
 
         #region Public Methods
