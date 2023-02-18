@@ -15,7 +15,7 @@ namespace FTS.Characters
         bool placed = false;
 
         int energy = 4;
-        int maxEnergy = 4;
+        [SerializeField] int maxEnergy = 4;
 
         #region Properties
         public Color Colour   // property
@@ -44,31 +44,14 @@ namespace FTS.Characters
         #endregion
 
         #region MonoBehaviour Callbacks
-        //void Start()
-        //{
-        //    placed = false;
-        //    Debug.Log("player placed");
-        //}
-        //private void Start()
-        //{
-        //    Debug.Log("player placed in player script");
-        //    Debug.Log("hello?????");
-        //    unitUI.UpdateHealth(health, maxHealth);
-        //    Debug.Log("hello?");
-        //}
-
-        //private void OnDestroy()
-        //{
-        //    TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
-        //}
+        protected override void Start()
+        {
+            base.Start();
+            energy = maxEnergy;
+        }
         #endregion
 
         #region Public Methods
-        internal override void StartRound()
-        {
-            //Debug.Log("player turn");
-        }
-
         internal int GetCardRange(CardType type)
         {
             int range = 0;

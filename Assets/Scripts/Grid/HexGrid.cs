@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEditor;
+using UnityEngine.SocialPlatforms;
 #endregion
 
 namespace FTS.Grid
@@ -723,6 +725,30 @@ namespace FTS.Grid
             }
         }
 
+        internal void ShowLinesProjectile(HexCell location)
+        {
+            for (HexDirection direction = HexDirection.NE; direction <= HexDirection.NW; direction++)
+            {
+                foreach(var cell in GetLine(location, direction))
+                {
+                    cell.SetHighlight(HighlightIndex.Attack);
+                    currentArea.Add(cell);
+                }
+            }
+        }
+        //internal void ShowLinesPericing(HexCell location, int length)
+        //{
+        //    //HexDirection direction = GetDirection(location, target);
+        //    Debug.Log("direction " + direction);
+
+
+        //    foreach (var cell in GetLine(location, direction))
+        //    {
+        //        cell.SetHighlight(HighlightIndex.Attack);
+        //        currentArea.Add(cell);
+        //    }
+        //}
+
         public void ClearArea()
         {
             if (currentArea != null)
@@ -855,6 +881,8 @@ namespace FTS.Grid
                     direction = HexDirection.W;
                 }
             }
+
+            Debug.Log(y + " " + x + " " + z);
             return direction;
         }
         #endregion

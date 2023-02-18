@@ -29,7 +29,7 @@ namespace FTS.Grid
         HexCell currentCell;
 
         Unit currentUnit;
-        Character selectedUnit;
+        //Character selectedUnit;
         Mover mover;
         bool unitsPlaced = false;
 
@@ -53,6 +53,7 @@ namespace FTS.Grid
             unitController = GetComponent<UnitController>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
+            UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
@@ -73,6 +74,7 @@ namespace FTS.Grid
 
         private void OnDestroy()
         {
+            UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
@@ -194,14 +196,14 @@ namespace FTS.Grid
                 characterInfo.EnableUI(unitController.GetCurrentUnit());
 
             }
-            //if (currentCell.Unit && currentUnit != currentCell.Unit)
-            //{
-            //    Debug.Log("Select");
-            //    if (currentCell && currentCell.Unit)
-            //    {
-            //        unitController.SetCurrentUnit(currentCell.Unit as Player);
-            //    }
-            //}
+            if (currentCell.Unit && currentUnit != currentCell.Unit)
+            {
+                Debug.Log("Select");
+                if (currentCell && currentCell.Unit)
+                {
+                    unitController.SetCurrentUnit(currentCell.Unit as Player);
+                }
+            }
             //else
             //{
             //    unitController.SetCurrentUnit(null);
@@ -238,10 +240,20 @@ namespace FTS.Grid
             {
                 grid.ClearReachable();
                 grid.ClearArea();
-                Player player = unitController.GetPlayerByClass(cardController.CardSelected.CharacterClass);
-                grid.ShowArea(player.GetComponent<Mover>().Location, cardController.CardSelected.Range, HighlightIndex.Attack);
-                if (cardController.CardSelected.Area > 1)
+                //Player player = unitController.GetPlayerByClass(cardController.CardSelected.CharacterClass);
+                
+                if(cardController.CardSelected.Targeting == CardTargeting.FromPlayer)
                 {
+                    grid.ShowLinesProjectile(currentUnit.Location);
+                }
+                else
+                {
+                    grid.ShowArea(currentUnit.Location, cardController.CardSelected.Range, HighlightIndex.Attack);
+                }
+                
+                
+                if (cardController.CardSelected.Area > 1)
+                { 
                     grid.ShowArea(currentCell, cardController.CardSelected.Area, HighlightIndex.CanReach);
                 }
             }
@@ -336,7 +348,7 @@ namespace FTS.Grid
         {
             DeselectUnit();
 
-            currentUnit = unitController.GetCurrentUnit();
+            currentUnit = unitController.GetCurrentPlayer();
             mover = currentUnit.GetComponent<Mover>();
             StartCoroutine(cameraController.MoveToPosition(currentUnit.transform.localPosition));
             grid.ClearReachable();
@@ -558,6 +570,12 @@ namespace FTS.Grid
         #endregion
 
         #region Events
+        private void UnitController_OnPlayerSelected()
+        {
+            currentUnit = unitController.CurrentPlayer;
+            SelectNextUnit();
+        }
+
         private void TurnController_OnCombatStart()
         {
             grid.ClearArea();

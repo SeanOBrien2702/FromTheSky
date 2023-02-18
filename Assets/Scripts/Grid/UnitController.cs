@@ -204,23 +204,6 @@ namespace FTS.Characters
                 if (!cell.Unit)
                 {
                     CreateUnit(building, cell);
-                    //Building newCharacter = Instantiate(building);
-                    //newCharacter.transform.SetParent(transform, false);
-                    //newCharacter.Location = cell;
-                    //cell.Unit = newCharacter;
-                    ////newCharacter.RollInitive();
-                    //newCharacter.CreateHeathBar();
-
-                    ////++numberOfUnits;
-
-                    //units.Add(newCharacter);
-
-                    
-                    
-                    //targetableUnits.Add(newCharacter);
-                    
-                    ////cell.SetModel(building.gameObject);
-                    ////cell.IsObstacle = true;
                 }
             }
         }

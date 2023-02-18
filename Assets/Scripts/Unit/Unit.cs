@@ -13,11 +13,8 @@ using static UnityEditor.FilePathAttribute;
 
 namespace FTS.Characters
 {
-    public abstract class Unit : MonoBehaviour//, IComparable
+    public abstract class Unit : MonoBehaviour
     {
-        //[SerializeField] Animator animator;
-        //[SerializeField] CharacterClass characterClass;
-        //[SerializeField] CharacterStats stats;
         [SerializeField] protected UnitUI unitUI;
         [SerializeField] Sprite portrait;
         [SerializeField] GameObject barrier;
@@ -26,14 +23,8 @@ namespace FTS.Characters
         public MMFeedbacks damageFeedback;
 
         string fullName;
-        //bool busy = false;
-
         int health = 0;
         protected int maxHealth = 0;
-        //int initiative = 0;
-        //int maxInitiative = 20;
-        //int energy = 4;
-        //int maxEnergy = 4;
         int armour = 0;
         bool hasBarrier = false;
         protected HexCell location;
@@ -44,43 +35,11 @@ namespace FTS.Characters
             get { return fullName; }   // get method
             set { fullName = value; }  // set method
         }
-        //public int Initiative   // property
-        //{
-        //    get { return initiative; }   // get method
-        //    set { initiative = value; }  // set method
-        //}
-        //public bool Busy   // property
-        //{
-        //    get { return busy; }   // get method
-        //    set { busy = value; }  // set method
-        //}
-
-        //public int Energy   // property
-        //{
-        //    get { return energy; }   // get method
-        //    set { energy = value; }  // set method
-        //}
-
-        //public int MaxEnergy   // property
-        //{
-        //    get { return maxEnergy; }   // get method
-        //    set { maxEnergy = value; }  // set method
-        //}
-
-        //public CharacterStats Stats  // property
-        //{
-        //    get { return stats; }   // get method
-        //}
 
         public Sprite Portrait  // property
         {
             get { return portrait; }   // get method
         }
-
-        //public CharacterClass CharacterClass  // property
-        //{
-        //    get { return characterClass; }   // get method
-        //}
 
         public int Health   // property
         {
@@ -124,13 +83,7 @@ namespace FTS.Characters
             get { return location; }
             set
             {
-                //if (location)
-                //{
-                //    location.Unit = null;
-                //}
                 location = value;
-                //value.Unit = this;
-                //transform.localPosition = value.transform.localPosition;
             }
         }
 
@@ -139,21 +92,9 @@ namespace FTS.Characters
         #region MonoBehaviour Callbacks
         protected virtual void Awake()
         {
-            Debug.Log("start unit");
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
-            
-            //health = maxHealth = stats.GetStat(Stat.Health, characterClass);
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }
-
-        //private void Start()
-        //{
-        //    fullName = characterClass.ToString();
-        //    //Debug.Log("character placed");
-        //    //unitUI.UpdateHealth(health, maxHealth);
-        //    //Debug.Log("hello?");
-        //    //MaxHealth = health;
-        //}
 
         private void OnDestroy()
         {
@@ -206,21 +147,12 @@ namespace FTS.Characters
                 UpdateBarrier(false);
             }
         }
-        //public int GetStat(Stat stat)
-        //{
-        //    return Stats.GetStat(stat, this.characterClass);
-        //}
 
         public void Stun()
         {
             Debug.Log(name + " stunned");
             GetComponent<Mover>().CanMove = false;
         }
-
-        //internal void RollInitive()
-        //{
-        //    initiative = UnityEngine.Random.Range(0, maxInitiative) + stats.GetStat(Stat.Movement, characterClass);
-        //}
 
         public virtual void Die()
         {
@@ -235,11 +167,6 @@ namespace FTS.Characters
         {
             //Debug.Log("Character turn");
         }
-
-        //public int CompareTo(object obj)
-        //{
-        //    return Initiative.CompareTo(obj);
-        //}
 
         public virtual Sprite GetBorder()
         {
