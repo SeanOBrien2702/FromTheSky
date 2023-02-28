@@ -1,16 +1,17 @@
-﻿using UnityEngine;
+﻿using FTS.Characters;
+using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    //RunController heartController;
+    Building building;
+    int currentHealth;
+    int health2;
 
-    }
-
-    // Update is called once per frame
-    void Update()
+    public int Health2
     {
+        get { return health2; }
+        //set
 
     }
 }

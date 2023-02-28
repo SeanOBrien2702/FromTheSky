@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 #endregion
 
 public class UIController : MonoBehaviour
@@ -65,7 +66,8 @@ public class UIController : MonoBehaviour
 
     public void GameOver()
     {
-        EnableHUD("GameOverHUD");
+        //EnableHUD("GameOverHUD");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Win()
@@ -86,6 +88,11 @@ public class UIController : MonoBehaviour
     public void Settings()
     {
         EnableHUD("SettingsHUD");
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
     #endregion
 }

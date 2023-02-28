@@ -103,7 +103,7 @@ namespace FTS.Characters
         #endregion
 
         #region Private Methods
-        private void TakeDamage()
+        protected virtual void TakeDamage()
         {
             unitUI.UpdateHealth(health);
             if (health <= 0)
@@ -121,7 +121,7 @@ namespace FTS.Characters
         #endregion
 
         #region Public Methods
-        public void CalculateDamageTaken(int damage)
+        public virtual void CalculateDamageTaken(int damage)
         {
             Debug.Log("incoming dmaage " + damage +" "+ health + " " + Health);
             damageFeedback?.PlayFeedbacks(transform.position, damage); //damage text animation
@@ -141,6 +141,7 @@ namespace FTS.Characters
                     }
                 }
                 Health -= damage;
+                unitController.DamageTaken(this, damage);
             }
             else
             {

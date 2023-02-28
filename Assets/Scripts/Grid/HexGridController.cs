@@ -347,7 +347,7 @@ namespace FTS.Grid
         public void SelectNextUnit()
         {
             DeselectUnit();
-
+            Debug.Log("hello?");
             currentUnit = unitController.GetCurrentPlayer();
             mover = currentUnit.GetComponent<Mover>();
             StartCoroutine(cameraController.MoveToPosition(currentUnit.transform.localPosition));

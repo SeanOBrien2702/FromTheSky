@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
     private Camera cam;
     private Vector3 dir;
     private Vector3 newPos;
-    private Vector3 startPos = new Vector3(100, 0 , 75);
+    private Vector3 startPos = new Vector3(110, 0 , 72);
 
     #region Properties
     public bool IsEnabled   // property
@@ -44,6 +44,8 @@ public class CameraController : MonoBehaviour
     {
         cam = Camera.main;
         //newPos = grid.VehicleStart.transform.position;
+        Debug.Log("position " + transform.position);
+        newPos = startPos;
         panLimit = grid.GetLastCellPosition();
     }
 
@@ -99,6 +101,7 @@ public class CameraController : MonoBehaviour
 
     private void Move()
     {
+        Debug.Log("position " + transform.position);
         float xInput = Input.GetAxisRaw("Horizontal");
         float zInput = Input.GetAxisRaw("Vertical");
         if (Input.GetKey(KeyCode.LeftShift))

@@ -18,6 +18,9 @@ namespace FTS.Characters
     {
         public static event Action<Character> OnEnemyKilled = delegate { };
         public static event Action<Character> OnPlayerKilled = delegate { };
+        public static event Action<Unit, int> OnDamageTaken = delegate { };
+        public static event System.Action OnPlayerLost = delegate { };
+        public static event System.Action OnEnemyLost = delegate { };
 
         HexGrid grid;
         HexGridController gridController;
@@ -161,6 +164,16 @@ namespace FTS.Characters
                     timeSinceChangingUnits = 0;
                 }
                 timeSinceChangingUnits += Time.deltaTime;
+            }
+
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                OnEnemyLost?.Invoke();
+            }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                OnPlayerLost?.Invoke();
             }
         }
 
@@ -318,6 +331,11 @@ namespace FTS.Characters
                 stateMachines.Remove(unit.GetComponent<StateMachine>());
                 enemyList.Remove((Enemy)unit);
                 gridController.RemoveIndicator((Enemy)unit);
+                if (enemyList.Count <= 0)
+                {
+                    SceneManager.LoadScene("Draft");
+                }
+
             }
             else
             {
@@ -382,6 +400,11 @@ namespace FTS.Characters
         internal List<StateMachine> GetStateMachines()
         {
             return stateMachines;
+        }
+
+        internal void DamageTaken(Unit unit, int damage)
+        {
+            OnDamageTaken?.Invoke(unit, damage);
         }
         #endregion
 
