@@ -257,6 +257,7 @@ namespace FTS.Characters
 
             if (newCharacter is Enemy)
             {
+                newCharacter.IsFriendly = false;
                 enemyList.Add((Character)newCharacter);
                 stateMachines.Add(newCharacter.GetComponent<StateMachine>());
             }

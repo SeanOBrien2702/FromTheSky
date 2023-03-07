@@ -19,15 +19,15 @@ namespace FTS.Grid
         public HexDirection Direction { get => direction; set => direction = value; }
         public List<HexCell> Line { get => line; set => line = value; }
 
-        public AttackIndicator(Character attacker, HexDirection direction)
-        {
-            this.attacker = attacker;
-            this.direction = direction;
-        }
-
         public AttackIndicator(List<HexCell> line, HexDirection direction)
         {
             this.Line = line;
+            this.direction = direction;
+        }
+
+        public AttackIndicator(HexCell position, HexDirection direction)
+        {
+            this.Line = new List<HexCell>() { position };
             this.direction = direction;
         }
     }

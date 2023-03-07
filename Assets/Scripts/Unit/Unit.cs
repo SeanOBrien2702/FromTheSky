@@ -27,6 +27,7 @@ namespace FTS.Characters
         protected int maxHealth = 0;
         int armour = 0;
         bool hasBarrier = false;
+        bool isFriendly = true;
         protected HexCell location;
 
         #region Properties
@@ -78,6 +79,13 @@ namespace FTS.Characters
                 UpdateBarrier(value);
             }  // set method
         }
+
+        public bool IsFriendly
+        {
+            get { return isFriendly; }
+            set { isFriendly = value; }
+        }
+
         public virtual HexCell Location
         {
             get { return location; }

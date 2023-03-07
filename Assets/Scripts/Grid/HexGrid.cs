@@ -140,15 +140,27 @@ namespace FTS.Grid
             cell.transform.localPosition = position;
             cell.Location = HexCoordinates.FromOffsetCoordinates(x, z);
 
+
+            if(x == 0 || x == width - 1)
+            {
+                cell.IsEdge = true;
+            }
+            if (z == 0 || z == height - 1)
+            {
+                cell.IsEdge = true;
+            }
+
             if (x > 0)
             {
                 cell.SetNeighbor(HexDirection.W, cells[i - 1]);
+                
             }
             if (z > 0)
             {
                 if ((z & 1) == 0)
                 {
                     cell.SetNeighbor(HexDirection.SE, cells[i - width]);
+                    
                     if (x > 0)
                     {
                         cell.SetNeighbor(HexDirection.SW, cells[i - width - 1]);
@@ -157,6 +169,7 @@ namespace FTS.Grid
                 else
                 {
                     cell.SetNeighbor(HexDirection.SW, cells[i - width]);
+                    
                     if (x < width - 1)
                     {
                         cell.SetNeighbor(HexDirection.SE, cells[i - width + 1]);
@@ -255,7 +268,6 @@ namespace FTS.Grid
             while (randomPostions.Count < numPositions);
             return randomPostions;
         }
-
 
         /*
         * FUNCTION    : Search(HexCell fromCell, HexCell toCell)
@@ -510,6 +522,47 @@ namespace FTS.Grid
             return currentPathTo;
         }
 
+        public List<HexCell> GetReachable(HexCell cell, int speed)
+        {
+            List<HexCell> newReachable = new List<HexCell>();
+            for (int i = 0; i < cells.Length; i++)
+            {
+                cells[i].Distance = int.MaxValue;
+            }
+
+            Queue<HexCell> frontier = new Queue<HexCell>();
+            cell.Distance = 0;
+            frontier.Enqueue(cell);
+            while (frontier.Count > 0)
+            {
+                HexCell current = frontier.Dequeue();
+                for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
+                {
+
+                    HexCell neighbor = current.GetNeighbor(d);
+
+                    if (neighbor != null)
+                    {
+                        if (!neighbor.IsCellAvailable())
+                        {
+                            continue;
+                        }
+                        if (current.Distance < neighbor.Distance)
+                        {
+                            neighbor.Distance = current.Distance + neighbor.MovementCost;
+
+                            if (neighbor.Distance <= speed && current.Distance < neighbor.Distance)
+                            {
+                                frontier.Enqueue(neighbor);
+                                newReachable.Add(neighbor);
+                            }
+                        }
+                    }
+                }
+            }
+            return newReachable;
+        }
+
         internal bool FindPathAway(HexCell fromCell, HexDirection direction , int movementLeft)
         {
             currentPathFrom = fromCell;
@@ -553,41 +606,10 @@ namespace FTS.Grid
 
         internal void ShowReachableHexes(HexCell cell, int speed)
         {
-            for (int i = 0; i < cells.Length; i++)
+            reachable = GetReachable(cell, speed);
+            foreach (HexCell hexCell in reachable)
             {
-                cells[i].Distance = int.MaxValue;
-            }
-
-            Queue<HexCell> frontier = new Queue<HexCell>();
-            cell.Distance = 0;
-            frontier.Enqueue(cell);
-            while (frontier.Count > 0)
-            {
-                HexCell current = frontier.Dequeue();
-                for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
-                {
-
-                    HexCell neighbor = current.GetNeighbor(d);
-
-                    if (neighbor != null)
-                    {
-                        if (neighbor.IsObstacle)
-                        {
-                            continue;
-                        }
-                        if (current.Distance < neighbor.Distance)
-                        {
-                            neighbor.Distance = current.Distance + neighbor.MovementCost;
-
-                            if (neighbor.Distance <= speed && current.Distance < neighbor.Distance)
-                            {
-                                frontier.Enqueue(neighbor);
-                                neighbor.SetHighlight(HighlightIndex.Highlight);
-                                reachable.Add(neighbor);
-                            }
-                        }
-                    }
-                }
+                hexCell.SetHighlight(HighlightIndex.Highlight);
             }
         }
 
@@ -668,42 +690,45 @@ namespace FTS.Grid
             return line;
         }
 
-        internal List<HexCell> GetLine(HexCell origin, HexDirection direction)
+        internal List<HexCell> GetLine(HexCell origin, HexDirection direction, int length, bool isPiercing)
         {
+            HexCell buffer = origin.GetNeighbor(direction);
             List<HexCell> line = new List<HexCell>();
-            origin = origin.GetNeighbor(direction);
 
-            while (origin)
+            for (int i = 0; i < length; i++)
             {
-                if (!origin.IsCellAvailable())
+                if (buffer == null)
                 {
-                    line.Add(origin);
                     break;
                 }
-                line.Add(origin);
-                origin = origin.GetNeighbor(direction);
-            }         
+                line.Add(buffer);
+                if (buffer.Unit && !isPiercing)
+                {
+                    break;
+                }              
+                buffer = buffer.GetNeighbor(direction);
+            }   
             return line;
         }
 
-        internal AttackIndicator GetLine(HexCell origin, HexCell target)
-        {
-            HexDirection direction = GetDirection(origin, target);
-            List<HexCell> line = new List<HexCell>();
+        //internal AttackIndicator GetLine(HexCell origin, HexCell target)
+        //{
+        //    HexDirection direction = GetDirection(origin, target);
+        //    List<HexCell> line = new List<HexCell>();
             
-            do
-            {
-                if (origin.GetNeighbor(direction) == null)
-                {
-                    break;
-                }
-                line.Add(origin.GetNeighbor(direction));
-                origin = origin.GetNeighbor(direction);
-            }
-            while (line.Last() != target);
+        //    do
+        //    {
+        //        if (origin.GetNeighbor(direction) == null)
+        //        {
+        //            break;
+        //        }
+        //        line.Add(origin.GetNeighbor(direction));
+        //        origin = origin.GetNeighbor(direction);
+        //    }
+        //    while (line.Last() != target);
 
-            return new AttackIndicator(line, direction);
-        }
+        //    return new AttackIndicator(line, direction);
+        //}
 
         public void ShowArea(HexCell fromCell, int range, HighlightIndex highlight)
         {
@@ -729,7 +754,7 @@ namespace FTS.Grid
         {
             for (HexDirection direction = HexDirection.NE; direction <= HexDirection.NW; direction++)
             {
-                foreach(var cell in GetLine(location, direction))
+                foreach(var cell in GetLine(location, direction, 3 , false))
                 {
                     cell.SetHighlight(HighlightIndex.Attack);
                     currentArea.Add(cell);
@@ -844,7 +869,7 @@ namespace FTS.Grid
 
         public HexDirection GetDirection(HexCell pivot, HexCell target)
         {
-            HexDirection direction = HexDirection.NW;
+            HexDirection direction = HexDirection.None;
             int x = pivot.Location.X - target.Location.X;
             int y = pivot.Location.Y - target.Location.Y;
             int z = pivot.Location.Z - target.Location.Z;
@@ -882,7 +907,7 @@ namespace FTS.Grid
                 }
             }
 
-            Debug.Log(y + " " + x + " " + z);
+            //Debug.Log(y + " " + x + " " + z);
             return direction;
         }
         #endregion

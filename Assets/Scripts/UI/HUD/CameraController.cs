@@ -43,8 +43,6 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        //newPos = grid.VehicleStart.transform.position;
-        Debug.Log("position " + transform.position);
         newPos = startPos;
         panLimit = grid.GetLastCellPosition();
     }
@@ -101,7 +99,6 @@ public class CameraController : MonoBehaviour
 
     private void Move()
     {
-        Debug.Log("position " + transform.position);
         float xInput = Input.GetAxisRaw("Horizontal");
         float zInput = Input.GetAxisRaw("Vertical");
         if (Input.GetKey(KeyCode.LeftShift))

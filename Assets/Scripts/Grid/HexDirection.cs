@@ -2,7 +2,7 @@
 {
     public enum HexDirection
     {
-        NE, E, SE, SW, W, NW
+        NE, E, SE, SW, W, NW, None
     }
 
     public static class HexDirectionExtensions

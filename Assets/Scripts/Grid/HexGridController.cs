@@ -310,7 +310,7 @@ namespace FTS.Grid
             {
                 cell.SetDangerIndicator(false);
             }
-            attackIndicators[character].Line = grid.GetLine(character.Location, attackIndicators[character].Direction);
+            attackIndicators[character].Line = grid.GetLine(character.Location, attackIndicators[character].Direction, character.Range, character.IsPiercieing());
             foreach (HexCell cell in attackIndicators[character].Line)
             {
                 cell.SetDangerIndicator(true);
@@ -328,7 +328,7 @@ namespace FTS.Grid
                     {
                         cell.SetDangerIndicator(false);
                     }
-                    indicator.Value.Line = grid.GetLine(indicator.Key.Location, indicator.Value.Direction);
+                    indicator.Value.Line = grid.GetLine(indicator.Key.Location, indicator.Value.Direction, indicator.Key.Range, indicator.Key.IsPiercieing());
                     foreach (HexCell cell in indicator.Value.Line)
                     {
                         cell.SetDangerIndicator(true);
@@ -441,6 +441,21 @@ namespace FTS.Grid
             return grid.GetDirection(closetPlayer.Location, mover.Location);
         }
 
+        internal HexDirection GetValidDirection(HexCell location)
+        {
+            HexDirection direction = HexDirection.None;
+            foreach (var item in unitController.GetTargetableUnits())
+            {
+                direction = grid.GetDirection(location, item.Location);
+                if(direction != HexDirection.None)
+                {
+                    break;
+                }
+                 
+            }
+            return direction;
+        }
+
         internal Unit GetClosestPlayer(Mover mover)
         {
             Unit closetUnit = null;
@@ -503,8 +518,7 @@ namespace FTS.Grid
             bool canReach = false;
             mover = enemy.GetComponent<Mover>();
             int distanceToEndpoint = targetCell.Location.DistanceTo(mover.Location.Location);
-            int distanceToTarget = targetCell.Location.DistanceTo(enemy.Target.Location.Location);
-            if (distanceToTarget < enemy.Range && distanceToEndpoint <= mover.MovementLeft)
+            if (distanceToEndpoint <= mover.MovementLeft)
                 canReach = true;
 
             return canReach;
@@ -525,6 +539,11 @@ namespace FTS.Grid
             return target;
         }
 
+        public List<HexCell> GetReachable(HexCell location, int movementLeft)
+        {
+            return grid.GetReachable(location, movementLeft).Distinct().ToList();
+        }
+
         internal bool IsAttackNotBlocked(Enemy enemy)
         {
             bool isAttackNotBlocked = true;
@@ -533,11 +552,21 @@ namespace FTS.Grid
             return isAttackNotBlocked;
         }
 
-        public void TelegraphAttack(Enemy enemy ,HexCell enemyPosition, HexCell target)
+        public void TelegraphTrajectoryAttack(Enemy enemy)
         {
-            AttackIndicator indicator = grid.GetLine(enemyPosition, target);
+            AttackIndicator indicator = new AttackIndicator(enemy.Target.Location, enemy.Direction);
 
-            foreach(HexCell cell in indicator.Line)
+            enemy.Target.Location.SetDangerIndicator(true);
+
+
+            attackIndicators.Add(enemy, indicator);
+        }
+
+        public void TelegraphAttack(Enemy enemy)
+        {
+            AttackIndicator indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction, enemy.Range, enemy.IsPiercieing()), enemy.Direction);
+         
+            foreach (HexCell cell in indicator.Line)
             {
                 cell.SetDangerIndicator(true);
             }

@@ -3,56 +3,77 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FTS.Turns;
+using FTS.Grid;
+using System.Xml;
+using System.Linq;
 
 namespace FTS.Characters
 {
-    [CreateAssetMenu(menuName = "PluggableAI/Decisions/InAttackRange")]
     public class InAttackRangeDecision : Decision
     {
-        public override bool Decide(StateMachine controller)
-        {
-            //if(controller.newEnemyPosition)
-               // controller.newEnemyPosition.SetDangerIndicator(false);
-            //Debug.Log("in attack range?");
-            controller.enemy.Target = controller.gridController.GetClosestPlayer(controller.mover);
-            //Debug.Log(controller.Target.name);
-            controller.newEnemyPosition = controller.gridController.GetNewEnemyPosition(controller.enemy, controller.enemy.Target);
-            //controller.newEnemyPosition.SetDangerIndicator(true);
+        protected List<Positions> possiblePositions = new List<Positions>();
 
-            //Debug.Log("set new position to move to " + controller.newEnemyPosition);
-            return CanReach(controller);// && IsInRange(controller);// && IsAttackNotBlocked(controller); && IsTelegraphPhase(controller);
+        public override bool Decide(StateMachine machine)
+        {
+            CalculatePosition(machine);
+            Positions position = GetRandomBestPosition();
+            machine.newEnemyPosition = position.Position;
+            machine.enemy.Direction = position.Direction;
+            machine.enemy.Target = position.Target;
+
+            return CanReach(machine);
         }
 
-        private bool IsAttackNotBlocked(StateMachine controller)
+        private Positions GetRandomBestPosition()
         {
-            bool isAttackNotBlocked = true;
-            if(!controller.enemy.IsArchAttack)
-            {
-                isAttackNotBlocked = controller.gridController.IsAttackNotBlocked(controller.enemy);
-            }
-            return isAttackNotBlocked;
+            int bestScore = possiblePositions.Max(x => x.Score);
+            possiblePositions.RemoveAll(x => x.Score < bestScore);
+            return possiblePositions[UnityEngine.Random.Range(0, possiblePositions.Count)];
         }
 
-        private bool CanReach(StateMachine controller)
+        //private HexCell GetClosestBestPosition()
+        //{
+        //    int bestScore = possiblePositions.Max(x => x.Score);
+        //    possiblePositions.RemoveAll(x => x.Score < bestScore);
+        //    foreach (Positions position in possiblePositions)
+        //    {
+
+        //    }
+        //}
+
+        protected virtual void CalculatePosition(StateMachine machine)
         {
-            bool canReach = controller.gridController.CanReachAttackRange(controller.enemy, controller.newEnemyPosition);
+            
+        }
+
+        private bool CanReach(StateMachine machine)
+        {
+            bool canReach = machine.gridController.CanReachAttackRange(machine.enemy, machine.newEnemyPosition);
             Debug.Log("can reach: " + canReach);
             return canReach;
         }
+    }
 
+    public class Positions
+    {
+        public int Score { get; set; }
+        public HexCell Position { get; set; }
+        public Unit Target { get; set; }
+        public HexDirection Direction { get; set; }
 
-        private bool IsInRange(StateMachine controller)
+        public Positions() { }
+
+        public Positions(HexCell position)
         {
-            //Check if in attack range
-            bool isInRange = true;
-            isInRange = controller.gridController.PlayerInRange(controller.enemy);
-            Debug.Log("is in range " + isInRange);
-            return isInRange;
+            Position = position;
         }
 
-        private bool IsTelegraphPhase(StateMachine controller)
+        public Positions(int score, HexCell position, Unit target, HexDirection direction)
         {
-            return controller.turnController.TurnPhase == TurnPhases.EnemyTelegraph;
+            Score = score;
+            Position = position;
+            Target = target;
+            Direction = direction;
         }
     }
 }

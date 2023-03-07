@@ -15,7 +15,18 @@ namespace FTS.Characters
 
         private void TelegraphAttack(StateMachine machine)
         {
-            machine.gridController.TelegraphAttack(machine.enemy, machine.mover.Location, machine.enemy.Target.Location);
+            Debug.Log("tele attack?");
+
+            if(machine.enemy.AttackType == AttackTypes.Trajectory)
+            {
+                machine.gridController.TelegraphTrajectoryAttack(machine.enemy);
+
+            }
+            else
+            {
+                machine.gridController.TelegraphAttack(machine.enemy);
+            }
+            
             machine.enemy.IsAttacking = true;
         }
     }

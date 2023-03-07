@@ -20,7 +20,7 @@ MonoBehaviour:
     - stat: 2
       value: 7
     - stat: 1
-      value: 4
+      value: 3
     - stat: 3
       value: 4
   - characterClass: 3
@@ -30,9 +30,9 @@ MonoBehaviour:
     - stat: 2
       value: 1
     - stat: 1
-      value: 2
-    - stat: 3
       value: 3
+    - stat: 3
+      value: 2
   - characterClass: 5
     stats:
     - stat: 0
