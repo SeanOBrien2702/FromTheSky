@@ -14,12 +14,7 @@ namespace FTS.Characters
         [SerializeField] Enemy gruntPrefab;
         [SerializeField] Enemy cowardPrefab;
         [SerializeField] Enemy rangerPrefab;
-        [SerializeField] Enemy StunnerPrefab;
-
-
-        #region Properties
-
-        #endregion
+        //[SerializeField] Enemy StunnerPrefab;
 
         #region MonoBehaviour Callbacks
         private void Start()
@@ -27,7 +22,7 @@ namespace FTS.Characters
             enemies.Add(gruntPrefab);
             enemies.Add(cowardPrefab);
             enemies.Add(rangerPrefab);
-            enemies.Add(StunnerPrefab);
+            //enemies.Add(StunnerPrefab);
         }
         #endregion
 
@@ -42,11 +37,9 @@ namespace FTS.Characters
             return enemies[index];
         }
 
-        //TODO: return only first enemy in list. testing purposes only
         internal Character GetRandomEnemy()
         {
-            //return enemies[UnityEngine.Random.Range(0, enemies.Count)];
-            return enemies[0];
+            return enemies[UnityEngine.Random.Range(0, enemies.Count)];
         }
         #endregion
     }

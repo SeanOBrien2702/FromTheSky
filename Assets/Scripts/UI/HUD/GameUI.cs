@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 #endregion
 
 public class GameUI : MonoBehaviour
@@ -46,9 +47,10 @@ public class GameUI : MonoBehaviour
         CardController.OnCardPlayed += CardController_OnCardPlayed;
         CardController.OnCardDrawn += CardController_OnCardDrawn;
         CardController.OnCardCreated += CardController_OnCardCreated;
-        CardController.OnEnergyChanged += CardController_OnEnergyChanged;
+        //CardController.OnEnergyChanged += CardController_OnEnergyChanged;
         TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
         TurnController.OnPlayerTurn += TurnController_OnNewTurn;
+        UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
         turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
         unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
     }
@@ -56,7 +58,6 @@ public class GameUI : MonoBehaviour
     private void Start()
     {
         cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
-        UpdateEnergy();
     }
 
     private void OnDestroy()
@@ -64,9 +65,10 @@ public class GameUI : MonoBehaviour
         CardController.OnCardPlayed -= CardController_OnCardPlayed;
         CardController.OnCardDrawn -= CardController_OnCardDrawn;
         CardController.OnCardCreated -= CardController_OnCardCreated;
-        CardController.OnEnergyChanged -= CardController_OnEnergyChanged;
+        //CardController.OnEnergyChanged -= CardController_OnEnergyChanged;
         TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
         TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
+        UnitController.OnPlayerSelected -= UnitController_OnPlayerSelected;
     }
     #endregion
 
@@ -92,7 +94,7 @@ public class GameUI : MonoBehaviour
 
     private void UpdateEnergy()
     {
-        energyText.text = cardController.Energy + "/" + cardController.TotalEnergy;
+        energyText.text = unitController.CurrentPlayer.Energy + "/" + unitController.CurrentPlayer.MaxEnergy;
     }
     #endregion
 
@@ -153,21 +155,16 @@ public class GameUI : MonoBehaviour
         UpdateDeckList();
     }
 
-    private void UnitController_OnUnitTurn(Character character)
+    private void UnitController_OnPlayerSelected()
     {
-        if (character is Player)
-        {
-            endTurnButton.SetActive(true);
-        }
-        else
-        {
-            endTurnButton.SetActive(false);
-        }
+        UpdateEnergy();
     }
+
     private void CardController_OnCardPlayed(Card card)
     {
         Debug.Log("Card played?");
         UpdateDeckList();
+        UpdateEnergy();
     }
 
     private void CardController_OnCardCreated()

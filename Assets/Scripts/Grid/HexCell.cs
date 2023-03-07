@@ -6,6 +6,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 #endregion
 
 namespace FTS.Grid
@@ -45,6 +46,8 @@ namespace FTS.Grid
         int dangerIndicator = 0;
         bool isDestination = false;
         bool isSpawn = false;
+        bool isDangerous = false;
+        bool isEdge = false;
 
         int distance = 0;
         int movementCost;
@@ -55,7 +58,7 @@ namespace FTS.Grid
         [HideInInspector] public HexCell pathFrom;
         public HexCell NextWithSamePriority { get; set; }
         public int SearchPhase { get; set; }
-        private Character unit;
+        private Unit unit;
         HexUI hexUI;
         Canvas canvas;
         HexMesh hexMesh;
@@ -83,7 +86,7 @@ namespace FTS.Grid
             get { return pathFrom; }   // get method
             set { pathFrom = value; }  // set method
         }
-        public Character Unit  // property
+        public Unit Unit  // property
         {
             get { return unit; }   // get method
             set { unit = value;
@@ -139,6 +142,18 @@ namespace FTS.Grid
             get { return dangerIndicator; }   // get method
             set { dangerIndicator = value; }  // set method
         }
+
+        public bool IsDangerous
+        {
+            get { return isDangerous; }
+            set { isDangerous = value; }
+        }
+
+        public bool IsEdge
+        {
+            get { return isEdge; }
+            set { isEdge = value; }
+        }
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -147,7 +162,6 @@ namespace FTS.Grid
             hexMesh = GetComponent<HexMesh>();
             meshRenderer = GetComponent<MeshRenderer>();
             RNGController = GetComponent<RandomCell>();
-            destination= FindObjectOfType<DestinationController>().GetComponent<DestinationController>();
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
         }
         #endregion
@@ -250,11 +264,13 @@ namespace FTS.Grid
             {
                 //renderer.material.color = highlightColours[(int)HighlightIndex.CantReachColour];//Color.red;
                 dangerHighlight.SetActive(true);
+                isDangerous = true;
             }
             else
             {
                 //renderer.material.color = highlightColours[(int)HighlightIndex.CanReachColour];
                 dangerHighlight.SetActive(false);
+                isDangerous = false;
             }
         }
 
@@ -341,6 +357,20 @@ namespace FTS.Grid
                 isFriendly = true;
             }
             return isFriendly;
+        }
+        internal bool IsFrendlyUnit(Unit comparedUnit)
+        {
+            if(Unit && comparedUnit.IsFriendly != Unit.IsFriendly)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsCellAvailable()
+        {
+            return (!isObstacle
+                && Unit == null);
         }
         #endregion
     }

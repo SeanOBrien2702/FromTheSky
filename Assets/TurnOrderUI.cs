@@ -55,18 +55,18 @@ public class TurnOrderUI : MonoBehaviour
         }
     }
 
-    internal void FillUI()
-    {
-        List<Character> units = unitController.GetUnits();
+    //internal void FillUI()
+    //{
+    //    List<Character> units = unitController.GetUnits();
 
-        foreach (var unit in units)
-        {
-            CharacterTurnPosition newTurnPosition = Instantiate(CharacterTurnPosition);
-            newTurnPosition.transform.SetParent(transform, false);
-            turnPositions.Add(unit, newTurnPosition);
-            turnPositions[unit].SetPortrait(unit.Portrait);
-            //Debug.Log("unit: " + unit.gameObject.name);
-        }
-        transform.GetChild(transform.childCount - 1).SetAsFirstSibling();
-    }
+    //    foreach (var unit in units)
+    //    {
+    //        CharacterTurnPosition newTurnPosition = Instantiate(CharacterTurnPosition);
+    //        newTurnPosition.transform.SetParent(transform, false);
+    //        turnPositions.Add(unit, newTurnPosition);
+    //        turnPositions[unit].SetPortrait(unit.Portrait);
+    //        //Debug.Log("unit: " + unit.gameObject.name);
+    //    }
+    //    transform.GetChild(transform.childCount - 1).SetAsFirstSibling();
+    //}
 }

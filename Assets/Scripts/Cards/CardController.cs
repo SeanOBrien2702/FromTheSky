@@ -158,7 +158,7 @@ namespace FTS.Cards
             {
                 hand.RemoveCard(playedCard);
             }
-            Energy -= playedCard.Cost;
+            unitController.CurrentPlayer.Energy -= playedCard.Cost;
             if (playedCard.IsAtomize)
             {
                 playedCard.Location = CardLocation.Atomized;
@@ -186,7 +186,7 @@ namespace FTS.Cards
         private bool HasEnergy(int cost)
         {
             bool hasEnergy = false;
-            if (cost <= energy)
+            if (cost <= unitController.CurrentPlayer.Energy)
             {
                 hasEnergy = true;
             }
@@ -220,7 +220,7 @@ namespace FTS.Cards
             }
             else if (!deck.Any(item => item.Location == CardLocation.Deck &&
                     (item.CharacterClass == CharacterClass.Common ||
-                     item.CharacterClass == unitController.GetCurrentUnit().CharacterClass)))
+                     item.CharacterClass == unitController.GetCurrentPlayer().CharacterClass)))
             {
                 if (deck.Any(item => item.Location == CardLocation.Discard))
                 {
@@ -450,7 +450,7 @@ namespace FTS.Cards
                 //Debug.Log("can draw?");
                 Card card = deck.FirstOrDefault(item => item.Location == CardLocation.Deck && 
                                                 (item.CharacterClass == CharacterClass.Common ||
-                                                item.CharacterClass == unitController.GetCurrentUnit().CharacterClass));
+                                                item.CharacterClass == unitController.GetCurrentPlayer().CharacterClass));
                 card.Location = CardLocation.Hand;
                 hand.AddCard(card);
                 OnCardDrawn?.Invoke();

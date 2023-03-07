@@ -15,7 +15,7 @@ namespace FTS.Cards
         [SerializeField] CostTarget costTarget;
         [SerializeField] int costChange = -1;
 
-        public override void ActivateEffect(Character target)
+        public override void ActivateEffect(Unit target)
         {
             cardController.ReduceCost(costTarget, costChange);         
         }

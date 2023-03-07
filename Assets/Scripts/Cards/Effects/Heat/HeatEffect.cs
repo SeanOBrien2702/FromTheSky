@@ -8,7 +8,7 @@ namespace FTS.Cards
     public class HeatEffect : Effect
     {
         [SerializeField] int heatAmount;
-        public override void ActivateEffect(Character target)
+        public override void ActivateEffect(Unit target)
         {
             target.GetComponent<Heat>().HeatLevel += heatAmount;
         }

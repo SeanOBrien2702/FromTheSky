@@ -13,7 +13,7 @@ namespace FTS.Cards
         [SerializeField] int length = 2;
         int damage = 5;
 
-        public override void ActivateEffect(Character player, HexCell target)
+        public override void ActivateEffect(Unit player, HexCell target)
         {
             List<HexCell> area = grid.GetLine(player, target, length);
 

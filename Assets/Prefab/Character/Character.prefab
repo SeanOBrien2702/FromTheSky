@@ -64,11 +64,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06d6649a96cca24b835719f979f8968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterClass: 1
+  stats: {fileID: 0}
+  unitUI: {fileID: 1227905858029449117, guid: 19a6d881f456d8249a24726aecb22f12, type: 3}
+  portrait: {fileID: 0}
+  barrier: {fileID: 4010783370477371485}
+  damageFeedback: {fileID: 4478104277416606989}
   animator: {fileID: 1530677751184685775}
   characterClass: 0
   stats: {fileID: 0}
   unitUI: {fileID: 1227905858029449117, guid: 19a6d881f456d8249a24726aecb22f12, type: 3}
-  picture: {fileID: 0}
+  portrait: {fileID: 0}
   barrier: {fileID: 4010783370477371485}
   damageFeedback: {fileID: 4478104277416606989}
 --- !u!114 &1799238614306022093
@@ -156,6 +162,7 @@ MonoBehaviour:
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -193,9 +200,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0

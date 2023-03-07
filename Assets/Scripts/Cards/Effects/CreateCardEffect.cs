@@ -13,7 +13,7 @@ namespace FTS.Cards
         [SerializeField] CardLocation cardLocation = CardLocation.Hand;
         [SerializeField] int numCopies = 1;
 
-        public override void ActivateEffect(Character target)
+        public override void ActivateEffect(Unit target)
         {
             if(numCopies <= 0)           
                 numCopies = 1;

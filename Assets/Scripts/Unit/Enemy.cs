@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using UnityEngine;
 using FTS.Grid;
+using System;
 #endregion
 
 namespace FTS.Characters
@@ -9,11 +10,13 @@ namespace FTS.Characters
     {
         bool isAttacking = false;
         bool canAttack = true;
-        HexCell target;
+        HexDirection direction;
+        Unit target;
         [SerializeField] bool isArchAttack = false;
         [SerializeField] GameObject projectileStart;
         [SerializeField] GameObject projectile;
         [SerializeField] EnemyTargeting targeting;
+        [SerializeField] AttackTypes attackType;
 
         #region Properties
         public bool IsAttacking   // property
@@ -28,7 +31,7 @@ namespace FTS.Characters
             set { canAttack = value; }  // set method
         }
 
-        public HexCell Target   // property
+        public Unit Target   // property
         {
             get { return target; }   // get method
             set { target = value; }  // set method
@@ -48,14 +51,19 @@ namespace FTS.Characters
             get { return targeting; }
         }
 
-        
+        public HexDirection Direction 
+        { 
+            get => direction; 
+            set => direction = value; 
+        }
+
+        public AttackTypes AttackType
+        {
+            get { return attackType; }
+        }
         #endregion
 
         #region MonoBehaviour Callbacks
-        //private void Start()
-        //{
-        //    Debug.Log("enemy placed");
-        //}
         #endregion
 
         #region Public Methods
@@ -63,6 +71,11 @@ namespace FTS.Characters
         {
             GameObject newProjectile = Instantiate(projectile);
             newProjectile.transform.SetParent(projectileStart.transform, false);
+        }
+
+        internal bool IsPiercieing()
+        {
+            return attackType == AttackTypes.Piercing ? true : false; 
         }
         #endregion
     }

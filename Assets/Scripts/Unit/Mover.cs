@@ -39,6 +39,7 @@ namespace FTS.Characters
                     location.Unit = null;
                 }
                 location = value;
+                character.Location = value;
                 value.Unit = character;
                 transform.localPosition = value.transform.localPosition;
             }
@@ -52,11 +53,15 @@ namespace FTS.Characters
         #endregion
 
         #region MonoBehaviour Callbacks
+        private void Awake()
+        {
+            character = GetComponent<Character>();
+        }
+
         void Start()
         {
             cameraController = FindObjectOfType<CameraController>().GetComponent<CameraController>();
-            stateController = FindObjectOfType<StateController>().GetComponent<StateController>();
-            character = GetComponent<Character>();
+            stateController = FindObjectOfType<StateController>().GetComponent<StateController>();       
             speed = character.Stats.GetStat(Stat.Movement, character.CharacterClass);
             movementLeft = speed;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
@@ -86,7 +91,7 @@ namespace FTS.Characters
         #endregion
 
         #region Public Methods
-        internal void Travel(List<HexCell> path, Vector3 lookTowards)
+        internal HexCell Travel(List<HexCell> path)//, Vector3 lookTowards)
         {
             movementLeft -= DistanceTraveled(path);
            
@@ -95,22 +100,14 @@ namespace FTS.Characters
                 Location = path[path.Count - 1];
                 pathToTravel = path;
                 StopAllCoroutines();
-                StartCoroutine(TravelPath(lookTowards));
+                StartCoroutine(TravelPath(Vector3.zero));
             }
             else
             {
                 Debug.LogWarning("path not found");
                 stateController.ActionDone = true;
             }
-        }
-
-        public void Travel(List<HexCell> path)
-        {
-            movementLeft -= DistanceTraveled(path);
-            Location = path[path.Count - 1];
-            pathToTravel = path;
-            StopAllCoroutines();
-            StartCoroutine(TravelPath(Vector3.zero));
+            return Location;
         }
 
         internal bool IsValidDestination(HexCell cell)

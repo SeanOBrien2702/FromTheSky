@@ -11,37 +11,17 @@ using UnityEngine;
 
 namespace FTS.Characters
 {
-    public class Character : MonoBehaviour, IComparable
+    public class Character : Unit
     {
         [SerializeField] Animator animator;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] CharacterStats stats;
-        [SerializeField] UnitUI unitUI;
-        [SerializeField] Sprite portrait;
-        [SerializeField] GameObject barrier;
-        UnitController unitController;
 
-        public MMFeedbacks damageFeedback;
-
-        string fullName;   
         bool busy = false;
-
-        int health = 0;
-        int maxHealth = 0;
         int initiative = 0;
         int maxInitiative = 20;
-        int energy = 4;
-        int maxEnergy = 4;
-        int armour = 0;
-        bool hasBarrier = false;
-
 
         #region Properties
-        public string Names   // property
-        {
-            get { return fullName; }   // get method
-            set { fullName = value; }  // set method
-        }
         public int Initiative   // property
         {
             get { return initiative; }   // get method
@@ -53,83 +33,28 @@ namespace FTS.Characters
             set { busy = value; }  // set method
         }
 
-        public int Energy   // property
-        {
-            get { return energy; }   // get method
-            set { energy = value; }  // set method
-        }
-
-        public int MaxEnergy   // property
-        {
-            get { return maxEnergy; }   // get method
-            set { maxEnergy = value; }  // set method
-        }
-
         public CharacterStats Stats  // property
         {
             get { return stats; }   // get method
-        }
-
-        public Sprite Portrait  // property
-        {
-            get { return portrait; }   // get method
         }
 
         public CharacterClass CharacterClass  // property
         {
             get { return characterClass; }   // get method
         }
-
-        public int Health   // property
-        {
-            get { return health; }   // get method
-            set
-            {
-                health = value;
-                TakeDamage();
-            }  // set method
-        }
-        public int MaxHealth   // property
-        {
-            get { return maxHealth; }   // get method
-            set
-            {
-                maxHealth = value;
-                unitUI.UpdateHealth(health, maxHealth);
-            }  // set method
-        }
-        public int Armour   // property
-        {
-            get { return armour; }   // get method
-            set { armour = value;
-                unitUI.UpdateArmour(armour);
-            }  // set method
-        }
-
-        public bool HasBarrier   // property
-        {
-            get { return hasBarrier; }   // get method
-            set { hasBarrier = value;
-                UpdateBarrier(value);
-            }  // set method
-        }
         #endregion
 
         #region MonoBehaviour Callbacks
-        private void Awake()
+        protected override void Awake()
         {
-            unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
-            health = maxHealth = stats.GetStat(Stat.Health, characterClass);
+            base.Awake();
+            Health = maxHealth = stats.GetStat(Stat.Health, characterClass);
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }
 
-        private void Start()
+        protected virtual void Start()
         {
-            fullName = characterClass.ToString();
-            //Debug.Log("character placed");
-            //unitUI.UpdateHealth(health, maxHealth);
-            //Debug.Log("hello?");
-            //MaxHealth = health;
+            unitUI.UpdateHealth(Health, maxHealth);
         }
 
         private void OnDestroy()
@@ -138,50 +63,7 @@ namespace FTS.Characters
         }
         #endregion
 
-        #region Private Methods
-        private void TakeDamage()
-        {
-            unitUI.UpdateHealth(health);
-            if (health <= 0)
-            {
-                Die();
-            }
-
-        }
-
-        private void UpdateBarrier(bool enable)
-        {
-            barrier.SetActive(enable);
-            hasBarrier = enable;
-        }
-        #endregion
-
         #region Public Methods
-        public void CalculateDamageTaken(int damage)
-        {
-            damageFeedback?.PlayFeedbacks(transform.position ,damage); //damage text animation
-            if (!hasBarrier)
-            {
-                if (armour > 0)
-                {
-                    if (damage <= armour)
-                    {
-                        Armour -= damage;
-                        damage = 0;
-                    }
-                    else
-                    {
-                        damage -= armour;
-                        Armour = 0;
-                    }
-                }
-                Health -= damage;
-            }
-            else
-            {
-                UpdateBarrier(false);
-            }
-        }
         public int GetStat(Stat stat)
         {
             return Stats.GetStat(stat, this.characterClass);
@@ -198,11 +80,11 @@ namespace FTS.Characters
             initiative = UnityEngine.Random.Range(0, maxInitiative) + stats.GetStat(Stat.Movement, characterClass);
         }
 
-        public void Die()
+        public override void Die()
         {
+            Debug.Log("Die character");
             unitController.RemoveUnit(this);
             StartCoroutine(DeathAnimation());
-            //Destroy(gameObject);
         }
 
         internal virtual void StartRound()
@@ -224,12 +106,6 @@ namespace FTS.Characters
         {
             Debug.Log("card not added to deck");
         }
-
-        internal void CreateHeathBar()
-        {
-            MaxHealth = health;
-            //unitUI.UpdateHealth(health, maxHealth);
-        }
         #endregion
 
         #region Coroutines
@@ -241,12 +117,6 @@ namespace FTS.Characters
         }
         #endregion
 
-        #region Events
-        private void TurnController_OnNewTurn()
-        {
-            energy = maxEnergy;
-            armour = 0;
-        }
-        #endregion
+        
     }
 }

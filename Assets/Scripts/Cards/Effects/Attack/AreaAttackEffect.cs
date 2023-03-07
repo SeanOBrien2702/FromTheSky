@@ -16,9 +16,7 @@ namespace FTS.Cards
 
         public override void ActivateEffect(HexCell target)
         {
-            grid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
             List<HexCell> area = grid.GetArea(target, radius);
-            Debug.Log("area size " + area.Count);
             foreach (var cell in area)
             {
                 for (int i = 0; i < numAttacks; i++)

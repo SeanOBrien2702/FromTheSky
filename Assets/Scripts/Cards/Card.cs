@@ -181,7 +181,7 @@ namespace FTS.Cards
             }
         }
 
-        public void Play(Character target)
+        public void Play(Unit target)
         {
             foreach (Effect effect in Effects)
             {
@@ -197,7 +197,7 @@ namespace FTS.Cards
             }
         }
 
-        public void Play(Character player, HexCell target)
+        public void Play(Unit player, HexCell target)
         {
             foreach (Effect effect in Effects)
             {

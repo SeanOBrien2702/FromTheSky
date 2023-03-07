@@ -4,6 +4,7 @@ using FTS.Cards;
 using FTS.Saving;
 using System.Collections.Generic;
 using System;
+using FTS.Turns;
 #endregion
 
 namespace FTS.Characters
@@ -12,6 +13,9 @@ namespace FTS.Characters
     {
         [SerializeField] Color colour;
         bool placed = false;
+
+        int energy = 4;
+        [SerializeField] int maxEnergy = 4;
 
         #region Properties
         public Color Colour   // property
@@ -25,29 +29,29 @@ namespace FTS.Characters
             get { return placed; }   // get method
             set { placed = value; }  // set method
         }
+
+        public int Energy   // property
+        {
+            get { return energy; }   // get method
+            set { energy = value; }  // set method
+        }
+
+        public int MaxEnergy   // property
+        {
+            get { return maxEnergy; }   // get method
+            set { maxEnergy = value; }  // set method
+        }
         #endregion
 
         #region MonoBehaviour Callbacks
-        //void Start()
-        //{
-        //    placed = false;
-        //    Debug.Log("player placed");
-        //}
-        //private void Start()
-        //{
-        //    Debug.Log("player placed in player script");
-        //    Debug.Log("hello?????");
-        //    unitUI.UpdateHealth(health, maxHealth);
-        //    Debug.Log("hello?");
-        //}
+        protected override void Start()
+        {
+            base.Start();
+            energy = maxEnergy;
+        }
         #endregion
 
         #region Public Methods
-        internal override void StartRound()
-        {
-            //Debug.Log("player turn");
-        }
-
         internal int GetCardRange(CardType type)
         {
             int range = 0;
@@ -81,6 +85,13 @@ namespace FTS.Characters
         {
             Health = Convert.ToInt32(state);
             Debug.Log("load health " + Health + " " + CharacterClass);
+        }
+        #endregion
+
+        #region Events
+        protected override void TurnController_OnNewTurn()
+        {
+            energy = maxEnergy;
         }
         #endregion
     }

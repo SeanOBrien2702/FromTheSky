@@ -76,9 +76,9 @@ MonoBehaviour:
   - characterClass: 6
     stats:
     - stat: 0
-      value: 8
+      value: 3
     - stat: 1
-      value: 4
+      value: 3
     - stat: 2
       value: 1
     - stat: 3

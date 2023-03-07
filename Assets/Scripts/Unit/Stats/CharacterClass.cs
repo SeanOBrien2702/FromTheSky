@@ -7,6 +7,7 @@
         Medic,
         Tank,
         Engineer,
-        Sniper
+        Sniper,
+        Pawn
     }
 }

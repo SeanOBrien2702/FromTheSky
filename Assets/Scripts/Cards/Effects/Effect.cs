@@ -12,6 +12,8 @@ namespace FTS.Cards
         protected HexGrid grid;
         protected HexGridController gridController;
         protected CardController cardController;
+        protected ForetellController foretell;
+        protected UnitController unitController;
         [HideInInspector] public bool effectFoldout;
 
         public void Initialize()
@@ -19,6 +21,8 @@ namespace FTS.Cards
             grid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
             gridController = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
+            unitController= FindObjectOfType<UnitController>().GetComponent<UnitController>();
+            foretell = FindObjectOfType<ForetellController>().GetComponent<ForetellController>();
         }
 
         public virtual void ActivateEffect()
@@ -26,7 +30,7 @@ namespace FTS.Cards
             Debug.Log("Base effect class");
         }
 
-        public virtual void ActivateEffect(Character target)
+        public virtual void ActivateEffect(Unit target)
         {
             Debug.Log("Base effect class with target");
         }
@@ -36,7 +40,7 @@ namespace FTS.Cards
             Debug.Log("Base effect class with ground target");
         }
 
-        public virtual void ActivateEffect(Character player, HexCell target)
+        public virtual void ActivateEffect(Unit player, HexCell target)
         {
             Debug.Log("Base effect class with ground target");
         }

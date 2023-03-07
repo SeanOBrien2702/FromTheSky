@@ -18,12 +18,7 @@ namespace FTS.Grid
         [SerializeField] int spawnLimit = 8;
         int enemiesSpawned = 0;
 
-        #region Properties
-
-        #endregion
-
         #region MonoBehaviour Callbacks
-        // Start is called before the first frame update
         void Start()
         {
             hexGrid = GetComponent<HexGrid>();
@@ -31,12 +26,6 @@ namespace FTS.Grid
             enemyDatabase = FindObjectOfType<EnemyDatabase>().GetComponent<EnemyDatabase>();
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnEnemyTurn += TurnController_OnEndTurn;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
 
         private void OnDestroy()
@@ -77,14 +66,6 @@ namespace FTS.Grid
                 }
             }
         }
-        #endregion
-
-        #region Public Methods
-
-        #endregion
-
-        #region Coroutines
-
         #endregion
 
         #region Events
