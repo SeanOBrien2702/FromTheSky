@@ -15,41 +15,60 @@ namespace MoreMountains.Tools
 		protected Scene _destinationScene;
 		protected UnityAction<Scene, Scene> _onActiveSceneChangedCallback;
 		protected string _sceneToLoadName;
+		protected string _antiSpillSceneName;
 		protected List<GameObject> _spillSceneRoots = new List<GameObject>(50);
 		
 		/// <summary>
 		/// Creates the temporary scene
 		/// </summary>
 		/// <param name="sceneToLoadName"></param>
-		public virtual void PrepareAntiFill(string sceneToLoadName, Material skybox)
+		public virtual void PrepareAntiFill(string sceneToLoadName, string antiSpillSceneName = "")
 		{
-			_antiSpillScene = SceneManager.CreateScene($"AntiSpill_{sceneToLoadName}");
 			_destinationScene = default; 
 			_sceneToLoadName = sceneToLoadName;
-			Debug.Log(skybox.name);
 			
-			if (_onActiveSceneChangedCallback != null) { SceneManager.activeSceneChanged -= _onActiveSceneChangedCallback; }
-			_onActiveSceneChangedCallback = OnActiveSceneChanged;
-			SceneManager.activeSceneChanged += _onActiveSceneChangedCallback;
-			SceneManager.SetActiveScene(_antiSpillScene);
-			RenderSettings.skybox = skybox;
+			if (antiSpillSceneName == "")
+			{
+				_antiSpillScene = SceneManager.CreateScene($"AntiSpill_{sceneToLoadName}");
+
+				PrepareAntiFillSetSceneActive();
+			}
+			else
+			{
+				SceneManager.LoadScene(antiSpillSceneName, LoadSceneMode.Additive);
+				_antiSpillScene = SceneManager.GetSceneByName(antiSpillSceneName);
+				_antiSpillSceneName = _antiSpillScene.name;
+				SceneManager.sceneLoaded += PrepareAntiFillOnSceneLoaded;
+			}
 		}
 
 		/// <summary>
-		/// Creates the temporary scene
+		/// When not creating an anti fill scene, acts once the scene has been actually created and is ready to be set active
+		/// This is bypassed when creating the scene
 		/// </summary>
-		/// <param name="sceneToLoadName"></param>
-		public virtual void PrepareAntiFill(string sceneToLoadName)
+		/// <param name="newScene"></param>
+		/// <param name="mode"></param>
+		protected virtual void PrepareAntiFillOnSceneLoaded(Scene newScene, LoadSceneMode mode)
 		{
-			_antiSpillScene = SceneManager.CreateScene($"AntiSpill_{sceneToLoadName}");
-			_destinationScene = default;
-			_sceneToLoadName = sceneToLoadName;
+			if (newScene.name != _antiSpillSceneName)
+			{
+				return;
+			}
+			SceneManager.sceneLoaded -= PrepareAntiFillOnSceneLoaded;
+			PrepareAntiFillSetSceneActive();
+		}
+
+		/// <summary>
+		/// Sets the anti spill scene active
+		/// </summary>
+		protected virtual void PrepareAntiFillSetSceneActive()
+		{
 			if (_onActiveSceneChangedCallback != null) { SceneManager.activeSceneChanged -= _onActiveSceneChangedCallback; }
 			_onActiveSceneChangedCallback = OnActiveSceneChanged;
 			SceneManager.activeSceneChanged += _onActiveSceneChangedCallback;
 			SceneManager.SetActiveScene(_antiSpillScene);
 		}
-
+		
 		/// <summary>
 		/// Once the destination scene has been loaded, we catch that event and prepare to empty
 		/// </summary>

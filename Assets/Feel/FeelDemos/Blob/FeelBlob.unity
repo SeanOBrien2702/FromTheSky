@@ -9975,6 +9975,7 @@ MonoBehaviour:
     AmplitudeMin: {x: 5, y: 5, z: 5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
+    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -10075,6 +10076,7 @@ MonoBehaviour:
     AmplitudeMin: {x: -10, y: -10, z: -10}
     AmplitudeMax: {x: 10, y: 10, z: 10}
     RelativeAmplitude: 1
+    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -10175,6 +10177,7 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
+    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -15128,7 +15131,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8756684, y: 1}
+    m_SensorSize: {x: 1.5239688, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -15198,6 +15201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetFPS: 300
+  RenderFrameInterval: 0
   VSyncCount: 0
 --- !u!4 &475878939
 Transform:
@@ -19986,7 +19990,6 @@ GameObject:
   m_Component:
   - component: {fileID: 674711167}
   - component: {fileID: 674711169}
-  - component: {fileID: 674711168}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -20008,25 +20011,6 @@ Transform:
   m_Father: {fileID: 1183306507}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &674711168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674711166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &674711169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20166,8 +20150,8 @@ GameObject:
   - component: {fileID: 963894732}
   - component: {fileID: 963894733}
   - component: {fileID: 963894736}
-  - component: {fileID: 963894735}
   - component: {fileID: 963894734}
+  - component: {fileID: 963894735}
   m_Layer: 0
   m_Name: DeniedFeedback
   m_TagString: Untagged
@@ -20203,19 +20187,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks:
   - {fileID: 963894736}
-  - {fileID: 963894735}
   - {fileID: 963894734}
+  - {fileID: 963894735}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
+  ForceTimescaleMode: 0
+  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -20253,9 +20240,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -20312,17 +20300,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 963894731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Haptics
+  Label: Haptic Preset
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -20338,85 +20327,14 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  HapticMethod: 0
-  HapticType: 2
-  TransientIntensity: 1
-  TransientSharpness: 1
-  ATVibrateIOS: 1
-  ATIOSIntensity: 1
-  ATIOSSharpness: 1
-  ATVibrateAndroid: 1
-  ATVibrateAndroidIfNoSupport: 0
-  ATAndroidIntensity: 1
-  ATAndroidSharpness: 1
-  ATRumble: 1
-  ATRumbleIntensity: 1
-  ATRumbleSharpness: 1
-  ATRumbleControllerID: -1
-  InitialContinuousIntensity: 1
-  ContinuousIntensityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  InitialContinuousSharpness: 1
-  ContinuousSharpnessCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  ContinuousDuration: 1
-  APVibrateIOS: 1
-  AHAPFileForIOS: {fileID: 0}
-  APVibrateAndroid: 1
-  APVibrateAndroidIfNoSupport: 0
-  AndroidWaveFormFile: {fileID: 0}
-  APRumble: 1
-  RumbleWaveFormFile: {fileID: 0}
-  AndroidRepeat: -1
-  RumbleRepeat: -1
-  OldIOSFallback: 0
-  Timescale: 1
-  AllowRumble: 0
-  ControllerID: -1
+  Preset: 2
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
 --- !u!114 &963894736
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -20434,9 +20352,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35093,15 +35012,15 @@ GameObject:
   - component: {fileID: 1280414633}
   - component: {fileID: 1280414632}
   - component: {fileID: 1280414631}
-  - component: {fileID: 1280414638}
-  - component: {fileID: 1280414637}
-  - component: {fileID: 1280414636}
-  - component: {fileID: 1280414635}
   - component: {fileID: 1280414639}
   - component: {fileID: 1280414630}
   - component: {fileID: 1280414629}
   - component: {fileID: 1280414628}
   - component: {fileID: 1280414627}
+  - component: {fileID: 1280414638}
+  - component: {fileID: 1280414637}
+  - component: {fileID: 1280414636}
+  - component: {fileID: 1280414635}
   m_Layer: 0
   m_Name: MoveFeedback
   m_TagString: Untagged
@@ -35140,9 +35059,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35222,11 +35142,14 @@ MonoBehaviour:
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
+  ForceTimescaleMode: 0
+  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -35264,9 +35187,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35283,6 +35207,10 @@ MonoBehaviour:
     TargetBPM: 120
   DebugActive: 0
   PauseDuration: 1.1
+  RandomizePauseDuration: 0
+  MinPauseDuration: 1
+  MaxPauseDuration: 3
+  RandomizeOnEachPlay: 1
   ScriptDriven: 0
   AutoResume: 0
   AutoResumeAfter: 0.25
@@ -35303,9 +35231,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35322,6 +35251,10 @@ MonoBehaviour:
     TargetBPM: 120
   DebugActive: 0
   PauseDuration: 0.8
+  RandomizePauseDuration: 0
+  MinPauseDuration: 1
+  MaxPauseDuration: 3
+  RandomizeOnEachPlay: 1
   ScriptDriven: 0
   AutoResume: 0
   AutoResumeAfter: 0.25
@@ -35342,9 +35275,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35362,8 +35296,9 @@ MonoBehaviour:
   DebugActive: 0
   Mode: 0
   BoundParticleSystem: {fileID: 1031576571}
-  MoveToPosition: 0
   RandomParticleSystems: []
+  MoveToPosition: 0
+  ActivateOnPlay: 0
 --- !u!114 &1280414624
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -35381,9 +35316,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35401,8 +35337,9 @@ MonoBehaviour:
   DebugActive: 0
   Mode: 0
   BoundParticleSystem: {fileID: 1903519440}
-  MoveToPosition: 0
   RandomParticleSystems: []
+  MoveToPosition: 0
+  ActivateOnPlay: 0
 --- !u!114 &1280414625
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -35420,9 +35357,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35440,8 +35378,9 @@ MonoBehaviour:
   DebugActive: 0
   Mode: 0
   BoundParticleSystem: {fileID: 14569899}
-  MoveToPosition: 0
   RandomParticleSystems: []
+  MoveToPosition: 0
+  ActivateOnPlay: 0
 --- !u!114 &1280414626
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -35459,9 +35398,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35478,6 +35418,10 @@ MonoBehaviour:
     TargetBPM: 120
   DebugActive: 0
   PauseDuration: 1.4
+  RandomizePauseDuration: 0
+  MinPauseDuration: 1
+  MaxPauseDuration: 3
+  RandomizeOnEachPlay: 1
   ScriptDriven: 0
   AutoResume: 0
   AutoResumeAfter: 0.25
@@ -35498,9 +35442,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35544,9 +35489,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35590,9 +35536,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35636,9 +35583,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35682,9 +35630,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35749,9 +35698,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35816,9 +35766,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35883,9 +35834,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35942,17 +35894,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1280414617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Haptics
+  Label: Haptic Preset
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35968,85 +35921,14 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  HapticMethod: 0
-  HapticType: 6
-  TransientIntensity: 1
-  TransientSharpness: 1
-  ATVibrateIOS: 1
-  ATIOSIntensity: 1
-  ATIOSSharpness: 1
-  ATVibrateAndroid: 1
-  ATVibrateAndroidIfNoSupport: 0
-  ATAndroidIntensity: 1
-  ATAndroidSharpness: 1
-  ATRumble: 1
-  ATRumbleIntensity: 1
-  ATRumbleSharpness: 1
-  ATRumbleControllerID: -1
-  InitialContinuousIntensity: 1
-  ContinuousIntensityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  InitialContinuousSharpness: 1
-  ContinuousSharpnessCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  ContinuousDuration: 1
-  APVibrateIOS: 1
-  AHAPFileForIOS: {fileID: 0}
-  APVibrateAndroid: 1
-  APVibrateAndroidIfNoSupport: 0
-  AndroidWaveFormFile: {fileID: 0}
-  APRumble: 1
-  RumbleWaveFormFile: {fileID: 0}
-  AndroidRepeat: -1
-  RumbleRepeat: -1
-  OldIOSFallback: 0
-  Timescale: 1
-  AllowRumble: 1
-  ControllerID: -1
+  Preset: 6
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
 --- !u!114 &1280414636
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -36056,17 +35938,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1280414617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Haptics
+  Label: Haptic Preset
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -36082,85 +35965,14 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  HapticMethod: 0
-  HapticType: 8
-  TransientIntensity: 1
-  TransientSharpness: 1
-  ATVibrateIOS: 1
-  ATIOSIntensity: 1
-  ATIOSSharpness: 1
-  ATVibrateAndroid: 1
-  ATVibrateAndroidIfNoSupport: 0
-  ATAndroidIntensity: 1
-  ATAndroidSharpness: 1
-  ATRumble: 1
-  ATRumbleIntensity: 1
-  ATRumbleSharpness: 1
-  ATRumbleControllerID: -1
-  InitialContinuousIntensity: 1
-  ContinuousIntensityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  InitialContinuousSharpness: 1
-  ContinuousSharpnessCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  ContinuousDuration: 1
-  APVibrateIOS: 1
-  AHAPFileForIOS: {fileID: 0}
-  APVibrateAndroid: 1
-  APVibrateAndroidIfNoSupport: 0
-  AndroidWaveFormFile: {fileID: 0}
-  APRumble: 1
-  RumbleWaveFormFile: {fileID: 0}
-  AndroidRepeat: -1
-  RumbleRepeat: -1
-  OldIOSFallback: 0
-  Timescale: 1
-  AllowRumble: 1
-  ControllerID: -1
+  Preset: 8
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
 --- !u!114 &1280414637
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -36170,17 +35982,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1280414617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Haptics
+  Label: Haptic Preset
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -36196,85 +36009,14 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  HapticMethod: 0
-  HapticType: 5
-  TransientIntensity: 1
-  TransientSharpness: 1
-  ATVibrateIOS: 1
-  ATIOSIntensity: 1
-  ATIOSSharpness: 1
-  ATVibrateAndroid: 1
-  ATVibrateAndroidIfNoSupport: 0
-  ATAndroidIntensity: 1
-  ATAndroidSharpness: 1
-  ATRumble: 1
-  ATRumbleIntensity: 1
-  ATRumbleSharpness: 1
-  ATRumbleControllerID: -1
-  InitialContinuousIntensity: 1
-  ContinuousIntensityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  InitialContinuousSharpness: 1
-  ContinuousSharpnessCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  ContinuousDuration: 1
-  APVibrateIOS: 1
-  AHAPFileForIOS: {fileID: 0}
-  APVibrateAndroid: 1
-  APVibrateAndroidIfNoSupport: 0
-  AndroidWaveFormFile: {fileID: 0}
-  APRumble: 1
-  RumbleWaveFormFile: {fileID: 0}
-  AndroidRepeat: -1
-  RumbleRepeat: -1
-  OldIOSFallback: 0
-  Timescale: 1
-  AllowRumble: 1
-  ControllerID: -1
+  Preset: 5
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
 --- !u!114 &1280414638
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -36284,17 +36026,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1280414617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Haptics
+  Label: Haptic Preset
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -36310,85 +36053,14 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  HapticMethod: 0
-  HapticType: 4
-  TransientIntensity: 1
-  TransientSharpness: 1
-  ATVibrateIOS: 1
-  ATIOSIntensity: 1
-  ATIOSSharpness: 1
-  ATVibrateAndroid: 1
-  ATVibrateAndroidIfNoSupport: 0
-  ATAndroidIntensity: 1
-  ATAndroidSharpness: 1
-  ATRumble: 1
-  ATRumbleIntensity: 1
-  ATRumbleSharpness: 1
-  ATRumbleControllerID: -1
-  InitialContinuousIntensity: 1
-  ContinuousIntensityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  InitialContinuousSharpness: 1
-  ContinuousSharpnessCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  ContinuousDuration: 1
-  APVibrateIOS: 1
-  AHAPFileForIOS: {fileID: 0}
-  APVibrateAndroid: 1
-  APVibrateAndroidIfNoSupport: 0
-  AndroidWaveFormFile: {fileID: 0}
-  APRumble: 1
-  RumbleWaveFormFile: {fileID: 0}
-  AndroidRepeat: -1
-  RumbleRepeat: -1
-  OldIOSFallback: 0
-  Timescale: 1
-  AllowRumble: 1
-  ControllerID: -1
+  Preset: 4
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
 --- !u!114 &1280414639
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -36406,9 +36078,10 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
-    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -46155,8 +45828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e11aea996651f74b92e3ebc7193458a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionKey: 32
-  ActionKeyAlt: 350
   CooldownDuration: 4
   MoveFeedback: {fileID: 1280414620}
   DeniedFeedback: {fileID: 963894733}
@@ -46386,12 +46057,57 @@ PrefabInstance:
     m_TransformParent: {fileID: 1183306507}
     m_Modifications:
     - target: {fileID: 394108091, guid: a5ed96966948b2348b46dab87f87bbcf, type: 3}
+      propertyPath: MobileText
+      value: Tap anywhere to move
+      objectReference: {fileID: 0}
+    - target: {fileID: 394108091, guid: a5ed96966948b2348b46dab87f87bbcf, type: 3}
       propertyPath: DesktopText
       value: Press space to move
       objectReference: {fileID: 0}
-    - target: {fileID: 394108091, guid: a5ed96966948b2348b46dab87f87bbcf, type: 3}
-      propertyPath: MobileText
-      value: Tap anywhere to move
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
@@ -46410,6 +46126,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -46425,12 +46146,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
-      propertyPath: m_RootOrder
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
@@ -46446,56 +46167,6 @@ PrefabInstance:
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378253, guid: a5ed96966948b2348b46dab87f87bbcf,
@@ -61394,6 +61065,8 @@ MonoBehaviour:
   ShakeDuration: 0.8
   PlayOnAwake: 0
   Interruptible: 1
+  AlwaysResetTargetValuesAfterShake: 0
+  CooldownBetweenShakes: 0
   Shaking: 0
   ForwardDirection: 1
   TimescaleMode: 0

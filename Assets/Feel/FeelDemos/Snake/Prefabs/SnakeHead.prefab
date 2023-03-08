@@ -9726,6 +9726,8 @@ MonoBehaviour:
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
+  CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -9763,14 +9765,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -9886,6 +9894,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
+  DetermineScaleOnPlay: 0
   DestinationScale: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!114 &887969641153413121
 MonoBehaviour:
@@ -9904,14 +9913,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -10018,8 +10033,33 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
+  DetermineRotationOnPlay: 0
   ToDestinationSpace: 0
   DestinationAngles: {x: 0, y: 180, z: 0}
+  ToDestinationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &7648688352537756094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10037,14 +10077,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -10160,6 +10206,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
+  DetermineScaleOnPlay: 0
   DestinationScale: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!114 &2804745470937181239
 MonoBehaviour:
@@ -10178,14 +10225,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -10292,8 +10345,33 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
+  DetermineRotationOnPlay: 0
   ToDestinationSpace: 1
   DestinationAngles: {x: 0, y: 0, z: 90}
+  ToDestinationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &887969641270025559
 GameObject:
   m_ObjectHideFlags: 0
@@ -15207,10 +15285,10 @@ GameObject:
   - component: {fileID: 887969641913899327}
   - component: {fileID: 887969641913899326}
   - component: {fileID: 887969641913899325}
-  - component: {fileID: 887969641913899324}
   - component: {fileID: 887969641913899267}
   - component: {fileID: 2959563254990335560}
   - component: {fileID: 4078890721708777001}
+  - component: {fileID: 8071590909953756904}
   m_Layer: 0
   m_Name: TurnFeedback
   m_TagString: Untagged
@@ -15246,7 +15324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks:
   - {fileID: 887969641913899325}
-  - {fileID: 887969641913899324}
+  - {fileID: 8071590909953756904}
   - {fileID: 887969641913899267}
   - {fileID: 2959563254990335560}
   - {fileID: 4078890721708777001}
@@ -15260,6 +15338,8 @@ MonoBehaviour:
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
+  CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -15297,14 +15377,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -15325,115 +15411,6 @@ MonoBehaviour:
   MinPitch: 1
   MaxPitch: 1
   SfxAudioMixerGroup: {fileID: 0}
---- !u!114 &887969641913899324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 887969641913899320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  Label: Haptics
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    InitialDelay: 0
-    CooldownDuration: 0
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  HapticMethod: 0
-  HapticType: 4
-  TransientIntensity: 1
-  TransientSharpness: 1
-  ATVibrateIOS: 1
-  ATIOSIntensity: 1
-  ATIOSSharpness: 1
-  ATVibrateAndroid: 1
-  ATVibrateAndroidIfNoSupport: 0
-  ATAndroidIntensity: 1
-  ATAndroidSharpness: 1
-  ATRumble: 1
-  ATRumbleIntensity: 1
-  ATRumbleSharpness: 1
-  ATRumbleControllerID: -1
-  InitialContinuousIntensity: 1
-  ContinuousIntensityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  InitialContinuousSharpness: 1
-  ContinuousSharpnessCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  ContinuousDuration: 1
-  APVibrateIOS: 1
-  AHAPFileForIOS: {fileID: 0}
-  APVibrateAndroid: 1
-  APVibrateAndroidIfNoSupport: 0
-  AndroidWaveFormFile: {fileID: 0}
-  APRumble: 1
-  RumbleWaveFormFile: {fileID: 0}
-  AndroidRepeat: -1
-  RumbleRepeat: -1
-  OldIOSFallback: 0
-  Timescale: 1
-  AllowRumble: 1
-  ControllerID: -1
 --- !u!114 &887969641913899267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15451,22 +15428,30 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
+  Mode: 0
   BoundParticleSystem: {fileID: 887969641270025558}
-  MoveToPosition: 0
   RandomParticleSystems: []
+  MoveToPosition: 0
+  ActivateOnPlay: 0
 --- !u!114 &2959563254990335560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15484,14 +15469,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -15607,6 +15598,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
+  DetermineScaleOnPlay: 0
   DestinationScale: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!114 &4078890721708777001
 MonoBehaviour:
@@ -15625,14 +15617,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -15739,8 +15737,77 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
+  DetermineRotationOnPlay: 0
   ToDestinationSpace: 0
   DestinationAngles: {x: 0, y: 180, z: 0}
+  ToDestinationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &8071590909953756904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887969641913899320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Haptic Preset
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
+    InitialDelay: 0
+    CooldownDuration: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Preset: 4
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
 --- !u!1 &887969642001634516
 GameObject:
   m_ObjectHideFlags: 0
@@ -15930,7 +15997,7 @@ GameObject:
   - component: {fileID: 887969642409557977}
   - component: {fileID: 887969642409557982}
   - component: {fileID: 887969642409557983}
-  - component: {fileID: 887969642409557976}
+  - component: {fileID: 3127942392291420502}
   m_Layer: 0
   m_Name: TeleportFeedback
   m_TagString: Untagged
@@ -15966,7 +16033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks:
   - {fileID: 887969642409557983}
-  - {fileID: 887969642409557976}
+  - {fileID: 3127942392291420502}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
@@ -15977,6 +16044,8 @@ MonoBehaviour:
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
+  CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -16014,14 +16083,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -16038,7 +16113,7 @@ MonoBehaviour:
   MinPitch: 1
   MaxPitch: 1
   SfxAudioMixerGroup: {fileID: 0}
---- !u!114 &887969642409557976
+--- !u!114 &3127942392291420502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16047,106 +16122,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 887969642409557978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Haptics
+  Label: Haptic Preset
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  HapticMethod: 0
-  HapticType: 4
-  TransientIntensity: 1
-  TransientSharpness: 1
-  ATVibrateIOS: 1
-  ATIOSIntensity: 1
-  ATIOSSharpness: 1
-  ATVibrateAndroid: 1
-  ATVibrateAndroidIfNoSupport: 0
-  ATAndroidIntensity: 1
-  ATAndroidSharpness: 1
-  ATRumble: 1
-  ATRumbleIntensity: 1
-  ATRumbleSharpness: 1
-  ATRumbleControllerID: -1
-  InitialContinuousIntensity: 1
-  ContinuousIntensityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  InitialContinuousSharpness: 1
-  ContinuousSharpnessCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  ContinuousDuration: 1
-  APVibrateIOS: 1
-  AHAPFileForIOS: {fileID: 0}
-  APVibrateAndroid: 1
-  APVibrateAndroidIfNoSupport: 0
-  AndroidWaveFormFile: {fileID: 0}
-  APRumble: 1
-  RumbleWaveFormFile: {fileID: 0}
-  AndroidRepeat: -1
-  RumbleRepeat: -1
-  OldIOSFallback: 0
-  Timescale: 1
-  AllowRumble: 1
-  ControllerID: -1
+  Preset: 4
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
 --- !u!1 &1859146799723750880
 GameObject:
   m_ObjectHideFlags: 0
@@ -21024,6 +21034,8 @@ MonoBehaviour:
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
+  CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -21061,22 +21073,30 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
+  Mode: 0
   BoundParticleSystem: {fileID: 7121450038961291734}
-  MoveToPosition: 0
   RandomParticleSystems: []
+  MoveToPosition: 0
+  ActivateOnPlay: 0
 --- !u!1 &3498215829673993004
 GameObject:
   m_ObjectHideFlags: 0
@@ -35545,13 +35565,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6039571569938451499}
   - component: {fileID: 8610833552874979524}
-  - component: {fileID: 6221701882912422291}
   - component: {fileID: 4057911374793555344}
   - component: {fileID: 1846998068}
   - component: {fileID: 1846998069}
   - component: {fileID: 4470893594557301219}
   - component: {fileID: 396831651395578228}
   - component: {fileID: 9109778914424049427}
+  - component: {fileID: 640259710961560349}
   m_Layer: 0
   m_Name: LoseFeedbacks
   m_TagString: Untagged
@@ -35586,7 +35606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Feedbacks:
-  - {fileID: 6221701882912422291}
+  - {fileID: 640259710961560349}
   - {fileID: 1846998069}
   - {fileID: 1846998068}
   - {fileID: 4057911374793555344}
@@ -35603,6 +35623,8 @@ MonoBehaviour:
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
+  CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -35623,115 +35645,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   DebugActive: 0
---- !u!114 &6221701882912422291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8786937159939047027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  Label: Haptics
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    InitialDelay: 0
-    CooldownDuration: 0
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    MMFeedbacksDirectionCondition: 0
-    PlayDirection: 0
-    ConstantIntensity: 0
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  HapticMethod: 0
-  HapticType: 3
-  TransientIntensity: 1
-  TransientSharpness: 1
-  ATVibrateIOS: 1
-  ATIOSIntensity: 1
-  ATIOSSharpness: 1
-  ATVibrateAndroid: 1
-  ATVibrateAndroidIfNoSupport: 0
-  ATAndroidIntensity: 1
-  ATAndroidSharpness: 1
-  ATRumble: 1
-  ATRumbleIntensity: 1
-  ATRumbleSharpness: 1
-  ATRumbleControllerID: -1
-  InitialContinuousIntensity: 1
-  ContinuousIntensityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  InitialContinuousSharpness: 1
-  ContinuousSharpnessCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  ContinuousDuration: 1
-  APVibrateIOS: 1
-  AHAPFileForIOS: {fileID: 0}
-  APVibrateAndroid: 1
-  APVibrateAndroidIfNoSupport: 0
-  AndroidWaveFormFile: {fileID: 0}
-  APRumble: 1
-  RumbleWaveFormFile: {fileID: 0}
-  AndroidRepeat: -1
-  RumbleRepeat: -1
-  OldIOSFallback: 0
-  Timescale: 1
-  AllowRumble: 1
-  ControllerID: -1
 --- !u!114 &4057911374793555344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35749,14 +35662,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -35793,14 +35712,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -35907,8 +35832,33 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
+  DetermineRotationOnPlay: 0
   ToDestinationSpace: 0
   DestinationAngles: {x: 0, y: 180, z: 0}
+  ToDestinationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1846998069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35926,14 +35876,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -36049,6 +36005,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
+  DetermineScaleOnPlay: 0
   DestinationScale: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!114 &4470893594557301219
 MonoBehaviour:
@@ -36067,22 +36024,30 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
+  Mode: 0
   BoundParticleSystem: {fileID: 1280382540464160374}
-  MoveToPosition: 0
   RandomParticleSystems: []
+  MoveToPosition: 0
+  ActivateOnPlay: 0
 --- !u!114 &396831651395578228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36100,14 +36065,20 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
@@ -36179,17 +36150,68 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
     InitialDelay: 0.06
     CooldownDuration: 0
+    InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
     DelayBetweenRepeats: 1
     MMFeedbacksDirectionCondition: 0
     PlayDirection: 0
     ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
     Sequence: {fileID: 0}
     TrackID: 0
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
   FreezeFrameDuration: 0.1
+  MinimumTimescaleThreshold: 0.1
+--- !u!114 &640259710961560349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8786937159939047027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Haptic Preset
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
+    InitialDelay: 0
+    CooldownDuration: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Preset: 3
+  HapticSettings:
+    ForceGamepadID: 0
+    GamepadID: 0
+    OnlyPlayIfHapticsSupported: 1
+    OnlyPlayIfAdvancedRequirementsMet: 0
+    OnlyPlayIfAmplitudeModulationSupported: 0
+    OnlyPlayIfFrequencyModulationSupported: 0
