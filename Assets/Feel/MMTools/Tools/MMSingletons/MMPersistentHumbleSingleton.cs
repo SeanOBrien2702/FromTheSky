@@ -46,19 +46,11 @@ namespace MoreMountains.Tools
 		/// </summary>
 		protected virtual void Awake ()
 		{
-			InitializeSingleton();			
-		}
-
-		/// <summary>
-		/// Initializes the singleton.
-		/// </summary>
-		protected virtual void InitializeSingleton()
-		{
 			if (!Application.isPlaying)
 			{
 				return;
 			}
-			
+
 			InitializationTime = Time.time;
 
 			DontDestroyOnLoad (this.gameObject);

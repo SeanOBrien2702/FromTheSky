@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MoreMountains.Tools
 {
-	/// <summary>
-	/// Prevents fast moving objects from going through colliders by casting a ray backwards after each movement
-	/// </summary>
-	[AddComponentMenu("More Mountains/Tools/Movement/MMPreventPassingThrough3D")]
-	public class MMPreventPassingThrough3D : MonoBehaviour 
+    /// <summary>
+    /// Prevents fast moving objects from going through colliders by casting a ray backwards after each movement
+    /// </summary>
+    [AddComponentMenu("More Mountains/Tools/Movement/MMPreventPassingThrough3D")]
+    public class MMPreventPassingThrough3D : MonoBehaviour 
 	{
 		/// the layer mask to search obstacles on
 		public LayerMask ObstaclesLayerMask; 
 		/// the bounds adjustment variable
 		public float SkinWidth = 0.1f;
-		public bool RepositionRigidbody = true;
-		/// the layer mask to filter when to reposition rigidbody
-		public LayerMask RepositionRigidbodyLayerMask; 
+        public bool RepositionRigidbody = true;
 
 		protected float _smallestBoundsWidth; 
 		protected float _adjustedSmallestBoundsWidth; 
@@ -27,18 +24,6 @@ namespace MoreMountains.Tools
 		protected Collider _collider;
 		protected Vector3 _lastMovement;
 		protected float _lastMovementSquared;
-
-		protected virtual void OnValidate()
-		{
-			// force initialized RepositionRigidbodyLayerMask, same behavior as before
-			if (RepositionRigidbody)
-			{
-				if (RepositionRigidbodyLayerMask.value == default)
-				{
-					RepositionRigidbodyLayerMask = ObstaclesLayerMask;
-				}
-			}
-		}
 
 		/// <summary>
 		/// On Start we initialize our object
@@ -100,16 +85,12 @@ namespace MoreMountains.Tools
 
 					if (!hitInfo.collider.isTrigger)
 					{
-						this.gameObject.SendMessage("PreventedCollision3D", hitInfo, SendMessageOptions.DontRequireReceiver);
-						if (RepositionRigidbody)
-						{
-							var hitLayer = hitInfo.collider.gameObject.layer;
-							if (0 != (1 << hitLayer & RepositionRigidbodyLayerMask))
-							{
-								this.transform.position = hitInfo.point - (_lastMovement / movementMagnitude) * _adjustedSmallestBoundsWidth;
-								_rigidbody.position = hitInfo.point - (_lastMovement / movementMagnitude) * _adjustedSmallestBoundsWidth;
-							}
-						}						
+                        this.gameObject.SendMessage("PreventedCollision3D", hitInfo, SendMessageOptions.DontRequireReceiver);
+                        if (RepositionRigidbody)
+                        {
+                            this.transform.position = hitInfo.point - (_lastMovement / movementMagnitude) * _adjustedSmallestBoundsWidth;
+                            _rigidbody.position = hitInfo.point - (_lastMovement / movementMagnitude) * _adjustedSmallestBoundsWidth;
+                        }						
 					}
 				}
 			} 
@@ -117,3 +98,5 @@ namespace MoreMountains.Tools
 		}
 	}
 }
+
+

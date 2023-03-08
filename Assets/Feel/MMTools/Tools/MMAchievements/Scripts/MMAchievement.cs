@@ -97,7 +97,6 @@ namespace MoreMountains.Tools
 		/// </summary>
 		protected virtual void EvaluateProgress()
 		{
-			MMAchievementChangedEvent.Trigger(this);
 			if (ProgressCurrent >= ProgressTarget)
 			{
 				ProgressCurrent = ProgressTarget;

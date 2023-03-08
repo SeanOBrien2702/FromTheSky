@@ -205,6 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95bc0f9cf6fa3b45ba4a4e45e2c460b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActionKey: 32
+  ActionKeyAlt: 350
   CooldownDuration: 0.1
   AttackFeedback: {fileID: 233433997}
   IndividualAttackFeedback: {fileID: 1466540677}
@@ -743,8 +745,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTimescale: 1
-  DefaultLerpSpeed: 1
-  DefaultLerpTimescale: 0
   CurrentTimeScale: 1
   TargetTimeScale: 1
   LerpTimescale: 1
@@ -923,10 +923,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -968,14 +967,11 @@ MonoBehaviour:
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
-  ForceTimescaleMode: 0
-  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
-  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -7366,10 +7362,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -7411,14 +7406,11 @@ MonoBehaviour:
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
-  ForceTimescaleMode: 0
-  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
-  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -13192,8 +13184,8 @@ GameObject:
   - component: {fileID: 951560828}
   - component: {fileID: 951560832}
   - component: {fileID: 951560831}
-  - component: {fileID: 951560829}
   - component: {fileID: 951560830}
+  - component: {fileID: 951560829}
   m_Layer: 0
   m_Name: AttackDeniedFeedback
   m_TagString: Untagged
@@ -13232,10 +13224,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -13292,18 +13283,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 951560827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Haptic Preset
+  Label: Haptics
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -13319,14 +13309,85 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  Preset: 2
-  HapticSettings:
-    ForceGamepadID: 0
-    GamepadID: 0
-    OnlyPlayIfHapticsSupported: 1
-    OnlyPlayIfAdvancedRequirementsMet: 0
-    OnlyPlayIfAmplitudeModulationSupported: 0
-    OnlyPlayIfFrequencyModulationSupported: 0
+  HapticMethod: 0
+  HapticType: 2
+  TransientIntensity: 1
+  TransientSharpness: 1
+  ATVibrateIOS: 1
+  ATIOSIntensity: 1
+  ATIOSSharpness: 1
+  ATVibrateAndroid: 1
+  ATVibrateAndroidIfNoSupport: 0
+  ATAndroidIntensity: 1
+  ATAndroidSharpness: 1
+  ATRumble: 1
+  ATRumbleIntensity: 1
+  ATRumbleSharpness: 1
+  ATRumbleControllerID: -1
+  InitialContinuousIntensity: 1
+  ContinuousIntensityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  InitialContinuousSharpness: 1
+  ContinuousSharpnessCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ContinuousDuration: 1
+  APVibrateIOS: 1
+  AHAPFileForIOS: {fileID: 0}
+  APVibrateAndroid: 1
+  APVibrateAndroidIfNoSupport: 0
+  AndroidWaveFormFile: {fileID: 0}
+  APRumble: 1
+  RumbleWaveFormFile: {fileID: 0}
+  AndroidRepeat: -1
+  RumbleRepeat: -1
+  OldIOSFallback: 0
+  Timescale: 1
+  AllowRumble: 0
+  ControllerID: -1
 --- !u!114 &951560831
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -13344,10 +13405,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -13396,14 +13456,11 @@ MonoBehaviour:
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
-  ForceTimescaleMode: 0
-  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
-  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -13696,6 +13753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetFPS: 300
+  RenderFrameInterval: 0
   VSyncCount: 0
 --- !u!1 &986400524
 GameObject:
@@ -13887,10 +13945,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -13934,10 +13991,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -13984,10 +14040,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -14028,10 +14083,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -14222,14 +14276,11 @@ MonoBehaviour:
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 1
   AutoPlayOnEnable: 0
-  ForceTimescaleMode: 0
-  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
-  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -14379,11 +14430,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5556
       objectReference: {fileID: 0}
@@ -14399,11 +14445,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.10759571
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.0127348
       objectReference: {fileID: 0}
@@ -14416,6 +14457,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.11684554
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.10759571
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -14473,11 +14524,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.0235
       objectReference: {fileID: 0}
@@ -14493,11 +14539,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.9025726
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.10682657
       objectReference: {fileID: 0}
@@ -14510,6 +14551,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.049021844
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.9025726
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -14694,11 +14745,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.3815
       objectReference: {fileID: 0}
@@ -14714,11 +14760,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.46392056
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.05490865
       objectReference: {fileID: 0}
@@ -14731,6 +14772,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.103923514
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.46392056
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -14773,6 +14824,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1297876394776863700, guid: 9096c72bd497923479605df131852973,
         type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1297876394776863700, guid: 9096c72bd497923479605df131852973,
+        type: 3}
       propertyPath: m_Size.x
       value: 0.1
       objectReference: {fileID: 0}
@@ -14780,11 +14836,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1297876394776863700, guid: 9096c72bd497923479605df131852973,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5203143107277489812, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -14803,11 +14854,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.338
       objectReference: {fileID: 0}
@@ -14823,11 +14869,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7356698
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.08707231
       objectReference: {fileID: 0}
@@ -14840,6 +14881,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.07895233
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7356698
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -20185,11 +20236,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.3815
       objectReference: {fileID: 0}
@@ -20205,11 +20251,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.46392056
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.05490865
       objectReference: {fileID: 0}
@@ -20222,6 +20263,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.103923514
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.46392056
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -20284,11 +20335,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5556
       objectReference: {fileID: 0}
@@ -20304,11 +20350,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.10759571
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.0127348
       objectReference: {fileID: 0}
@@ -20321,6 +20362,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.11684554
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.10759571
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -20881,7 +20932,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5239688, y: 1}
+    m_SensorSize: {x: 1.6535715, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -20993,6 +21044,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1451497455}
   - component: {fileID: 1451497457}
+  - component: {fileID: 1451497456}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -21014,6 +21066,25 @@ Transform:
   m_Father: {fileID: 1447310511}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1451497456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451497454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!114 &1451497457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21228,8 +21299,8 @@ GameObject:
   - component: {fileID: 1466540681}
   - component: {fileID: 1466540682}
   - component: {fileID: 1466540683}
-  - component: {fileID: 1466540685}
   - component: {fileID: 1466540684}
+  - component: {fileID: 1466540685}
   m_Layer: 0
   m_Name: IndividualAttackFeedback
   m_TagString: Untagged
@@ -21255,22 +21326,19 @@ MonoBehaviour:
   - {fileID: 1466540681}
   - {fileID: 1466540682}
   - {fileID: 1466540683}
-  - {fileID: 1466540685}
   - {fileID: 1466540684}
+  - {fileID: 1466540685}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
-  ForceTimescaleMode: 0
-  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
-  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -21308,10 +21376,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -21383,10 +21450,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -21565,10 +21631,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.1
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -21586,9 +21651,8 @@ MonoBehaviour:
   DebugActive: 0
   Mode: 0
   BoundParticleSystem: {fileID: 1589733113}
-  RandomParticleSystems: []
   MoveToPosition: 0
-  ActivateOnPlay: 0
+  RandomParticleSystems: []
 --- !u!114 &1466540682
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -21606,10 +21670,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -21658,10 +21721,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -21838,18 +21900,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1466540676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Haptic Preset
+  Label: Haptics
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -21865,14 +21926,85 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  Preset: 4
-  HapticSettings:
-    ForceGamepadID: 0
-    GamepadID: 0
-    OnlyPlayIfHapticsSupported: 1
-    OnlyPlayIfAdvancedRequirementsMet: 0
-    OnlyPlayIfAmplitudeModulationSupported: 0
-    OnlyPlayIfFrequencyModulationSupported: 0
+  HapticMethod: 0
+  HapticType: 4
+  TransientIntensity: 1
+  TransientSharpness: 1
+  ATVibrateIOS: 1
+  ATIOSIntensity: 1
+  ATIOSSharpness: 1
+  ATVibrateAndroid: 1
+  ATVibrateAndroidIfNoSupport: 0
+  ATAndroidIntensity: 1
+  ATAndroidSharpness: 1
+  ATRumble: 1
+  ATRumbleIntensity: 1
+  ATRumbleSharpness: 1
+  ATRumbleControllerID: -1
+  InitialContinuousIntensity: 1
+  ContinuousIntensityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  InitialContinuousSharpness: 1
+  ContinuousSharpnessCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ContinuousDuration: 1
+  APVibrateIOS: 1
+  AHAPFileForIOS: {fileID: 0}
+  APVibrateAndroid: 1
+  APVibrateAndroidIfNoSupport: 0
+  AndroidWaveFormFile: {fileID: 0}
+  APRumble: 1
+  RumbleWaveFormFile: {fileID: 0}
+  AndroidRepeat: -1
+  RumbleRepeat: -1
+  OldIOSFallback: 0
+  Timescale: 1
+  AllowRumble: 0
+  ControllerID: -1
 --- !u!114 &1466540685
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -21890,10 +22022,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -21961,8 +22092,8 @@ GameObject:
   - component: {fileID: 1472564343}
   - component: {fileID: 1472564347}
   - component: {fileID: 1472564346}
-  - component: {fileID: 1472564344}
   - component: {fileID: 1472564345}
+  - component: {fileID: 1472564344}
   m_Layer: 0
   m_Name: AttackDeniedFeedback
   m_TagString: Untagged
@@ -22001,10 +22132,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -22061,18 +22191,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1472564342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Haptic Preset
+  Label: Haptics
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -22088,14 +22217,85 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  Preset: 2
-  HapticSettings:
-    ForceGamepadID: 0
-    GamepadID: 0
-    OnlyPlayIfHapticsSupported: 1
-    OnlyPlayIfAdvancedRequirementsMet: 0
-    OnlyPlayIfAmplitudeModulationSupported: 0
-    OnlyPlayIfFrequencyModulationSupported: 0
+  HapticMethod: 0
+  HapticType: 2
+  TransientIntensity: 1
+  TransientSharpness: 1
+  ATVibrateIOS: 1
+  ATIOSIntensity: 1
+  ATIOSSharpness: 1
+  ATVibrateAndroid: 1
+  ATVibrateAndroidIfNoSupport: 0
+  ATAndroidIntensity: 1
+  ATAndroidSharpness: 1
+  ATRumble: 1
+  ATRumbleIntensity: 1
+  ATRumbleSharpness: 1
+  ATRumbleControllerID: -1
+  InitialContinuousIntensity: 1
+  ContinuousIntensityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  InitialContinuousSharpness: 1
+  ContinuousSharpnessCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ContinuousDuration: 1
+  APVibrateIOS: 1
+  AHAPFileForIOS: {fileID: 0}
+  APVibrateAndroid: 1
+  APVibrateAndroidIfNoSupport: 0
+  AndroidWaveFormFile: {fileID: 0}
+  APRumble: 1
+  RumbleWaveFormFile: {fileID: 0}
+  AndroidRepeat: -1
+  RumbleRepeat: -1
+  OldIOSFallback: 0
+  Timescale: 1
+  AllowRumble: 0
+  ControllerID: -1
 --- !u!114 &1472564346
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -22113,10 +22313,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -22157,22 +22356,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks:
   - {fileID: 1472564346}
-  - {fileID: 1472564344}
   - {fileID: 1472564345}
+  - {fileID: 1472564344}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
-  ForceTimescaleMode: 0
-  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
-  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -22723,7 +22919,6 @@ MonoBehaviour:
   PlayOnAwake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
-  CooldownBetweenShakes: 0
   Shaking: 0
   ForwardDirection: 1
   TimescaleMode: 0
@@ -22780,7 +22975,6 @@ MonoBehaviour:
   PlayOnAwake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
-  CooldownBetweenShakes: 0
   Shaking: 0
   ForwardDirection: 1
   TimescaleMode: 0
@@ -29458,57 +29652,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1447310511}
     m_Modifications:
     - target: {fileID: 394108091, guid: a5ed96966948b2348b46dab87f87bbcf, type: 3}
-      propertyPath: MobileText
-      value: Tap anywhere to attack
-      objectReference: {fileID: 0}
-    - target: {fileID: 394108091, guid: a5ed96966948b2348b46dab87f87bbcf, type: 3}
       propertyPath: DesktopText
       value: Press space to attack
       objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
+    - target: {fileID: 394108091, guid: a5ed96966948b2348b46dab87f87bbcf, type: 3}
+      propertyPath: MobileText
+      value: Tap anywhere to attack
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
@@ -29527,11 +29676,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -29547,13 +29691,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
@@ -29568,6 +29712,56 @@ PrefabInstance:
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378253, guid: a5ed96966948b2348b46dab87f87bbcf,
@@ -29775,6 +29969,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95bc0f9cf6fa3b45ba4a4e45e2c460b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActionKey: 32
+  ActionKeyAlt: 350
   CooldownDuration: 0.1
   AttackFeedback: {fileID: 627386866}
   IndividualAttackFeedback: {fileID: 2108737270}
@@ -29807,11 +30003,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.674
       objectReference: {fileID: 0}
@@ -29827,11 +30018,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.9802939
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.11602549
       objectReference: {fileID: 0}
@@ -29844,6 +30030,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.018792026
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.9802939
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -29996,11 +30192,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.674
       objectReference: {fileID: 0}
@@ -30016,11 +30207,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.9802939
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.11602549
       objectReference: {fileID: 0}
@@ -30033,6 +30219,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.018792026
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.9802939
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -35097,11 +35293,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.0235
       objectReference: {fileID: 0}
@@ -35117,11 +35308,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.9025726
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.10682657
       objectReference: {fileID: 0}
@@ -35134,6 +35320,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.049021844
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.9025726
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -35171,12 +35367,12 @@ PrefabInstance:
       objectReference: {fileID: 295862490}
     - target: {fileID: 6142139939243032202, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: ForceColor
+      propertyPath: ForceLifetime
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6142139939243032202, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: ForceLifetime
+      propertyPath: ForceColor
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8353206952533393121, guid: 9096c72bd497923479605df131852973,
@@ -35188,11 +35384,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BarbarianEnemy1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -35211,11 +35402,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.85662293
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.10138807
       objectReference: {fileID: 0}
@@ -35228,6 +35414,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.059460208
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.85662293
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -35381,8 +35577,8 @@ GameObject:
   - component: {fileID: 2108737267}
   - component: {fileID: 2108737266}
   - component: {fileID: 2108737265}
-  - component: {fileID: 2108737263}
   - component: {fileID: 2108737264}
+  - component: {fileID: 2108737263}
   m_Layer: 0
   m_Name: IndividualAttackFeedback
   m_TagString: Untagged
@@ -35421,10 +35617,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35490,18 +35685,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2108737261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69e14417fec82fd45a6ccb78d3868d40, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f1326a5f4dbb874f9c42effa0befa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  Label: Haptic Preset
+  Label: Haptics
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35517,14 +35711,85 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  Preset: 4
-  HapticSettings:
-    ForceGamepadID: 0
-    GamepadID: 0
-    OnlyPlayIfHapticsSupported: 1
-    OnlyPlayIfAdvancedRequirementsMet: 0
-    OnlyPlayIfAmplitudeModulationSupported: 0
-    OnlyPlayIfFrequencyModulationSupported: 0
+  HapticMethod: 0
+  HapticType: 4
+  TransientIntensity: 1
+  TransientSharpness: 1
+  ATVibrateIOS: 1
+  ATIOSIntensity: 1
+  ATIOSSharpness: 1
+  ATVibrateAndroid: 1
+  ATVibrateAndroidIfNoSupport: 0
+  ATAndroidIntensity: 1
+  ATAndroidSharpness: 1
+  ATRumble: 1
+  ATRumbleIntensity: 1
+  ATRumbleSharpness: 1
+  ATRumbleControllerID: -1
+  InitialContinuousIntensity: 1
+  ContinuousIntensityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  InitialContinuousSharpness: 1
+  ContinuousSharpnessCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ContinuousDuration: 1
+  APVibrateIOS: 1
+  AHAPFileForIOS: {fileID: 0}
+  APVibrateAndroid: 1
+  APVibrateAndroidIfNoSupport: 0
+  AndroidWaveFormFile: {fileID: 0}
+  APRumble: 1
+  RumbleWaveFormFile: {fileID: 0}
+  AndroidRepeat: -1
+  RumbleRepeat: -1
+  OldIOSFallback: 0
+  Timescale: 1
+  AllowRumble: 0
+  ControllerID: -1
 --- !u!114 &2108737265
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -35542,10 +35807,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35730,10 +35994,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35782,10 +36045,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.1
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35803,9 +36065,8 @@ MonoBehaviour:
   DebugActive: 0
   Mode: 0
   BoundParticleSystem: {fileID: 1244429167}
-  RandomParticleSystems: []
   MoveToPosition: 0
-  ActivateOnPlay: 0
+  RandomParticleSystems: []
 --- !u!114 &2108737268
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -35823,10 +36084,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -36005,10 +36265,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -36067,22 +36326,19 @@ MonoBehaviour:
   - {fileID: 2108737267}
   - {fileID: 2108737266}
   - {fileID: 2108737265}
-  - {fileID: 2108737263}
   - {fileID: 2108737264}
+  - {fileID: 2108737263}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
-  ForceTimescaleMode: 0
-  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
-  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -36344,6 +36600,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1297876394776863700, guid: 9096c72bd497923479605df131852973,
         type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1297876394776863700, guid: 9096c72bd497923479605df131852973,
+        type: 3}
       propertyPath: m_Size.x
       value: 0.1
       objectReference: {fileID: 0}
@@ -36351,11 +36612,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1297876394776863700, guid: 9096c72bd497923479605df131852973,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5203143107277489812, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -36366,11 +36622,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BarbarianEnemy2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -36389,11 +36640,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7356698
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.08707231
       objectReference: {fileID: 0}
@@ -36406,6 +36652,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.07895233
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7356698
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -40200,23 +40456,18 @@ PrefabInstance:
       objectReference: {fileID: 502521350}
     - target: {fileID: 6142139939243032202, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: ForceColor
+      propertyPath: ForceLifetime
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6142139939243032202, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: ForceLifetime
+      propertyPath: ForceColor
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960155, guid: 9096c72bd497923479605df131852973,
         type: 3}
       propertyPath: m_Name
       value: BarbarianEnemy1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
@@ -40235,11 +40486,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.85662293
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.10138807
       objectReference: {fileID: 0}
@@ -40252,6 +40498,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.059460208
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.85662293
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973,
         type: 3}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2035111234}
-  m_IndirectSpecularColor: {r: 0.83002114, g: 0.6867779, b: 0.5713578, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5063,11 +5063,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.18
       objectReference: {fileID: 0}
@@ -5083,11 +5078,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.77466863
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -5100,6 +5090,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.77466863
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -5132,26 +5132,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.595
       objectReference: {fileID: 0}
@@ -5164,11 +5144,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -2.081
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9997485
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -5187,6 +5162,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9997485
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -5199,6 +5184,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5265625615195376083, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -5585,14 +5585,11 @@ MonoBehaviour:
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
-  ForceTimescaleMode: 0
-  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
-  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -5644,10 +5641,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -5686,10 +5682,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.2
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -5841,10 +5836,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -6014,10 +6008,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -6289,7 +6282,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.5239688, y: 1}
+    m_SensorSize: {x: 1.8756684, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -6307,26 +6300,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.352
       objectReference: {fileID: 0}
@@ -6339,11 +6312,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9997485
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -6362,6 +6330,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9997485
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -6374,6 +6352,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5265625615195376083, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -6620,7 +6613,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -6721,7 +6713,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -6822,7 +6813,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -7103,26 +7093,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.375
       objectReference: {fileID: 0}
@@ -7135,11 +7105,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -5.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.96501654
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -7158,6 +7123,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.96501654
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -7170,6 +7145,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5265625615195376083, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -7306,7 +7296,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -7407,7 +7396,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -7508,7 +7496,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -7850,7 +7837,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -7951,7 +7937,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -8052,7 +8037,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -8505,7 +8489,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -8606,7 +8589,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -8707,7 +8689,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -9082,7 +9063,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -9183,7 +9163,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -9284,7 +9263,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -9845,7 +9823,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -9946,7 +9923,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -10047,7 +10023,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -10310,26 +10285,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.89
       objectReference: {fileID: 0}
@@ -10342,11 +10297,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -2.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9977433
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -10365,6 +10315,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9977433
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -10377,6 +10337,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5265625615195376083, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -10627,11 +10602,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.62
       objectReference: {fileID: 0}
@@ -10647,11 +10617,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9977433
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -10664,6 +10629,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9977433
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -10772,7 +10747,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -10873,7 +10847,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -10974,7 +10947,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -11283,7 +11255,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -11384,7 +11355,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -11485,7 +11455,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -11801,8 +11770,6 @@ MonoBehaviour:
   ShakeDuration: 0.8
   PlayOnAwake: 0
   Interruptible: 1
-  AlwaysResetTargetValuesAfterShake: 0
-  CooldownBetweenShakes: 0
   Shaking: 0
   ForwardDirection: 1
   TimescaleMode: 0
@@ -11921,8 +11888,6 @@ MonoBehaviour:
   ShakeDuration: 0.2
   PlayOnAwake: 0
   Interruptible: 1
-  AlwaysResetTargetValuesAfterShake: 0
-  CooldownBetweenShakes: 0
   Shaking: 0
   ForwardDirection: 1
   TimescaleMode: 0
@@ -11978,8 +11943,6 @@ MonoBehaviour:
   ShakeDuration: 0.8
   PlayOnAwake: 0
   Interruptible: 1
-  AlwaysResetTargetValuesAfterShake: 0
-  CooldownBetweenShakes: 0
   Shaking: 0
   ForwardDirection: 1
   TimescaleMode: 0
@@ -12167,6 +12130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a25af1840c62f94428f6258831338949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActionKey: 32
+  ActionKeyAlt: 350
   CooldownDuration: 1
   NoFeedbackAnimator: {fileID: 1747071487}
   FeedbackAnimator: {fileID: 736351431}
@@ -12177,11 +12142,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 445327336}
     m_Modifications:
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12199,11 +12159,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.851727
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -12216,6 +12171,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.851727
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -12403,7 +12368,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -12504,7 +12468,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -12605,7 +12568,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -12728,26 +12690,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.3999996
       objectReference: {fileID: 0}
@@ -12760,11 +12702,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -14.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9977433
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -12783,6 +12720,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9977433
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -12795,6 +12742,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5265625615195376083, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -13017,7 +12979,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -13118,7 +13079,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -13219,7 +13179,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -13449,7 +13408,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -13550,7 +13508,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -13651,7 +13608,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -13939,8 +13895,6 @@ MonoBehaviour:
   AddToInitialValue: 0
   UseUnscaledTime: 1
   RevertToInitialValueAfterEnd: 1
-  UseMaterialPropertyBlocks: 0
-  SafeMode: 0
   Curve:
     MMTweenDefinitionType: 0
     MMTweenCurve: 0
@@ -14249,7 +14203,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -14350,7 +14303,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -14451,7 +14403,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -24351,7 +24302,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -24452,7 +24402,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -24553,7 +24502,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -30054,11 +30002,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.65
       objectReference: {fileID: 0}
@@ -30074,11 +30017,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7954735
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -30091,6 +30029,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7954735
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -30199,7 +30147,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -30300,7 +30247,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -30401,7 +30347,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -30791,7 +30736,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -30892,7 +30836,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -30993,7 +30936,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -31436,7 +31378,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -31537,7 +31478,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -31638,7 +31578,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -31837,7 +31776,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -31938,7 +31876,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -32039,7 +31976,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -32269,7 +32205,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -32370,7 +32305,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -32471,7 +32405,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -32701,7 +32634,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -32802,7 +32734,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -32903,7 +32834,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -33102,7 +33032,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -33203,7 +33132,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -33304,7 +33232,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -33582,7 +33509,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -33683,7 +33609,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -33784,7 +33709,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -33942,10 +33866,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -34022,14 +33945,11 @@ MonoBehaviour:
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
-  ForceTimescaleMode: 0
-  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
-  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -34081,10 +34001,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -34140,10 +34059,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -34161,9 +34079,8 @@ MonoBehaviour:
   DebugActive: 0
   Mode: 0
   BoundParticleSystem: {fileID: 910775316}
-  RandomParticleSystems: []
   MoveToPosition: 0
-  ActivateOnPlay: 0
+  RandomParticleSystems: []
 --- !u!114 &1153873031
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -34181,10 +34098,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -34320,10 +34236,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -34397,10 +34312,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -34444,10 +34358,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -34674,10 +34587,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.2
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -34904,10 +34816,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.6
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35116,10 +35027,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.4
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -35506,7 +35416,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -35607,7 +35516,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -35708,7 +35616,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -36065,7 +35972,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -36166,7 +36072,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -36267,7 +36172,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -36446,8 +36350,6 @@ MonoBehaviour:
   AddToInitialValue: 0
   UseUnscaledTime: 1
   RevertToInitialValueAfterEnd: 1
-  UseMaterialPropertyBlocks: 0
-  SafeMode: 0
   Curve:
     MMTweenDefinitionType: 0
     MMTweenCurve: 0
@@ -42192,7 +42094,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -42293,7 +42194,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -42394,7 +42294,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -42642,26 +42541,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.899
       objectReference: {fileID: 0}
@@ -42674,11 +42553,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -6.891
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.87172747
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -42697,6 +42571,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.87172747
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -42709,6 +42593,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5265625615195376083, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -42802,7 +42701,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -42903,7 +42801,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -43004,7 +42901,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -43203,7 +43099,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -43304,7 +43199,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -43405,7 +43299,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -43559,26 +43452,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.66
       objectReference: {fileID: 0}
@@ -43591,11 +43464,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -10.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8733475
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -43614,6 +43482,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8733475
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -43626,6 +43504,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5265625615195376083, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -43719,7 +43612,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -43820,7 +43712,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -43921,7 +43812,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -44123,8 +44013,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTimescale: 1
-  DefaultLerpSpeed: 1
-  DefaultLerpTimescale: 0
   CurrentTimeScale: 1
   TargetTimeScale: 1
   LerpTimescale: 1
@@ -49299,7 +49187,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -49400,7 +49287,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -49501,7 +49387,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -49700,7 +49585,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -49801,7 +49685,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -49902,7 +49785,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -55034,14 +54916,11 @@ MonoBehaviour:
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
   AutoPlayOnEnable: 0
-  ForceTimescaleMode: 0
-  ForcedTimescaleMode: 1
   DurationMultiplier: 1
   DisplayFullDurationDetails: 0
   CooldownDuration: 0
   InitialDelay: 0
   CanPlayWhileAlreadyPlaying: 1
-  ChanceToPlay: 100
   FeedbacksIntensity: 1
   Events:
     TriggerMMFeedbacksEvents: 0
@@ -55093,10 +54972,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.15
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 2
     RepeatForever: 0
@@ -55114,7 +54992,6 @@ MonoBehaviour:
   DebugActive: 0
   Mode: 0
   TargetShaderController: {fileID: 780676527}
-  TargetShaderControllerList: []
   RevertToInitialValueAfterEnd: 0
   OneTimeDuration: 0.05
   OneTimeAmplitude: 15
@@ -55206,10 +55083,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.3
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 2
     RepeatForever: 0
@@ -55227,9 +55103,8 @@ MonoBehaviour:
   DebugActive: 0
   Mode: 0
   BoundParticleSystem: {fileID: 1298706666}
-  RandomParticleSystems: []
   MoveToPosition: 0
-  ActivateOnPlay: 0
+  RandomParticleSystems: []
 --- !u!114 &1613779488
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -55247,10 +55122,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.15
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -55315,10 +55189,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.15
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -55426,10 +55299,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.5
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -55446,7 +55318,6 @@ MonoBehaviour:
     TargetBPM: 120
   DebugActive: 0
   FreezeFrameDuration: 0.05
-  MinimumTimescaleThreshold: 0.1
 --- !u!114 &1613779491
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -55464,10 +55335,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -55645,10 +55515,9 @@ MonoBehaviour:
   Chance: 100
   Timing:
     TimescaleMode: 0
-    ExcludeFromHoldingPauses: 0
-    ContributeToTotalDuration: 1
     InitialDelay: 0.15
     CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
     InterruptsOnStop: 1
     NumberOfRepeats: 0
     RepeatForever: 0
@@ -56113,7 +55982,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -56214,7 +56082,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -56315,7 +56182,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -56550,7 +56416,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -56651,7 +56516,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -56752,7 +56616,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -56951,7 +56814,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -57052,7 +56914,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -57153,7 +57014,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -57480,7 +57340,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -57581,7 +57440,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -57682,7 +57540,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -58165,7 +58022,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -58266,7 +58122,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -58367,7 +58222,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -58689,7 +58543,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -58790,7 +58643,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -58891,7 +58743,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -63868,11 +63719,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.94
       objectReference: {fileID: 0}
@@ -63888,11 +63734,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.77466863
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -63905,6 +63746,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.77466863
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -63968,11 +63819,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.93
       objectReference: {fileID: 0}
@@ -63988,11 +63834,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8733475
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -64005,6 +63846,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8733475
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -64037,11 +63888,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.001
       objectReference: {fileID: 0}
@@ -64057,11 +63903,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.851727
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -64074,6 +63915,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.851727
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -64182,7 +64033,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -64283,7 +64133,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -64384,7 +64233,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -64674,7 +64522,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -64775,7 +64622,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -64876,7 +64722,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -65075,7 +64920,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -65176,7 +65020,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -65277,7 +65120,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -65757,72 +65599,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 778519825}
     m_Modifications:
     - target: {fileID: 394108091, guid: a5ed96966948b2348b46dab87f87bbcf, type: 3}
-      propertyPath: MobileText
-      value: Tap anywhere to jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 394108091, guid: a5ed96966948b2348b46dab87f87bbcf, type: 3}
       propertyPath: DesktopText
       value: Press space to jump
       objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
+    - target: {fileID: 394108091, guid: a5ed96966948b2348b46dab87f87bbcf, type: 3}
+      propertyPath: MobileText
+      value: Tap anywhere to jump
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
@@ -65841,11 +65623,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -65861,13 +65638,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
@@ -65882,6 +65659,71 @@ PrefabInstance:
     - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516721323258378249, guid: a5ed96966948b2348b46dab87f87bbcf,
+        type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8516721323258378253, guid: a5ed96966948b2348b46dab87f87bbcf,
@@ -66383,6 +66225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2114531419}
   - component: {fileID: 2114531421}
+  - component: {fileID: 2114531420}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -66404,6 +66247,25 @@ Transform:
   m_Father: {fileID: 778519825}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2114531420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114531418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!114 &2114531421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66504,7 +66366,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -66605,7 +66466,6 @@ MonoBehaviour:
     AmplitudeMin: {x: -5, y: -5, z: -5}
     AmplitudeMax: {x: 5, y: 5, z: 5}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -66706,7 +66566,6 @@ MonoBehaviour:
     AmplitudeMin: {x: 0, y: 0, z: 0}
     AmplitudeMax: {x: 1, y: 1, z: 1}
     RelativeAmplitude: 1
-    UniformValues: 0
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -66891,11 +66750,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.67
       objectReference: {fileID: 0}
@@ -66911,11 +66765,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9977433
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -66928,6 +66777,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9977433
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
@@ -66960,11 +66819,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.425
       objectReference: {fileID: 0}
@@ -66980,11 +66834,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -66997,6 +66846,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 40694071891407375, guid: 06cf8061235d06c429c065ea1adff9ad,
         type: 3}

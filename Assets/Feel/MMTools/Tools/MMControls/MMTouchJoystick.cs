@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
+using System.Collections;
+using MoreMountains.Tools;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using System;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 namespace MoreMountains.Tools 
 {
 	[System.Serializable]
 	public class JoystickEvent : UnityEvent<Vector2> {}
-	[System.Serializable]
-	public class JoystickFloatEvent : UnityEvent<float> {}
 
 	/// <summary>
 	/// Joystick input class.
@@ -21,131 +18,91 @@ namespace MoreMountains.Tools
 	/// </summary>
 	[RequireComponent(typeof(Rect))]
 	[RequireComponent(typeof(CanvasGroup))]
-	[AddComponentMenu("More Mountains/Tools/Controls/MMTouchJoystick")]
-	public class MMTouchJoystick : MMMonoBehaviour, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
+    [AddComponentMenu("More Mountains/Tools/Controls/MMTouchJoystick")]
+    public class MMTouchJoystick : MonoBehaviour, IDragHandler, IEndDragHandler
 	{
-		[MMInspectorGroup("Camera", true, 16)]
+		[Header("Camera")]
 		public Camera TargetCamera;
 
-		[MMInspectorGroup("Joystick Behaviour", true, 18)]
-		[Tooltip("Determines whether the horizontal axis of this stick should be enabled. If not, the stick will only move vertically.")]
+		[Header("Pressed Behaviour")]
+		[MMInformation("Here you can set the opacity of the joystick when it's pressed. Useful for visual feedback.", MMInformationAttribute.InformationType.Info,false)]
+		/// the new opacity to apply to the canvas group when the button is pressed
+		public float PressedOpacity = 0.5f;
+
+		[Header("Axis")]
+		[MMInformation("Choose if you want a joystick limited to one axis or not, and define the MaxRange. The MaxRange is the maximum distance from its initial center position you can drag the joystick to.",MMInformationAttribute.InformationType.Info,false)]
 		/// Is horizontal axis allowed
 		public bool HorizontalAxisEnabled = true;
 		/// Is vertical axis allowed
-		[Tooltip("Determines whether the vertical axis of this stick should be enabled. If not, the stick will only move horizontally.")]
 		public bool VerticalAxisEnabled = true;
 		/// The max range allowed
-		[Tooltip("The MaxRange is the maximum distance from its initial center position you can drag the joystick to.")]
+		[MMInformation("And finally you can bind a function to get your joystick's values. Your method has to have a Vector2 as a parameter. Drag your object here and select the method.", MMInformationAttribute.InformationType.Info,false)]
 		public float MaxRange = 1.5f;
 
-		[MMInspectorGroup("Value Events", true, 19)]
-		/// An event to use the raw value of the joystick
-		[Tooltip("An event to use the raw value of the joystick")]
+		[Header("Binding")]
+		/// The method(s) to call when the button gets pressed down
 		public JoystickEvent JoystickValue;
-		/// An event to use the normalized value of the joystick
-		[Tooltip("An event to use the normalized value of the joystick")]
-		public JoystickEvent JoystickNormalizedValue;
-		// An event to use the joystick's amplitude (the magnitude of its Vector2 output)
-		[Tooltip("An event to use the joystick's amplitude (the magnitude of its Vector2 output)")]
-		public JoystickFloatEvent JoystickMagnitudeValue;
-		
-		[MMInspectorGroup("Touch Events", true, 8)]
-		/// An event triggered when tapping the joystick for the first time
-		[Tooltip("An event triggered when tapping the joystick for the first time")]
-		public UnityEvent OnPointerDownEvent;
-		/// An event triggered when dragging the stick
-		[Tooltip("An event triggered when dragging the stick")]
-		public UnityEvent OnDragEvent;
-		/// An event triggered when releasing the stick
-		[Tooltip("An event triggered when releasing the stick")]
-		public UnityEvent OnPointerUpEvent;
-		
-		[MMInspectorGroup("Rotating Direction Indicator", true, 20)]
+
+		[Header("Rotating Direction Indicator")] 
 		/// an object you can rotate to show the direction of the joystick. Will only be visible if the movement is above a threshold
-		[Tooltip("an object you can rotate to show the direction of the joystick. Will only be visible if the movement is above a threshold")]
 		public Transform RotatingIndicator;
 		/// the threshold above which the rotating indicator will appear
-		[Tooltip("the threshold above which the rotating indicator will appear")]
 		public float RotatingIndicatorThreshold = 0.1f;
-		
-		[MMInspectorGroup("Knob Opacity", true, 17)]
-		/// the new opacity to apply to the canvas group when the button is pressed
-		[Tooltip("the new opacity to apply to the canvas group when the button is pressed")]
-		public float PressedOpacity = 0.5f;
-		/// whether or not to interpolate opacity changes on the knob's canvas group
-		[Tooltip("whether or not to interpolate opacity changes on the knob's canvas group")]
-		public bool InterpolateOpacity = true;
-		/// the speed at which to interpolate opacity
-		[Tooltip("the speed at which to interpolate opacity")]
-		[MMCondition("InterpolateOpacity", true)]
-		public float InterpolateOpacitySpeed = 1f;
-		
-		[MMInspectorGroup("Debug Output", true, 5)]
-		/// the raw value of the joystick, from 0 to 1 on each axis
-		[Tooltip("the raw value of the joystick, from 0 to 1 on each axis")]
-		[MMReadOnly]
-		public Vector2 RawValue;
-		/// the normalized value of the joystick
-		[Tooltip("the normalized value of the joystick")]
-		[MMReadOnly]
-		public Vector2 NormalizedValue;
-		/// the magnitude of the stick's vector
-		[Tooltip("the magnitude of the stick's vector")]
-		[MMReadOnly]
-		public float Magnitude;
-		/// whether or not to draw gizmos associated to this stick
-		[Tooltip("whether or not to draw gizmos associated to this stick")] 
-		public bool DrawGizmos = true;
-		
-		
-		/// the render mode of the parent canvas this stick is on
+
 		public RenderMode ParentCanvasRenderMode { get; protected set; }
 
+		/// Store neutral position of the stick
 		protected Vector2 _neutralPosition;
+		/// Current horizontal and vertical values of the joystick (from -1 to 1)
+		public Vector2 _joystickValue;
+		/// The canvas rect transform we're working with.
+		protected RectTransform _canvasRectTransform;
+		/// working vector
 		protected Vector2 _newTargetPosition;
 		protected Vector3 _newJoystickPosition;
 		protected float _initialZPosition;
-		protected float _targetOpacity;
-		protected CanvasGroup _canvasGroup;
+
+	    protected CanvasGroup _canvasGroup;
 		protected float _initialOpacity;
 		protected Transform _knobTransform;
 		protected bool _rotatingIndicatorIsNotNull = false;
-		
-		/// <summary>
-		/// On Start we initialize our stick
-		/// </summary>
-		protected virtual void Start()
-		{
-			Initialize();
-		}
 
-		/// <summary>
-		/// Initializes the various parts of the stick
-		/// </summary>
-		/// <exception cref="Exception"></exception>
-		public virtual void Initialize()
+
+        /// <summary>
+        /// On Start, we get our working canvas, and we set our neutral position
+        /// </summary>
+        protected virtual void Awake()
+        {
+           // Initialize();
+        }
+
+        protected virtual void Start()
+        {
+            Initialize();
+        }
+
+        public virtual void Initialize()
 		{
-			if ((ParentCanvasRenderMode == RenderMode.ScreenSpaceCamera) && (TargetCamera == null))
-			{
-				throw new Exception("MMTouchJoystick : you have to set a target camera");
-			}
-			
+			_canvasRectTransform = GetComponentInParent<Canvas>().transform as RectTransform;
 			_canvasGroup = GetComponent<CanvasGroup>();
 			_rotatingIndicatorIsNotNull = (RotatingIndicator != null);
 
 			SetKnobTransform(this.transform);
 
-			SetNeutralPosition();
-			
+            SetNeutralPosition();
+			if (TargetCamera == null)
+			{
+				throw new Exception("MMTouchJoystick : you have to set a target camera");
+			}
 			ParentCanvasRenderMode = GetComponentInParent<Canvas>().renderMode;
 			_initialZPosition = _knobTransform.position.z;
 			_initialOpacity = _canvasGroup.alpha;			
 		}
 
-		/// <summary>
-		/// Assigns a new transform as the joystick knob
-		/// </summary>
-		/// <param name="newTransform"></param>
+        /// <summary>
+        /// Assigns a new transform as the joystick knob
+        /// </summary>
+        /// <param name="newTransform"></param>
 		public virtual void SetKnobTransform(Transform newTransform)
 		{
 			_knobTransform = newTransform;
@@ -156,38 +113,17 @@ namespace MoreMountains.Tools
 		/// </summary>
 		protected virtual void Update()
 		{
-			NormalizedValue = RawValue.normalized;
-			Magnitude = RawValue.magnitude;
-			
-			if (HorizontalAxisEnabled || VerticalAxisEnabled)
+            if (JoystickValue != null)
 			{
-				JoystickValue.Invoke(RawValue);
-				JoystickNormalizedValue.Invoke(NormalizedValue);
-				JoystickMagnitudeValue.Invoke(Magnitude);
+				if (HorizontalAxisEnabled || VerticalAxisEnabled)
+				{
+					JoystickValue.Invoke(_joystickValue);
+				}
 			}
-			
-			RotateIndicator();
-			HandleOpacity();
+
+            RotateIndicator();
 		}
 
-		/// <summary>
-		/// Changes or interpolates the opacity of the knob
-		/// </summary>
-		protected virtual void HandleOpacity()
-		{
-			if (InterpolateOpacity)
-			{
-				_canvasGroup.alpha = MMMaths.Lerp(_canvasGroup.alpha, _targetOpacity, InterpolateOpacitySpeed, Time.unscaledDeltaTime);	
-			}
-			else
-			{
-				_canvasGroup.alpha = _targetOpacity;
-			}
-		}
-
-		/// <summary>
-		/// Rotates an indicator to match the rotation of the stick
-		/// </summary>
 		protected virtual void RotateIndicator()
 		{
 			if (!_rotatingIndicatorIsNotNull)
@@ -195,9 +131,9 @@ namespace MoreMountains.Tools
 				return;
 			}
 
-			RotatingIndicator.gameObject.SetActive(RawValue.magnitude > RotatingIndicatorThreshold);
-			float angle = Mathf.Atan2(RawValue.y, RawValue.x) * Mathf.Rad2Deg;
-			RotatingIndicator.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+			RotatingIndicator.gameObject.SetActive(_joystickValue.magnitude > RotatingIndicatorThreshold);
+			float angle = Mathf.Atan2(_joystickValue.y, _joystickValue.x) * Mathf.Rad2Deg;
+			RotatingIndicator.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 		}
 		
 		/// <summary>
@@ -205,8 +141,8 @@ namespace MoreMountains.Tools
 		/// </summary>
 		public virtual void SetNeutralPosition()
 		{
-			_neutralPosition = _knobTransform.position;
-		}
+            _neutralPosition = _knobTransform.position;
+        }
 
 		public virtual void SetNeutralPosition(Vector3 newPosition)
 		{
@@ -218,12 +154,21 @@ namespace MoreMountains.Tools
 		/// </summary>
 		public virtual void OnDrag(PointerEventData eventData)
 		{
-			OnDragEvent.Invoke();
+			_canvasGroup.alpha = PressedOpacity;
 
-			_newTargetPosition = ConvertToWorld(eventData.position);
+			// if we're in "screen space - camera" render mode
+			if (ParentCanvasRenderMode == RenderMode.ScreenSpaceCamera)
+			{
+				_newTargetPosition = TargetCamera.ScreenToWorldPoint(eventData.position);
+			}
+			// otherwise
+			else
+			{
+				_newTargetPosition = eventData.position;
+			}
 
 			// We clamp the stick's position to let it move only inside its defined max range
-			ClampToBounds();
+			_newTargetPosition = Vector2.ClampMagnitude(_newTargetPosition - _neutralPosition, MaxRange);
 
 			// If we haven't authorized certain axis, we force them to zero
 			if (!HorizontalAxisEnabled)
@@ -235,8 +180,8 @@ namespace MoreMountains.Tools
 				_newTargetPosition.y = 0;
 			}
 			// For each axis, we evaluate its lerped value (-1...1)
-			RawValue.x = EvaluateInputValue(_newTargetPosition.x);
-			RawValue.y = EvaluateInputValue(_newTargetPosition.y);
+			_joystickValue.x = EvaluateInputValue(_newTargetPosition.x);
+			_joystickValue.y = EvaluateInputValue(_newTargetPosition.y);
 
 			_newJoystickPosition = _neutralPosition + _newTargetPosition;
 			_newJoystickPosition.z = _initialZPosition;
@@ -246,45 +191,19 @@ namespace MoreMountains.Tools
 		}
 
 		/// <summary>
-		/// Clamps the stick to the specified range
+		/// What happens when the stick is released
 		/// </summary>
-		protected virtual void ClampToBounds()
-		{
-			_newTargetPosition = Vector2.ClampMagnitude(_newTargetPosition - _neutralPosition, MaxRange);
-		}
-
-		/// <summary>
-		/// Converts a position to world position
-		/// </summary>
-		/// <param name="position"></param>
-		/// <returns></returns>
-		protected virtual Vector3 ConvertToWorld(Vector3 position)
-		{
-			if (ParentCanvasRenderMode == RenderMode.ScreenSpaceCamera)
-			{
-				return TargetCamera.ScreenToWorldPoint(position);
-			}
-			else
-			{
-				return position;
-			}
-		}
-
-		/// <summary>
-		/// Resets the stick's position and values
-		/// </summary>
-		public virtual void ResetJoystick()
+		public virtual void OnEndDrag(PointerEventData eventData)
 		{
 			// we reset the stick's position
 			_newJoystickPosition = _neutralPosition;
 			_newJoystickPosition.z = _initialZPosition;
 			_knobTransform.position = _newJoystickPosition;
-			
-			RawValue.x = 0f;
-			RawValue.y = 0f;
+			_joystickValue.x = 0f;
+			_joystickValue.y = 0f;
 
 			// we set its opacity back
-			_targetOpacity = _initialOpacity;
+			_canvasGroup.alpha=_initialOpacity;
 		}
 
 		/// <summary>
@@ -297,63 +216,10 @@ namespace MoreMountains.Tools
 			return Mathf.InverseLerp(0, MaxRange, Mathf.Abs(vectorPosition)) * Mathf.Sign(vectorPosition);
 		}
 
-		/// <summary>
-		/// What happens when the stick stops being dragged
-		/// </summary>
-		public virtual void OnEndDrag(PointerEventData eventData)
-		{
-		}
-		
-		/// <summary>
-		/// What happens when the stick is released (even if no drag happened)
-		/// </summary>
-		/// <param name="data"></param>
-		public virtual void OnPointerUp(PointerEventData data)
-		{
-			ResetJoystick();
-			OnPointerUpEvent.Invoke();
-		}
-		
-		/// <summary>
-		/// What happens when the stick is pressed for the first time
-		/// </summary>
-		/// <param name="data"></param>
-		public virtual void OnPointerDown(PointerEventData data)
-		{
-			_targetOpacity = PressedOpacity;
-			OnPointerDownEvent.Invoke();
-		}
-
-		/// <summary>
-		/// On enable, we initialize our stick
-		/// </summary>
 		protected virtual void OnEnable()
 		{
 			Initialize();
-			_targetOpacity = _initialOpacity;
+			_canvasGroup.alpha = _initialOpacity;
 		}
-		
-		#if UNITY_EDITOR
-		/// <summary>
-		/// Draws gizmos if needed
-		/// </summary>
-		protected virtual void OnDrawGizmos()
-		{
-			if (!DrawGizmos)
-			{
-				return;
-			}
-
-			Handles.color = MMColors.Orange;
-			if (!Application.isPlaying)
-			{
-				Handles.DrawWireDisc(this.transform.position, Vector3.forward, MaxRange);	
-			}
-			else
-			{
-				Handles.DrawWireDisc(_neutralPosition, Vector3.forward, MaxRange);
-			}
-		}
-		#endif
 	}
 }

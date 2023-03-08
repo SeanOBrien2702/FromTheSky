@@ -7,11 +7,11 @@ namespace MoreMountains.Tools
 	[CustomPropertyDrawer(typeof(MMReorderableAttributeAttribute))]
 	public class ReorderableDrawer : PropertyDrawer {
 
-		private static Dictionary<int, MMReorderableList> lists = new Dictionary<int, MMReorderableList>();
+		private static Dictionary<int, ReorderableList> lists = new Dictionary<int, ReorderableList>();
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
 
-			MMReorderableList list = GetList(property, attribute as MMReorderableAttributeAttribute);
+			ReorderableList list = GetList(property, attribute as MMReorderableAttributeAttribute);
 
 			return list != null ? list.GetHeight() : EditorGUIUtility.singleLineHeight;
 		}		
@@ -19,7 +19,7 @@ namespace MoreMountains.Tools
 		#if  UNITY_EDITOR
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 
-			MMReorderableList list = GetList(property, attribute as MMReorderableAttributeAttribute);
+			ReorderableList list = GetList(property, attribute as MMReorderableAttributeAttribute);
 
 			if (list != null) {
 
@@ -45,29 +45,29 @@ namespace MoreMountains.Tools
 			return 0;
 		}
 
-		public static MMReorderableList GetList(SerializedProperty property) {
+		public static ReorderableList GetList(SerializedProperty property) {
 
 			return GetList(property, null, GetListId(property));
 		}
 
-		public static MMReorderableList GetList(SerializedProperty property, MMReorderableAttributeAttribute attrib) {
+		public static ReorderableList GetList(SerializedProperty property, MMReorderableAttributeAttribute attrib) {
 
 			return GetList(property, attrib, GetListId(property));
 		}
 
-		public static MMReorderableList GetList(SerializedProperty property, int id) {
+		public static ReorderableList GetList(SerializedProperty property, int id) {
 
 			return GetList(property, null, id);
 		}
 
-		public static MMReorderableList GetList(SerializedProperty property, MMReorderableAttributeAttribute attrib, int id) {
+		public static ReorderableList GetList(SerializedProperty property, MMReorderableAttributeAttribute attrib, int id) {
 
 			if (property == null) {
 
 				return null;
 			}
 
-			MMReorderableList list = null;
+			ReorderableList list = null;
 			SerializedProperty array = property.FindPropertyRelative("array");
 
 			if (array != null && array.isArray) {
@@ -78,13 +78,13 @@ namespace MoreMountains.Tools
 
 						Texture icon = !string.IsNullOrEmpty(attrib.elementIconPath) ? AssetDatabase.GetCachedIcon(attrib.elementIconPath) : null;
 
-						MMReorderableList.ElementDisplayType displayType = attrib.singleLine ? MMReorderableList.ElementDisplayType.SingleLine : MMReorderableList.ElementDisplayType.Auto;
+						ReorderableList.ElementDisplayType displayType = attrib.singleLine ? ReorderableList.ElementDisplayType.SingleLine : ReorderableList.ElementDisplayType.Auto;
 
-						list = new MMReorderableList(array, attrib.add, attrib.remove, attrib.draggable, displayType, attrib.elementNameProperty, attrib.elementNameOverride, icon);
+						list = new ReorderableList(array, attrib.add, attrib.remove, attrib.draggable, displayType, attrib.elementNameProperty, attrib.elementNameOverride, icon);
 					}
 					else {
 
-						list = new MMReorderableList(array, true, true, true);
+						list = new ReorderableList(array, true, true, true);
 					}
 
 					lists.Add(id, list);
