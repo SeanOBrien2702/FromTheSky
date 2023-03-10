@@ -1,5 +1,111 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1498052040365835401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3031822275776843280}
+  - component: {fileID: 1292932849499452082}
+  - component: {fileID: 5247927180749840082}
+  - component: {fileID: 6996861851129735322}
+  - component: {fileID: 8628587266733291279}
+  - component: {fileID: 6882815989272371323}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3031822275776843280
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498052040365835401}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 414.36566, y: 693.6786, z: -700.2341}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8697713050240454995}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1292932849499452082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498052040365835401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c714dff07c3144d2ba31f5d5947a7013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mixer: {fileID: -2273146209696275378, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
+  ScenePersistent: 1
+  CollapseLibrary: 1
+  TrackLibrary: []
+--- !u!114 &5247927180749840082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498052040365835401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba875997bc5c4d85a9b0478acbccfc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mixer: {fileID: -3165942800488051908, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
+  ScenePersistent: 1
+  CollapseObjectLibrary: 1
+  CollapseGroupLibrary: 1
+  SFXObjectLibrary: []
+  SFXGroupLibrary: []
+--- !u!114 &6996861851129735322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498052040365835401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbc32136609849cb891f98414060571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollapseLibrary: 1
+  ScenePersistent: 0
+  PlaylistLibrary: []
+--- !u!81 &8628587266733291279
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498052040365835401}
+  m_Enabled: 1
+--- !u!114 &6882815989272371323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498052040365835401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d605a04ff23ea40bba63ab2a986003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuTrack: {fileID: 11400000, guid: 234fc46e73673484cb94dffca4d09b93, type: 2}
+  combatTrack: {fileID: 11400000, guid: 8e258baabf14682469ed523dcebb1a58, type: 2}
 --- !u!1 &3834075897655039180
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +139,7 @@ Transform:
   - {fileID: 6510679664790416551}
   - {fileID: 8644599872789599570}
   - {fileID: 3813705008834952228}
+  - {fileID: 3031822275776843280}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -550,3 +657,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a621f657cb9ca6c459bcd9aed68588ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 50

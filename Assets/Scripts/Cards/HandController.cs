@@ -7,6 +7,7 @@ using FTS.Characters;
 using FTS.UI;
 using System;
 using UnityEngine.EventSystems;
+using AMPInternal;
 #endregion
 
 namespace FTS.Cards
@@ -44,6 +45,8 @@ namespace FTS.Cards
         [SerializeField] GameObject cardPrefab;
         [SerializeField] Transform targetingPosition;
 
+
+
         [Header("Hand Position")]
         [SerializeField] Transform deckPosition;
         [SerializeField] Transform discardPosition;
@@ -54,24 +57,30 @@ namespace FTS.Cards
         [SerializeField] int zoomHeight = 300;
         [Range(1f, 1.5f)]
         [SerializeField] float zoomInScaling = 1.1f;
+        Vector3 zoomScale = new Vector3(1.25f, 1.25f, 1);
+        Vector3 handScale = new Vector3(1f, 1f, 1);
+        Vector3 discardScale = new Vector3(0.05f, 0.05f, 1);
+        bool isTargetingZoom = false;
+        float startZoom;
+        float endZoom;
+        int currentZoom = -1;
+
+        [Header("Draw Settings")]
+        [SerializeField] float drawInterval;
+        [SerializeField] float duration = 1f;
+        [SerializeField] SFXObject drawSound;
+        int spacingIncrement = 600;
+        int spacingAdjustment = 35;       
+        int rotationIncrement = 6;
+        bool isDrawing = false;
+        bool lerping = false;
 
         public static event System.Action OnCardsSpaced = delegate { };
         List<HandPrefab> handPrefabs = new List<HandPrefab>();
         List<CardUI> cardUI = new List<CardUI>();
-        int spacingIncrement = 600;
-        int spacingAdjustment = 35;
-        float duration = 0.5f;
-        int rotationIncrement = 6;
+        Queue<HandPrefab> cardsToBeDrawn = new Queue<HandPrefab>();
+        
 
-        Vector3 zoomScale = new Vector3(1.25f, 1.25f, 1);
-        Vector3 handScale = new Vector3(1f, 1f, 1);
-        Vector3 discardScale = new Vector3(0.05f, 0.05f, 1);
-        bool lerping = false;
-        bool isTargetingZoom = false;
-        float startZoom;
-        float endZoom;
-
-        int currentZoom = -1;
 
         #region Properties
         public bool LERPing  // property
@@ -301,8 +310,9 @@ namespace FTS.Cards
             cardUI.Add(newCardUI);
 
             HandPrefab handPrefab = new HandPrefab(drawnCard, newCardUI.CardID);
-            handPrefabs.Add(handPrefab);
-            SpaceHand();
+            cardsToBeDrawn.Enqueue(handPrefab);
+            //handPrefabs.Add(handPrefab);
+            ReadjustHand();
         }
 
         internal void DiscardHand()
@@ -320,7 +330,22 @@ namespace FTS.Cards
 
         public void ReadjustHand()
         {
-            SpaceHand();
+            if (!isDrawing)
+                StartCoroutine(SpaceHandStager());
+                
+        }
+
+        IEnumerator SpaceHandStager()
+        {
+            isDrawing = true; 
+            while (cardsToBeDrawn.Count > 0)
+            {
+                handPrefabs.Add(cardsToBeDrawn.Dequeue());
+                SFXManager.Main.Play(drawSound);
+                SpaceHand();
+                yield return new WaitForSeconds(drawInterval);
+            }
+            isDrawing = false;
         }
         
         public void SetTagetingZoom(bool zoom)
