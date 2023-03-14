@@ -34,7 +34,7 @@ namespace FTS.Core
             if (overPlanet && Input.GetMouseButton(0))
             {
                 objectiveController.SetObjective(objectives);
-                SceneManager.LoadScene("GameScene");
+                SceneManager.LoadScene(Scenes.GameScene.ToString());
             }
         }
 

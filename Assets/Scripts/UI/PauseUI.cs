@@ -38,7 +38,7 @@ namespace FTS.UI
 
         public void MainMenu()
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene(Scenes.MainMenu.ToString());
         }
 
         public void HowToPlay()

@@ -67,7 +67,7 @@ public class UIController : MonoBehaviour
     public void GameOver()
     {
         //EnableHUD("GameOverHUD");
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(Scenes.MainMenu.ToString());
     }
 
     public void Win()

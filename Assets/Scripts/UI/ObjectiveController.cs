@@ -128,7 +128,7 @@ namespace FTS.Core
                 //Debug.Log("objective complete: " + objectivesRequired);
                 if (objectivesComplete >= objectivesRequired)
                 {
-                    SceneManager.LoadScene("DraftScene");
+                    SceneManager.LoadScene(Scenes.DraftScene.ToString());
                 }
             }
         }

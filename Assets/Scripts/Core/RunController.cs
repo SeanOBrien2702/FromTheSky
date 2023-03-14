@@ -12,8 +12,10 @@ namespace FTS.Core
 { 
     public class RunController : MonoBehaviour, ISaveable
     {
-        public static event System.Action<int> OnValueChanged = delegate { };
+        public static event System.Action<int> OnHealthChanged = delegate { };
+        public static event System.Action<int> OnDayChanged = delegate { };
         [SerializeField] int startingHealth = 50;
+        [SerializeField] int startingDay = 10;
         RunInfo runInfo = new RunInfo();
         int health;
         int day;
@@ -25,7 +27,7 @@ namespace FTS.Core
             set
             {
                 health = value;
-                OnValueChanged.Invoke(health);
+                OnHealthChanged.Invoke(health);
             }
         }
 
@@ -35,6 +37,7 @@ namespace FTS.Core
             set
             {
                 day = value;
+                OnDayChanged.Invoke(day);
             }
         }
 
@@ -50,13 +53,14 @@ namespace FTS.Core
         void Start()
         {
             Health = startingHealth;
+            day = startingDay;
             UnitController.OnDamageTaken += UnitController_OnDamageTaken;
             UnitController.OnEnemyLost += UnitController_OnEnemyLost;
         }
 
         private void UnitController_OnEnemyLost()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void TakeDamage(int damage)
@@ -65,7 +69,7 @@ namespace FTS.Core
             Debug.Log("take damage " + damage);
             if(Health <= 0)
             {
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene(Scenes.MainMenu.ToString());
             }
         }
 

@@ -14,12 +14,12 @@ namespace FTS.UI
         {
             hearthText = GetComponent<TextMeshProUGUI>();
             hearthText.text = FindObjectOfType<RunController>().GetComponent<RunController>().Health.ToString();
-            RunController.OnValueChanged += HeartController_OnValueChanged;
+            RunController.OnHealthChanged += HeartController_OnValueChanged;
         }
 
         private void OnDestroy()
         {
-            RunController.OnValueChanged -= HeartController_OnValueChanged;
+            RunController.OnHealthChanged -= HeartController_OnValueChanged;
         }
 
         private void HeartController_OnValueChanged(int value)

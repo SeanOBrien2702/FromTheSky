@@ -39,13 +39,13 @@ namespace FTS.UI
         public void Continue()
         {
             saving.Continue();
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene(Scenes.GameScene.ToString());
         }
 
         public void NewGame()
         {
             saving.NewGame();
-            SceneManager.LoadScene("CharacterSelectScene");
+            SceneManager.LoadScene(Scenes.CharacterSelectScene.ToString());
         }
 
         public void Settings()

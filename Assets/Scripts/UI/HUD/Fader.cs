@@ -28,7 +28,7 @@ public class Fader : MonoBehaviour
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(Scenes.GameScene.ToString());
     }
     #endregion
 }

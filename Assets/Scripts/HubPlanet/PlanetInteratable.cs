@@ -30,7 +30,7 @@ public class PlanetInteratable : MonoBehaviour
                 // Do something with the object that was hit by the raycast.
             }
 
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene(Scenes.GameScene.ToString());
         }
     }
 

@@ -66,12 +66,12 @@ namespace FTS.UI
         {
             Debug.Log(card.name);
             cardDB.AddCardToDeck(card);
-            SceneManager.LoadScene("HubScene");
+            SceneManager.LoadScene(Scenes.HubScene.ToString());
         }
 
         public void Skip()
         {
-            SceneManager.LoadScene("HubScene");
+            SceneManager.LoadScene(Scenes.HubScene.ToString());
         }
 
         //Click when slecting characters

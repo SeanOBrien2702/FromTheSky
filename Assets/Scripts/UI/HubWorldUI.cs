@@ -18,87 +18,77 @@ namespace FTS.UI
 {
     public class HubWorldUI : MonoBehaviour
     {
-        [SerializeField] MMFeedbacks sceneFeedback;
+        [SerializeField] GameObject endGameScreen;
 
-        [SerializeField] ObjectiveGenerator objective;
-        [SerializeField] PlanetCamera planetCamera;
 
-        [Header("Objectives")]
-        [SerializeField] TextMeshProUGUI objectiveLabel;
-        [SerializeField] TextMeshProUGUI optionalLabel;
-        [SerializeField] Transform objectivePanel;
+        //[SerializeField] ObjectiveGenerator objective;
+        //[SerializeField] PlanetCamera planetCamera;
+
+        //[Header("Objectives")]
+        //[SerializeField] TextMeshProUGUI objectiveLabel;
+        //[SerializeField] TextMeshProUGUI optionalLabel;
+        //[SerializeField] Transform objectivePanel;
         //List<Objective> currentObjective = new List<Objective>();
-        Dictionary<Objective, TextMeshProUGUI> textList = new Dictionary<Objective, TextMeshProUGUI>();
+        //Dictionary<Objective, TextMeshProUGUI> textList = new Dictionary<Objective, TextMeshProUGUI>();
 
 
         #region Public Methods
-        public void StartMisstion()
+        public void WonGame()
         {
-            //SceneManager.LoadScene("GameScene");
-        }
-
-        public void NextMission()
-        {
-            //Debug.Log(objective.NextObjective.transform.position);
-            planetCamera.PanToObjective(objective.NextObjective);
-            UpdateUI(objective.CurrentObjective);
-        }
-
-        public void PreviousMission()
-        {
-            planetCamera.PanToObjective(objective.PreviousObjective);
-            UpdateUI(objective.CurrentObjective);
+            SceneManager.LoadScene(Scenes.MainMenu.ToString());
         }
 
         public void StartGame()
         {
-            //SceneManager.LoadScene("GameScene");
-            ///sceneFeedback?.Pla;
+            SceneManager.LoadScene(Scenes.GameScene.ToString());
         }
         #endregion
 
         void Start()
         {
-            UpdateUI(objective.CurrentObjective);
-            planetCamera.PanToObjective(objective.CurrentObjective);
-        }
-
-        void UpdateUI(MapObjective currentObjective)
-        {
-            ClearUI();
-            bool isFirstOptional = true;
-            TextMeshProUGUI objectiveLbl = Instantiate(objectiveLabel);
-            objectiveLbl.transform.SetParent(objectivePanel, false);
-            for (int i = 0; i < currentObjective.Objectives.Count; i++)
-            {             
-                if (isFirstOptional && currentObjective.Objectives[i].IsOptional)
-                {
-                    isFirstOptional = false;
-                    TextMeshProUGUI optional = Instantiate(optionalLabel);
-                    optional.transform.SetParent(objectivePanel, false);
-                }
-                TextMeshProUGUI textMesh = Instantiate(objectiveLabel);
-                textMesh.text = currentObjective.Objectives[i].SetDescription();
-                textMesh.transform.SetParent(objectivePanel, false);
-                textMesh.color = Color.white;
-
-                textList.Add(currentObjective.Objectives[i], textMesh);
-            }
-            //Debug.Log("currentObjective " + currentObjective.Objectives.Count);
-
-            foreach (var objective in currentObjective.Objectives)
+            //UpdateUI(objective.CurrentObjective);
+            //planetCamera.PanToObjective(objective.CurrentObjective);
+            if (FindObjectOfType<RunController>().GetComponent<RunController>().Day < 0)
             {
-                textList[objective].text = objective.SetDescription();
+                endGameScreen.SetActive(true);
             }
         }
 
-        void ClearUI()
-        {
-            textList.Clear();
-            foreach (Transform child in objectivePanel)
-            {
-                Destroy(child.gameObject);
-            }
-        }
+        //void UpdateUI(MapObjective currentObjective)
+        //{
+        //    ClearUI();
+        //    bool isFirstOptional = true;
+        //    TextMeshProUGUI objectiveLbl = Instantiate(objectiveLabel);
+        //    objectiveLbl.transform.SetParent(objectivePanel, false);
+        //    for (int i = 0; i < currentObjective.Objectives.Count; i++)
+        //    {             
+        //        if (isFirstOptional && currentObjective.Objectives[i].IsOptional)
+        //        {
+        //            isFirstOptional = false;
+        //            TextMeshProUGUI optional = Instantiate(optionalLabel);
+        //            optional.transform.SetParent(objectivePanel, false);
+        //        }
+        //        TextMeshProUGUI textMesh = Instantiate(objectiveLabel);
+        //        textMesh.text = currentObjective.Objectives[i].SetDescription();
+        //        textMesh.transform.SetParent(objectivePanel, false);
+        //        textMesh.color = Color.white;
+
+        //        textList.Add(currentObjective.Objectives[i], textMesh);
+        //    }
+
+        //    foreach (var objective in currentObjective.Objectives)
+        //    {
+        //        textList[objective].text = objective.SetDescription();
+        //    }
+        //}
+
+        //void ClearUI()
+        //{
+        //    textList.Clear();
+        //    foreach (Transform child in objectivePanel)
+        //    {
+        //        Destroy(child.gameObject);
+        //    }
+        //}
     }
 }

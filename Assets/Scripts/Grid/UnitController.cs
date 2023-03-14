@@ -168,7 +168,8 @@ namespace FTS.Characters
 
             if(Input.GetKeyDown(KeyCode.P))
             {
-                OnEnemyLost?.Invoke();
+                SceneManager.LoadScene(Scenes.DraftScene.ToString());
+                //OnEnemyLost?.Invoke();
             }
 
             if (Input.GetKeyDown(KeyCode.O))
@@ -334,7 +335,7 @@ namespace FTS.Characters
                 gridController.RemoveIndicator((Enemy)unit);
                 if (enemyList.Count <= 0)
                 {
-                    SceneManager.LoadScene("Draft");
+                    SceneManager.LoadScene(Scenes.DraftScene.ToString());
                 }
 
             }
@@ -350,7 +351,7 @@ namespace FTS.Characters
                     OnPlayerKilled?.Invoke((Player)unit);
                     if (playerList.Count <= 0 && gridController.UnitsPlaced)
                     {
-                        SceneManager.LoadScene("MainMenu");
+                        SceneManager.LoadScene(Scenes.MainMenu.ToString());
                     }
                 }
                 //else
