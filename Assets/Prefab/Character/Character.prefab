@@ -64,19 +64,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06d6649a96cca24b835719f979f8968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterClass: 1
-  stats: {fileID: 0}
   unitUI: {fileID: 1227905858029449117, guid: 19a6d881f456d8249a24726aecb22f12, type: 3}
   portrait: {fileID: 0}
   barrier: {fileID: 4010783370477371485}
   damageFeedback: {fileID: 4478104277416606989}
   animator: {fileID: 1530677751184685775}
-  characterClass: 0
+  characterClass: 1
   stats: {fileID: 0}
-  unitUI: {fileID: 1227905858029449117, guid: 19a6d881f456d8249a24726aecb22f12, type: 3}
-  portrait: {fileID: 0}
-  barrier: {fileID: 4010783370477371485}
-  damageFeedback: {fileID: 4478104277416606989}
 --- !u!114 &1799238614306022093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +87,7 @@ MonoBehaviour:
   pushSpeed: 0.1
   rotationSpeed: 180
   animator: {fileID: 1530677751184685775}
+  movementSounds: {fileID: 11400000, guid: 1e1bba9a36b70014abfedd3a7129475f, type: 2}
 --- !u!114 &1852897224218879265
 MonoBehaviour:
   m_ObjectHideFlags: 0

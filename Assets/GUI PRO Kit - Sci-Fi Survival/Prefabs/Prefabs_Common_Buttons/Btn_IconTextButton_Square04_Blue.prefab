@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 2416853386468903807}
   - component: {fileID: 2416853386468903792}
   - component: {fileID: 2416853386468903793}
+  - component: {fileID: 4850252794450764038}
   m_Layer: 5
   m_Name: Btn_IconTextButton_Square04_Blue
   m_TagString: Untagged
@@ -269,6 +270,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4850252794450764038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2416853386468903795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 488784ae608003b478dce8ea7da8a383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSound: {fileID: 11400000, guid: 1bb62d10b1df2ed4c888bd3e2a5ec0a6, type: 2}
+  pressedSound: {fileID: 11400000, guid: bd73434e29aa68f4397cbd04ba0a9159, type: 2}
 --- !u!1 &2416853387144282280
 GameObject:
   m_ObjectHideFlags: 0

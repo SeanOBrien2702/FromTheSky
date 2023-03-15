@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour
         {
             screens.Add(child.gameObject);
         }
+        Game();
     }
 
     void Update()

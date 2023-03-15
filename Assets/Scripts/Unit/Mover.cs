@@ -12,6 +12,8 @@ namespace FTS.Characters
     [RequireComponent(typeof(Character))]
     public class Mover : MonoBehaviour
     {
+
+         
         CameraController cameraController;
         Character character;
         StateController stateController;
@@ -20,6 +22,8 @@ namespace FTS.Characters
         [SerializeField] float pushSpeed = 0.1f;
         [SerializeField] float rotationSpeed = 180f;
         [SerializeField] Animator animator;
+
+        [SerializeField] SFXGroup movementSounds;
 
         HexCell location;
         List<HexCell> pathToTravel;
@@ -143,6 +147,7 @@ namespace FTS.Characters
 
         IEnumerator TravelPath(Vector3 lookTowards)
         {
+            SFXManager.Main.Play(movementSounds);
             canMove = false;
             cameraController.StartCharacterFollow(this.transform);
             Vector3 a, b, c = pathToTravel[0].transform.localPosition;

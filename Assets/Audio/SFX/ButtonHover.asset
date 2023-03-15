@@ -16,7 +16,7 @@ MonoBehaviour:
   SFXName: ButtonHover
   SFXLayers:
   - LayerName: 
-    SFX: {fileID: 8300000, guid: dfdb195f0fef847b1a5b3b35d741f8e3, type: 3}
+    SFX: {fileID: 8300000, guid: e515ab3d6890c604689f3f645ee9fb0a, type: 3}
     RandomizeVolume: 0
     FixedVolume: 1
     MinVolume: 0.5

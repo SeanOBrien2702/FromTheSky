@@ -16,7 +16,7 @@ MonoBehaviour:
   SFXName: ButtonClick
   SFXLayers:
   - LayerName: 
-    SFX: {fileID: 8300000, guid: 2a134809872a28f41a40f03d1792516f, type: 3}
+    SFX: {fileID: 8300000, guid: cde0712e2125fea4ab46190803748e2f, type: 3}
     RandomizeVolume: 0
     FixedVolume: 1
     MinVolume: 0.5

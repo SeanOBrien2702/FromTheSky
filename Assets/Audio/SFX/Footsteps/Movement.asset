@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9147afdb5fbfd12458fcb691fc49c0c9, type: 3}
+  m_Name: Movement
+  m_EditorClassIdentifier: 
+  GroupName: Movement
+  SFXObjects:
+  - {fileID: 11400000, guid: 409fae4264fc57748aeaea091cc65119, type: 2}
+  - {fileID: 11400000, guid: 3620ac00b7d39254f9081707dedeee36, type: 2}
+  - {fileID: 11400000, guid: 0c85bbe5f82926645b4c6b344f9fa2a9, type: 2}
+  - {fileID: 11400000, guid: 6275088442b62764ea6794947d4beafe, type: 2}
+  - {fileID: 11400000, guid: d065f0c2a814c884ea90298796fc692b, type: 2}
+  Randomization: 0
