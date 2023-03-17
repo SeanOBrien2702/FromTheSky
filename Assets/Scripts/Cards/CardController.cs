@@ -249,8 +249,7 @@ namespace FTS.Cards
 
         private void DrawNewHand()
         {
-            //Debug.Log("draw hand");
-            for (int i = 0; i < cardsPerTurn; i++)
+            for (int i = 0; i <= cardsPerTurn; i++)
             {
                 DrawCard();
             }
@@ -301,9 +300,7 @@ namespace FTS.Cards
         {
             bool canPlay = false;
             if (HasEnergy(card.Cost) && 
-                card.Effects.Count > 0 && 
-                (card.CharacterClass == CharacterClass.Common 
-                || card.CharacterClass == characterClass))
+                card.Effects.Count > 0)
             {
                 canPlay = true;
             }
@@ -545,6 +542,11 @@ namespace FTS.Cards
         public List<Card> GetDeck()
         {
             return deck;
+        }
+
+        internal void CardDrawPerTurn(int cardsDrawn)
+        {
+            cardsPerTurn += cardsDrawn;
         }
         #endregion
 

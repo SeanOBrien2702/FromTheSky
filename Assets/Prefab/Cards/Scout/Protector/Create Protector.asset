@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
+  m_Name: Create Protector
+  m_EditorClassIdentifier: 
+  cardName: Create Protector
+  flavourText: 
+  image: {fileID: 21300000, guid: 465da96ac21d7dd439eaa56c1c10ffb3, type: 3}
+  border: {fileID: 21300000, guid: cec5e44fbe4eb6f4689ac8a93fc8f14b, type: 3}
+  cost: 1
+  range: 2
+  area: 1
+  cardRarity: 2
+  characterClass: 1
+  type: 1
+  targeting: 2
+  isAtomize: 1
+  isTemporary: 0
+  isInherent: 0
+  onDrawEffects: []
+  effects:
+  - {fileID: 11400000, guid: ac38b29afad835544a31490a7468a9d3, type: 2}
+  onDiscardEffects: []

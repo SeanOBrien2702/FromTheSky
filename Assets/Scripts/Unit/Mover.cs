@@ -13,7 +13,7 @@ namespace FTS.Characters
     public class Mover : MonoBehaviour
     {
 
-         
+        HexGridController gridController;
         CameraController cameraController;
         Character character;
         StateController stateController;
@@ -42,10 +42,12 @@ namespace FTS.Characters
                 {
                     location.Unit = null;
                 }
+                //gridController.UpdateIndicators(location, value);
                 location = value;
                 character.Location = value;
                 value.Unit = character;
                 transform.localPosition = value.transform.localPosition;
+                    
             }
         }
 
@@ -65,7 +67,8 @@ namespace FTS.Characters
         void Start()
         {
             cameraController = FindObjectOfType<CameraController>().GetComponent<CameraController>();
-            stateController = FindObjectOfType<StateController>().GetComponent<StateController>();       
+            stateController = FindObjectOfType<StateController>().GetComponent<StateController>();   
+            gridController = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
             speed = character.Stats.GetStat(Stat.Movement, character.CharacterClass);
             movementLeft = speed;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;

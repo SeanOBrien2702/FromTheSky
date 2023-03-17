@@ -14,5 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectFoldout: 1
   unit: {fileID: 7111782792705582091, guid: 8f47447ce11a08b42ac32b1dee6d7409, type: 3}
-  radius: 2
-  friendlyFire: 0

@@ -45,8 +45,6 @@ namespace FTS.Cards
         [SerializeField] GameObject cardPrefab;
         [SerializeField] Transform targetingPosition;
 
-
-
         [Header("Hand Position")]
         [SerializeField] Transform deckPosition;
         [SerializeField] Transform discardPosition;
@@ -80,8 +78,6 @@ namespace FTS.Cards
         List<CardUI> cardUI = new List<CardUI>();
         Queue<HandPrefab> cardsToBeDrawn = new Queue<HandPrefab>();
         
-
-
         #region Properties
         public bool LERPing  // property
         {
@@ -276,6 +272,25 @@ namespace FTS.Cards
             }
             return index;
         }
+        void SpaceHandStager()
+        {
+            if (!isDrawing)
+                StartCoroutine(SpaceHandStagerCoroutine());
+
+        }
+
+        IEnumerator SpaceHandStagerCoroutine()
+        {
+            isDrawing = true;
+            while (cardsToBeDrawn.Count > 0)
+            {
+                handPrefabs.Add(cardsToBeDrawn.Dequeue());
+                SFXManager.Main.Play(drawSound);
+                SpaceHand();
+                yield return new WaitForSeconds(drawInterval);
+            }
+            isDrawing = false;
+        }
         #endregion
 
         #region Public Methods
@@ -312,7 +327,7 @@ namespace FTS.Cards
             HandPrefab handPrefab = new HandPrefab(drawnCard, newCardUI.CardID);
             cardsToBeDrawn.Enqueue(handPrefab);
             //handPrefabs.Add(handPrefab);
-            ReadjustHand();
+            SpaceHandStager();
         }
 
         internal void DiscardHand()
@@ -327,27 +342,11 @@ namespace FTS.Cards
             cardUI.Clear();
             handPrefabs.Clear();
         }
-
-        public void ReadjustHand()
+        internal void ReadjustHand()
         {
-            if (!isDrawing)
-                StartCoroutine(SpaceHandStager());
-                
+            SpaceHand();
         }
 
-        IEnumerator SpaceHandStager()
-        {
-            isDrawing = true; 
-            while (cardsToBeDrawn.Count > 0)
-            {
-                handPrefabs.Add(cardsToBeDrawn.Dequeue());
-                SFXManager.Main.Play(drawSound);
-                SpaceHand();
-                yield return new WaitForSeconds(drawInterval);
-            }
-            isDrawing = false;
-        }
-        
         public void SetTagetingZoom(bool zoom)
         {
             isTargetingZoom = zoom;

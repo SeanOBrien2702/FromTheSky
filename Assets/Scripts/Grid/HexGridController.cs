@@ -317,7 +317,7 @@ namespace FTS.Grid
             }
         }
 
-        private void UpdateIndicators(HexCell oldLocation, HexCell newLocation)
+        public void UpdateIndicators(HexCell oldLocation, HexCell newLocation)
         {
             foreach (var indicator in attackIndicators)
             {

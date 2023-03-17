@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Attack
   flavourText: 
-  image: {fileID: 0}
-  border: {fileID: 21300000, guid: cec5e44fbe4eb6f4689ac8a93fc8f14b, type: 3}
+  image: {fileID: 21300000, guid: 2899411326b09174a9b3f6c7d0e553c3, type: 3}
+  border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
   cost: 1
   range: 4
   area: 1
