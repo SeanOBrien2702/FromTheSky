@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Shove
   flavourText: 
-  image: {fileID: 0}
-  border: {fileID: 21300000, guid: 6606cfd5fb6c55944baf3506a7213f2f, type: 3}
+  image: {fileID: 21300000, guid: 39971bb53d9f7da4586bfda4d7be3fb2, type: 3}
+  border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
   cost: 1
   range: 1
   area: 1

@@ -189,9 +189,9 @@ namespace FTS.Cards
                     foreach (var item in cardUI)
                     {
                         Card card = cardController.GetCard(item.CardID);
-                    //item.FillCardUI(player, card);
-                    item.FillCardUI(card);
-                    if (cardController.CanPlay(card))
+                        //item.FillCardUI(player, card);
+                        //item.FillCardUI(card);
+                        if (cardController.CanPlay(card))
                         {
                             item.HighlightCard(true);
                         }

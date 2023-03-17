@@ -49,7 +49,6 @@ namespace FTS.Characters
         private bool CanReach(StateMachine machine)
         {
             bool canReach = machine.gridController.CanReachAttackRange(machine.enemy, machine.newEnemyPosition);
-            Debug.Log("can reach: " + canReach);
             return canReach;
         }
     }
