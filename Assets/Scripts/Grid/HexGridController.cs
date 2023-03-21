@@ -304,7 +304,7 @@ namespace FTS.Grid
             }
         }
 
-        private void UpdateIndicators(Enemy character)
+        public void UpdateIndicators(Enemy character)
         {
             foreach (HexCell cell in attackIndicators[character].Line)
             {
