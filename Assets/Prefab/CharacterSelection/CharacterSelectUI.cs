@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using System;
 using UnityEngine.EventSystems;
-using System.Security.Cryptography;
+using FTS.Core;
 
 namespace FTS.UI
 {
@@ -17,14 +17,15 @@ namespace FTS.UI
         [SerializeField] GameObject orbitSupportDraft;
         PlayerDatabase playerDatabase;
         [SerializeField] Transform playerPosition;
-        [SerializeField] CharacterStatsUI playerUI;
+        CharacterStatsUI playerUI;
         PlayerModel playerModel = new PlayerModel();
 
         void Start()
         {
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
+            playerUI = GetComponent<CharacterStatsUI>();
             AddPlayer(playerDatabase.GetPlayer((CharacterClass)1));
-            orbitSupportDraft.SetActive(false);
+            //orbitSupportDraft.SetActive(false);
         }
 
         void AddPlayer(Player player)
@@ -62,7 +63,7 @@ namespace FTS.UI
         public void Continue()
         {
             playerDatabase.SetPlayer(playerModel.characterClass);
-            orbitSupportDraft.SetActive(true);
+            SceneController.Instance.LoadScene(Scenes.HubScene);          
         }
     }
 

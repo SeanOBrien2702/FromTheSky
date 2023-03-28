@@ -15,3 +15,4 @@ MonoBehaviour:
   encounterName: Draft Cards
   encounterSprite: {fileID: 21300000, guid: 0082198af801842be84138f830322bdf, type: 3}
   nextScene: 4
+  isSceneAddative: 1

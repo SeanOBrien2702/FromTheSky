@@ -31,13 +31,13 @@ public class EncounterSelectionUI : MonoBehaviour
             ui.Image.sprite = encounter.EncounterSprite;
             
             ui.Button.onClick.AddListener(() => {
-                SelectEncounter(encounter.NextScene);
+                SelectEncounter(encounter);
             });
         }
     }
 
-    private void SelectEncounter(Scenes nextScene)
+    private void SelectEncounter(Encounter encounter)
     {
-        SceneManager.LoadScene(nextScene.ToString());
+        SceneController.Instance.LoadScene(encounter);
     }
 }

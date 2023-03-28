@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using FTS.Saving;
 using TMPro;
+using FTS.Core;
 #endregion
 
 namespace FTS.UI
@@ -39,13 +40,13 @@ namespace FTS.UI
         public void Continue()
         {
             saving.Continue();
-            SceneManager.LoadScene(Scenes.GameScene.ToString());
+            SceneController.Instance.LoadScene(Scenes.GameScene);
         }
 
         public void NewGame()
         {
             saving.NewGame();
-            SceneManager.LoadScene(Scenes.CharacterSelectScene.ToString());
+            SceneController.Instance.LoadScene(Scenes.CharacterSelectScene);
         }
 
         public void Settings()

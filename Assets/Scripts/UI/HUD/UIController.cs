@@ -1,4 +1,5 @@
 ﻿#region Using Statements
+using FTS.Core;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -68,7 +69,7 @@ public class UIController : MonoBehaviour
     public void GameOver()
     {
         //EnableHUD("GameOverHUD");
-        SceneManager.LoadScene(Scenes.MainMenu.ToString());
+        SceneController.Instance.LoadScene(Scenes.MainMenu);
     }
 
     public void Win()

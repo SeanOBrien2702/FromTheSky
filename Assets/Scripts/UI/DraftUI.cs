@@ -8,6 +8,8 @@ using FTS.Cards;
 using FTS.Characters;
 using System.Text.RegularExpressions;
 using UnityEngine.EventSystems;
+using FTS.Core;
+using TMPro;
 #endregion
 
 namespace FTS.UI
@@ -21,21 +23,28 @@ namespace FTS.UI
         CardDatabase cardDB;
         PlayerDatabase playerDB;
 
+        [SerializeField] int skipCinder = 10;
+        [SerializeField] TextMeshProUGUI skipButtonText;
+
+        [Header("draft Options")]
         [SerializeField] Transform cardPanel;
         [SerializeField] GameObject cardPrefab;
         [SerializeField] bool isOrbital = false;
 
+
         #region MonoBehaviour Callbacks
-        void Awake()
+        private void Awake()
         {
-            cardDB = FindObjectOfType<CardDatabase>().GetComponent<CardDatabase>();
+            
         }
 
         void Start()
         {
+            cardDB = FindObjectOfType<CardDatabase>().GetComponent<CardDatabase>();
+            skipButtonText.text = "Skip card\nAdd " + skipCinder + " Cinder";
             if (!isOrbital)
             {
-                cards = cardDB.PopulateDraftPicks(numCards);
+                cards = cardDB.GetMultipleCards(numCards);
                 FillPanel();
             }
         }
@@ -44,9 +53,6 @@ namespace FTS.UI
         #region Private Methods
         void FillPanel()
         {
-            //playerDB = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
-            
-
             foreach (Card card in cards)
             {
                 GameObject go = (GameObject)Instantiate(cardPrefab);
@@ -66,12 +72,13 @@ namespace FTS.UI
         {
             Debug.Log(card.name);
             cardDB.AddCardToDeck(card);
-            SceneManager.LoadScene(Scenes.HubScene.ToString());
+            SceneController.Instance.LoadScene(Scenes.HubScene);
         }
 
         public void Skip()
         {
-            SceneManager.LoadScene(Scenes.HubScene.ToString());
+            FindObjectOfType<RunController>().GetComponent<RunController>().Cinder += skipCinder;
+            SceneController.Instance.LoadScene(Scenes.HubScene);
         }
 
         //Click when slecting characters

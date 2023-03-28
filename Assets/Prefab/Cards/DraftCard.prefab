@@ -115,7 +115,7 @@ PrefabInstance:
     - target: {fileID: 5921444663996253023, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
         type: 3}
       propertyPath: m_Name
-      value: BaseCard
+      value: DraftCard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c11f1835954e6343b7d0c2cb1e78a8a, type: 3}

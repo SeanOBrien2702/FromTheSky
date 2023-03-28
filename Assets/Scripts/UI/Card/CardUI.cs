@@ -29,6 +29,7 @@ namespace FTS.UI
         bool overTooltip = false;
         string currentTooltip = null;
         TooltipUI tooltipUI;
+        ShopCardUI shopUI;
 
         public Card CardInfos // property
         {
@@ -67,6 +68,7 @@ namespace FTS.UI
         private void Awake()
         {
             tooltipUI = GetComponent<TooltipUI>();
+            shopUI= GetComponent<ShopCardUI>();
         }
 
         private void Update()
@@ -168,6 +170,10 @@ namespace FTS.UI
             foreach (var item in card.Effects)
             {
                 rulesText.text += item.GetEffectText();
+            }
+            if (shopUI)
+            {
+                shopUI.SetCost(card.Rarity);
             }
         }
 

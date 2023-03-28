@@ -1,5 +1,6 @@
 #region Using Statements
 using FTS.Cards;
+using FTS.Core;
 using FTS.Grid;
 using FTS.Turns;
 using System;
@@ -168,7 +169,8 @@ namespace FTS.Characters
 
             if(Input.GetKeyDown(KeyCode.P))
             {
-                SceneManager.LoadScene(Scenes.DraftScene.ToString());
+                SceneController.Instance.LoadScene(Scenes.DraftScene, true);
+                //SceneManager.LoadScene(Scenes.DraftScene.ToString());
                 //OnEnemyLost?.Invoke();
             }
 
@@ -335,7 +337,7 @@ namespace FTS.Characters
                 gridController.RemoveIndicator((Enemy)unit);
                 if (enemyList.Count <= 0)
                 {
-                    SceneManager.LoadScene(Scenes.DraftScene.ToString());
+                    SceneController.Instance.LoadScene(Scenes.DraftScene, true);
                 }
 
             }
@@ -351,7 +353,7 @@ namespace FTS.Characters
                     OnPlayerKilled?.Invoke((Player)unit);
                     if (playerList.Count <= 0 && gridController.UnitsPlaced)
                     {
-                        SceneManager.LoadScene(Scenes.MainMenu.ToString());
+                        SceneController.Instance.LoadScene(Scenes.MainMenu);
                     }
                 }
                 //else

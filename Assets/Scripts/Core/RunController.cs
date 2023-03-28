@@ -19,7 +19,7 @@ namespace FTS.Core
         RunInfo runInfo = new RunInfo();
         int health;
         int day;
-        int money;
+        int cinder;
 
         public int Health
         {
@@ -41,12 +41,12 @@ namespace FTS.Core
             }
         }
 
-        public int Money
+        public int Cinder
         {
-            get { return money; }
+            get { return cinder; }
             set
             {
-                money = value;
+                cinder = value;
             }
         }
 
@@ -69,7 +69,7 @@ namespace FTS.Core
             Debug.Log("take damage " + damage);
             if(Health <= 0)
             {
-                SceneManager.LoadScene(Scenes.MainMenu.ToString());
+                SceneController.Instance.LoadScene(Scenes.MainMenu);
             }
         }
 
@@ -78,7 +78,7 @@ namespace FTS.Core
         {
             runInfo.Health = Health;
             runInfo.Day = Day;
-            runInfo.Money = Money;
+            runInfo.Cinder = Cinder;
 
             return runInfo;
         }
@@ -88,7 +88,7 @@ namespace FTS.Core
             runInfo = (RunInfo)state;
             health = runInfo.Health;
             day = runInfo.Day;
-            money = runInfo.Money;
+            cinder = runInfo.Cinder;
         }
         #endregion
 
@@ -105,6 +105,6 @@ namespace FTS.Core
     {
         public int Health;
         public int Day;
-        public int Money;
+        public int Cinder;
     }
 }

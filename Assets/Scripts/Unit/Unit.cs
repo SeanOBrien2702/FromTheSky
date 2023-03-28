@@ -18,6 +18,8 @@ namespace FTS.Characters
         [SerializeField] protected UnitUI unitUI;
         [SerializeField] Sprite portrait;
         [SerializeField] GameObject barrier;
+
+        [SerializeField] string description;   
         protected UnitController unitController;
 
         public MMFeedbacks damageFeedback;
@@ -95,6 +97,7 @@ namespace FTS.Characters
             }
         }
 
+        public string Description { get => description; }
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -118,7 +121,6 @@ namespace FTS.Characters
             {
                 Die();
             }
-
         }
 
         private void UpdateBarrier(bool enable)

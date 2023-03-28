@@ -1,4 +1,5 @@
 ﻿#region Using Statements
+using FTS.Core;
 using FTS.Saving;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -38,7 +39,7 @@ namespace FTS.UI
 
         public void MainMenu()
         {
-            SceneManager.LoadScene(Scenes.MainMenu.ToString());
+            SceneController.Instance.LoadScene(Scenes.MainMenu);
         }
 
         public void HowToPlay()

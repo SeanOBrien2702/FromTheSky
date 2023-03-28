@@ -33,6 +33,7 @@ namespace FTS.Cards
         [SerializeField] bool isAtomize;
         [SerializeField] bool isTemporary;
         [SerializeField] bool isInherent;
+        [SerializeField] int cinderCost = 10;
 
         CardLocation location = CardLocation.Deck;
         [SerializeField] List<Effect> onDrawEffects;
@@ -162,6 +163,8 @@ namespace FTS.Cards
             get { return onDiscardEffects; }   // get method
             set { onDiscardEffects = value; }  // set method
         }
+
+        public int CinderCost { get => cinderCost; set => cinderCost = value; }
         #endregion
 
         #region MonoBehaviour Callbacks

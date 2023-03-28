@@ -5,6 +5,7 @@ using UnityEngine;
 using FTS.Characters;
 using FTS.Saving;
 using FTS.Turns;
+using FTS.UI;
 #endregion
 
 namespace FTS.Cards
@@ -57,7 +58,7 @@ namespace FTS.Cards
         #endregion
 
         #region Public Methods
-        public List<Card> PopulateDraftPicks(int numPicks)
+        public List<Card> GetMultipleCards(int numPicks)
         {
             classList = playerDatabase.GetPlayerClasses();
             List<Card> bucket = new List<Card>();

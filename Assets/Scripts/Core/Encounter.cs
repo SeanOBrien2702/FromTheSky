@@ -11,9 +11,11 @@ namespace FTS.Core
         [SerializeField] string encounterName;
         [SerializeField] Sprite encounterSprite;
         [SerializeField] Scenes nextScene;
+        [SerializeField] bool isSceneAddative = false;
 
         public string EncounterName { get => encounterName; set => encounterName = value; }
         public Sprite EncounterSprite { get => encounterSprite; set => encounterSprite = value; }
         public Scenes NextScene { get => nextScene; set => nextScene = value; }
+        public bool IsSceneAddative { get => isSceneAddative; set => isSceneAddative = value; }
     }
 }

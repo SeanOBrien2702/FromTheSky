@@ -35,12 +35,12 @@ namespace FTS.UI
         #region Public Methods
         public void WonGame()
         {
-            SceneManager.LoadScene(Scenes.MainMenu.ToString());
+            SceneController.Instance.LoadScene(Scenes.MainMenu);
         }
 
         public void StartGame()
         {
-            SceneManager.LoadScene(Scenes.GameScene.ToString());
+            SceneController.Instance.LoadScene(Scenes.GameScene);
         }
         #endregion
 
