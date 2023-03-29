@@ -23,8 +23,6 @@ namespace FTS.UI
 
         [Header("Convertions")]
         [SerializeField] Button convertHealth;
-
-
         [SerializeField] Button convertCinder;
 
         #region MonoBehaviour Callbacks
@@ -32,7 +30,6 @@ namespace FTS.UI
         {
             cardDB = FindObjectOfType<CardDatabase>().GetComponent<CardDatabase>();
             runController = FindObjectOfType<RunController>().GetComponent<RunController>();
-            runController.Cinder = 100;
             FillShopPanel();
         }
         #endregion

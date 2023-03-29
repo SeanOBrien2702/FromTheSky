@@ -1003,5 +1003,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a621f657cb9ca6c459bcd9aed68588ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 50
+  startingCinder: 100
+  startingHealth: 25
   startingDay: 10

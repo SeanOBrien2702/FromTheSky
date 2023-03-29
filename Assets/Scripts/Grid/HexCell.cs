@@ -34,6 +34,7 @@ namespace FTS.Grid
         [SerializeField] List<Color> highlightColours;
         [SerializeField] GameObject dangerHighlight;
         [SerializeField] GameObject attackHighlight;
+        [SerializeField] GameObject spawningHighlight;
         //[SerializeField] Color canReachColour;
         //[SerializeField] Color cantReachColour;
         //[SerializeField] Color highlightColour;
@@ -272,6 +273,11 @@ namespace FTS.Grid
                 dangerHighlight.SetActive(false);
                 isDangerous = false;
             }
+        }
+
+        public void SetSpawningHighlight(bool spawning)
+        {
+            spawningHighlight.SetActive(spawning);
         }
 
         public void SetColour(Color color)

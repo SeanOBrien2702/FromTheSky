@@ -13,7 +13,10 @@ namespace FTS.Core
     public class RunController : MonoBehaviour, ISaveable
     {
         public static event System.Action<int> OnHealthChanged = delegate { };
+        public static event System.Action<int> OnCinderChanged = delegate { };
         public static event System.Action<int> OnDayChanged = delegate { };
+
+        [SerializeField] int startingCinder = 50;
         [SerializeField] int startingHealth = 50;
         [SerializeField] int startingDay = 10;
         RunInfo runInfo = new RunInfo();
@@ -47,6 +50,7 @@ namespace FTS.Core
             set
             {
                 cinder = value;
+                OnCinderChanged.Invoke(health);
             }
         }
 
@@ -54,6 +58,7 @@ namespace FTS.Core
         {
             Health = startingHealth;
             day = startingDay;
+            Cinder = startingCinder;
             UnitController.OnDamageTaken += UnitController_OnDamageTaken;
             UnitController.OnEnemyLost += UnitController_OnEnemyLost;
         }

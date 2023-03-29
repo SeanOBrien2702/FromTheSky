@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
     private Camera cam;
     private Vector3 dir;
     private Vector3 newPos;
-    private Vector3 startPos = new Vector3(110, 0 , 72);
+    private Vector3 startPos = new Vector3(70, 0 , 50);
 
     #region Properties
     public bool IsEnabled   // property
