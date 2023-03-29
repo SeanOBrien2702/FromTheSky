@@ -711,24 +711,24 @@ namespace FTS.Grid
             return line;
         }
 
-        //internal AttackIndicator GetLine(HexCell origin, HexCell target)
-        //{
-        //    HexDirection direction = GetDirection(origin, target);
-        //    List<HexCell> line = new List<HexCell>();
-            
-        //    do
-        //    {
-        //        if (origin.GetNeighbor(direction) == null)
-        //        {
-        //            break;
-        //        }
-        //        line.Add(origin.GetNeighbor(direction));
-        //        origin = origin.GetNeighbor(direction);
-        //    }
-        //    while (line.Last() != target);
+        internal List<HexCell> GetLine(HexCell origin, HexDirection direction)
+        {
+            HexCell buffer = origin.GetNeighbor(direction);
+            List<HexCell> line = new List<HexCell>();
 
-        //    return new AttackIndicator(line, direction);
-        //}
+            while(buffer != null)
+            {
+                if (!buffer.IsCellAvailable())
+                {
+                    line.Add(buffer);
+                    break;
+                }
+                line.Add(buffer);
+                buffer = buffer.GetNeighbor(direction);           
+            }
+
+            return line;
+        }
 
         public void ShowArea(HexCell fromCell, int range, HighlightIndex highlight)
         {
@@ -761,18 +761,6 @@ namespace FTS.Grid
                 }
             }
         }
-        //internal void ShowLinesPericing(HexCell location, int length)
-        //{
-        //    //HexDirection direction = GetDirection(location, target);
-        //    Debug.Log("direction " + direction);
-
-
-        //    foreach (var cell in GetLine(location, direction))
-        //    {
-        //        cell.SetHighlight(HighlightIndex.Attack);
-        //        currentArea.Add(cell);
-        //    }
-        //}
 
         public void ClearArea()
         {

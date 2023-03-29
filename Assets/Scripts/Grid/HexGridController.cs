@@ -304,17 +304,9 @@ namespace FTS.Grid
             }
         }
 
-        public void UpdateIndicators(Enemy character)
+        public void UpdateIndicators(Enemy enemy)
         {
-            foreach (HexCell cell in attackIndicators[character].Line)
-            {
-                cell.SetDangerIndicator(false);
-            }
-            attackIndicators[character].Line = grid.GetLine(character.Location, attackIndicators[character].Direction, character.Range, character.IsPiercieing());
-            foreach (HexCell cell in attackIndicators[character].Line)
-            {
-                cell.SetDangerIndicator(true);
-            }
+            UpdateLine(enemy, attackIndicators[enemy]);
         }
 
         public void UpdateIndicators(HexCell oldLocation, HexCell newLocation)
@@ -324,16 +316,28 @@ namespace FTS.Grid
                 if (indicator.Value.Line.Contains(oldLocation) ||
                     indicator.Value.Line.Contains(newLocation))
                 {
-                    foreach (HexCell cell in indicator.Value.Line)
-                    {
-                        cell.SetDangerIndicator(false);
-                    }
-                    indicator.Value.Line = grid.GetLine(indicator.Key.Location, indicator.Value.Direction, indicator.Key.Range, indicator.Key.IsPiercieing());
-                    foreach (HexCell cell in indicator.Value.Line)
-                    {
-                        cell.SetDangerIndicator(true);
-                    }
+                    UpdateLine(indicator.Key, indicator.Value);
                 }          
+            }
+        }
+
+        private void UpdateLine(Enemy enemy, AttackIndicator indicator)
+        {
+            foreach (HexCell cell in indicator.Line)
+            {
+                cell.SetDangerIndicator(false);
+            }
+            if (enemy.IsPiercieing())
+            {
+                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, enemy.Range, enemy.IsPiercieing());
+            }
+            else
+            {
+                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction);
+            }
+            foreach (HexCell cell in indicator.Line)
+            {
+                cell.SetDangerIndicator(true);
             }
         }
 
@@ -563,8 +567,16 @@ namespace FTS.Grid
 
         public void TelegraphAttack(Enemy enemy)
         {
-            AttackIndicator indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction, enemy.Range, enemy.IsPiercieing()), enemy.Direction);
-         
+            AttackIndicator indicator;
+            if (enemy.IsPiercieing())
+            {
+                indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction, enemy.Range, enemy.IsPiercieing()), enemy.Direction);
+            }
+            else
+            {
+                indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction), enemy.Direction);
+            }
+
             foreach (HexCell cell in indicator.Line)
             {
                 cell.SetDangerIndicator(true);

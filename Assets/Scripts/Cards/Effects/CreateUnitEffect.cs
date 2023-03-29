@@ -14,6 +14,7 @@ namespace FTS.Cards
         public override void ActivateEffect(HexCell target)
         {
             unitController.CreateUnit(unit, target);
+            gridController.UpdateIndicators(target, null); ;
         }
 
         public override string GetEffectText()
