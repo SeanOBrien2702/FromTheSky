@@ -2,6 +2,7 @@
 using FTS.Turns;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 #endregion
 
@@ -39,7 +40,7 @@ namespace FTS.Characters
 
         public void UpdateStateMachine()
         {
-            StartCoroutine(UpdateEnemyStateMachines());
+            //StartCoroutine(UpdateEnemyStateMachines());
         }
 
         #endregion
@@ -49,7 +50,7 @@ namespace FTS.Characters
         {     
             List<StateMachine> stateMachines = unitController.GetStateMachines();
             //Debug.Log("Start state machine " + stateMachines.Count);
-            foreach (StateMachine machine in stateMachines)
+            foreach (StateMachine machine in stateMachines.ToList())
             {
                 yield return StartCoroutine(machine.UpdateState());
             }

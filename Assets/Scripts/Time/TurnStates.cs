@@ -2,6 +2,6 @@ namespace FTS.Turns
 {
     public enum TurnPhases
     {
-        Placement, EnemyTelegraph, PlayerTurn, Environment, EnemyActions, VehicleAction
+        Placement, EnemyTelegraph, PlayerTurn, Environment, EnemyActions, EnemySpawn
     }
 }

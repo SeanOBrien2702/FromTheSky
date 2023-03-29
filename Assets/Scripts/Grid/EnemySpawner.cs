@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FTS.Turns;
+using FTS.Core;
 #endregion
 namespace FTS.Grid
 {
@@ -12,10 +13,12 @@ namespace FTS.Grid
         HexGrid hexGrid;
         UnitController unitController;
         EnemyDatabase enemyDatabase;
+        TurnController turnController;
         List<HexCell> spawnLocations = new List<HexCell>();
         [SerializeField] int minSpawn = 1;
         [SerializeField] int maxSpawn = 3;
         [SerializeField] int spawnLimit = 8;
+        [SerializeField] int maxEnemiesAtOnce = 4;
         int enemiesSpawned = 0;
 
         #region MonoBehaviour Callbacks
@@ -24,14 +27,15 @@ namespace FTS.Grid
             hexGrid = GetComponent<HexGrid>();
             unitController = GetComponent<UnitController>();
             enemyDatabase = FindObjectOfType<EnemyDatabase>().GetComponent<EnemyDatabase>();
+            turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
-            TurnController.OnEnemyTurn += TurnController_OnEndTurn;
+            TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
         }
 
         private void OnDestroy()
         {
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
-            TurnController.OnEnemyTurn -= TurnController_OnEndTurn;
+            TurnController.OnEnemySpawn -= TurnController_OnEnemySpawn;
         }
         #endregion
 
@@ -49,8 +53,7 @@ namespace FTS.Grid
                 }
                 HexCell cell = hexGrid.FindGridEdge();
                 cell.IsSpawn = true;
-                Debug.Log("spawn cell " +cell);
-                cell.SetDangerIndicator(true);
+                cell.SetSpawningHighlight(true);
                 spawnLocations.Add(cell);
             }
         }
@@ -62,22 +65,23 @@ namespace FTS.Grid
                 if(!cell.Unit)
                 {
                     unitController.CreateUnit(enemyDatabase.GetRandomEnemy(), cell);
-                    cell.SetDangerIndicator(false); ;                   
+                    cell.SetSpawningHighlight(false); ;                   
                 }
             }
+            turnController.UpdatePhase();
         }
         #endregion
 
         #region Events
         private void TurnController_OnNewTurn()
         {
-            SetSpawnPositions();
+            if(unitController.GetEnemyUnits().Count <= maxEnemiesAtOnce)
+                SetSpawnPositions();
         }
 
-        private void TurnController_OnEndTurn(bool isTelegraph)
-        {
-            if(isTelegraph)
-                SpawnEnemies();
+        private void TurnController_OnEnemySpawn()
+        {         
+            SpawnEnemies();
         }
         #endregion
     }

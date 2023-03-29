@@ -39,7 +39,8 @@ namespace FTS.Characters
 
         internal Character GetRandomEnemy()
         {
-            return enemies[UnityEngine.Random.Range(0, enemies.Count)];
+            //TODO: -1 is for testing with out terjectory enemy
+            return enemies[UnityEngine.Random.Range(0, enemies.Count-1)];
         }
         #endregion
     }

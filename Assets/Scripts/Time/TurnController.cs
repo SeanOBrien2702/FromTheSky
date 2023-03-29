@@ -22,6 +22,7 @@ namespace FTS.Turns
 
         public static event System.Action OnCombatStart = delegate { };
         public static event System.Action<bool> OnEnemyTurn = delegate { };
+        public static event System.Action OnEnemySpawn = delegate { };
         public static event System.Action OnPlayerTurn = delegate { };
         //public static event System.Action OnEnemyAction = delegate { };
 
@@ -77,6 +78,11 @@ namespace FTS.Turns
             turn++;
             turnText.text = "Turn: " + turn.ToString();
         }
+
+        private void SpawnEnemies()
+        {
+            OnEnemySpawn?.Invoke();
+        }
         #endregion
 
         #region Public Methods
@@ -90,7 +96,7 @@ namespace FTS.Turns
         public void UpdatePhase()
         {
             turnPhase++;
-            if (turnPhase > TurnPhases.EnemyActions)
+            if (turnPhase > TurnPhases.EnemySpawn)
             {
                 turnPhase = TurnPhases.EnemyTelegraph;
             }
@@ -100,13 +106,16 @@ namespace FTS.Turns
                     EnemyTelegraph();
                     break;
                 case TurnPhases.PlayerTurn:
-                    PlayerTurn();              
+                    PlayerTurn();
                     break;
                 case TurnPhases.Environment:
                     UpdatePhase();
                     break;
                 case TurnPhases.EnemyActions:
                     EnemyAction();
+                    break;
+                case TurnPhases.EnemySpawn:
+                    SpawnEnemies();
                     break;
                 default:
                     break;
