@@ -1208,7 +1208,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Thank you for trying out this early demo of my game. Press F10 to give
+  m_text: 'Thank you for trying out this early demo of my game. Press F8 to give
     feedback or report a bug.
 
 
