@@ -898,6 +898,11 @@ namespace FTS.Grid
             //Debug.Log(y + " " + x + " " + z);
             return direction;
         }
+
+        internal bool InCurrentArea(HexCell currentCell)
+        {
+            return currentArea.Contains(currentCell);
+        }
         #endregion
     }
 }

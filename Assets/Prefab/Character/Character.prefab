@@ -67,6 +67,7 @@ MonoBehaviour:
   unitUI: {fileID: 1227905858029449117, guid: 19a6d881f456d8249a24726aecb22f12, type: 3}
   portrait: {fileID: 0}
   barrier: {fileID: 4010783370477371485}
+  description: 
   damageFeedback: {fileID: 4478104277416606989}
   animator: {fileID: 1530677751184685775}
   characterClass: 1
@@ -274,11 +275,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FillOrigin
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7427994084756960419, guid: 19a6d881f456d8249a24726aecb22f12,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.8
       objectReference: {fileID: 0}
     - target: {fileID: 7495131204853363458, guid: 19a6d881f456d8249a24726aecb22f12,
         type: 3}

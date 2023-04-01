@@ -65,6 +65,7 @@ MonoBehaviour:
   unitUI: {fileID: 442821436572470910}
   portrait: {fileID: 21300000, guid: 15eb5ddf35d134be196b5dca4cf8758b, type: 3}
   barrier: {fileID: 7483593880638004401}
+  description: 
   damageFeedback: {fileID: 7950919156692214241}
   startingHealth: 3
 --- !u!1 &8900052954750368877
@@ -327,11 +328,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FillOrigin
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7427994084756960419, guid: 19a6d881f456d8249a24726aecb22f12,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.8
       objectReference: {fileID: 0}
     - target: {fileID: 7495131204853363458, guid: 19a6d881f456d8249a24726aecb22f12,
         type: 3}

@@ -299,7 +299,7 @@ namespace FTS.Characters
             }
         }
 
-        internal void PlacePlayer(HexCell cell)
+        internal Player PlacePlayer(HexCell cell)
         {
             currentPlayer = playerDatabase.GetUnplacedCharacter(playerList);
             if (currentPlayer != null)
@@ -307,6 +307,7 @@ namespace FTS.Characters
                 CreateUnit(currentPlayer, cell);
                 currentPlayer = NextPlayer;
             }
+            return currentPlayer;
         }
 
         internal void RemovePlayer(Player unit)

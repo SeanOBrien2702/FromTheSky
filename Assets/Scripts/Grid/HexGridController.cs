@@ -58,6 +58,7 @@ namespace FTS.Grid
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
             grid.ShowPlacementArea(placementArea);
+            currentUnit = unitController.PlacePlayer(grid.GetCell(new HexCoordinates(grid.Width/2, 0)));
         }
 
         void Update()
@@ -89,38 +90,52 @@ namespace FTS.Grid
             {
                 PlaceUnit();
             }
-            else if (Input.GetMouseButtonDown(1) && MouseOverGrid())
-            {
-                RemoveUnit();
-            }
+            //else if (Input.GetMouseButtonDown(1) && MouseOverGrid())
+            //{
+            //    RemoveUnit();
+            //}
         }
 
-        private void RemoveUnit()
-        {
-            UpdateCurrentCell();
-            if (currentCell && currentCell.Unit is Player)
-            {
-                currentCell.Unit.Die();
-                currentCell.Unit = null;
-                Debug.Log(unitController.NumberOfUnits);
-                if (unitController.NumberOfPlayers < maxNumPLayers)
-                {
-                    startButton.interactable = false;
-                }
-                characterInfo.DisableUI();
-            }
-        }
+        //private void RemoveUnit()
+        //{
+        //    UpdateCurrentCell();
+        //    if (currentCell && currentCell.Unit is Player)
+        //    {
+        //        currentCell.Unit.Die();
+        //        currentCell.Unit = null;
+        //        Debug.Log(unitController.NumberOfUnits);
+        //        if (unitController.NumberOfPlayers < maxNumPLayers)
+        //        {
+        //            startButton.interactable = false;
+        //        }
+        //        characterInfo.DisableUI();
+        //    }
+        //}
+
+        //private void PlaceUnit()
+        //{
+        //    UpdateCurrentCell();
+        //    if (currentCell && !currentCell.IsObstacle && !currentCell.Unit)
+        //    {
+        //        unitController.PlacePlayer(currentCell);
+        //        if (unitController.NumberOfPlayers >= maxNumPLayers)
+        //        {
+        //            startButton.interactable = true;
+        //        }
+        //    }
+        //}
 
         private void PlaceUnit()
         {
             UpdateCurrentCell();
-            if (currentCell && !currentCell.IsObstacle && !currentCell.Unit)
+            if (currentCell && !currentCell.IsObstacle && !currentCell.Unit && grid.InCurrentArea(currentCell))
             {
-                unitController.PlacePlayer(currentCell);
-                if (unitController.NumberOfPlayers >= maxNumPLayers)
-                {
-                    startButton.interactable = true;
-                }
+                currentUnit.GetComponent<Mover>().Location = currentCell;
+                //unitController.PlacePlayer(currentCell);
+                //if (unitController.NumberOfPlayers >= maxNumPLayers)
+                //{
+                //    startButton.interactable = true;
+                //}
             }
         }
 

@@ -36,7 +36,7 @@ public class UnitUI : MonoBehaviour
         float healthBarWidth = healthBar.GetComponent<RectTransform>().sizeDelta.x;
         float increment = healthBarWidth / maxHealth;
         float position = 0;
-
+        Debug.Log(start.localPosition);
         for (int i = 1; i < maxHealth; i++)
         {
             position -= increment;
