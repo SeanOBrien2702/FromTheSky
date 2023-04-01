@@ -24,8 +24,6 @@ public class ButtonAudio : MonoBehaviour, IPointerEnterHandler
     //Detect if the Cursor starts to pass over the GameObject
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        //Output to console the GameObject's name and the following message
         SFXManager.Main.Play(hoverSound);
-        Debug.Log("Cursor Entering " + name + " GameObject");
     }
 }

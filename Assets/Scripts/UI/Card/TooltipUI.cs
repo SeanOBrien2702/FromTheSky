@@ -81,11 +81,9 @@ namespace FTS.UI
         internal void CreateTooltips(string rulesText)
         {
             foreach (string word in rulesText.ToUpper().Split('>', '<'))
-            {
-                Debug.Log(word);    
+            { 
                 if(Keywords.KeywordTerms.Keys.Contains(word))
                 {
-                    Debug.Log("found word");
                     Tooltip tooltip = Instantiate(tooltipPrefab, tooltipPosition.transform);
                     tooltip.SetToolTip(word, Keywords.KeywordTerms[word]);
                 }

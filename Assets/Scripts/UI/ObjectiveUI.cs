@@ -30,24 +30,24 @@ namespace FTS.UI
 
         public void CreateObjectiveText(List<Objective> objectives)
         {
-            bool isFirstOptional = true;
-            //List<Objective> objectives = objectivesBuffer.OrderByDescending(item => item.IsOptional).ToList();
-            //objectives = objectivesBuffer.OrderBy(item => item.IsOptional).ToList();
-            for (int i = 0; i < objectives.Count; i++)
-            {
-                if (isFirstOptional && objectives[i].IsOptional)
-                {
-                    isFirstOptional = false;
-                    TextMeshProUGUI optional = Instantiate(optionalLabel);
-                    optional.transform.SetParent(transform, false);
-                }
-                TextMeshProUGUI textMesh = Instantiate(objectiveLabel);
-                textMesh.text = objectives[i].SetDescription();
-                textMesh.transform.SetParent(transform, false);
-                textMesh.color = Color.white;
+            //bool isFirstOptional = true;
+            ////List<Objective> objectives = objectivesBuffer.OrderByDescending(item => item.IsOptional).ToList();
+            ////objectives = objectivesBuffer.OrderBy(item => item.IsOptional).ToList();
+            //for (int i = 0; i < objectives.Count; i++)
+            //{
+            //    if (isFirstOptional && objectives[i].IsOptional)
+            //    {
+            //        isFirstOptional = false;
+            //        TextMeshProUGUI optional = Instantiate(optionalLabel);
+            //        optional.transform.SetParent(transform, false);
+            //    }
+            //    TextMeshProUGUI textMesh = Instantiate(objectiveLabel);
+            //    textMesh.text = objectives[i].SetDescription();
+            //    textMesh.transform.SetParent(transform, false);
+            //    textMesh.color = Color.white;
                 
-                textList.Add(objectives[i], textMesh);
-            }
+            //    textList.Add(objectives[i], textMesh);
+            //}
         }
         
         public void UpdateUI(List<Objective> objectives)

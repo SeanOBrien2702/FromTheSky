@@ -16,7 +16,7 @@ MonoBehaviour:
   SFXName: DrawCard
   SFXLayers:
   - LayerName: 
-    SFX: {fileID: 8300000, guid: 3f8017e7d03054cd789f47ade67c90d5, type: 3}
+    SFX: {fileID: 8300000, guid: 49b2d411a99141041aeb5dc69fa4c190, type: 3}
     RandomizeVolume: 0
     FixedVolume: 1
     MinVolume: 0.5

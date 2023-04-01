@@ -6,7 +6,7 @@ using UnityEngine;
 public interface IObjective 
 {
     string ObjectiveDescription { get; set; }
-    int GoldReward { get; set; }
+    //int GoldReward { get; set; }
     Card CardReward { get; set; }
     bool IsComplete { get; set; }
     bool IsOptional { get; set; }

@@ -800,7 +800,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4956380435219591066}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2192,7 +2192,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4956380435219591066}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2221,7 +2221,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'The objective of the game is to protect the buildings from the invading
     enemies. Survive for 10 days of battle until the planet is inhospitable for the
-    invaders
+    invaders.
 
 '
   m_isRightToLeft: 0
@@ -2907,8 +2907,8 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Cards are used to control the actions of the units. To play a card
         you drag it to the target you want to hit or above the hand on screen if
-        the card does not target something. Cards are highlighted if they can be
-        used by that unit and enough energy is available.
+        the card does not target something. Cards are highlighted if it can be used
+        by that unit and has enough energy.
 
 '
       objectReference: {fileID: 0}

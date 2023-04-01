@@ -169,7 +169,7 @@ namespace FTS.UI
 
             foreach (var item in card.Effects)
             {
-                rulesText.text += item.GetEffectText();
+                rulesText.text += item.GetEffectText() + ". ";
             }
             if (shopUI)
             {

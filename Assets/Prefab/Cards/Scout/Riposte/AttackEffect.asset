@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: AttackEffect
   m_EditorClassIdentifier: 
   effectFoldout: 0
-  numAttacks: 3
-  damage: 2
+  numAttacks: 1
+  damage: 3

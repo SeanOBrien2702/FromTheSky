@@ -43,10 +43,10 @@ public class UnitUI : MonoBehaviour
             GameObject newTick = Instantiate(tick);
             newTick.transform.SetParent(start, false);
             newTick.transform.localPosition = new Vector3(position, 0, 0);
-            if (i % 5 == 0)
-            {
-                newTick.transform.localScale += new Vector3(1, 0, 0);
-            }
+            //if (i % 5 == 0)
+            //{
+            //    newTick.transform.localScale += new Vector3(1, 0, 0);
+            //}
         }
     }
     #endregion

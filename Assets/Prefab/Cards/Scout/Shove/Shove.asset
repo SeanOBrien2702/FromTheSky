@@ -26,7 +26,9 @@ MonoBehaviour:
   isAtomize: 0
   isTemporary: 0
   isInherent: 0
+  cinderCost: 10
   onDrawEffects: []
   effects:
   - {fileID: 11400000, guid: 8ea5ee5fba2f0794b8b825c922535406, type: 2}
+  - {fileID: 11400000, guid: abb42670a192b8546bfe4dcbe2d67125, type: 2}
   onDiscardEffects: []

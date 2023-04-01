@@ -9,9 +9,9 @@ namespace FTS.Core
     public abstract class Objective : ScriptableObject
     {
         //[SerializeField] string objectiveDescription;
-        [SerializeField] int goldReward;
-        [SerializeField] Card cardReward;
-        [SerializeField] bool isOptional;
+        //[SerializeField] int goldReward;
+        //[SerializeField] Card cardReward;
+        //[SerializeField] bool isOptional;
         protected bool isComplete = false;
 
         #region Properties
@@ -38,11 +38,11 @@ namespace FTS.Core
             set { isComplete = value; }
         }
 
-        public bool IsOptional
-        {
-            get { return isOptional; }
-            set { isOptional = value; }
-        }
+        //public bool IsOptional
+        //{
+        //    get { return isOptional; }
+        //    set { isOptional = value; }
+        //}
         #endregion
 
 

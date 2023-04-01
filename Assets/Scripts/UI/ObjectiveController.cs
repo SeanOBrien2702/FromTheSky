@@ -113,23 +113,23 @@ namespace FTS.Core
             //TODO: fix object UI being null sometimes
             if (objectiveUI != null)
             {
-                objectiveUI.UpdateUI(objectives);
-                int objectivesComplete = 0;
-                int objectivesRequired = objectives.Count(item => item.IsOptional == false);
-                foreach (var objective in objectives)
-                {
-                    //Debug.Log("objective complete: " + objective.name);
-                    //Debug.Log("objective complete: " + objective.IsComplete);
-                    if (objective.IsComplete && !objective.IsOptional)
-                    {
-                        objectivesComplete++;
-                    }
-                }
-                //Debug.Log("objective complete: " + objectivesRequired);
-                if (objectivesComplete >= objectivesRequired)
-                {
-                    SceneController.Instance.LoadScene(Scenes.DraftScene, true);
-                }
+                //objectiveUI.UpdateUI(objectives);
+                //int objectivesComplete = 0;
+                //int objectivesRequired = objectives.Count(item => item.IsOptional == false);
+                //foreach (var objective in objectives)
+                //{
+                //    //Debug.Log("objective complete: " + objective.name);
+                //    //Debug.Log("objective complete: " + objective.IsComplete);
+                //    if (objective.IsComplete && !objective.IsOptional)
+                //    {
+                //        objectivesComplete++;
+                //    }
+                //}
+                ////Debug.Log("objective complete: " + objectivesRequired);
+                //if (objectivesComplete >= objectivesRequired)
+                //{
+                //    SceneController.Instance.LoadScene(Scenes.DraftScene, true);
+                //}
             }
         }
 

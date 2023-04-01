@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Overkill
   flavourText: 
-  image: {fileID: 21300000, guid: 2899411326b09174a9b3f6c7d0e553c3, type: 3}
-  border: {fileID: 21300000, guid: 11a18cf618c35ff4aab936afaafa86f1, type: 3}
+  image: {fileID: 21300000, guid: d23c46d608da83047a6346f90dded78c, type: 3}
+  border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
   cost: 1
   range: 5
   area: 1
@@ -26,6 +26,7 @@ MonoBehaviour:
   isAtomize: 1
   isTemporary: 0
   isInherent: 0
+  cinderCost: 10
   onDrawEffects: []
   effects:
   - {fileID: 11400000, guid: 2e9328e517972834bb04f1ce21bd4316, type: 2}

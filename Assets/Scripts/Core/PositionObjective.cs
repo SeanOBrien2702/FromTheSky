@@ -11,18 +11,18 @@ namespace FTS.Core
     public class PositionObjective : Objective
     {
         //[SerializeField] string objectiveDescription;
-        [SerializeField] int goldReward;
+        //[SerializeField] int goldReward;
         [SerializeField] Card cardReward;
         [SerializeField] bool isOptional;
         private bool isComplete = false;
         List<HexCell> locations = new List<HexCell>();
 
         #region Properties
-        public int GoldReward   // property
-        {
-            get { return goldReward; }   // get method
-            set { goldReward = value; }  // set method
-        }
+        //public int GoldReward   // property
+        //{
+        //    get { return goldReward; }   // get method
+        //    set { goldReward = value; }  // set method
+        //}
 
         public Card CardReward   // property
         {

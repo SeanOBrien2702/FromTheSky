@@ -2,6 +2,7 @@
 using UnityEngine;
 using FTS.Grid;
 using System;
+using FTS.UI;
 #endregion
 
 namespace FTS.Characters
@@ -17,6 +18,7 @@ namespace FTS.Characters
         [SerializeField] GameObject projectile;
         [SerializeField] EnemyTargeting targeting;
         [SerializeField] AttackTypes attackType;
+        [SerializeField] TelegraphIntentUI intentUI;
 
         #region Properties
         public bool IsAttacking   // property
@@ -61,6 +63,8 @@ namespace FTS.Characters
         {
             get { return attackType; }
         }
+
+        public TelegraphIntentUI IntentUI { get => intentUI; set => intentUI = value; }
         #endregion
 
         #region MonoBehaviour Callbacks

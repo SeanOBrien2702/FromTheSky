@@ -30,11 +30,7 @@ namespace FTS.Characters
         #region Public Methods
         private void AddDefaultPlayers()
         {
-
-            for (int i = 0; i < 3; i++)
-            {
-                players.Add(playerPrefabs[i]);
-            }
+            players.Add(playerPrefabs[0]);
         }
         #endregion
 

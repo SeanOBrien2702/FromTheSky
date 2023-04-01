@@ -12,7 +12,8 @@ namespace FTS.Cards
 {
     public class CardDatabase : MonoBehaviour, ISaveable
     {
-        PlayerDatabase playerDatabase;
+        //PlayerDatabase playerDatabase;
+        //UnitController unitController;
         Dictionary<CharacterClass, List<Card>> lookupTable = null;
         [SerializeField] List<Card> deck = new List<Card>();
         [SerializeField] List<CardBorder> cardBorders;
@@ -24,7 +25,7 @@ namespace FTS.Cards
         #region MonoBehaviour Callbacks
         private void Start()
         {
-            playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
+            //playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             BuildLookup();
             TurnController.OnCombatStart += TurnController_OnCombatStart;
         }
@@ -60,20 +61,13 @@ namespace FTS.Cards
         #region Public Methods
         public List<Card> GetMultipleCards(int numPicks)
         {
-            classList = playerDatabase.GetPlayerClasses();
-            List<Card> bucket = new List<Card>();
-
-            for (int i = 0; i < numPicks; i++)
-            {
-                bucket.Add(lookupTable[classList[Random.Range(0, classList.Length)]].OrderBy(o => System.Guid.NewGuid())
-                                                     .FirstOrDefault());
-            }
-            return bucket;
+            System.Random random = new System.Random();
+            return lookupTable[CharacterClass.Scout].OrderBy(item => random.Next()).Take(numPicks).ToList();
         }
 
         internal List<Card> GetOrbitalCards()
         {
-            classList = playerDatabase.GetPlayerClasses();
+            //classList = playerDatabase.GetPlayerClasses();
             List<Card> bucket = new List<Card>();
 
             for (int i = 0; i < 2; i++)

@@ -4,13 +4,9 @@ using FTS.Core;
 using FTS.Grid;
 using FTS.Turns;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using static UnityEditor.Experimental.GraphView.GraphView;
 #endregion
 
 namespace FTS.Characters
@@ -166,17 +162,19 @@ namespace FTS.Characters
                 }
                 timeSinceChangingUnits += Time.deltaTime;
             }
-
-            if(Input.GetKeyDown(KeyCode.P))
+            if (Application.isEditor)
             {
-                SceneController.Instance.LoadScene(Scenes.DraftScene, true);
-                //SceneManager.LoadScene(Scenes.DraftScene.ToString());
-                //OnEnemyLost?.Invoke();
-            }
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    SceneController.Instance.LoadScene(Scenes.DraftScene, true);
+                    //SceneManager.LoadScene(Scenes.DraftScene.ToString());
+                    //OnEnemyLost?.Invoke();
+                }
 
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                OnPlayerLost?.Invoke();
+                if (Input.GetKeyDown(KeyCode.O))
+                {
+                    OnPlayerLost?.Invoke();
+                }
             }
         }
 
@@ -349,7 +347,7 @@ namespace FTS.Characters
 
                     Player player = (Player)unit;
                     playerList.Remove(player);
-                    cardController.RemoveClass(player.CharacterClass);
+                    //cardController.RemoveClass(player.CharacterClass);
                     OnPlayerKilled?.Invoke((Player)unit);
                     if (playerList.Count <= 0 && gridController.UnitsPlaced)
                     {

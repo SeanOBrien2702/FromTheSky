@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using FTS.Grid;
 using FTS.Turns;
+using FTS.UI;
 #endregion
 
 namespace FTS.Characters
@@ -16,6 +17,7 @@ namespace FTS.Characters
         StateController stateController;
         CameraController camera;
 
+        [HideInInspector] public TelegraphIntentUI telegraphIntentUI;      
         [HideInInspector] public Mover mover;
         [HideInInspector] public Enemy enemy;
         [HideInInspector] public HexGridController gridController;
@@ -46,7 +48,7 @@ namespace FTS.Characters
             camera = FindObjectOfType<CameraController>().GetComponent<CameraController>();
             enemy = GetComponent<Enemy>();
             mover = GetComponent<Mover>();
-            
+            telegraphIntentUI = enemy.IntentUI;
         }
         #endregion
 

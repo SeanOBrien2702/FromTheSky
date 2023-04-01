@@ -562,6 +562,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: characterClassCards.Array.data[1].cards.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: characterClassCards.Array.data[1].cards.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9253fd6d37d144d43adcdda84fa54b91,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: characterClassCards.Array.data[1].cards.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: e5eaad70fa5f6f54791ab4be85b118c6,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: characterClassCards.Array.data[1].cards.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: e5eaad70fa5f6f54791ab4be85b118c6,
+        type: 2}
     - target: {fileID: 8990577267346574125, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: m_Name
@@ -895,6 +918,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 38aecd77a18d544bfb836befe83883b7,
         type: 2}
+    - target: {fileID: 1610171334750814841, guid: b417e02570d9be44594a52e7618ba9c4,
+        type: 3}
+      propertyPath: m_text
+      value: Press F8 to submit feedback.
+      objectReference: {fileID: 0}
     - target: {fileID: 1610171334750814841, guid: b417e02570d9be44594a52e7618ba9c4,
         type: 3}
       propertyPath: m_textAlignment

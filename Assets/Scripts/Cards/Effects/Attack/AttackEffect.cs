@@ -7,12 +7,11 @@ namespace FTS.Cards
     [CreateAssetMenu(menuName = "Effect/Attack/Attack", fileName = "AttackEffect.asset")]
     public class AttackEffect : Effect
     {
-        [Header("Combat")]
         [SerializeField] int numAttacks = 1;
-        [SerializeField] int range = 3;
-        [SerializeField] int area = 1;
+        //[SerializeField] int range = 3;
+        //[SerializeField] int area = 1;
+        [SerializeField] int damage = 2;
 
-        int damage = 2;
         public override void ActivateEffect(Unit target)
         {
             for (int i = 0; i < numAttacks; i++)

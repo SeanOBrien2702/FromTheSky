@@ -28,8 +28,6 @@ namespace FTS.Cards
         [SerializeField] int maxHandSize = 10;
         [SerializeField] int cardsPerTurn = 5;
 
-
-
         GameUI gameUI;
         UnitController unitController;
         CardDatabase cardDatabase;
@@ -219,9 +217,7 @@ namespace FTS.Cards
             {
                 canDraw = false;
             }
-            else if (!deck.Any(item => item.Location == CardLocation.Deck &&
-                    (item.CharacterClass == CharacterClass.Common ||
-                     item.CharacterClass == unitController.GetCurrentPlayer().CharacterClass)))
+            else if (!deck.Any(item => item.Location == CardLocation.Deck))
             {
                 if (deck.Any(item => item.Location == CardLocation.Discard))
                 {
@@ -442,13 +438,9 @@ namespace FTS.Cards
 
         public void DrawCard()
         {
-            //Debug.Log("draw?");
             if (canDraw())
             {
-                //Debug.Log("can draw?");
-                Card card = deck.FirstOrDefault(item => item.Location == CardLocation.Deck && 
-                                                (item.CharacterClass == CharacterClass.Common ||
-                                                item.CharacterClass == unitController.GetCurrentPlayer().CharacterClass));
+                Card card = deck.FirstOrDefault(item => item.Location == CardLocation.Deck);
                 card.Location = CardLocation.Hand;
                 hand.AddCard(card);
                 OnCardDrawn?.Invoke();
