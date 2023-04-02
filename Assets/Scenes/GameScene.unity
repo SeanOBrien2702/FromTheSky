@@ -2344,7 +2344,7 @@ PrefabInstance:
     - target: {fileID: 3243454177699071875, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
       propertyPath: m_text
-      value: Place unit
+      value: Repostion unit
       objectReference: {fileID: 0}
     - target: {fileID: 3245319054413668040, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
@@ -3196,7 +3196,7 @@ PrefabInstance:
     - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}
       propertyPath: enemiesToSpawn
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1867353417224850159, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}

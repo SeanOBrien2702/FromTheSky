@@ -601,7 +601,7 @@ namespace FTS.Grid
 
         internal void RemoveIndicator(Enemy unit)
         {
-            foreach (HexCell cell in attackIndicators[unit].Line)
+            foreach (HexCell cell in attackIndicators[unit].Line.ToList())
             {
                 cell.SetDangerIndicator(false);
             }
@@ -610,7 +610,7 @@ namespace FTS.Grid
 
         public void Attack(Enemy enemy)
         {
-            foreach (HexCell cell in attackIndicators[enemy].Line)
+            foreach (HexCell cell in attackIndicators[enemy].Line.ToList())
             {
                 cell.SetDangerIndicator(false);
                 if(cell.Unit)

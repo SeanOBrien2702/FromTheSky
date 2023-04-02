@@ -330,10 +330,11 @@ namespace FTS.Characters
             --numberOfUnits;
             if (unit is Enemy)
             {
+                gridController.RemoveIndicator((Enemy)unit);
                 OnEnemyKilled?.Invoke((Enemy)unit);
                 stateMachines.Remove(unit.GetComponent<StateMachine>());
                 enemyList.Remove((Enemy)unit);
-                gridController.RemoveIndicator((Enemy)unit);
+                
                 if (enemyList.Count <= 0)
                 {
                     SceneController.Instance.LoadScene(Scenes.DraftScene, true);
