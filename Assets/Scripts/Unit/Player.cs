@@ -48,6 +48,12 @@ namespace FTS.Characters
         {
             base.Start();
             energy = maxEnergy;
+            TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
+        }
+
+        private void OnDestroy()
+        {
+            TurnController.OnEnemySpawn -= TurnController_OnEnemySpawn;
         }
         #endregion
 
@@ -89,9 +95,9 @@ namespace FTS.Characters
         #endregion
 
         #region Events
-        protected override void TurnController_OnNewTurn()
+        private void TurnController_OnEnemySpawn()
         {
-            energy = maxEnergy;
+            Energy = maxEnergy;
         }
         #endregion
     }

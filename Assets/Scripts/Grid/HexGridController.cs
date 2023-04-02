@@ -214,7 +214,7 @@ namespace FTS.Grid
             if (currentCell.Unit && currentUnit != currentCell.Unit)
             {
                 Debug.Log("Select");
-                if (currentCell && currentCell.Unit)
+                if (currentCell && currentCell.Unit is Player)
                 {
                     unitController.SetCurrentUnit(currentCell.Unit as Player);
                 }

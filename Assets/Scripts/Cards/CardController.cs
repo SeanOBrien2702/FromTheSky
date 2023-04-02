@@ -37,8 +37,8 @@ namespace FTS.Cards
 
         Card lastCardPlayed;
         Card cardSelected;
-        int energy;
-        int totalEnergy = 4;
+        //int energy;
+        //int totalEnergy = 4;
         private CharacterClass characterClass;
 
         bool handleDiscard = false;
@@ -51,19 +51,19 @@ namespace FTS.Cards
             set { cardSelected = value; }  // set method
         }
 
-        public int Energy   // property
-        {
-            get { return energy; }   // get method
-            set { energy = value;
-                OnEnergyChanged?.Invoke();
-            }  // set method
-        }
+        //public int Energy   // property
+        //{
+        //    get { return energy; }   // get method
+        //    set { energy = value;
+        //        OnEnergyChanged?.Invoke();
+        //    }  // set method
+        //}
 
-        public int TotalEnergy   // property
-        {
-            get { return totalEnergy; }   // get method
-            set { totalEnergy = value; }  // set method
-        }
+        //public int TotalEnergy   // property
+        //{
+        //    get { return totalEnergy; }   // get method
+        //    set { totalEnergy = value; }  // set method
+        //}
 
         public int MaxHandSize   // property
         {
@@ -578,7 +578,7 @@ namespace FTS.Cards
         private void TurnController_OnNewTurn()
         {
             //Debug.Log("draw new hard?");
-            energy = totalEnergy;
+            //energy = totalEnergy;
             DrawNewHand();
         }
         #endregion
