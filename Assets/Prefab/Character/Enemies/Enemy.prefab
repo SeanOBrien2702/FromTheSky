@@ -303,6 +303,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1799238614306022091, guid: b955708cfc370964fbe80b7a36a1bca4,
+        type: 3}
+      propertyPath: m_Height
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799238614306022091, guid: b955708cfc370964fbe80b7a36a1bca4,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1799238614306022093, guid: b955708cfc370964fbe80b7a36a1bca4,
         type: 3}
       propertyPath: pushSpeed
@@ -322,6 +332,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599671269632315327, guid: b955708cfc370964fbe80b7a36a1bca4,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344629008717816395, guid: b955708cfc370964fbe80b7a36a1bca4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9082565082746563147, guid: b955708cfc370964fbe80b7a36a1bca4,
         type: 3}
@@ -401,6 +421,7 @@ MonoBehaviour:
   portrait: {fileID: 0}
   barrier: {fileID: 0}
   description: 
+  hoverSound: {fileID: 11400000, guid: 1bb62d10b1df2ed4c888bd3e2a5ec0a6, type: 2}
   damageFeedback: {fileID: 5582012230401370999}
   animator: {fileID: 7380319928023493813}
   characterClass: 0
@@ -412,6 +433,7 @@ MonoBehaviour:
   targeting: 0
   attackType: 0
   intentUI: {fileID: 5238737796892697449}
+  indicator: {fileID: 0}
 --- !u!114 &-3402009541125080230
 MonoBehaviour:
   m_ObjectHideFlags: 0

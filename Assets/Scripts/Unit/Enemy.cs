@@ -1,14 +1,14 @@
 ﻿#region Using Statements
 using UnityEngine;
 using FTS.Grid;
-using System;
 using FTS.UI;
+using WalldoffStudios.Indicators;
 #endregion
 
 namespace FTS.Characters
 {
-    public class Enemy : Character
-    {
+    public class Enemy : Character 
+    {    
         bool isAttacking = false;
         bool canAttack = true;
         HexDirection direction;
@@ -19,6 +19,7 @@ namespace FTS.Characters
         [SerializeField] EnemyTargeting targeting;
         [SerializeField] AttackTypes attackType;
         [SerializeField] TelegraphIntentUI intentUI;
+        [SerializeField] IndicatorController indicator;
 
         #region Properties
         public bool IsAttacking   // property
@@ -65,10 +66,22 @@ namespace FTS.Characters
         }
 
         public TelegraphIntentUI IntentUI { get => intentUI; set => intentUI = value; }
+        public IndicatorController Indicator { get => indicator; set => indicator = value; }
         #endregion
 
-        #region MonoBehaviour Callbacks
-        #endregion
+        protected override void OnMouseEnter()
+        {
+            base.OnMouseEnter();
+            if (indicator)
+                indicator.ShotIndicator();
+        }
+
+        protected override void OnMouseExit()
+        {
+            base.OnMouseExit();
+            if (indicator)
+                indicator.IndicatorResetFillAmount();
+        }
 
         #region Public Methods
         public void Attack()

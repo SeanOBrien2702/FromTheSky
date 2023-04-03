@@ -8,6 +8,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 #endregion
 
 namespace FTS.Grid
@@ -57,8 +58,10 @@ namespace FTS.Grid
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
+            Unit.OnHover += Unit_OnHover;
+            Unit.OnHoverExit += Unit_OnHoverExit;
             grid.ShowPlacementArea(placementArea);
-            currentUnit = unitController.PlacePlayer(grid.GetCell(new HexCoordinates(grid.Width/2, 0)));
+            currentUnit = unitController.PlacePlayer(grid.GetCell(new HexCoordinates(grid.Width / 2, 0)));
         }
 
         void Update()
@@ -79,6 +82,8 @@ namespace FTS.Grid
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
+            Unit.OnHover += Unit_OnHover;
+            Unit.OnHoverExit += Unit_OnHoverExit;
         }
         #endregion
 
@@ -341,18 +346,25 @@ namespace FTS.Grid
             foreach (HexCell cell in indicator.Line)
             {
                 cell.SetDangerIndicator(false);
+                cell.SetDangerous(false);
             }
+
             if (enemy.IsPiercieing())
             {
                 indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, enemy.Range, enemy.IsPiercieing());
+                foreach (HexCell cell in indicator.Line)
+                {
+                    cell.SetDangerIndicator(true);
+                }
             }
             else
             {
                 indicator.Line = grid.GetLine(enemy.Location, indicator.Direction);
+                indicator.Line.Last().SetDangerIndicator(true);
             }
             foreach (HexCell cell in indicator.Line)
             {
-                cell.SetDangerIndicator(true);
+                cell.SetDangerous(true);
             }
         }
 
@@ -586,15 +598,20 @@ namespace FTS.Grid
             if (enemy.IsPiercieing())
             {
                 indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction, enemy.Range, enemy.IsPiercieing()), enemy.Direction);
+                foreach (HexCell cell in indicator.Line)
+                {
+                    cell.SetDangerIndicator(true);
+                }
             }
             else
             {
                 indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction), enemy.Direction);
+                indicator.Line.Last().SetDangerIndicator(true);
             }
 
             foreach (HexCell cell in indicator.Line)
             {
-                cell.SetDangerIndicator(true);
+                cell.SetDangerous(true);
             }
             attackIndicators.Add(enemy, indicator);
         }
@@ -647,6 +664,50 @@ namespace FTS.Grid
             grid.ClearArea();
             grid.ClearPath();
             grid.ClearReachable();
+        }
+        private void Unit_OnHoverExit(Unit unit)
+        {
+            if(unit is Enemy)
+            {
+                Enemy enemy = (Enemy)unit;
+                if (cardController.CardSelected)
+                {
+                    enemy.ShowDamage(0);
+                }
+                else if (attackIndicators.ContainsKey(enemy))
+                {
+                    foreach (HexCell cell in attackIndicators[enemy].Line.ToList())
+                    {
+                        if (cell.Unit)
+                        {
+                            cell.Unit.ShowDamage(0);
+                        }
+                    }
+                }
+            }                         
+        }
+
+        private void Unit_OnHover(Unit unit)
+        {
+            if (unit is Enemy)
+            {
+                Enemy enemy = (Enemy)unit;
+                if(cardController.CardSelected)
+                {
+                    enemy.ShowDamage(cardController.GetDamage());
+                }
+                else if (attackIndicators.ContainsKey(enemy))
+                {
+                    foreach (HexCell cell in attackIndicators[enemy].Line.ToList())
+                    {
+                        if (cell.Unit)
+                        {
+                            int damage = enemy.Stats.GetStat(Stat.Damage, enemy.CharacterClass);
+                            cell.Unit.ShowDamage(damage);
+                        }
+                    }
+                }
+            }       
         }
         #endregion
     }

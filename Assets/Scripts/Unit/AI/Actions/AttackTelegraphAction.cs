@@ -10,6 +10,10 @@ namespace FTS.Characters
         public override void Act(StateController controller, StateMachine machine)
         {
             TelegraphAttack(machine);
+            if (machine.enemy.Indicator)
+            {
+                machine.enemy.Indicator.ToggleAim(true);
+            }
             machine.telegraphIntentUI.ShowAttack(machine.enemy.GetStat(Stat.Damage));
             controller.ActionDone = true;
         }

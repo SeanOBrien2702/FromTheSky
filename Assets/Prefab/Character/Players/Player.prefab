@@ -67,6 +67,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5599671269632315327, guid: b955708cfc370964fbe80b7a36a1bca4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344629008717816395, guid: b955708cfc370964fbe80b7a36a1bca4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8897542897565884760, guid: b955708cfc370964fbe80b7a36a1bca4,
         type: 3}
       propertyPath: m_TagString
@@ -117,26 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5869748873792558939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8918363082321941229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77410d6ac3e86d4478594f8a8c84701b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 8503430834204003053}
-  characterClass: 0
-  stats: {fileID: 11400000, guid: 8e01d80668c0a26468f0a672e98ec0e4, type: 2}
-  unitUI: {fileID: 3849243981634020016}
-  picture: {fileID: 0}
-  barrier: {fileID: 6094887887503405183}
-  damageFeedback: {fileID: 6708430611498093871}
-  colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &3658990017584045375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,3 +140,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueIdentifier: 
+--- !u!114 &5869748873792558939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918363082321941229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77410d6ac3e86d4478594f8a8c84701b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitUI: {fileID: 3849243981634020016}
+  portrait: {fileID: 0}
+  barrier: {fileID: 6094887887503405183}
+  description: 
+  hoverSound: {fileID: 11400000, guid: 1bb62d10b1df2ed4c888bd3e2a5ec0a6, type: 2}
+  damageFeedback: {fileID: 6708430611498093871}
+  animator: {fileID: 8503430834204003053}
+  characterClass: 0
+  stats: {fileID: 11400000, guid: 8e01d80668c0a26468f0a672e98ec0e4, type: 2}
+  colour: {r: 0, g: 0, b: 0, a: 0}
+  maxEnergy: 4

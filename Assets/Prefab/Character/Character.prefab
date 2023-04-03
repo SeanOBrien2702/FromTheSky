@@ -48,10 +48,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 6
+  m_Height: 20
   m_Direction: 1
-  m_Center: {x: 0, y: -2, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &1799238614306022092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +68,7 @@ MonoBehaviour:
   portrait: {fileID: 0}
   barrier: {fileID: 4010783370477371485}
   description: 
+  hoverSound: {fileID: 11400000, guid: 1bb62d10b1df2ed4c888bd3e2a5ec0a6, type: 2}
   damageFeedback: {fileID: 4478104277416606989}
   animator: {fileID: 1530677751184685775}
   characterClass: 1
@@ -86,7 +87,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   travelSpeed: 4
   pushSpeed: 0.1
-  rotationSpeed: 180
   animator: {fileID: 1530677751184685775}
   movementSounds: {fileID: 11400000, guid: 1e1bba9a36b70014abfedd3a7129475f, type: 2}
 --- !u!114 &1852897224218879265
@@ -261,15 +261,65 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1799238614306022088}
     m_Modifications:
+    - target: {fileID: 786845168592024240, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0.794
+      objectReference: {fileID: 0}
+    - target: {fileID: 786845168592024240, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_FillOrigin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1227905858029449117, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: possibleDamageBar
+      value: 
+      objectReference: {fileID: 5599671269632315327}
     - target: {fileID: 2562384852219892566, guid: 19a6d881f456d8249a24726aecb22f12,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3788506976666148676, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478514106687814196, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478514106687814196, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478514106687814196, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478514106687814196, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478514106687814196, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5873729414239545085, guid: 19a6d881f456d8249a24726aecb22f12,
         type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598595772518213226, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6598595772518213226, guid: 19a6d881f456d8249a24726aecb22f12,
         type: 3}
@@ -399,6 +449,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5142381639238548751}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5599671269632315327 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 786845168592024240, guid: 19a6d881f456d8249a24726aecb22f12,
+    type: 3}
+  m_PrefabInstance: {fileID: 5142381639238548751}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6827477125159537004
 PrefabInstance:
   m_ObjectHideFlags: 0

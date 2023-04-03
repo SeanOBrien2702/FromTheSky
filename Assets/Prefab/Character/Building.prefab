@@ -66,6 +66,7 @@ MonoBehaviour:
   portrait: {fileID: 21300000, guid: 15eb5ddf35d134be196b5dca4cf8758b, type: 3}
   barrier: {fileID: 7483593880638004401}
   description: 
+  hoverSound: {fileID: 11400000, guid: 1bb62d10b1df2ed4c888bd3e2a5ec0a6, type: 2}
   damageFeedback: {fileID: 7950919156692214241}
   startingHealth: 3
 --- !u!1 &8900052954750368877
@@ -314,10 +315,40 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5227015851115183652}
     m_Modifications:
+    - target: {fileID: 786845168592024240, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2562384852219892566, guid: 19a6d881f456d8249a24726aecb22f12,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478514106687814196, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478514106687814196, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478514106687814196, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478514106687814196, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478514106687814196, guid: 19a6d881f456d8249a24726aecb22f12,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5873729414239545085, guid: 19a6d881f456d8249a24726aecb22f12,
         type: 3}

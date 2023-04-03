@@ -1,4 +1,6 @@
 ﻿#region Using Statements
+using FTS.Characters;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 #endregion
@@ -8,6 +10,7 @@ public class UnitUI : MonoBehaviour
     [Header("Health")]
     [SerializeField] Text lblHealth;
     [SerializeField] Image healthBar;
+    [SerializeField] Image possibleDamageBar;
     [SerializeField] GameObject tick;
     [SerializeField] Transform start;
 
@@ -21,12 +24,13 @@ public class UnitUI : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+        UnitController.OnEnemyKilled += UnitController_OnEnemyKilled;
     }
 
     public void FixedUpdate()
     {
         transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
-
+        UnitController.OnEnemyKilled -= UnitController_OnEnemyKilled;
     }
     #endregion
 
@@ -36,7 +40,6 @@ public class UnitUI : MonoBehaviour
         float healthBarWidth = healthBar.GetComponent<RectTransform>().sizeDelta.x;
         float increment = healthBarWidth / maxHealth;
         float position = 0;
-        Debug.Log(start.localPosition);
         for (int i = 1; i < maxHealth; i++)
         {
             position -= increment;
@@ -82,5 +85,21 @@ public class UnitUI : MonoBehaviour
 
     }
 
+    internal void ShowDamage(int health, int maxHealth, int damage)
+    {
+        possibleDamageBar.enabled = true;
+        int bufferHealth = health - damage;
+        possibleDamageBar.fillAmount = 1 - ((float)bufferHealth / (float)maxHealth);
+    }
+
+    internal void HideDamage()
+    {
+        possibleDamageBar.enabled = false;
+    }
     #endregion
+
+    private void UnitController_OnEnemyKilled(Character obj)
+    {
+        HideDamage();
+    }
 }

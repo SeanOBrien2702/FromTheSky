@@ -5,7 +5,7 @@ namespace FTS.Cards
 {
     [System.Serializable]
     [CreateAssetMenu(menuName = "Effect/Attack/Attack", fileName = "AttackEffect.asset")]
-    public class AttackEffect : Effect
+    public class AttackEffect : Effect, IDamageEffect
     {
         [SerializeField] int numAttacks = 1;
         //[SerializeField] int range = 3;
@@ -33,6 +33,11 @@ namespace FTS.Cards
                 effectText = "Deal " + damage + " damage " + numAttacks + " times";
             }
             return effectText;
+        }
+
+        public int GetTotalDamage()
+        {
+            return numAttacks * damage;
         }
     }
 }
