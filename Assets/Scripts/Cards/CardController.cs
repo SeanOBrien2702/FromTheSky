@@ -541,6 +541,16 @@ namespace FTS.Cards
         {
             cardsPerTurn += cardsDrawn;
         }
+
+        internal int GetDamage()
+        {
+            int damage = 0;
+            foreach (IDamageEffect item in CardSelected.Effects.OfType<IDamageEffect>())
+            {
+                damage += item.GetTotalDamage();
+            }
+            return damage;
+        }
         #endregion
 
         #region Events

@@ -3,6 +3,7 @@ using FTS.Cards;
 using FTS.Grid;
 using FTS.Turns;
 using MoreMountains.Feedbacks;
+using System;
 using UnityEngine;
 #endregion
 
@@ -10,11 +11,14 @@ namespace FTS.Characters
 {
     public abstract class Unit : MonoBehaviour
     {
+        public static event Action<Unit> OnHover = delegate { };
+        public static event Action<Unit> OnHoverExit = delegate { };
         [SerializeField] protected UnitUI unitUI;
         [SerializeField] Sprite portrait;
         [SerializeField] GameObject barrier;
 
-        [SerializeField] string description;   
+        [SerializeField] string description;
+        [SerializeField] SFXObject hoverSound;
         protected UnitController unitController;
 
         public MMFeedbacks damageFeedback;
@@ -106,6 +110,16 @@ namespace FTS.Characters
         {
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
         }
+        protected virtual void OnMouseEnter()
+        {
+            SFXManager.Main.Play(hoverSound);
+            OnHover?.Invoke(this);
+        }
+
+        protected virtual void OnMouseExit()
+        {
+            OnHoverExit?.Invoke(this);
+        }  
         #endregion
 
         #region Private Methods
@@ -153,6 +167,33 @@ namespace FTS.Characters
                 UpdateBarrier(false);
             }
         }
+
+
+        internal void ShowDamage(int damage)
+        {
+            if (damage == 0)
+            {
+                unitUI.HideDamage();
+            }
+            else
+            { 
+                if (armour > 0)
+                {
+                    if (damage <= armour)
+                    {
+                        Armour -= damage;
+                        damage = 0;
+                    }
+                    else
+                    {
+                        damage -= armour;
+                        Armour = 0;
+                    }
+                }
+                unitUI.ShowDamage(health, maxHealth, damage);
+            }
+        }
+
 
         public void Stun()
         {

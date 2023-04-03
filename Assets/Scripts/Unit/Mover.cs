@@ -4,6 +4,7 @@ using FTS.Turns;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 #endregion
 
@@ -20,7 +21,7 @@ namespace FTS.Characters
 
         [SerializeField] float travelSpeed = 2f;
         [SerializeField] float pushSpeed = 0.1f;
-        [SerializeField] float rotationSpeed = 180f;
+        float rotationSpeed = 0.5f;
         [SerializeField] Animator animator;
 
         [SerializeField] SFXGroup movementSounds;
@@ -128,6 +129,11 @@ namespace FTS.Characters
             StartCoroutine(TravelPush(newLocation.transform.localPosition));
             Location = newLocation;
         }
+
+        public void LookAt(int angle)
+        {
+            StartCoroutine(RotateToTarget(angle));
+        }
         #endregion
 
         #region Coroutines
@@ -192,13 +198,29 @@ namespace FTS.Characters
             }
             transform.localPosition = location.transform.localPosition;
             pathToTravel = null;
-            
+
             cameraController.StopCharacterFollow();
             stateController.ActionDone = true;
   
             if (movementLeft >= 1)
                 canMove = true;
         }
+
+        IEnumerator RotateToTarget(float targetAngle)
+        {
+            float time = 0;
+            Vector3 targetRotation = new Vector3(0, targetAngle, 0);
+
+            while (time < rotationSpeed)
+            {
+                transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, targetRotation, time / rotationSpeed);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            transform.eulerAngles = targetRotation;
+            stateController.ActionDone = true;
+        }
+       
         #endregion
 
         #region Events

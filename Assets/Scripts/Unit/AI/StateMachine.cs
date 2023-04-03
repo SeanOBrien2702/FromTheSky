@@ -6,6 +6,7 @@ using UnityEngine.AI;
 using FTS.Grid;
 using FTS.Turns;
 using FTS.UI;
+using WalldoffStudios.Indicators;
 #endregion
 
 namespace FTS.Characters
@@ -16,6 +17,7 @@ namespace FTS.Characters
         public State remainState;
         StateController stateController;
         CameraController camera;
+        IndicatorController indicator;
 
         [HideInInspector] public TelegraphIntentUI telegraphIntentUI;      
         [HideInInspector] public Mover mover;
@@ -48,6 +50,7 @@ namespace FTS.Characters
             camera = FindObjectOfType<CameraController>().GetComponent<CameraController>();
             enemy = GetComponent<Enemy>();
             mover = GetComponent<Mover>();
+            indicator = enemy.Indicator;
             telegraphIntentUI = enemy.IntentUI;
         }
         #endregion

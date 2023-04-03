@@ -17,7 +17,11 @@ namespace FTS.Characters
         {
             //AttackDamage(machine);
             machine.enemy.Attack();
-            machine.enemy.IsAttacking = false;
+            machine.enemy.IsAttacking = false;          
+            if (machine.enemy.Indicator)
+            {
+                machine.enemy.Indicator.ToggleAim(false);
+            }
             machine.gridController.Attack(machine.enemy);
         }
 

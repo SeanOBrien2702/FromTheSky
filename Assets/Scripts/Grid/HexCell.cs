@@ -2,11 +2,10 @@
 using FTS.Characters;
 using FTS.Core;
 using FTS.UI;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Linq;
+using TMPro;
 #endregion
 
 namespace FTS.Grid
@@ -27,7 +26,7 @@ namespace FTS.Grid
         private HexStatus status = HexStatus.Unavailable;
         [SerializeField] bool isObstacle = false;
         [SerializeField] HexCell[] neighbors;
-        [SerializeField] Text label;
+        [SerializeField] TextMeshProUGUI label;
         [SerializeField] Image highlight;
 
         [Header("Highlight Colours")]
@@ -45,6 +44,7 @@ namespace FTS.Grid
         GameObject modelOnHex;
         RandomCell RNGController;
         int dangerIndicator = 0;
+        int dangerousCount = 0;
         bool isDestination = false;
         bool isSpawn = false;
         bool isDangerous = false;
@@ -248,6 +248,29 @@ namespace FTS.Grid
             }
         }
 
+        public void SetDangerous(bool danger)
+        {
+            if (danger)
+            {
+                ++dangerousCount;
+            }
+            else
+            {
+                if (dangerousCount > 0)
+                {
+                    --dangerousCount;
+                }
+            }
+            if (dangerousCount > 0)
+            {
+                isDangerous = true;
+            }
+            else
+            {
+                isDangerous = false;
+            }
+        }
+
         public void SetDangerIndicator(bool danger)
         {
             if (danger)
@@ -265,13 +288,11 @@ namespace FTS.Grid
             {
                 //renderer.material.color = highlightColours[(int)HighlightIndex.CantReachColour];//Color.red;
                 dangerHighlight.SetActive(true);
-                isDangerous = true;
             }
             else
             {
                 //renderer.material.color = highlightColours[(int)HighlightIndex.CanReachColour];
                 dangerHighlight.SetActive(false);
-                isDangerous = false;
             }
         }
 

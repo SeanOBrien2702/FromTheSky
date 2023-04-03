@@ -11,5 +11,10 @@
         {
             return (int)direction < 3 ? (direction + 3) : (direction - 3);
         }
+
+        public static int Angle(this HexDirection direction)
+        {
+            return (int)direction * 60 + 30;
+        }
     }
 }
