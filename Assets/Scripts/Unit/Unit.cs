@@ -142,8 +142,7 @@ namespace FTS.Characters
         #region Public Methods
         public virtual void CalculateDamageTaken(int damage)
         {
-            Debug.Log("incoming dmaage " + damage +" "+ health + " " + Health);
-            damageFeedback?.PlayFeedbacks(transform.position, damage); //damage text animation
+            damageFeedback?.PlayFeedbacks(transform.position, damage);
             if (!hasBarrier)
             {
                 if (armour > 0)

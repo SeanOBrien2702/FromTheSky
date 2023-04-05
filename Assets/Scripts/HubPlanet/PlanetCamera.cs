@@ -32,11 +32,11 @@ public class PlanetCamera : MonoBehaviour
         }
     }
 
-    internal void PanToObjective(MapObjective nextObjective)
-    {
-        inactiveTimer = 0;
-        StartCoroutine(LerpToObjective(nextObjective.transform.rotation));
-    }
+    //internal void PanToObjective(MapObjective nextObjective)
+    //{
+    //    inactiveTimer = 0;
+    //    StartCoroutine(LerpToObjective(nextObjective.transform.rotation));
+    //}
 
 
     IEnumerator LerpToObjective(Quaternion targetPosition)

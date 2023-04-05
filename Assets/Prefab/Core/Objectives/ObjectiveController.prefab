@@ -46,5 +46,11 @@ MonoBehaviour:
   objectivesList:
   - {fileID: 11400000, guid: 427e2896213cf4f478d864e4d6312fbd, type: 2}
   - {fileID: 11400000, guid: 3744b3c864a60ec43ac61cd3aa6ca5bb, type: 2}
-  optionalObjectivesList: []
+  - {fileID: 11400000, guid: a35bcc6f986b2ac48ace45c5884d0b42, type: 2}
+  - {fileID: 11400000, guid: 4dca44db7be795548b64985fe960ffd9, type: 2}
+  - {fileID: 11400000, guid: 6161858ea1f3ae744ba864ad295c1b81, type: 2}
+  - {fileID: 11400000, guid: 65a46cd1f2c05d04d9e64ee483e77089, type: 2}
+  optionalObjectivesList:
+  - {fileID: 11400000, guid: db34b4050a4b7a846ae2c48e5cd248b2, type: 2}
+  - {fileID: 11400000, guid: d2506fa728d9fc347851371e8522a207, type: 2}
   minNumObjectives: 3

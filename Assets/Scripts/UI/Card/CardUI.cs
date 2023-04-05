@@ -177,9 +177,9 @@ namespace FTS.UI
             }
         }
 
+        //TODO: have the card text only intilized once
         public void FillCardUI(Card card)
         {
-            Debug.Log("fill text-------------------");
             cost.text = card.Cost.ToString();
             ConfigureCardType(card);
             string cardText = FillCardText(card);

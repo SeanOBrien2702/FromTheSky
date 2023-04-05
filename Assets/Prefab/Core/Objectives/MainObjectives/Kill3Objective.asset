@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade92917903c4504ab5d2c9fc22522b4, type: 3}
   m_Name: Kill3Objective
   m_EditorClassIdentifier: 
-  goldReward: 50
-  cardReward: {fileID: 0}
+  cinderReward: 50
   isOptional: 0
-  enemiesToKill: 3
+  enemiesToKill: 5
   enemy: {fileID: 0}

@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace FTS.Core
@@ -10,9 +10,25 @@ namespace FTS.Core
         [SerializeField] Objective[] objectivesList;
         [SerializeField] Objective[] optionalObjectivesList;
         List<Objective> currentObjectives = new List<Objective>();
-        List<MapObjective> mapObjectives;
         [SerializeField] int minNumObjectives = 3;
-        //[SerializeField] int 
+
+        Objective GetRandomObjective(bool isOptional = false)
+        {
+            Objective objective;
+
+            int randomNum = Random.Range(0, isOptional ? optionalObjectivesList.Count() : objectivesList.Count());
+
+            if (isOptional)
+            {
+                objective = optionalObjectivesList[randomNum];
+            }
+            else
+            {
+                objective = objectivesList[randomNum];
+            }
+
+            return objective;
+        }
 
         //TODO: change this from adding each objecive to procedurally selecting them
         public List<Objective> GetRandomObjectives()
@@ -25,20 +41,20 @@ namespace FTS.Core
             return currentObjectives;
         }
 
-        internal void SetObjective(List<Objective> objectives)
+        internal void SetObjectives(List<Objective> objectives)
         {
             currentObjectives.Clear();
-            Debug.Log("objectives " + objectives);
             currentObjectives.AddRange(objectives);
         }
 
-        internal List<Objective> GetObjectiveList()
+        internal List<Objective> GenerateObjectives()
         {
-            if (currentObjectives.Count <= 0)
-            {
-                GetRandomObjectives();
-            }
-            return currentObjectives;
+            List<Objective> objectives = new List<Objective>();
+
+            objectives.Add(GetRandomObjective(false));
+            objectives.Add(GetRandomObjective(true));
+
+            return objectives;
         }
     }
 }

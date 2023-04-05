@@ -38,8 +38,9 @@ namespace FTS.Core
             }
         }
 
-        public override string SetDescription()
+        public override string SetDescription(bool isEncounter = false)
         {
+            Debug.Log("currentKills " + currentKills + " enemiesToKill " + enemiesToKill);
             string description = "Kill " + enemiesToKill;
             if (enemy)
             {
@@ -49,8 +50,10 @@ namespace FTS.Core
             {
                 description += " enemies";
             }
-
-            description += " (" + currentKills + "/" + enemiesToKill + ")";
+            if (!isEncounter)
+            {
+                description += " (" + currentKills + "/" + enemiesToKill + ")";
+            }
             return description;
         }
     }

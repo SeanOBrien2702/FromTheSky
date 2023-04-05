@@ -262,7 +262,6 @@ namespace FTS.UI
                     //handController.ReadjustHand();
                 }
             }
-            Debug.Log("-------hello?");
             handController.ReadjustHand();
             handController.SetTagetingZoom(false);
         }

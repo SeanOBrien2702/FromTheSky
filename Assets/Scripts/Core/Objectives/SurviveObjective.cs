@@ -14,30 +14,22 @@ namespace FTS.Core
         public override void EnableObjective()
         {
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
-            Debug.Log("turn controller " + turnController);
         }
 
         public override void UpdateObjective()
         {
-            Debug.Log("update turn objective "+ turnController.Turn + " update turn objective " + turnsToSurvive);
             if(turnController.Turn >= turnsToSurvive)
             {
                 isComplete = true;
             }
         }
 
-        public override string SetDescription()
+        public override string SetDescription(bool isEncounter = false)
         {
-            //Debug.Log("turn controller " + turnController);
-            //Debug.Log("turnsToSurvive " + turnsToSurvive);
-            string description = "";
-            if(turnController)
+            string description = "Survive for " + turnsToSurvive + " turns";
+            if (!isEncounter)
             {
-                description = "Survive for " + turnsToSurvive + " turns (" + turnController.Turn + "/" + turnsToSurvive + ")";
-            }
-            else
-            {
-                description = "Survive for " + turnsToSurvive + " turns";
+                description += " (" + turnController.Turn + "/" + turnsToSurvive + ")";
             }
             return description;
         }

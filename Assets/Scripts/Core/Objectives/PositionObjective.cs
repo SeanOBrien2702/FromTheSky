@@ -47,7 +47,7 @@ namespace FTS.Core
             throw new System.NotImplementedException();
         }
 
-        public override string SetDescription()
+        public override string SetDescription(bool isEncounter = false)
         {
             return "Reach the EVAC zone";
         }

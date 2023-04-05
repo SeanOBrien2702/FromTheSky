@@ -15,12 +15,9 @@ public class MusicController : MonoBehaviour
 
     private void SceneManager_activeSceneChanged(Scene oldScene, Scene newScene)
     {
-        Debug.Log(oldScene.name + " to " + newScene.name);
-        if(newScene.name == "GameScene")
+        if(newScene.name == Scenes.GameScene.ToString())
         {
-            Debug.Log("combat music?");
             PlaylistManager.Main.Play(combatTrack);
-            //MusicManager.Main.Pause();
         }
         else
         {

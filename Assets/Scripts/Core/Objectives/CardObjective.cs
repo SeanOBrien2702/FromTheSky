@@ -2,6 +2,8 @@ using UnityEngine;
 using FTS.Grid;
 using FTS.Cards;
 using FTS.Characters;
+using FTS.Turns;
+using AMPInternal.Utilities;
 
 namespace FTS.Core
 {
@@ -13,13 +15,6 @@ namespace FTS.Core
         [SerializeField] int cardsToPlay;
         [SerializeField] CardType cardType;
         int currentPlayed = 0;
-
-        //HexCoordinates location;
-        public override void EnableObjective()
-        {
-
-        }
-
 
         public override void UpdateObjective(Card card)
         {
@@ -36,9 +31,14 @@ namespace FTS.Core
             }
         }
 
-        public override string SetDescription()
+        public override string SetDescription(bool isEncounter = false)
         {
-            return "Play " + cardsToPlay + " " + cardType.ToString() + " cards (" + currentPlayed + "/" + cardsToPlay + ")";
+            string description = "Play " + cardsToPlay + " " + cardType.ToString() + " cards";
+            if (!isEncounter)
+            {
+                description += " (" + currentPlayed + "/" + cardsToPlay + ")";
+            }
+            return description;
         }
     }
 }

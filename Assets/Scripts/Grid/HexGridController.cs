@@ -627,13 +627,16 @@ namespace FTS.Grid
 
         public void Attack(Enemy enemy)
         {
+            if(!attackIndicators.ContainsKey(enemy))
+            {
+                return;
+            }
             foreach (HexCell cell in attackIndicators[enemy].Line.ToList())
             {
                 cell.SetDangerIndicator(false);
                 if(cell.Unit)
                 {
                     int damage = enemy.Stats.GetStat(Stat.Damage, enemy.CharacterClass);
-                    Debug.Log("damage " + damage);
                     cell.Unit.CalculateDamageTaken(damage);
                 }
             } 

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 #endregion
 
 namespace FTS.Characters
@@ -15,6 +16,7 @@ namespace FTS.Characters
     {
         public static event Action<Character> OnEnemyKilled = delegate { };
         public static event Action<Character> OnPlayerKilled = delegate { };
+        public static event Action<Character> OnPlayerSpawned = delegate { };
         public static event Action<Unit, int> OnDamageTaken = delegate { };
         public static event System.Action OnPlayerLost = delegate { };
         public static event System.Action OnEnemyLost = delegate { };
@@ -264,9 +266,10 @@ namespace FTS.Characters
             }
             else if(newCharacter is Player)
             {
+                ++numberOfPlayers;
                 targetableUnits.Add(newCharacter);
                 playerList.Add(newCharacter as Player);
-                ++numberOfPlayers;
+                OnPlayerSpawned?.Invoke(newCharacter as Player);          
             }
             else
             {
@@ -334,12 +337,6 @@ namespace FTS.Characters
                 OnEnemyKilled?.Invoke((Enemy)unit);
                 stateMachines.Remove(unit.GetComponent<StateMachine>());
                 enemyList.Remove((Enemy)unit);
-                
-                if (enemyList.Count <= 0)
-                {
-                    SceneController.Instance.LoadScene(Scenes.DraftScene, true);
-                }
-
             }
             else
             {
