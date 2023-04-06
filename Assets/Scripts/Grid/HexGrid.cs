@@ -750,16 +750,39 @@ namespace FTS.Grid
             }
         }
 
-        internal void ShowLinesProjectile(HexCell location)
+
+        internal void ShowAvalibleTargets(HexCell location, int range)
+        {
+            List<HexCell> targets = GetArea(location, range);
+
+            foreach (var target in targets.FindAll(item => item.Unit is Enemy))
+            {
+                target.SetHighlight(HighlightIndex.CantReach);
+                currentArea.Add(target);
+            }
+        }
+
+        internal void ShowLinesProjectile(HexCell location, HighlightIndex highlight)
         {
             for (HexDirection direction = HexDirection.NE; direction <= HexDirection.NW; direction++)
             {
-                foreach(var cell in GetLine(location, direction, 3 , false))
+                foreach(var cell in GetLine(location, direction, 3 , true))
                 {
-                    cell.SetHighlight(HighlightIndex.Attack);
+                    cell.SetHighlight(HighlightIndex.Highlight);
                     currentArea.Add(cell);
                 }
             }
+        }
+
+        internal List<HexCell> ShowLinesProjectile(HexCell location, HighlightIndex highlight, HexDirection direction)
+        {
+            List<HexCell> line = GetLine(location, direction, 3, true);
+            foreach (var cell in line)
+            {
+                cell.SetHighlight(HighlightIndex.Attack);
+                currentArea.Add(cell);
+            }
+            return line;
         }
 
         public void ClearArea()

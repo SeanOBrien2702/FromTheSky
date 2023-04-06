@@ -65,6 +65,7 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 0.78431374}
   - {r: 0.023139905, g: 0.9621751, b: 0.9811321, a: 0.7058824}
   - {r: 1, g: 0, b: 0, a: 0.7058824}
+  - {r: 0.8301887, g: 0.71893346, b: 0.3485226, a: 1}
   dangerHighlight: {fileID: 5984099139215820047}
   attackHighlight: {fileID: 1202484848308613296}
   spawningHighlight: {fileID: 2609766962483122625}

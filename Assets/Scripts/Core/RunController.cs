@@ -54,7 +54,7 @@ namespace FTS.Core
             }
         }
 
-        void Start()
+        void Awake()
         {
             Health = startingHealth;
             day = startingDay;

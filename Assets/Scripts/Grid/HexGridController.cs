@@ -33,7 +33,7 @@ namespace FTS.Grid
         //Character selectedUnit;
         Mover mover;
         bool unitsPlaced = false;
-
+        List<HexCell> targetArea = new List<HexCell>();
         Dictionary<Enemy, AttackIndicator> attackIndicators = new Dictionary<Enemy, AttackIndicator>();
 
         int maxNumPLayers = 0;
@@ -260,22 +260,40 @@ namespace FTS.Grid
             {
                 grid.ClearReachable();
                 grid.ClearArea();
+                ClearTargetArea();
                 //Player player = unitController.GetPlayerByClass(cardController.CardSelected.CharacterClass);
                 
                 if(cardController.CardSelected.Targeting == CardTargeting.FromPlayer)
                 {
-                    grid.ShowLinesProjectile(currentUnit.Location);
+                    grid.ShowLinesProjectile(currentUnit.Location, HighlightIndex.CardRange);
+                    HexDirection direction = grid.GetDirection(currentUnit.Location, currentCell);
+                    if (direction != HexDirection.None)
+                    {
+                        targetArea = grid.ShowLinesProjectile(currentUnit.Location, HighlightIndex.Attack, direction);
+                        foreach (var cell in targetArea)
+                        {
+                            if (cell.Unit)
+                            {
+                                Debug.Log(cell.Unit.name + " " + cardController.GetDamage());
+                                cell.Unit.ShowDamage(cardController.GetDamage());
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    grid.ShowArea(currentUnit.Location, cardController.CardSelected.Range, HighlightIndex.Attack);
+                    grid.ShowArea(currentUnit.Location, cardController.CardSelected.Range, HighlightIndex.CardRange);
+                    if (cardController.CardSelected.Type == CardType.Attack)
+                    {
+                        grid.ShowAvalibleTargets(currentUnit.Location, cardController.CardSelected.Range);
+                    }               
                 }
-                
-                
-                if (cardController.CardSelected.Area > 1)
-                { 
-                    grid.ShowArea(currentCell, cardController.CardSelected.Area, HighlightIndex.CanReach);
-                }
+                              
+                //if (cardController.CardSelected.Area > 0 &&
+                //    GetDistance(currentCell) <= cardController.CardSelected.Range)
+                //{ 
+                //    grid.ShowArea(currentCell, cardController.CardSelected.Area, HighlightIndex.CanReach);
+                //}
             }
         }
 
@@ -300,6 +318,17 @@ namespace FTS.Grid
                 return true;
             }
             return false;
+        }
+
+        void ClearTargetArea()
+        {
+            foreach (var cell in targetArea)
+            {
+                if(cell.Unit)
+                {
+                    cell.Unit.ShowDamage(0);
+                }
+            }
         }
 
         internal void Push(Character character, HexDirection direction)
@@ -668,6 +697,7 @@ namespace FTS.Grid
             grid.ClearPath();
             grid.ClearReachable();
         }
+
         private void Unit_OnHoverExit(Unit unit)
         {
             if(unit is Enemy)
@@ -695,7 +725,8 @@ namespace FTS.Grid
             if (unit is Enemy)
             {
                 Enemy enemy = (Enemy)unit;
-                if(cardController.CardSelected)
+                if(cardController.CardSelected &&
+                   cardController.CardSelected.Targeting == CardTargeting.Unit)
                 {
                     enemy.ShowDamage(cardController.GetDamage());
                 }

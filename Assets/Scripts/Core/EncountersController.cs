@@ -1,11 +1,5 @@
-using AMPInternal.Utilities;
-using FTS.Core;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace FTS.Core
 {

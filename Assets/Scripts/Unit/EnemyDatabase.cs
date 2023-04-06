@@ -1,9 +1,6 @@
 ﻿#region Using Statements
 using System.Collections.Generic;
 using UnityEngine;
-using FTS.Cards;
-using System.Linq;
-using System;
 #endregion
 
 namespace FTS.Characters
@@ -11,17 +8,17 @@ namespace FTS.Characters
     public class EnemyDatabase : MonoBehaviour
     {
         List<Enemy> enemies = new List<Enemy>();
-        [SerializeField] Enemy gruntPrefab;
-        [SerializeField] Enemy cowardPrefab;
-        [SerializeField] Enemy rangerPrefab;
+        [SerializeField] Enemy piercingPrefab;
+        [SerializeField] Enemy projectilePrefab;
+        [SerializeField] Enemy trajectoryPrefab;
         //[SerializeField] Enemy StunnerPrefab;
 
         #region MonoBehaviour Callbacks
         private void Start()
         {
-            enemies.Add(gruntPrefab);
-            enemies.Add(cowardPrefab);
-            enemies.Add(rangerPrefab);
+            enemies.Add(piercingPrefab);
+            enemies.Add(projectilePrefab);
+            enemies.Add(trajectoryPrefab);
             //enemies.Add(StunnerPrefab);
         }
         #endregion
@@ -39,8 +36,23 @@ namespace FTS.Characters
 
         internal Character GetRandomEnemy()
         {
-            //TODO: -1 is for testing with out terjectory enemy
-            return enemies[UnityEngine.Random.Range(0, enemies.Count-1)];
+            //TODO: add terjectory enemy to possible options
+            int randomNumber = UnityEngine.Random.Range(0, 100);
+            Enemy enemy;
+            if (randomNumber <= 65)
+            {
+                enemy = projectilePrefab;
+            }
+            else if (randomNumber > 65 && randomNumber <= 100)
+            {
+                enemy = piercingPrefab;
+            }
+            else
+            {
+                enemy = projectilePrefab;
+            }
+
+            return enemy;
         }
         #endregion
     }

@@ -7,7 +7,7 @@ namespace FTS.Cards
 {
     [System.Serializable]
     [CreateAssetMenu(menuName = "Effect/Attack/LineAttack", fileName = "LineAttackEffect.asset")]
-    public class LineAttackEffect : Effect
+    public class LineAttackEffect : Effect, IDamageEffect
     {
         [SerializeField] int numAttacks = 1;
         [SerializeField] int length = 2;
@@ -42,6 +42,11 @@ namespace FTS.Cards
             }
             effectText += " " + length + " hexes forward";
             return effectText;
+        }
+
+        public int GetTotalDamage()
+        {
+            return numAttacks * damage;
         }
     }
 }

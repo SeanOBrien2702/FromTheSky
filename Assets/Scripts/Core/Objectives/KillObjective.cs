@@ -16,7 +16,6 @@ namespace FTS.Core
             currentKills = 0;
         }
 
-
         public override void UpdateObjective(Enemy enemyKilled)
         {
             if (enemy)

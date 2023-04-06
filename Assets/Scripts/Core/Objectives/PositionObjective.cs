@@ -12,10 +12,9 @@ namespace FTS.Core
     {
         //[SerializeField] string objectiveDescription;
         //[SerializeField] int goldReward;
-        [SerializeField] Card cardReward;
-        [SerializeField] bool isOptional;
-        private bool isComplete = false;
-        List<HexCell> locations = new List<HexCell>();
+        //[SerializeField] Card cardReward;
+        //private bool isComplete = false;
+        //List<HexCell> locations = new List<HexCell>();
 
         #region Properties
         //public int GoldReward   // property
@@ -24,23 +23,23 @@ namespace FTS.Core
         //    set { goldReward = value; }  // set method
         //}
 
-        public Card CardReward   // property
-        {
-            get { return cardReward; }   // get method
-            set { cardReward = value; }  // set method
-        }
+        //public Card CardReward   // property
+        //{
+        //    get { return cardReward; }   // get method
+        //    set { cardReward = value; }  // set method
+        //}
 
-        public bool IsComplete
-        {
-            get { return isComplete; }
-            set { isComplete = value; }
-        }
+        //public bool IsComplete
+        //{
+        //    get { return isComplete; }
+        //    set { isComplete = value; }
+        //}
 
-        public bool IsOptional
-        {
-            get { return isOptional; }
-            set { isOptional = value; }
-        }
+        //public bool IsOptional
+        //{
+        //    get { return isOptional; }
+        //    set { isOptional = value; }
+        //}
         #endregion
         public void UpdateObjective()
         {

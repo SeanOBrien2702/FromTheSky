@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157f39e6b7be10c459adb804dbf83314, type: 3}
   m_Name: ArmourEffect
   m_EditorClassIdentifier: 
-  armourAmount: 4
+  effectFoldout: 1
+  armourAmount: 1

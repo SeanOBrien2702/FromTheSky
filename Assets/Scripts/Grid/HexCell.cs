@@ -16,7 +16,8 @@ namespace FTS.Grid
         CanReach,
         CantReach,
         Highlight,
-        Attack
+        Attack,
+        CardRange
     }
 
 
@@ -327,11 +328,11 @@ namespace FTS.Grid
                 highlight.enabled = true;
                 if(highlightIndex == HighlightIndex.Attack)
                 {
-                    attackHighlight.SetActive(true);
+                    //attackHighlight.SetActive(true);
                 }
                 else
                 {
-                    attackHighlight.SetActive(false);
+                    //attackHighlight.SetActive(false);
                 }
             }
             else

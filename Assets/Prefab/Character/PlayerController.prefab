@@ -62,11 +62,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed54fcd94ba33f4896d21eb7ab2cea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gruntPrefab: {fileID: 7494323970741600098, guid: 163e612583c9e7e438693911de0491fc,
+  piercingPrefab: {fileID: 7494323970741600098, guid: 163e612583c9e7e438693911de0491fc,
     type: 3}
-  cowardPrefab: {fileID: 7494323970741600098, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
+  projectilePrefab: {fileID: 7494323970741600098, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
     type: 3}
-  rangerPrefab: {fileID: 7494323970741600098, guid: 8b6d6777928cbba4b88c7275ee57c2ce,
-    type: 3}
-  StunnerPrefab: {fileID: 7494323970741600098, guid: 1b8e65380b10c774ead9a17a914f310e,
+  trajectoryPrefab: {fileID: 7494323970741600098, guid: 8b6d6777928cbba4b88c7275ee57c2ce,
     type: 3}
