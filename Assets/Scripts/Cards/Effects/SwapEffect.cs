@@ -14,6 +14,7 @@ namespace FTS.Cards
             HexCell playerPos = unitController.CurrentPlayer.Location;
             unitController.CurrentPlayer.GetComponent<Mover>().Location = targetPos;
             target.GetComponent<Mover>().Location = playerPos;
+            gridController.UpdateReachable();
             if(target is Enemy)
                 gridController.UpdateIndicators((Enemy)target);
         }

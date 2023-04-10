@@ -113,14 +113,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4252405628363071366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a29b3e64feba04b994f7a98f3f96e5, type: 3}
+  m_Script: {fileID: 11500000, guid: cf2e0ae00334af14e81a3ae3a2e78d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectiveLabel: {fileID: 4252405628734180214}
-  optionalLabel: {fileID: 8266778633984989388, guid: 493f2a861bac08047b428004b83c964d,
-    type: 3}
-  objectivePanel: {fileID: 4252405628363071365}
-  objectivesBuffer: []
+  optionalLabel: {fileID: 0}
+  objectivesBuffer:
+  - {fileID: 11400000, guid: 427e2896213cf4f478d864e4d6312fbd, type: 2}
+  - {fileID: 11400000, guid: db34b4050a4b7a846ae2c48e5cd248b2, type: 2}
 --- !u!1001 &5312817361267741626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181,7 +181,7 @@ PrefabInstance:
     - target: {fileID: 8266778633984989389, guid: 493f2a861bac08047b428004b83c964d,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8266778633984989389, guid: 493f2a861bac08047b428004b83c964d,
         type: 3}
@@ -221,7 +221,7 @@ PrefabInstance:
     - target: {fileID: 8266778633984989389, guid: 493f2a861bac08047b428004b83c964d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 8266778633984989389, guid: 493f2a861bac08047b428004b83c964d,
         type: 3}

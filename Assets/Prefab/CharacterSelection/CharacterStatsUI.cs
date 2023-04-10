@@ -11,6 +11,8 @@ public class CharacterStatsUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI movementText;
     [SerializeField] TextMeshProUGUI descriptionText;
+    [SerializeField] TextMeshProUGUI abiltyText;
+    [SerializeField] Image abiltyImage;
 
     public void UpdateUI(Player player)
     {
@@ -18,5 +20,8 @@ public class CharacterStatsUI : MonoBehaviour
         healthText.text = "Health: " + player.GetStat(Stat.Health).ToString();
         movementText.text = "Movement: " + player.GetStat(Stat.Movement).ToString();
         descriptionText.text = player.Description;
+        IAbility abilty = player.GetComponent<IAbility>();
+        abiltyText.text = abilty.GetDescription();
+        abiltyImage.sprite = abilty.AbiltyImage;
     }
 }

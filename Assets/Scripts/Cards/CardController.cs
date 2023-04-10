@@ -400,16 +400,20 @@ namespace FTS.Cards
             //ShuffleDeck();
         }
 
-        internal void AddCard(Card card, bool isTemporary, CardLocation cardLocation)
+        internal void AddCard(Card card, bool isTemporary, CardLocation cardLocation, bool isFree = false)
         {
-            Card newCard = Instantiate(card);
-            deck.Add(newCard);
+            Card newCard = Instantiate(card);        
             newCard.Location = cardLocation;
             newCard.IsAtomize = isTemporary;
             newCard.IsTemporary = isTemporary;
+            if(isFree)
+            {
+                newCard.Cost = 0;
+            }
             if(cardLocation == CardLocation.Hand)
                 hand.AddCard(newCard);
             OnCardCreated?.Invoke();
+            deck.Add(newCard);
         }
 
         public void RemoveCard(string cardId)

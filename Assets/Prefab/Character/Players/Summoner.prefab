@@ -222,7 +222,29 @@ PrefabInstance:
     - target: {fileID: 8918363082321941229, guid: cab9d1526ae389547ae179da95fcdd2f,
         type: 3}
       propertyPath: m_Name
-      value: Medic
+      value: Summoner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cab9d1526ae389547ae179da95fcdd2f, type: 3}
+--- !u!1 &1258820896106120622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8918363082321941229, guid: cab9d1526ae389547ae179da95fcdd2f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7691120222048048963}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5786695299651983572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258820896106120622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a6d25ac3e8cca43bb7bed1e6fe2fed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+  description: Create a temporary Pawn card in hand
+  abiltyImage: {fileID: 21300000, guid: 465da96ac21d7dd439eaa56c1c10ffb3, type: 3}
+  card: {fileID: 11400000, guid: a3bd02136889c084f8bd9f51e4549c7a, type: 2}

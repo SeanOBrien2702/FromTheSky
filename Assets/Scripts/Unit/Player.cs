@@ -16,6 +16,7 @@ namespace FTS.Characters
 
         int energy = 4;
         [SerializeField] int maxEnergy = 4;
+        IAbility abilty;
 
         #region Properties
         public Color Colour   // property
@@ -41,12 +42,20 @@ namespace FTS.Characters
             get { return maxEnergy; }   // get method
             set { maxEnergy = value; }  // set method
         }
+
+        public IAbility Abilty { get => abilty; set => abilty = value; }
         #endregion
 
         #region MonoBehaviour Callbacks
+        protected override void Awake()
+        {
+            base.Awake();
+            abilty = GetComponent<IAbility>();
+        }
+
         protected override void Start()
         {
-            base.Start();
+            base.Start();         
             energy = maxEnergy;
             TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
         }

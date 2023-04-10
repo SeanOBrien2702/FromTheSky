@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
-  m_Name: Create Pawn
+  m_Name: Create Drone
   m_EditorClassIdentifier: 
-  cardName: Create Pawn
+  cardName: Create Drone
   flavourText: 
   image: {fileID: 21300000, guid: e478242f03a7f6648b6659799cc05eab, type: 3}
-  border: {fileID: 21300000, guid: cec5e44fbe4eb6f4689ac8a93fc8f14b, type: 3}
+  border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
   cost: 1
   range: 2
   area: 1
@@ -26,6 +26,7 @@ MonoBehaviour:
   isAtomize: 1
   isTemporary: 0
   isInherent: 0
+  cinderCost: 10
   onDrawEffects: []
   effects:
   - {fileID: 11400000, guid: ac38b29afad835544a31490a7468a9d3, type: 2}

@@ -53,8 +53,7 @@ namespace FTS.Characters
         float timeSinceChangingUnits = 0;
         float changeCooldown = 0.5f;
 
-        public static event System.Action OnPlayerSelected = delegate { };
-       //public static event Action<Character> OnUnitTurn = delegate { };
+        public static event System.Action<Player> OnPlayerSelected = delegate { };
 
         #region Properties
         public int NumberOfPlayers { get => numberOfPlayers; set => numberOfPlayers = value; }
@@ -295,7 +294,7 @@ namespace FTS.Characters
         public void SetCurrentUnit(Player player)
         {
             currentPlayer = player;
-            OnPlayerSelected?.Invoke();
+            OnPlayerSelected?.Invoke(currentPlayer);
             if (player != null)
             {
                 characterInfo.EnableUI(player);
@@ -414,6 +413,7 @@ namespace FTS.Characters
         {
             currentPlayer = playerList.First();
             currentUnit = currentPlayer;
+            SetCurrentUnit(currentPlayer);
         }
 
         private void TurnController_OnCombatStart()

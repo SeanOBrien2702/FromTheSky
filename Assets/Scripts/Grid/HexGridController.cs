@@ -671,10 +671,16 @@ namespace FTS.Grid
             } 
             attackIndicators.Remove(enemy);
         }
+
+        public void UpdateReachable()
+        {
+            grid.ClearReachable();
+            grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
+        }
         #endregion
 
         #region Events
-        private void UnitController_OnPlayerSelected()
+        private void UnitController_OnPlayerSelected(Player player)
         {
             currentUnit = unitController.CurrentPlayer;
             SelectNextUnit();

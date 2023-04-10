@@ -157,7 +157,7 @@ namespace FTS.UI
             UpdateDeckList();
         }
 
-        private void UnitController_OnPlayerSelected()
+        private void UnitController_OnPlayerSelected(Player player)
         {
             UpdateEnergy();
         }

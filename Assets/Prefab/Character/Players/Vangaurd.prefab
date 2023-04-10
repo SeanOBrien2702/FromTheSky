@@ -179,7 +179,29 @@ PrefabInstance:
     - target: {fileID: 8918363082321941229, guid: cab9d1526ae389547ae179da95fcdd2f,
         type: 3}
       propertyPath: m_Name
-      value: Scout
+      value: Vangaurd
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cab9d1526ae389547ae179da95fcdd2f, type: 3}
+--- !u!1 &5189214111746351549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8918363082321941229, guid: cab9d1526ae389547ae179da95fcdd2f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3731136932161532752}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5863671291236251968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5189214111746351549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9152ea5998a3cc543af396cd08e324a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+  description: Gain 1 energy and draw 1 card.
+  abiltyImage: {fileID: 21300000, guid: 5c9769197b1d22743831606d3f5faddb, type: 3}
+  energyGained: 1
