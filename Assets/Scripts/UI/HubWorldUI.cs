@@ -3,15 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using FTS.Core;
-using TMPro;
-using System.Collections.Generic;
-using System;
-using MoreMountains.Feedbacks;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using MoreMountains.Feedbacks;
-using UnityEngine.Events;
 #endregion
 
 namespace FTS.UI

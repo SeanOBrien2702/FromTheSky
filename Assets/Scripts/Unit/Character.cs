@@ -1,12 +1,8 @@
 ﻿#region Using Statements
 using FTS.Cards;
 using FTS.Turns;
-using MoreMountains.Feedbacks;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 #endregion
 
 namespace FTS.Characters
@@ -115,8 +111,6 @@ namespace FTS.Characters
             yield return new WaitForSeconds(1.5f);
             Destroy(gameObject);
         }
-        #endregion
-
-        
+        #endregion  
     }
 }

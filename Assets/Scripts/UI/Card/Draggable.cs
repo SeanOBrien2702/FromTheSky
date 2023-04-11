@@ -3,7 +3,6 @@ using FTS.Cards;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using MoreMountains.Feedbacks;
 #endregion
 
 namespace FTS.UI
@@ -26,10 +25,6 @@ namespace FTS.UI
         [SerializeField] GameObject arrowHead;
         [SerializeField] GameObject arrowNode;
         [SerializeField] Transform arrowStart;
-
-        [Header("MM Feedbacks")]
-        [SerializeField] MMFeedbacks dragFeedback;
-        MMFeedbackPosition position;
 
         List<RectTransform> arrowNodes = new List<RectTransform>();
         List<Vector2> controlPoints = new List<Vector2>();       

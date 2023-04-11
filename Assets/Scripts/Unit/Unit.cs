@@ -2,7 +2,6 @@
 using FTS.Cards;
 using FTS.Grid;
 using FTS.Turns;
-using MoreMountains.Feedbacks;
 using System;
 using UnityEngine;
 #endregion
@@ -20,8 +19,6 @@ namespace FTS.Characters
         [SerializeField] string description;
         [SerializeField] SFXObject hoverSound;
         protected UnitController unitController;
-
-        public MMFeedbacks damageFeedback;
 
         string fullName;
         int health = 0;
@@ -142,7 +139,6 @@ namespace FTS.Characters
         #region Public Methods
         public virtual void CalculateDamageTaken(int damage)
         {
-            damageFeedback?.PlayFeedbacks(transform.position, damage);
             if (!hasBarrier)
             {
                 if (armour > 0)
