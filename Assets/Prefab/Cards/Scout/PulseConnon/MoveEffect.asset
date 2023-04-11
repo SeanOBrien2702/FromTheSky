@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19a76ab7d34f69b4c9ebb63b864844c6, type: 3}
-  m_Name: AttackEffect
+  m_Script: {fileID: 11500000, guid: 3ba462dd2b86e83498966ecbe48cf9bc, type: 3}
+  m_Name: MoveEffect
   m_EditorClassIdentifier: 
-  effectFoldout: 1
-  numAttacks: 1
-  damage: 2
+  effectFoldout: 0
+  distance: 1

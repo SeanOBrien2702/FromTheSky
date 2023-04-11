@@ -13,11 +13,12 @@ namespace FTS.Cards
         [SerializeField] int length = 2;
         int damage = 5;
 
-        public override void ActivateEffect(Unit player, HexCell target)
+        public override void ActivateEffect(HexCell target)
         {
-            List<HexCell> area = grid.GetLine(player, target, length);
+            HexDirection direction = grid.GetDirection(unitController.CurrentPlayer.Location, target);
+            List<HexCell> line = grid.GetLine(unitController.CurrentPlayer.Location, direction, length, false);
 
-            foreach (var cell in area)
+            foreach (var cell in line)
             {
                 if (cell.Unit)
                 {

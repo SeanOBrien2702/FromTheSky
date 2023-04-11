@@ -325,21 +325,15 @@ namespace FTS.Cards
                     if (IsInRange(playedCard.Range) && IsTargetValid(playedCard.Targeting))
                     {
                         CardPlayed(playedCard);
-                        switch (playedCard.Targeting)
+
+                        if(playedCard.Targeting == CardTargeting.Unit ||
+                            playedCard.Targeting == CardTargeting.Trajectory)
                         {
-                            case CardTargeting.None:
-                                break;
-                            case CardTargeting.Unit:
-                                playedCard.Play(target.Unit);
-                                break;
-                            case CardTargeting.Ground:
-                                playedCard.Play(target);
-                                break;
-                            case CardTargeting.FromPlayer:
-                                playedCard.Play(unitController.CurrentPlayer, target);
-                                break;
-                            default:
-                                break;
+                            playedCard.Play(target.Unit);
+                        }
+                        else
+                        {
+                            playedCard.Play(target);
                         }
                     }
                 }
@@ -594,6 +588,18 @@ namespace FTS.Cards
             //Debug.Log("draw new hard?");
             //energy = totalEnergy;
             DrawNewHand();
+        }
+
+        internal bool IsFreeAim()
+        {
+            if((int)cardSelected.Targeting < (int)CardTargeting.Projectile)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }            
         }
         #endregion
     }

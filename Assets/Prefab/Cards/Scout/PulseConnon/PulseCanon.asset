@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
-  m_Name: Overkill
+  m_Name: PulseCanon
   m_EditorClassIdentifier: 
-  cardName: Overkill
+  cardName: PulseCanon
   flavourText: 
-  image: {fileID: 21300000, guid: d23c46d608da83047a6346f90dded78c, type: 3}
+  image: {fileID: 21300000, guid: 2899411326b09174a9b3f6c7d0e553c3, type: 3}
   border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
   cost: 1
-  range: 5
+  range: 4
   area: 1
   cardRarity: 0
   characterClass: 1
   type: 0
   targeting: 3
-  isAtomize: 1
+  isAtomize: 0
   isTemporary: 0
   isInherent: 0
   cinderCost: 10
   onDrawEffects: []
   effects:
-  - {fileID: 11400000, guid: 2e9328e517972834bb04f1ce21bd4316, type: 2}
-  - {fileID: 11400000, guid: f9539c0ee527af245ab62c924d8e2c36, type: 2}
+  - {fileID: 11400000, guid: c44cbe95d2a4ce8439bbed20f17b7c7e, type: 2}
+  - {fileID: 11400000, guid: 1ccec93904fcc1141b47c2cf52d1cfef, type: 2}
   onDiscardEffects: []

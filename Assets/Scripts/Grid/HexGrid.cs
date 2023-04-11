@@ -672,25 +672,7 @@ namespace FTS.Grid
             return area;
         }
 
-        internal List<HexCell> GetLine(Unit player, HexCell target, int length)
-        {
-            HexCell buffer = player.GetComponent<Mover>().Location;
-            HexDirection direction = GetDirection(buffer, target);
-            List<HexCell> line = new List<HexCell>();
-
-            for (int i = 0; i < length; i++)
-            {
-                if(buffer.GetNeighbor(direction) == null)
-                {
-                    break;
-                }
-                line.Add(buffer.GetNeighbor(direction));
-                buffer = buffer.GetNeighbor(direction);        
-            }
-            return line;
-        }
-
-        internal List<HexCell> GetLine(HexCell origin, HexDirection direction, int length, bool isPiercing)
+        internal List<HexCell> GetLine(HexCell origin, HexDirection direction, int length, bool isProjectile)
         {
             HexCell buffer = origin.GetNeighbor(direction);
             List<HexCell> line = new List<HexCell>();
@@ -702,31 +684,12 @@ namespace FTS.Grid
                     break;
                 }
                 line.Add(buffer);
-                if (buffer.Unit && !isPiercing)
+                if (buffer.Unit && isProjectile)
                 {
                     break;
                 }              
                 buffer = buffer.GetNeighbor(direction);
             }   
-            return line;
-        }
-
-        internal List<HexCell> GetLine(HexCell origin, HexDirection direction)
-        {
-            HexCell buffer = origin.GetNeighbor(direction);
-            List<HexCell> line = new List<HexCell>();
-
-            while(buffer != null)
-            {
-                if (!buffer.IsCellAvailable())
-                {
-                    line.Add(buffer);
-                    break;
-                }
-                line.Add(buffer);
-                buffer = buffer.GetNeighbor(direction);           
-            }
-
             return line;
         }
 
@@ -750,7 +713,6 @@ namespace FTS.Grid
             }
         }
 
-
         internal void ShowAvalibleTargets(HexCell location, int range)
         {
             List<HexCell> targets = GetArea(location, range);
@@ -762,11 +724,11 @@ namespace FTS.Grid
             }
         }
 
-        internal void ShowLinesProjectile(HexCell location, HighlightIndex highlight)
+        internal void ShowLines(HexCell location, int range, bool isProjectile)
         {
             for (HexDirection direction = HexDirection.NE; direction <= HexDirection.NW; direction++)
             {
-                foreach(var cell in GetLine(location, direction, 3 , true))
+                foreach(var cell in GetLine(location, direction, range, isProjectile))
                 {
                     cell.SetHighlight(HighlightIndex.Highlight);
                     currentArea.Add(cell);
@@ -774,9 +736,9 @@ namespace FTS.Grid
             }
         }
 
-        internal List<HexCell> ShowLinesProjectile(HexCell location, HighlightIndex highlight, HexDirection direction)
+        internal List<HexCell> ShowLine(HexCell location, HexDirection direction, int range, bool isProjectile)
         {
-            List<HexCell> line = GetLine(location, direction, 3, true);
+            List<HexCell> line = GetLine(location, direction, range, isProjectile);
             foreach (var cell in line)
             {
                 cell.SetHighlight(HighlightIndex.Attack);

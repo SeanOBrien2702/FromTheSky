@@ -36,8 +36,7 @@ namespace FTS.Grid
         List<HexCell> targetArea = new List<HexCell>();
         Dictionary<Enemy, AttackIndicator> attackIndicators = new Dictionary<Enemy, AttackIndicator>();
 
-        int maxNumPLayers = 0;
-
+        int projectileRange = 9999;
 
         #region Properties
         public bool UnitsPlaced   // property
@@ -261,15 +260,37 @@ namespace FTS.Grid
                 grid.ClearReachable();
                 grid.ClearArea();
                 ClearTargetArea();
-                //Player player = unitController.GetPlayerByClass(cardController.CardSelected.CharacterClass);
                 
-                if(cardController.CardSelected.Targeting == CardTargeting.FromPlayer)
+                Card card = cardController.CardSelected;
+                if (cardController.IsFreeAim())
                 {
-                    grid.ShowLinesProjectile(currentUnit.Location, HighlightIndex.CardRange);
+                    grid.ShowArea(currentUnit.Location, card.Range, HighlightIndex.CardRange);
+                    if (card.Type == CardType.Attack)
+                    {
+                        grid.ShowAvalibleTargets(currentUnit.Location, cardController.CardSelected.Range);
+                    }               
+                }
+                else
+                {
+                    if (card.Targeting == CardTargeting.Projectile)
+                    {
+                        grid.ShowLines(currentUnit.Location, projectileRange, true);
+                    }
+                    else
+                    {
+                        grid.ShowLines(currentUnit.Location, card.Range, false);
+                    }
                     HexDirection direction = grid.GetDirection(currentUnit.Location, currentCell);
                     if (direction != HexDirection.None)
                     {
-                        targetArea = grid.ShowLinesProjectile(currentUnit.Location, HighlightIndex.Attack, direction);
+                        if (card.Targeting == CardTargeting.Projectile)
+                        {
+                            targetArea = grid.ShowLine(currentUnit.Location, direction, projectileRange, true);
+                        }
+                        else
+                        {
+                            targetArea = grid.ShowLine(currentUnit.Location, direction, card.Range, false);
+                        }
                         foreach (var cell in targetArea)
                         {
                             if (cell.Unit)
@@ -279,14 +300,6 @@ namespace FTS.Grid
                             }
                         }
                     }
-                }
-                else
-                {
-                    grid.ShowArea(currentUnit.Location, cardController.CardSelected.Range, HighlightIndex.CardRange);
-                    if (cardController.CardSelected.Type == CardType.Attack)
-                    {
-                        grid.ShowAvalibleTargets(currentUnit.Location, cardController.CardSelected.Range);
-                    }               
                 }
                               
                 //if (cardController.CardSelected.Area > 0 &&
@@ -388,7 +401,7 @@ namespace FTS.Grid
             }
             else
             {
-                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction);
+                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, projectileRange, enemy.IsPiercieing());
                 indicator.Line.Last().SetDangerIndicator(true);
             }
             foreach (HexCell cell in indicator.Line)
@@ -437,14 +450,14 @@ namespace FTS.Grid
                         isValidTarget = true;
                     }
                 }
-                else if (targeting == CardTargeting.GroundOnly)
+                else if (targeting == CardTargeting.Ground)
                 {
-                    if (!currentCell.Unit)
+                    if (currentCell.IsCellAvailable())
                     {
                         isValidTarget = true;
                     }
                 }
-                else if (targeting == CardTargeting.Ground || targeting == CardTargeting.FromPlayer)
+                else
                 {
 
                     isValidTarget = true;
@@ -626,7 +639,7 @@ namespace FTS.Grid
             AttackIndicator indicator;
             if (enemy.IsPiercieing())
             {
-                indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction, enemy.Range, enemy.IsPiercieing()), enemy.Direction);
+                indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction, enemy.Range, false), enemy.Direction);
                 foreach (HexCell cell in indicator.Line)
                 {
                     cell.SetDangerIndicator(true);
@@ -634,7 +647,7 @@ namespace FTS.Grid
             }
             else
             {
-                indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction), enemy.Direction);
+                indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction, projectileRange, true), enemy.Direction);
                 indicator.Line.Last().SetDangerIndicator(true);
             }
 

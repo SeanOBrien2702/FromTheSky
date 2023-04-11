@@ -24,6 +24,6 @@ namespace FTS.Cards
     }
     public enum CardTargeting
     {
-        None, Unit, Ground, FromPlayer, GroundOnly
+        None, Unit, Ground, Projectile, Piercing, Trajectory
     }
 }

@@ -9,6 +9,7 @@ namespace FTS.Cards
 {
     public abstract class Effect : ScriptableObject
     {
+        protected int projectileRange = 9999;
         protected HexGrid grid;
         protected HexGridController gridController;
         protected CardController cardController;
