@@ -13,12 +13,13 @@ namespace FTS.Core
         public override void EnableObjective()
         {
             totalDamage = 0;
+            UpdateObjective(totalDamage);
         }
 
         public override void UpdateObjective(int damage)
         {
             totalDamage += damage;
-            if (totalDamage <= damageThreshhold)
+            if (totalDamage < damageThreshhold)
             {
                 isComplete = true;
             }

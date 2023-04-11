@@ -1,52 +1,25 @@
-using System;
+using FTS.Core;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using FTS.Core;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace FTS.UI
 {
     public class ObjectiveUI : MonoBehaviour
     {
-        [SerializeField] TextMeshProUGUI objectiveLabel;
-        [SerializeField] TextMeshProUGUI optionalLabel;
-        [SerializeField] List<Objective> objectivesBuffer;
-        Dictionary<Objective, TextMeshProUGUI> textList = new Dictionary<Objective, TextMeshProUGUI>();
+        [SerializeField] Toggle toggle;
+        [SerializeField] TextMeshProUGUI objectiveText;
 
-        public void CreateObjectiveText(List<Objective> objectives)
+        public void UpdateObjective(Objective objective)
         {
-            for (int i = 0; i < objectives.Count; i++)
+            objectiveText.text = objective.SetDescription();
+            if (objective.IsOptional)
             {
-                TextMeshProUGUI textMesh = Instantiate(objectiveLabel);
-                textMesh.text = objectives[i].SetDescription();
-                textMesh.transform.SetParent(transform, false);
-                textMesh.color = Color.white;
-
-                textList.Add(objectives[i], textMesh);
+                objectiveText.text += "(Optional)";
             }
-
-            foreach (var item in objectives)
-            {
-                UpdateUI(item);
-            }
-        }
-        
-        public void UpdateUI(List<Objective> objectives)
-        {
-            foreach (var objective in objectives)
-            {
-                textList[objective].text = objective.SetDescription();
-            }
-        }
-
-        public void UpdateUI(Objective objective)
-        {
-            textList[objective].text = objective.SetDescription();
-            if(objective.IsOptional)
-            {
-                textList[objective].text += "(Optional)";
-            }
+            toggle.isOn = objective.IsComplete;
         }
     }
 }

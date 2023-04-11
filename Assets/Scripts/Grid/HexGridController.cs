@@ -154,7 +154,7 @@ namespace FTS.Grid
                 }
                 if (mover)
                 {
-                    if (Input.GetMouseButtonDown(1))
+                    if (Input.GetMouseButtonDown(0))
                     {
                         DoMove();
                     }
@@ -174,6 +174,10 @@ namespace FTS.Grid
                         }
                     }
                 }
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                DeselectUnit();
             }
         }
 

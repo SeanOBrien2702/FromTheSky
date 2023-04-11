@@ -16,13 +16,13 @@ namespace FTS.Core
     public class ObjectiveController : MonoBehaviour
     {
         ObjectiveDatabase objectiveDatabase;
-        ObjectiveUI objectiveUI;
+        ObjectiveUIController objectiveUI;
         List<Objective> objectives = new List<Objective>();
         [SerializeField] List<Objective> testingObjectives;
 
         void Start()
         {
-            objectiveUI = FindObjectOfType<ObjectiveUI>().GetComponent<ObjectiveUI>();
+            objectiveUI = FindObjectOfType<ObjectiveUIController>().GetComponent<ObjectiveUIController>();
             objectiveDatabase = FindObjectOfType<ObjectiveDatabase>().GetComponent<ObjectiveDatabase>();
 
             if(objectives.Count == 0)
