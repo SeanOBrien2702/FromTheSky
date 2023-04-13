@@ -25,7 +25,7 @@ namespace FTS.UI
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             playerUI = GetComponent<CharacterStatsUI>();
             AddPlayer(playerDatabase.GetPlayer((CharacterClass)1));
-            //orbitSupportDraft.SetActive(false);
+            Time.timeScale = 1.0f;
         }
 
         void AddPlayer(Player player)

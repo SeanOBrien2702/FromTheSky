@@ -81,6 +81,7 @@ namespace FTS.Core
         internal List<Encounter> GetEncounters()
         {
             numCombatEncounters = 0;
+            runController.Day--;
             List<Encounter> encounters = new List<Encounter>();
             if (runController.Day > 1)
             {
@@ -95,8 +96,7 @@ namespace FTS.Core
                 {
                     encounters.Add(bossEnccounter);
                 }
-            }
-            runController.Day--;
+            }          
             return encounters;
         }
     }

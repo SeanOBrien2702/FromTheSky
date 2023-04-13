@@ -23,6 +23,7 @@ namespace FTS.Core
         int health;
         int day;
         int cinder;
+        bool hasWon = false;
 
         public int Health
         {
@@ -41,6 +42,12 @@ namespace FTS.Core
             {
                 day = value;
                 OnDayChanged.Invoke(day);
+                if(day <= 0)
+                {
+                    hasWon = true;
+                    day = startingDay;
+                    SceneController.Instance.LoadScene(Scenes.EndGameScene, true);
+                }
             }
         }
 
@@ -54,6 +61,8 @@ namespace FTS.Core
             }
         }
 
+        public bool HasWon { get => hasWon; set => hasWon = value; }
+
         void Awake()
         {
             Health = startingHealth;
@@ -61,6 +70,14 @@ namespace FTS.Core
             Cinder = startingCinder;
             UnitController.OnDamageTaken += UnitController_OnDamageTaken;
             UnitController.OnEnemyLost += UnitController_OnEnemyLost;
+            UnitController.OnPlayerLost += UnitController_OnPlayerLost;
+        }
+
+        private void OnDestroy()
+        {
+            UnitController.OnDamageTaken -= UnitController_OnDamageTaken;
+            UnitController.OnEnemyLost -= UnitController_OnEnemyLost;
+            UnitController.OnPlayerLost -= UnitController_OnPlayerLost;
         }
 
         private void UnitController_OnEnemyLost()
@@ -74,7 +91,7 @@ namespace FTS.Core
             Debug.Log("take damage " + damage);
             if(Health <= 0)
             {
-                SceneController.Instance.LoadScene(Scenes.MainMenu);
+                SceneController.Instance.LoadScene(Scenes.EndGameScene, true);
             }
         }
 
@@ -103,6 +120,10 @@ namespace FTS.Core
             {
                 TakeDamage(damage);
             }
+        }
+        private void UnitController_OnPlayerLost()
+        {
+            hasWon = false;
         }
     }
 

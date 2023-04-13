@@ -5,5 +5,6 @@ public enum Scenes
     HubScene,
     GameScene,
     DraftScene,
-    ShopScene
+    ShopScene,
+    EndGameScene
 }

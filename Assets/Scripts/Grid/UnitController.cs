@@ -189,7 +189,7 @@ namespace FTS.Characters
         #region Private Methods
         private Character GetRandomCharacter()
         {
-            return enemyDatabase.GetRandomEnemy();
+;            return enemyDatabase.GetRandomEnemy();
         }
 
         void CreateUnitInRandomPosition(Character newCharacter)
@@ -349,13 +349,10 @@ namespace FTS.Characters
                     OnPlayerKilled?.Invoke((Player)unit);
                     if (playerList.Count <= 0 && gridController.UnitsPlaced)
                     {
-                        SceneController.Instance.LoadScene(Scenes.MainMenu);
+                        SceneController.Instance.LoadScene(Scenes.EndGameScene, true);
+                        OnPlayerLost?.Invoke();
                     }
                 }
-                //else
-                //{
-
-                //}
                 targetableUnits.Remove(unit);
             }
             units.Remove(unit);
