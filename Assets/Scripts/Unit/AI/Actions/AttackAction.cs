@@ -15,25 +15,20 @@ namespace FTS.Characters
 
         private void Attack(StateMachine machine)
         {
-            //AttackDamage(machine);
             machine.enemy.Attack();
             machine.enemy.IsAttacking = false;          
             if (machine.enemy.Indicator)
             {
                 machine.enemy.Indicator.ToggleAim(false);
             }
-            machine.gridController.Attack(machine.enemy);
+            if (machine.enemy.AttackType != AttackTypes.Projectile)
+            {
+                machine.gridController.Attack(machine.enemy);            
+            }
+            else
+            {
+                machine.gridController.RemoveIndicator(machine.enemy);
+            }
         }
-
-        //internal void AttackDamage(StateMachine machine)
-        //{
-        //    int damage = machine.enemy.Stats.GetStat(Stat.Damage, machine.enemy.CharacterClass);
-        //    //Debug.Log("enemy damage: " + damage);
-        //    //Debug.Log(machine.newEnemyPosition.Unit.name);
-        //    //machine.mover.LookAtTarget(machine.enemy.Target.gameObject.transform.position);
-        //    machine.enemy.Target.Unit.CalculateDamageTaken(damage);
-        //    machine.enemy.Attack();
-        //    //machine.newEnemyPosition.Unit.CalculateDamageTaken(damage);
-        //}
     }
 }

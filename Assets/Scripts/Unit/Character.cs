@@ -9,7 +9,7 @@ namespace FTS.Characters
 {
     public class Character : Unit
     {
-        [SerializeField] Animator animator;
+        [SerializeField] protected Animator animator;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] CharacterStats stats;
 

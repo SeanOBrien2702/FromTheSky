@@ -63,7 +63,7 @@ namespace FTS.UI
         public void Continue()
         {
             playerDatabase.SetPlayer(playerModel.characterClass);
-            SceneController.Instance.LoadScene(Scenes.HubScene);          
+            SceneController.Instance.LoadScene(Scenes.GameScene);          
         }
     }
 

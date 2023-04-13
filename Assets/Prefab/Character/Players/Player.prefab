@@ -62,6 +62,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1799238614306022091, guid: b955708cfc370964fbe80b7a36a1bca4,
+        type: 3}
+      propertyPath: m_Height
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799238614306022091, guid: b955708cfc370964fbe80b7a36a1bca4,
+        type: 3}
+      propertyPath: m_Radius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799238614306022091, guid: b955708cfc370964fbe80b7a36a1bca4,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 9.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1799238614306022095, guid: b955708cfc370964fbe80b7a36a1bca4,
         type: 3}
       propertyPath: m_Name
@@ -115,18 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36658e8ed22b9e642ad85c18946a98f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6708430611498093871 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4478104277416606989, guid: b955708cfc370964fbe80b7a36a1bca4,
-    type: 3}
-  m_PrefabInstance: {fileID: 7150676089258487842}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3658990017584045375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +160,6 @@ MonoBehaviour:
   barrier: {fileID: 6094887887503405183}
   description: 
   hoverSound: {fileID: 11400000, guid: 1bb62d10b1df2ed4c888bd3e2a5ec0a6, type: 2}
-  damageFeedback: {fileID: 6708430611498093871}
   animator: {fileID: 8503430834204003053}
   characterClass: 0
   stats: {fileID: 11400000, guid: 8e01d80668c0a26468f0a672e98ec0e4, type: 2}

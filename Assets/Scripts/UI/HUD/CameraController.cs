@@ -1,4 +1,5 @@
 ﻿#region Using Statements
+using FTS.Characters;
 using FTS.Grid;
 using System.Collections;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] HexGrid grid;
+    StateController stateController;
     Vector3 panLimit;
 
     private float moveSpeed;
@@ -42,6 +44,7 @@ public class CameraController : MonoBehaviour
     #region MonoBehaviour Callbacks
     void Start()
     {
+        stateController = FindObjectOfType<StateController>().GetComponent<StateController>();
         cam = Camera.main;
         newPos = startPos;
         panLimit = grid.GetLastCellPosition();
@@ -133,6 +136,11 @@ public class CameraController : MonoBehaviour
         isFollowing = false;
         isEnabled = true;
     }
+
+    public void MoveCamera(Vector3 moveTo)
+    {
+        StartCoroutine(MoveToPosition(moveTo));
+    }
     #endregion
 
     #region Coroutines
@@ -149,6 +157,7 @@ public class CameraController : MonoBehaviour
             yield return null;
         }
         isEnabled = true;
+        stateController.ActionDone = true;
     }
     #endregion
 }

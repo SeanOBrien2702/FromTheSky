@@ -16,7 +16,7 @@ namespace FTS.Characters
         public State currentState;
         public State remainState;
         StateController stateController;
-        CameraController camera;
+        [HideInInspector] public CameraController cameraController;
         IndicatorController indicator;
 
         [HideInInspector] public TelegraphIntentUI telegraphIntentUI;      
@@ -47,7 +47,7 @@ namespace FTS.Characters
             gridController = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             stateController = FindObjectOfType<StateController>().GetComponent<StateController>();
-            camera = FindObjectOfType<CameraController>().GetComponent<CameraController>();
+            cameraController = FindObjectOfType<CameraController>().GetComponent<CameraController>();
             enemy = GetComponent<Enemy>();
             mover = GetComponent<Mover>();
             indicator = enemy.Indicator;
@@ -79,7 +79,7 @@ namespace FTS.Characters
             //Debug.Log("old state: "+currentState);
             currentState.CheckTransitions(this);
             //Debug.Log("new state: " +currentState);
-            yield return StartCoroutine(currentState.DoActions(stateController, this, camera));
+            yield return StartCoroutine(currentState.DoActions(stateController, this, cameraController));
             //Debug.Log("action complete");
 
             

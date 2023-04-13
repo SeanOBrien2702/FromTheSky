@@ -154,7 +154,7 @@ namespace FTS.Grid
                 }
                 if (mover)
                 {
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(0) && MouseOverGrid())
                     {
                         DoMove();
                     }
@@ -169,7 +169,10 @@ namespace FTS.Grid
 
                             if (mover.CanMove)
                             {
-                                DoPathfinding();
+                                if (MouseOverGrid())
+                                {
+                                    DoPathfinding();
+                                }
                             }
                         }
                     }
@@ -397,7 +400,7 @@ namespace FTS.Grid
 
             if (enemy.IsPiercieing())
             {
-                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, enemy.Range, enemy.IsPiercieing());
+                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, enemy.Range, false);
                 foreach (HexCell cell in indicator.Line)
                 {
                     cell.SetDangerIndicator(true);
@@ -405,7 +408,7 @@ namespace FTS.Grid
             }
             else
             {
-                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, projectileRange, enemy.IsPiercieing());
+                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, projectileRange, true);
                 indicator.Line.Last().SetDangerIndicator(true);
             }
             foreach (HexCell cell in indicator.Line)
@@ -693,6 +696,15 @@ namespace FTS.Grid
         {
             grid.ClearReachable();
             grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
+        }
+
+        public void OutOfBounds()
+        {
+            if (mover != null)
+            {
+                grid.ClearPath(mover.MovementLeft);
+            }
+            currentCell = null;
         }
         #endregion
 

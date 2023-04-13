@@ -3,6 +3,7 @@ using UnityEngine;
 using FTS.Grid;
 using FTS.UI;
 using WalldoffStudios.Indicators;
+using AeLa.EasyFeedback.APIs;
 #endregion
 
 namespace FTS.Characters
@@ -14,12 +15,17 @@ namespace FTS.Characters
         HexDirection direction;
         Unit target;
         [SerializeField] bool isArchAttack = false;
-        [SerializeField] GameObject projectileStart;
-        [SerializeField] GameObject projectile;
+
         [SerializeField] EnemyTargeting targeting;
         [SerializeField] AttackTypes attackType;
         [SerializeField] TelegraphIntentUI intentUI;
         [SerializeField] IndicatorController indicator;
+
+        [Header("Attack animation")]
+        [SerializeField] GameObject projectileStart;
+        [SerializeField] GameObject projectileAnimation;
+        [SerializeField] GameObject piercingAnimation;
+        GameObject piercingInstance;
 
         #region Properties
         public bool IsAttacking   // property
@@ -69,6 +75,7 @@ namespace FTS.Characters
         public IndicatorController Indicator { get => indicator; set => indicator = value; }
         #endregion
 
+        #region MonoBehaviour Callbacks
         protected override void OnMouseEnter()
         {
             base.OnMouseEnter();
@@ -83,11 +90,30 @@ namespace FTS.Characters
                 indicator.IndicatorResetFillAmount();
         }
 
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                Attack();
+            }
+        }
+        #endregion
+
         #region Public Methods
         public void Attack()
         {
-            GameObject newProjectile = Instantiate(projectile);
-            newProjectile.transform.SetParent(projectileStart.transform, false);
+            animator.SetTrigger("Shoot");
+            if (attackType == AttackTypes.Projectile)
+            {
+                Instantiate(projectileAnimation, projectileStart.transform.position, projectileStart.transform.rotation);
+            }
+            else if(attackType == AttackTypes.Piercing)
+            {
+                Destroy(piercingInstance);
+                piercingInstance = Instantiate(piercingAnimation, projectileStart.transform.position, projectileStart.transform.rotation);
+                piercingInstance.transform.parent = transform;
+                Destroy(piercingInstance, 0.5f);
+            }
         }
 
         internal bool IsPiercieing()
