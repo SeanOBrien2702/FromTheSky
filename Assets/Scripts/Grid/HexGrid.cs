@@ -843,6 +843,10 @@ namespace FTS.Grid
         public HexDirection GetDirection(HexCell pivot, HexCell target)
         {
             HexDirection direction = HexDirection.None;
+            if(pivot == target)
+            {
+                return direction;
+            }
             int x = pivot.Location.X - target.Location.X;
             int y = pivot.Location.Y - target.Location.Y;
             int z = pivot.Location.Z - target.Location.Z;

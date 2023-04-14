@@ -134,6 +134,12 @@ namespace FTS.Characters
         {
             StartCoroutine(RotateToTarget(angle));
         }
+
+        public void LookAt(HexDirection direction)
+        {
+            int angle = HexDirectionExtensions.Angle(direction);
+            StartCoroutine(RotateToTarget(angle));
+        }
         #endregion
 
         #region Coroutines

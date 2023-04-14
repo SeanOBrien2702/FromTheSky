@@ -18,6 +18,12 @@ namespace FTS.Characters
         [SerializeField] int maxEnergy = 4;
         IAbility abilty;
 
+        [Header("Attack animation")]
+        [SerializeField] GameObject projectileStart;
+        [SerializeField] GameObject projectileAnimation;
+        [SerializeField] GameObject piercingAnimation;
+        GameObject piercingInstance;
+
         #region Properties
         public Color Colour   // property
         {
@@ -57,11 +63,13 @@ namespace FTS.Characters
         {
             base.Start();         
             energy = maxEnergy;
+            CardController.OnCardPlayed += CardController_OnCardPlayed;
             TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
         }
 
         private void OnDestroy()
         {
+            CardController.OnCardPlayed += CardController_OnCardPlayed;
             TurnController.OnEnemySpawn -= TurnController_OnEnemySpawn;
         }
         #endregion
@@ -87,6 +95,27 @@ namespace FTS.Characters
             }
             return range;
         }
+
+        public void Attack(Card card)
+        {
+            if(card.Type != CardType.Attack)
+            {
+                return;
+            }
+            animator.SetTrigger("Shoot");
+            if (card.Targeting == CardTargeting.Projectile)
+            {
+                Instantiate(projectileAnimation, projectileStart.transform.position, projectileStart.transform.rotation);
+            }
+            else if (card.Targeting == CardTargeting.Piercing)
+            {
+                Destroy(piercingInstance);
+                piercingInstance = Instantiate(piercingAnimation, projectileStart.transform.position, projectileStart.transform.rotation);
+                piercingInstance.transform.parent = transform;
+                Destroy(piercingInstance, 0.5f);
+            }
+        }
+
         #endregion
 
         #region Saving Methods
@@ -107,6 +136,11 @@ namespace FTS.Characters
         private void TurnController_OnEnemySpawn()
         {
             Energy = maxEnergy;
+        }
+
+        private void CardController_OnCardPlayed(Card card)
+        {
+            Attack(card);
         }
         #endregion
     }

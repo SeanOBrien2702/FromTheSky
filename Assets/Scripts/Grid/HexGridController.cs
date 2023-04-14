@@ -290,6 +290,7 @@ namespace FTS.Grid
                     HexDirection direction = grid.GetDirection(currentUnit.Location, currentCell);
                     if (direction != HexDirection.None)
                     {
+                        mover.LookAt(direction);
                         if (card.Targeting == CardTargeting.Projectile)
                         {
                             targetArea = grid.ShowLine(currentUnit.Location, direction, projectileRange, true);

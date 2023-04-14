@@ -13,7 +13,7 @@ namespace FTS.Characters
 
         private void LookAt(StateMachine machine)
         {
-            machine.mover.LookAt(HexDirectionExtensions.Angle(machine.enemy.Direction));
+            machine.mover.LookAt(machine.enemy.Direction);
         }
     }
 }
