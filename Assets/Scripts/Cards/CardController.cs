@@ -22,11 +22,16 @@ namespace FTS.Cards
         public static event System.Action<Card> OnCardPlayed = delegate { };
         public static event System.Action OnCardDrawn = delegate { };
         public static event System.Action OnCardCreated = delegate { };
-        public static event System.Action OnEnergyChanged = delegate { };
         List<Card> deck = new List<Card>();
 
         [SerializeField] int maxHandSize = 10;
         [SerializeField] int cardsPerTurn = 5;
+
+        [Header("CardSounds")]
+        [SerializeField] SFXObject attackSFX;
+        [SerializeField] SFXObject supportSFX;
+        [SerializeField] SFXObject summonSFX;
+
 
         GameUI gameUI;
         UnitController unitController;
@@ -153,6 +158,7 @@ namespace FTS.Cards
         #region Private Methods
         private void CardPlayed(Card playedCard)
         {
+            PlayCardSound(playedCard.Type);
             if (hand)
             {
                 hand.RemoveCard(playedCard);
@@ -290,6 +296,24 @@ namespace FTS.Cards
             }
             return overCard;
         }
+
+        void PlayCardSound(CardType type)
+        {
+            switch (type)
+            {
+                case CardType.Attack:
+                    SFXManager.Main.Play(attackSFX);
+                    break;
+                case CardType.Support:
+                    SFXManager.Main.Play(attackSFX);
+                    break;
+                case CardType.Summon:
+                    SFXManager.Main.Play(attackSFX);
+                    break;
+                default:
+                    break;
+            }
+        }
         #endregion
 
         #region Public Methods
@@ -312,13 +336,10 @@ namespace FTS.Cards
             if(HasEnergy(playedCard.Cost) && 
                 playedCard.Effects.Count > 0) 
             {
-                //Debug.Log(playedCard.Id);
                 if (playedCard.Targeting == CardTargeting.None)
                 {
-                    //Debug.Log("played non-targeting card");
                     CardPlayed(playedCard);
                     playedCard.Play(unitController.GetCurrentUnit());
-                    //playedCard.Play(unitController.GetCurrentPlayer());
                 }
                 else
                 {
@@ -326,8 +347,7 @@ namespace FTS.Cards
                     {
                         CardPlayed(playedCard);
 
-                        if(playedCard.Targeting == CardTargeting.Unit ||
-                            playedCard.Targeting == CardTargeting.Trajectory)
+                        if(playedCard.Targeting == CardTargeting.Unit)
                         {
                             playedCard.Play(target.Unit);
                         }
