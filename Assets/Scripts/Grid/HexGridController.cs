@@ -53,7 +53,8 @@ namespace FTS.Grid
             unitController = GetComponent<UnitController>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
-            UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
+            UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
+            UnitController.OnSelectUnit += UnitController_OnSelectUnit;
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
@@ -77,7 +78,8 @@ namespace FTS.Grid
 
         private void OnDestroy()
         {
-            UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
+            UnitController.OnSelectPlayer -= UnitController_OnSelectPlayer;
+            UnitController.OnSelectUnit += UnitController_OnSelectUnit;
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
@@ -94,40 +96,7 @@ namespace FTS.Grid
             {
                 PlaceUnit();
             }
-            //else if (Input.GetMouseButtonDown(1) && MouseOverGrid())
-            //{
-            //    RemoveUnit();
-            //}
         }
-
-        //private void RemoveUnit()
-        //{
-        //    UpdateCurrentCell();
-        //    if (currentCell && currentCell.Unit is Player)
-        //    {
-        //        currentCell.Unit.Die();
-        //        currentCell.Unit = null;
-        //        Debug.Log(unitController.NumberOfUnits);
-        //        if (unitController.NumberOfPlayers < maxNumPLayers)
-        //        {
-        //            startButton.interactable = false;
-        //        }
-        //        characterInfo.DisableUI();
-        //    }
-        //}
-
-        //private void PlaceUnit()
-        //{
-        //    UpdateCurrentCell();
-        //    if (currentCell && !currentCell.IsObstacle && !currentCell.Unit)
-        //    {
-        //        unitController.PlacePlayer(currentCell);
-        //        if (unitController.NumberOfPlayers >= maxNumPLayers)
-        //        {
-        //            startButton.interactable = true;
-        //        }
-        //    }
-        //}
 
         private void PlaceUnit()
         {
@@ -135,11 +104,6 @@ namespace FTS.Grid
             if (currentCell && !currentCell.IsObstacle && !currentCell.Unit && grid.InCurrentArea(currentCell))
             {
                 currentUnit.GetComponent<Mover>().Location = currentCell;
-                //unitController.PlacePlayer(currentCell);
-                //if (unitController.NumberOfPlayers >= maxNumPLayers)
-                //{
-                //    startButton.interactable = true;
-                //}
             }
         }
 
@@ -180,7 +144,7 @@ namespace FTS.Grid
             }
             if (Input.GetMouseButtonDown(1))
             {
-                DeselectUnit();
+                unitController.SetCurrentUnit(null);
             }
         }
 
@@ -211,30 +175,11 @@ namespace FTS.Grid
 
         void DoSelection()
         {
-            //grid.ClearReachable();
             UpdateCurrentCell();
-            if (currentCell.Unit)
-            {
-                characterInfo.EnableUI(currentCell.Unit);
-            }
-            else
-            {
-                characterInfo.EnableUI(unitController.GetCurrentUnit());
-
-            }
             if (currentCell.Unit && currentUnit != currentCell.Unit)
             {
-                Debug.Log("Select");
-                if (currentCell && currentCell.Unit is Player)
-                {
-                    unitController.SetCurrentUnit(currentCell.Unit as Player);
-                }
+                unitController.SetCurrentUnit(currentCell.Unit);
             }
-            //else
-            //{
-            //    unitController.SetCurrentUnit(null);
-            //    DeselectUnit();
-            //}
         }
 
         void DeselectUnit()
@@ -323,10 +268,10 @@ namespace FTS.Grid
             if (grid.HasPath)
             {
                 grid.ClearReachable();
-                Travel(mover);                
+                Travel(mover);
+                unitController.MovementChanged(mover.MovementLeft);
                 grid.ClearPath(mover.MovementLeft);
                 grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
-                //characterInfo.UpdateUI(unitController.CurrentPlayer);
             }
         }
 
@@ -428,7 +373,7 @@ namespace FTS.Grid
         public void SelectNextUnit()
         {
             DeselectUnit();
-            currentUnit = unitController.GetCurrentPlayer();
+            currentUnit = unitController.CurrentUnit;
             mover = currentUnit.GetComponent<Mover>();
             StartCoroutine(cameraController.MoveToPosition(currentUnit.transform.localPosition));
             grid.ClearReachable();
@@ -557,7 +502,7 @@ namespace FTS.Grid
 
         internal void TargetPush(Character target)
         {
-            HexCell attacker = unitController.GetCurrentPlayer().GetComponent<Mover>().Location;
+            HexCell attacker = unitController.CurrentUnit.GetComponent<Mover>().Location;
             Mover mover = target.GetComponent<Mover>();
             HexDirection direction = grid.GetDirection(attacker, mover.Location);
             Push(target, direction);
@@ -710,10 +655,16 @@ namespace FTS.Grid
         #endregion
 
         #region Events
-        private void UnitController_OnPlayerSelected(Player player)
+
+        private void UnitController_OnSelectPlayer(Player player)
         {
-            currentUnit = unitController.CurrentPlayer;
+            currentUnit = player;
             SelectNextUnit();
+        }
+
+        private void UnitController_OnSelectUnit(Unit unit)
+        {
+            DeselectUnit();
         }
 
         private void TurnController_OnCombatStart()

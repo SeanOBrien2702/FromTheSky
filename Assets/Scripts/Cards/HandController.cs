@@ -8,6 +8,7 @@ using FTS.UI;
 using System;
 using UnityEngine.EventSystems;
 using AMPInternal;
+using FTS.Grid;
 #endregion
 
 namespace FTS.Cards
@@ -88,16 +89,18 @@ namespace FTS.Cards
 
         #region MonoBehaviour Callbacks
         private void Start()
-        {   
-            //UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
-            CardController.OnEnergyChanged += CardController_OnEnergyChanged;
+        {
+            UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
+            UnitController.OnSelectUnit += UnitController_OnSelectUnit;
+            UnitController.OnEnergyChanged += UnitController_OnEnergyChanged; 
             CardController.OnCardDrawn += CardController_OnCardDrawn;
         }
 
         private void OnDestroy()
         {
-            //UnitController.OnPlayerSelected -= UnitController_OnPlayerSelected;
-            CardController.OnEnergyChanged -= CardController_OnEnergyChanged;
+            UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
+            UnitController.OnSelectUnit -= UnitController_OnSelectUnit;
+            UnitController.OnEnergyChanged -= UnitController_OnEnergyChanged;
             CardController.OnCardDrawn -= CardController_OnCardDrawn;
         }
 
@@ -175,28 +178,31 @@ namespace FTS.Cards
 
         private void UpdateHighlight()
         {
-            //Player player = unitController.GetCurrentPlayer();
             if (cardUI.Count > 0)
             {
-                //CharacterClass characterClass = player.CharacterClass;
-                //if (characterClass != CharacterClass.Vehicle)
-                //{
-                    foreach (var item in cardUI)
-                    {
-                        item.HighlightCard(false);
-                    }
+                DisableHighlight();
 
-                    foreach (var item in cardUI)
+                foreach (var item in cardUI)
+                {
+                    Card card = cardController.GetCard(item.CardID);
+                    //item.FillCardUI(player, card);
+                    //item.FillCardUI(card);
+                    if (cardController.CanPlay(card))
                     {
-                        Card card = cardController.GetCard(item.CardID);
-                        //item.FillCardUI(player, card);
-                        //item.FillCardUI(card);
-                        if (cardController.CanPlay(card))
-                        {
-                            item.HighlightCard(true);
-                        }
+                        item.HighlightCard(true);
                     }
-                //}
+                }
+            }
+        }
+
+        private void DisableHighlight()
+        {    
+            if (cardUI.Count > 0)
+            {
+                foreach (var item in cardUI)
+                {
+                    item.HighlightCard(false);
+                }
             }
         }
 
@@ -396,20 +402,28 @@ namespace FTS.Cards
         #endregion
 
         #region Events
-        //private void UnitController_OnPlayerSelected()
-        //{
-        //    UpdateHighlight();
 
-        //}
-
-        private void CardController_OnEnergyChanged()
+        private void UnitController_OnSelectPlayer(Player obj)
         {
             UpdateHighlight();
+        }
+
+        private void UnitController_OnEnergyChanged(Player player, int energy)
+        {
+            if(unitController.CurrentPlayer == player)
+            {
+                UpdateHighlight();
+            }
         }
 
         private void CardController_OnCardDrawn()
         {
             UpdateHighlight();
+        }
+
+        private void UnitController_OnSelectUnit(Unit unit)
+        {
+            DisableHighlight();
         }
         #endregion
     }

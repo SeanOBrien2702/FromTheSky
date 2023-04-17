@@ -1,6 +1,4 @@
 using FTS.Characters;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -15,32 +13,63 @@ namespace FTS.UI
         [SerializeField] TextMeshProUGUI descriptionText;
         [SerializeField] TextMeshProUGUI abiltyText;
 
+        #region MonoBehaviour Callbacks
         private void Start()
         {
-            UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
+            UnitController.OnSelectUnit += UnitController_OnSelectUnit;
+            UnitController.OnSelectPlayer += UnitController_OnPlayerSelected;
+            UnitController.OnMovementChanged += UnitController_OnMovementChanged;
         }
 
         private void OnDestroy()
         {
-            UnitController.OnPlayerSelected -= UnitController_OnPlayerSelected;
+            UnitController.OnSelectUnit -= UnitController_OnSelectUnit;
+            UnitController.OnSelectPlayer -= UnitController_OnPlayerSelected;
+            UnitController.OnMovementChanged -= UnitController_OnMovementChanged;
         }
+        #endregion
 
-        public void UpdateUI(Character unit)
+        #region Private Methods
+        public void UpdateUI(Unit unit)
         {
-            if(unit == null)
+            if (unit == null)
             {
                 panel.gameObject.SetActive(false);
                 return;
             }
+           
             panel.gameObject.SetActive(true);
-            nameText.text = unit.name;
-            healthText.text = "Health: " + unit.GetStat(Stat.Health).ToString();
-            movementText.text = "Movement: " + unit.GetStat(Stat.Movement).ToString();
+            nameText.text = unit.name.Split('(')[0];
+            if (unit is Character)
+            {
+                Character character = (Character)unit;
+                healthText.text = "Health: " + character.Health + "/" + character.MaxHealth;
+                movementText.gameObject.SetActive(true);
+                movementText.text = "Movement: " + character.Mover.MovementLeft + "/" + character.GetStat(Stat.Movement).ToString();
+            }
+            else if (unit is Building)
+            {
+                Building building = (Building)unit;
+                healthText.text = "Health: " + building.Health + "/" + building.MaxHealth;
+                movementText.gameObject.SetActive(false);
+            }
+        }
+        #endregion
+
+        #region Events
+        private void UnitController_OnSelectUnit(Unit unit)
+        {
+            UpdateUI(unit);
         }
 
         private void UnitController_OnPlayerSelected(Player player)
         {
             UpdateUI(player);
         }
+        private void UnitController_OnMovementChanged(Unit unit, int arg2)
+        {
+            UpdateUI(unit);
+        }
+        #endregion
     }
 }

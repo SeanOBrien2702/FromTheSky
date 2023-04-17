@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 1ef3362002c9e8c46a0050d69cef0922, type: 2}
-  m_Color: {r: 0.19339621, g: 0.6989405, b: 1, a: 1}
+  m_Color: {r: 0.9150943, g: 0.5919226, b: 0.28057137, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -223,6 +223,11 @@ PrefabInstance:
       propertyPath: highlight
       value: 
       objectReference: {fileID: 4452234658373327730}
+    - target: {fileID: 3600609896639172863, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5921444663996253023, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
         type: 3}
       propertyPath: m_Name
@@ -262,4 +267,3 @@ MonoBehaviour:
   arrowNode: {fileID: 824992737810711169, guid: 1f532a6633ec0f74daf93fe19968a002,
     type: 3}
   arrowStart: {fileID: 1716310567215427097}
-  dragFeedback: {fileID: 0}

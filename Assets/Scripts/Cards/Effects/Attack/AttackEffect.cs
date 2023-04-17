@@ -23,20 +23,20 @@ namespace FTS.Cards
             }
         }
 
-        public override void ActivateEffect(HexCell target)
-        {
-            //TODO: allow characters to be moved different distances
-            Debug.Log("UNIT CONTROLLER???? "+ unitController.CurrentPlayer);
-            HexDirection direction = grid.GetDirection(unitController.CurrentPlayer.Location, target);
-            List<HexCell> line = grid.GetLine(unitController.CurrentPlayer.Location, direction, projectileRange, true);
-            if (line.Last().Unit && line.Last().Unit is Character)
-            {
-                for (int i = 0; i < numAttacks; i++)
-                {
-                    line.Last().Unit.CalculateDamageTaken(damage);
-                }
-            }
-        }
+        //public override void ActivateEffect(HexCell target)
+        //{
+        //    //TODO: allow characters to be moved different distances
+        //    Debug.Log("UNIT CONTROLLER???? "+ unitController.CurrentPlayer);
+        //    HexDirection direction = grid.GetDirection(unitController.CurrentPlayer.Location, target);
+        //    List<HexCell> line = grid.GetLine(unitController.CurrentPlayer.Location, direction, projectileRange, true);
+        //    if (line.Last().Unit && line.Last().Unit is Character)
+        //    {
+        //        for (int i = 0; i < numAttacks; i++)
+        //        {
+        //            line.Last().Unit.CalculateDamageTaken(damage);
+        //        }
+        //    }
+        //}
 
         public override string GetEffectText()
         {

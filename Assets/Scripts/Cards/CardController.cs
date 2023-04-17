@@ -19,7 +19,7 @@ namespace FTS.Cards
     */
     public class CardController : MonoBehaviour
     {
-        public static event System.Action<Card> OnCardPlayed = delegate { };
+        public static event System.Action<Card, Player> OnCardPlayed = delegate { };
         public static event System.Action OnCardDrawn = delegate { };
         public static event System.Action OnCardCreated = delegate { };
         List<Card> deck = new List<Card>();
@@ -34,7 +34,7 @@ namespace FTS.Cards
 
 
         GameUI gameUI;
-        UnitController unitController;
+        Player player;
         CardDatabase cardDatabase;
         HandController hand;
         HexGridController grid;
@@ -98,13 +98,12 @@ namespace FTS.Cards
             gameUI = FindObjectOfType<GameUI>().GetComponent<GameUI>();
             hand = FindObjectOfType<HandController>().GetComponent<HandController>();
             grid = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
-            //turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
-            unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             cardDatabase = FindObjectOfType<CardDatabase>().GetComponent<CardDatabase>();
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
-            //UnitController.OnUnitTurn += UnitController_OnUnitTurn;
+            UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
+            UnitController.OnSelectUnit += UnitController_OnSelectUnit;
         }
 
         /*
@@ -151,7 +150,8 @@ namespace FTS.Cards
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
-            //UnitController.OnUnitTurn -= UnitController_OnUnitTurn;
+            UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
+            UnitController.OnSelectUnit += UnitController_OnSelectUnit;
         }
         #endregion
 
@@ -163,7 +163,7 @@ namespace FTS.Cards
             {
                 hand.RemoveCard(playedCard);
             }
-            unitController.CurrentPlayer.Energy -= playedCard.Cost;
+            player.Energy -= playedCard.Cost;
             if (playedCard.IsAtomize)
             {
                 playedCard.Location = CardLocation.Atomized;
@@ -173,7 +173,7 @@ namespace FTS.Cards
                 playedCard.Location = CardLocation.Discard;
             }
             gameUI.UpdateDeckList();
-            OnCardPlayed?.Invoke(playedCard);
+            OnCardPlayed?.Invoke(playedCard, player);
             lastCardPlayed = playedCard;
         }
 
@@ -181,7 +181,7 @@ namespace FTS.Cards
         {
             foreach (var item in discardedCard.OnDiscardEffects)
             {
-                item.ActivateEffect(unitController.CurrentPlayer);
+                item.ActivateEffect(player);
             }
             discardedCard.Location = CardLocation.Discard;
             hand.RemoveCard(discardedCard);
@@ -191,7 +191,7 @@ namespace FTS.Cards
         private bool HasEnergy(int cost)
         {
             bool hasEnergy = false;
-            if (cost <= unitController.CurrentPlayer.Energy)
+            if (cost <= player.Energy)
             {
                 hasEnergy = true;
             }
@@ -333,13 +333,14 @@ namespace FTS.Cards
         public void PlayCard(string cardId)
         {
             Card playedCard = deck.Find(item => item.Id == cardId);
-            if(HasEnergy(playedCard.Cost) && 
+            if(player &&
+                HasEnergy(playedCard.Cost) && 
                 playedCard.Effects.Count > 0) 
             {
                 if (playedCard.Targeting == CardTargeting.None)
                 {
                     CardPlayed(playedCard);
-                    playedCard.Play(unitController.GetCurrentUnit());
+                    playedCard.Play(player);
                 }
                 else
                 {
@@ -351,7 +352,7 @@ namespace FTS.Cards
                         {
                             playedCard.Play(target.Unit);
                         }
-                        else
+                        else if(playedCard.Targeting != CardTargeting.Projectile)
                         {
                             playedCard.Play(target);
                         }
@@ -464,7 +465,7 @@ namespace FTS.Cards
                 OnCardDrawn?.Invoke();
                 foreach (var effect in card.OnDrawEffects)
                 {
-                    effect.ActivateEffect(unitController.CurrentPlayer);
+                    effect.ActivateEffect(player);
                 }
             }
         }
@@ -572,16 +573,16 @@ namespace FTS.Cards
         #endregion
 
         #region Events
+        private void UnitController_OnSelectPlayer(Player newPlayer)
+        {
+            player = newPlayer;
+        }
 
-        //private void UnitController_OnUnitTurn(Character character)
-        //{
-        //    DiscardHand();
-        //    if (character is Player)
-        //    {
-        //        energy = totalEnergy;
-        //        DrawNewHand();
-        //    }
-        //}
+        private void UnitController_OnSelectUnit(Unit unit)
+        {
+            player = null;
+        }
+
 
         private void TurnController_OnCombatStart()
         {

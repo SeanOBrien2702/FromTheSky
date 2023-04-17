@@ -182,7 +182,7 @@ namespace FTS.Characters
                     transform.localPosition = Bezier.GetPoint(a, b, c, time);
                     Vector3 d = Bezier.GetDerivative(a, b, c, time);
                     d.y = 0f;
-                    transform.localRotation = Quaternion.LookRotation(d);
+                    animator.transform.localRotation = Quaternion.LookRotation(d);
                     yield return null;
                 }
                 time -= 1f;
@@ -199,7 +199,7 @@ namespace FTS.Characters
                 transform.localPosition = Bezier.GetPoint(a, b, c, time);
                 Vector3 d = Bezier.GetDerivative(a, b, c, time);
                 d.y = 0f;
-                transform.localRotation = Quaternion.LookRotation(d);
+                animator.transform.localRotation = Quaternion.LookRotation(d);
                 yield return null;
             }
             transform.localPosition = location.transform.localPosition;
@@ -219,11 +219,11 @@ namespace FTS.Characters
 
             while (time < rotationSpeed)
             {
-                transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, targetRotation, time / rotationSpeed);
+                animator.transform.eulerAngles = Vector3.Lerp(animator.transform.rotation.eulerAngles, targetRotation, time / rotationSpeed);
                 time += Time.deltaTime;
                 yield return null;
             }
-            transform.eulerAngles = targetRotation;
+            animator.transform.eulerAngles = targetRotation;
             stateController.ActionDone = true;
         }
        

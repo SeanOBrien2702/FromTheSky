@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2292324524920399893}
   - component: {fileID: 3226755744647181497}
+  - component: {fileID: 64577420}
   m_Layer: 0
   m_Name: CardController
   m_TagString: Untagged
@@ -43,6 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0f99a9d2b4c7a44bf1e0e9c4b20a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testCard: {fileID: 0}
   maxHandSize: 10
-  drawsPreTurn: 5
+  cardsPerTurn: 4
+  attackSFX: {fileID: 11400000, guid: 5a92bea11e1605b4292ece7d38e0a610, type: 2}
+  supportSFX: {fileID: 11400000, guid: bf486e6f3c764e748be84399dca4be02, type: 2}
+  summonSFX: {fileID: 11400000, guid: 7b8f7634c21bd104bb0666cdc329ca1a, type: 2}
+--- !u!114 &64577420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7643241335770023123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3824e282ad1a9af43a2b59f7a938b4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

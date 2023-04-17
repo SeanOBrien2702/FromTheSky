@@ -52,7 +52,7 @@ namespace FTS.UI
             //CardController.OnEnergyChanged += CardController_OnEnergyChanged;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
-            UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
+            UnitController.OnSelectPlayer += UnitController_OnPlayerSelected;
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
         }
@@ -70,7 +70,7 @@ namespace FTS.UI
             //CardController.OnEnergyChanged -= CardController_OnEnergyChanged;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
-            UnitController.OnPlayerSelected -= UnitController_OnPlayerSelected;
+            UnitController.OnSelectPlayer -= UnitController_OnPlayerSelected;
         }
         #endregion
 
@@ -162,7 +162,7 @@ namespace FTS.UI
             UpdateEnergy();
         }
 
-        private void CardController_OnCardPlayed(Card card)
+        private void CardController_OnCardPlayed(Card card, Player player)
         {
             Debug.Log("Card played?");
             UpdateDeckList();

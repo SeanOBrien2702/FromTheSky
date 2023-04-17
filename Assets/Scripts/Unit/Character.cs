@@ -12,6 +12,7 @@ namespace FTS.Characters
         [SerializeField] protected Animator animator;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] CharacterStats stats;
+        Mover mover;
 
         bool busy = false;
         int initiative = 0;
@@ -38,12 +39,15 @@ namespace FTS.Characters
         {
             get { return characterClass; }   // get method
         }
+
+        public Mover Mover { get => mover; set => mover = value; }
         #endregion
 
         #region MonoBehaviour Callbacks
         protected override void Awake()
         {
             base.Awake();
+            mover = GetComponent<Mover>();
             Health = maxHealth = stats.GetStat(Stat.Health, characterClass);
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }

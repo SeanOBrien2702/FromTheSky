@@ -20,7 +20,7 @@ namespace FTS.Characters
 
         [Header("Attack animation")]
         [SerializeField] GameObject projectileStart;
-        [SerializeField] GameObject projectileAnimation;
+        [SerializeField] Projectile projectileAnimation;
         [SerializeField] GameObject piercingAnimation;
         GameObject piercingInstance;
 
@@ -40,7 +40,9 @@ namespace FTS.Characters
         public int Energy   // property
         {
             get { return energy; }   // get method
-            set { energy = value; }  // set method
+            set { energy = value;
+                unitController.EnergyChanged(this, energy);
+            }  // set method
         }
 
         public int MaxEnergy   // property
@@ -86,7 +88,7 @@ namespace FTS.Characters
                 case CardType.Support:
                     range = Stats.GetStat(Stat.SupportRange, CharacterClass);
                     break;
-                case CardType.Enhancement:
+                case CardType.Summon:
                     range = Stats.GetStat(Stat.SupportRange, CharacterClass);
                     break;
                 default:
@@ -105,7 +107,8 @@ namespace FTS.Characters
             animator.SetTrigger("Shoot");
             if (card.Targeting == CardTargeting.Projectile)
             {
-                Instantiate(projectileAnimation, projectileStart.transform.position, projectileStart.transform.rotation);
+                Projectile projectile = Instantiate(projectileAnimation, projectileStart.transform.position, projectileStart.transform.rotation);
+                projectile.Card = card;
             }
             else if (card.Targeting == CardTargeting.Piercing)
             {
@@ -138,9 +141,10 @@ namespace FTS.Characters
             Energy = maxEnergy;
         }
 
-        private void CardController_OnCardPlayed(Card card)
+        private void CardController_OnCardPlayed(Card card, Player player)
         {
-            Attack(card);
+            if(player == this)
+                Attack(card);
         }
         #endregion
     }

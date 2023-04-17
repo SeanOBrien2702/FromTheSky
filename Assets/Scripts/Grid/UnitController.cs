@@ -6,6 +6,7 @@ using FTS.Turns;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditorInternal;
 using UnityEngine;
 using static UnityEngine.UI.CanvasScaler;
 #endregion
@@ -17,7 +18,14 @@ namespace FTS.Characters
         public static event Action<Character> OnEnemyKilled = delegate { };
         public static event Action<Character> OnPlayerKilled = delegate { };
         public static event Action<Character> OnPlayerSpawned = delegate { };
+
         public static event Action<Unit, int> OnDamageTaken = delegate { };
+        public static event Action<Player, int> OnEnergyChanged = delegate { };
+        public static event Action<Unit, int> OnMovementChanged = delegate { };
+
+        public static event Action<Unit> OnSelectUnit = delegate { };
+        public static event Action<Player> OnSelectPlayer = delegate { };
+
         public static event System.Action OnPlayerLost = delegate { };
         public static event System.Action OnEnemyLost = delegate { };
 
@@ -37,8 +45,6 @@ namespace FTS.Characters
         [Range(1, 10)]
         [SerializeField] int enemiesToSpawn = 5;
 
-        [SerializeField] UI.CharacterInfo characterInfo;
-
         [Header("Buildings")]
         [SerializeField] int minSpawn = 2;
         [SerializeField] int maxSpawn = 4;
@@ -47,13 +53,10 @@ namespace FTS.Characters
         int numberOfPlayers;
         int numberOfUnits;
         Unit currentUnit;
-        Player currentPlayer;
         private int currentIndex = 0;
         private int currentUnitIndex = 0;
         float timeSinceChangingUnits = 0;
         float changeCooldown = 0.5f;
-
-        public static event System.Action<Player> OnPlayerSelected = delegate { };
 
         #region Properties
         public int NumberOfPlayers { get => numberOfPlayers; set => numberOfPlayers = value; }
@@ -88,7 +91,13 @@ namespace FTS.Characters
 
         public Player CurrentPlayer
         {
-            get { return currentPlayer; }
+            get {
+                if (currentUnit is Player)
+                {
+                    return (Player)currentUnit;
+                }
+                return null;
+            }
         }
 
         public int CurrentUnitIndex
@@ -277,49 +286,34 @@ namespace FTS.Characters
             UpdateTurnOrder();
         }
 
-
-
-
         public void StartTurn()
         {
             currentUnit = NextUnit;
-            //OnUnitTurn?.Invoke(currentUnit);
-            if (currentUnit is Player)
+        }
+
+        public void SetCurrentUnit(Unit unit)
+        {
+            currentUnit = unit;
+            Debug.Log(currentUnit);
+            if(unit is Player)
             {
-                characterInfo.EnableUI(currentUnit);
+                OnSelectPlayer?.Invoke(unit as Player);
+            }
+            else
+            {
+                OnSelectUnit?.Invoke(currentUnit);
             }
         }
 
-
-        public void SetCurrentUnit(Player player)
+        internal Unit PlacePlayer(HexCell cell)
         {
-            currentPlayer = player;
-            OnPlayerSelected?.Invoke(currentPlayer);
-            if (player != null)
+            currentUnit = playerDatabase.GetUnplacedCharacter(playerList);
+            if (currentUnit != null)
             {
-                characterInfo.EnableUI(player);
+                CreateUnit(currentUnit, cell);
+                currentUnit = NextPlayer;
             }
-        }
-
-        internal Player PlacePlayer(HexCell cell)
-        {
-            currentPlayer = playerDatabase.GetUnplacedCharacter(playerList);
-            if (currentPlayer != null)
-            {
-                CreateUnit(currentPlayer, cell);
-                currentPlayer = NextPlayer;
-            }
-            return currentPlayer;
-        }
-
-        internal void RemovePlayer(Player unit)
-        {
-            currentPlayer = unit;
-        }
-
-        internal Player GetCurrentPlayer()
-        {
-            return currentPlayer;
+            return currentUnit;
         }
 
         internal Unit GetCurrentUnit()
@@ -403,14 +397,24 @@ namespace FTS.Characters
         {
             OnDamageTaken?.Invoke(unit, damage);
         }
+
+        internal void EnergyChanged(Player player, int energy)
+        {
+            OnEnergyChanged?.Invoke(player, energy);
+        }
+
+        internal void MovementChanged(int movement)
+        {
+            OnMovementChanged?.Invoke(currentUnit, movement);
+        }
         #endregion
 
         #region Events
         private void TurnController_OnNewTurn()
         {
-            currentPlayer = playerList.First();
-            currentUnit = currentPlayer;
-            SetCurrentUnit(currentPlayer);
+            currentUnit = playerList.First();
+            //currentUnit = currentPlayer;
+            SetCurrentUnit(currentUnit);
         }
 
         private void TurnController_OnCombatStart()

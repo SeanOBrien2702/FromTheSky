@@ -17,14 +17,14 @@ namespace FTS.UI
         void Start()
         {
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
-            UnitController.OnPlayerSelected += UnitController_OnPlayerSelected;
+            UnitController.OnSelectPlayer += UnitController_OnPlayerSelected;
             ToggleUI(false);
         }
 
         private void OnDestroy()
         {
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
-            UnitController.OnPlayerSelected -= UnitController_OnPlayerSelected;
+            UnitController.OnSelectPlayer -= UnitController_OnPlayerSelected;
         }
 
         void ToggleUI(bool toggle)

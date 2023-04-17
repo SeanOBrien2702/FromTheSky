@@ -94,7 +94,7 @@ namespace FTS.Core
             CheckObjectives();
         }
 
-        private void CardController_OnCardPlayed(Card playedCard)
+        private void CardController_OnCardPlayed(Card playedCard, Player player)
         {
             foreach (var objective in objectives.FindAll(item => item is CardObjective))
             {
