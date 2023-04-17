@@ -100,10 +100,10 @@ namespace FTS.Cards
             grid = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
             cardDatabase = FindObjectOfType<CardDatabase>().GetComponent<CardDatabase>();
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
-            TurnController.OnCombatStart += TurnController_OnCombatStart;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
             UnitController.OnSelectUnit += UnitController_OnSelectUnit;
+            FillDeck();
         }
 
         /*
@@ -148,7 +148,6 @@ namespace FTS.Cards
         private void OnDestroy()
         {
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
-            TurnController.OnCombatStart -= TurnController_OnCombatStart;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
             UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
             UnitController.OnSelectUnit += UnitController_OnSelectUnit;
@@ -313,6 +312,16 @@ namespace FTS.Cards
                 default:
                     break;
             }
+        }
+        
+        private void FillDeck()
+        {
+            foreach (var card in cardDatabase.GetDeck())
+            {
+                AddCard(card);
+            }
+            deck = deck.OrderBy(item => Guid.NewGuid()).ToList();
+            deck = deck.OrderByDescending(item => item.IsInherent).ToList();
         }
         #endregion
 
@@ -581,17 +590,6 @@ namespace FTS.Cards
         private void UnitController_OnSelectUnit(Unit unit)
         {
             player = null;
-        }
-
-
-        private void TurnController_OnCombatStart()
-        {
-            foreach (var card in cardDatabase.GetDeck())
-            {
-                AddCard(card);
-            }
-            deck = deck.OrderBy(item => Guid.NewGuid()).ToList();
-            deck = deck.OrderByDescending(item => item.IsInherent).ToList();
         }
 
         private void TurnController_OnEnemyTurn(bool isTelegraph)

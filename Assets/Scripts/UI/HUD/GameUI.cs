@@ -90,7 +90,7 @@ namespace FTS.UI
             atomized.SetActive(enable);
             energy.SetActive(enable);
             endTurnButton.SetActive(enable);
-            turnCounter.SetActive(enable);
+            //turnCounter.SetActive(enable);
             playerMessageText.text = "";
         }
 
