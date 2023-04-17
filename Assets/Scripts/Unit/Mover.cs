@@ -63,15 +63,15 @@ namespace FTS.Characters
         private void Awake()
         {
             character = GetComponent<Character>();
+            speed = character.Stats.GetStat(Stat.Movement, character.CharacterClass);
+            movementLeft = speed;
         }
 
         void Start()
         {
             cameraController = FindObjectOfType<CameraController>().GetComponent<CameraController>();
             stateController = FindObjectOfType<StateController>().GetComponent<StateController>();   
-            gridController = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
-            speed = character.Stats.GetStat(Stat.Movement, character.CharacterClass);
-            movementLeft = speed;
+            gridController = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();           
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }

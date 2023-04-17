@@ -321,7 +321,8 @@ namespace FTS.Grid
 
         public void UpdateIndicators(Enemy enemy)
         {
-            UpdateLine(enemy, attackIndicators[enemy]);
+            if(attackIndicators.ContainsKey(enemy))
+                UpdateLine(enemy, attackIndicators[enemy]);
         }
 
         public void UpdateIndicators(HexCell oldLocation, HexCell newLocation)

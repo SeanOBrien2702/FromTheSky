@@ -25,15 +25,7 @@ public class DeckUI : MonoBehaviour
             go.transform.SetParent(contentPanel, false);
             go.GetComponentInChildren<CardUI>().SaveCardData(card);
             cards.Add(card.Id, go);
-            Debug.Log(card);
         }
-        Debug.Log("start");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OpenPanel(int cardLocation)
@@ -41,7 +33,6 @@ public class DeckUI : MonoBehaviour
         CardLocation location = (CardLocation)cardLocation;
         panel.SetActive(true);
         headerText.text = location.ToString();
-
 
         foreach (Card card in cardController.GetDeck())
         {

@@ -29,7 +29,6 @@ namespace FTS.Core
             {
                 currentKills++;
             }
-            Debug.Log("currentKills " + currentKills + " enemiesToKill " + enemiesToKill);
             if (currentKills >= enemiesToKill)
             {
                 currentKills = enemiesToKill;
@@ -39,7 +38,6 @@ namespace FTS.Core
 
         public override string SetDescription(bool isEncounter = false)
         {
-            Debug.Log("currentKills " + currentKills + " enemiesToKill " + enemiesToKill);
             string description = "Kill " + enemiesToKill;
             if (enemy)
             {
