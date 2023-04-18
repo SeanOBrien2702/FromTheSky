@@ -23,7 +23,7 @@ namespace FTS.Characters
 
         [Header("Attack animation")]
         [SerializeField] GameObject projectileStart;
-        [SerializeField] GameObject projectileAnimation;
+        [SerializeField] Projectile projectileAnimation;
         [SerializeField] GameObject piercingAnimation;
         GameObject piercingInstance;
 
@@ -105,7 +105,8 @@ namespace FTS.Characters
             animator.SetTrigger("Shoot");
             if (attackType == AttackTypes.Projectile)
             {
-                Instantiate(projectileAnimation, projectileStart.transform.position, projectileStart.transform.rotation);
+                Projectile proectile = Instantiate(projectileAnimation, projectileStart.transform.position, projectileStart.transform.rotation);
+                proectile.Damage = GetStat(Stat.Damage);
             }
             else if(attackType == AttackTypes.Piercing)
             {

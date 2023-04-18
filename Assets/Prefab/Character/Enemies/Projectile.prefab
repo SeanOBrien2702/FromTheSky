@@ -208,6 +208,12 @@ PrefabInstance:
       propertyPath: characterClass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5202244463018623556, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: projectileAnimation
+      value: 
+      objectReference: {fileID: 6944456373705352415, guid: 9a95808365b5bbd418bb9630eeb1dae9,
+        type: 3}
     - target: {fileID: -3402009541125080230, guid: 014ede208cc899e4ca1367e7c0162a5a,
         type: 3}
       propertyPath: currentState
@@ -315,6 +321,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8e01d80668c0a26468f0a672e98ec0e4,
         type: 2}
+    - target: {fileID: 8443474915125200359, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 014ede208cc899e4ca1367e7c0162a5a, type: 3}
 --- !u!4 &4152578443565990345 stripped
