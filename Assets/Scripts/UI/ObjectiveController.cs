@@ -25,6 +25,8 @@ namespace FTS.Core
             objectiveUI = FindObjectOfType<ObjectiveUIController>().GetComponent<ObjectiveUIController>();
             objectiveDatabase = FindObjectOfType<ObjectiveDatabase>().GetComponent<ObjectiveDatabase>();
 
+            objectives = objectiveDatabase.GetObjectives();
+
             if(objectives.Count == 0)
             {
                 objectives.AddRange(testingObjectives);

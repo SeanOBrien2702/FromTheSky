@@ -403,9 +403,12 @@ namespace FTS.Cards
 
         #region Events
 
-        private void UnitController_OnSelectPlayer(Player obj)
+        private void UnitController_OnSelectPlayer(Player player)
         {
-            UpdateHighlight();
+            if (unitController.CurrentPlayer == player)
+            {
+                UpdateHighlight();
+            }
         }
 
         private void UnitController_OnEnergyChanged(Player player, int energy)

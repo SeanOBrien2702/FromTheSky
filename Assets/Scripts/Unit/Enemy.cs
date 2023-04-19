@@ -89,14 +89,6 @@ namespace FTS.Characters
             if (indicator)
                 indicator.IndicatorResetFillAmount();
         }
-
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                Attack();
-            }
-        }
         #endregion
 
         #region Public Methods

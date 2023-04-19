@@ -47,6 +47,11 @@ namespace FTS.Core
             currentObjectives.AddRange(objectives);
         }
 
+        public List<Objective>GetObjectives()
+        {
+            return currentObjectives;
+        }
+
         internal List<Objective> GenerateObjectives()
         {
             List<Objective> objectives = new List<Objective>();

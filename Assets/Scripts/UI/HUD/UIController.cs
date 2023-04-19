@@ -8,17 +8,15 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] GameObject pauseHUD;
-    float previousTimeScale = 0;
-    List<GameObject> screens = new List<GameObject>();
+    [SerializeField] Canvas pauseHUD;
+    Dictionary<string, Canvas> screens = new Dictionary<string, Canvas>();
 
     #region MonoBehaviour Callbacks
     void Awake()
     {
-        Transform allChildren = GetComponentInChildren<Transform>();
-        foreach (Transform child in allChildren)
+        foreach (Canvas child in GetComponentsInChildren<Canvas>())
         {
-            screens.Add(child.gameObject);
+            screens.Add(child.gameObject.name, child);
         }
         Game();    
     }
@@ -35,24 +33,19 @@ public class UIController : MonoBehaviour
     #region Private Methods
     private void EnableHUD(string HUDName)
     {
-        foreach (GameObject screen in screens)
+        foreach (var screen in screens)
         {
-            if (screen.name == HUDName)
-            {
-                screen.SetActive(true);
-            }
-            else
-            {
-                screen.SetActive(false);
-            }
+            screen.Value.enabled = false;
+
         }
+        screens[HUDName].enabled = true;
     }
     #endregion
 
     #region Public Methods
     public void Pause()
     {
-        if (!pauseHUD.activeSelf)
+        if (!pauseHUD.enabled)
         {
             EnableHUD("PauseHUD");
         }
