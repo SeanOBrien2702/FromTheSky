@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] float normalMoveSpeed;
     [SerializeField] float fastMoveSpeed;
+    float movementScaler = 0.0075f;
 
     [Header("Rotation Settings")]
     [SerializeField] float rotateSpeed;
@@ -144,11 +145,12 @@ public class CameraController : MonoBehaviour
     #endregion
 
     #region Coroutines
-    public IEnumerator MoveToPosition(Vector3 moveTo)
+    public IEnumerator MoveToPosition(Vector3 moveTo, bool actionDone = true)
     {
-        float duration = 0.5f;
         float time = 0;
         Vector3 startPosition = transform.position;
+        float duration = Vector3.Distance(startPosition, moveTo) * movementScaler;
+
         isEnabled = false;
         while (time < duration)
         {
@@ -157,7 +159,7 @@ public class CameraController : MonoBehaviour
             yield return null;
         }
         isEnabled = true;
-        stateController.ActionDone = true;
+        stateController.ActionDone = actionDone;
     }
     #endregion
 }

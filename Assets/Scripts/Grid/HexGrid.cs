@@ -259,7 +259,7 @@ namespace FTS.Grid
                 int randomNumber = UnityEngine.Random.Range(0, area.Count);           
                 cell = area[randomNumber];
 
-                if (!cell.IsObstacle || !cell.Unit &&
+                if (cell.IsCellAvailable() &&
                     !randomPostions.Contains(cell))
                 {
                     randomPostions.Add(cell);

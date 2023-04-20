@@ -614,6 +614,10 @@ namespace FTS.Grid
 
         internal void RemoveIndicator(Enemy unit)
         {
+            if (!attackIndicators.ContainsKey(unit))
+            {
+                return;
+            }
             foreach (HexCell cell in attackIndicators[unit].Line.ToList())
             {
                 cell.SetDangerIndicator(false);
