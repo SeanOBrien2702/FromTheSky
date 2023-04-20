@@ -3,6 +3,7 @@ using FTS.Grid;
 using FTS.Turns;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -48,7 +49,7 @@ namespace FTS.Characters
                 character.Location = value;
                 value.Unit = character;
                 transform.localPosition = value.transform.localPosition;
-                    
+                Debug.Log("set position");    
             }
         }
 
@@ -105,7 +106,7 @@ namespace FTS.Characters
            
             if (path != null)
             {
-                Location = path[path.Count - 1];
+                //Location = path[path.Count - 1];
                 pathToTravel = path;
                 StopAllCoroutines();
                 StartCoroutine(TravelPath(Vector3.zero));
@@ -163,7 +164,11 @@ namespace FTS.Characters
         IEnumerator TravelPath(Vector3 lookTowards)
         {
             SFXManager.Main.Play(movementSounds);
+            Debug.Log("position " + transform.position);
+            yield return StartCoroutine(cameraController.MoveToPosition(transform.position, false));
+            Debug.Log("position " + transform.position);
             canMove = false;
+            //
             cameraController.StartCharacterFollow(this.transform);
             Vector3 a, b, c = pathToTravel[0].transform.localPosition;
             transform.localPosition = c;
@@ -203,11 +208,11 @@ namespace FTS.Characters
                 yield return null;
             }
             transform.localPosition = location.transform.localPosition;
+            Location = pathToTravel[pathToTravel.Count - 1];
             pathToTravel = null;
-
             cameraController.StopCharacterFollow();
             stateController.ActionDone = true;
-  
+            Debug.Log("position " + transform.position);
             if (movementLeft >= 1)
                 canMove = true;
         }
