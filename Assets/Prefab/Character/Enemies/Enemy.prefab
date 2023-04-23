@@ -393,6 +393,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36658e8ed22b9e642ad85c18946a98f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5238737796892697449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317473650354441608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8f0fdf1899c1e4c869a464a9f3d2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageText: {fileID: 2939503355338548272}
+  damageImage: {fileID: 3473082553686382527}
 --- !u!114 &-5202244463018623556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,11 +428,13 @@ MonoBehaviour:
   characterClass: 0
   stats: {fileID: 11400000, guid: 185d2dbcdf93dea40a832381b295ff78, type: 2}
   isArchAttack: 0
+  attackDirections: 00000000
   targeting: 0
   attackType: 0
   intentUI: {fileID: 5238737796892697449}
   indicator: {fileID: 0}
-  projectileStart: {fileID: 8659801009948445611}
+  projectileStart:
+  - {fileID: 0}
   projectileAnimation: {fileID: 1891902229039176, guid: 9a95808365b5bbd418bb9630eeb1dae9,
     type: 3}
   piercingAnimation: {fileID: 1959126674990218, guid: b67042affc59bdf469a26afcc712c2bc,
@@ -445,17 +461,3 @@ MonoBehaviour:
   unitController: {fileID: 0}
   turnController: {fileID: 0}
   newEnemyPosition: {fileID: 0}
---- !u!114 &5238737796892697449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7317473650354441608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8f0fdf1899c1e4c869a464a9f3d2f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageText: {fileID: 2939503355338548272}
-  damageImage: {fileID: 3473082553686382527}

@@ -164,12 +164,10 @@ namespace FTS.Characters
         IEnumerator TravelPath(Vector3 lookTowards)
         {
             SFXManager.Main.Play(movementSounds);
-            Debug.Log("position " + transform.position);
             yield return StartCoroutine(cameraController.MoveToPosition(transform.position, false));
-            Debug.Log("position " + transform.position);
             canMove = false;
-            //
             cameraController.StartCharacterFollow(this.transform);
+
             Vector3 a, b, c = pathToTravel[0].transform.localPosition;
             transform.localPosition = c;
             if(animator != null)

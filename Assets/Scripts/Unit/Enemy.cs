@@ -8,21 +8,21 @@ using AeLa.EasyFeedback.APIs;
 
 namespace FTS.Characters
 {
-    public class Enemy : Character 
-    {    
+    public class Enemy : Character
+    {
         bool isAttacking = false;
         bool canAttack = true;
         HexDirection direction;
         Unit target;
         [SerializeField] bool isArchAttack = false;
-
+        [SerializeField] AttackDirections[] attackDirections;
         [SerializeField] EnemyTargeting targeting;
         [SerializeField] AttackTypes attackType;
         [SerializeField] TelegraphIntentUI intentUI;
         [SerializeField] IndicatorController indicator;
 
         [Header("Attack animation")]
-        [SerializeField] GameObject projectileStart;
+        [SerializeField] GameObject[] projectileStart;
         [SerializeField] Projectile projectileAnimation;
         [SerializeField] GameObject piercingAnimation;
         GameObject piercingInstance;
@@ -73,6 +73,7 @@ namespace FTS.Characters
 
         public TelegraphIntentUI IntentUI { get => intentUI; set => intentUI = value; }
         public IndicatorController Indicator { get => indicator; set => indicator = value; }
+        public AttackDirections[] AttackDirections { get => attackDirections; set => attackDirections = value; }
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -97,15 +98,22 @@ namespace FTS.Characters
             animator.SetTrigger("Shoot");
             if (attackType == AttackTypes.Projectile)
             {
-                Projectile proectile = Instantiate(projectileAnimation, projectileStart.transform.position, projectileStart.transform.rotation);
-                proectile.Damage = GetStat(Stat.Damage);
+                foreach (GameObject start in projectileStart)
+                {
+                    Projectile proectile = Instantiate(projectileAnimation, start.transform.position, start.transform.rotation);
+                    proectile.Damage = GetStat(Stat.Damage);
+                }
+                
             }
             else if(attackType == AttackTypes.Piercing)
             {
-                Destroy(piercingInstance);
-                piercingInstance = Instantiate(piercingAnimation, projectileStart.transform.position, projectileStart.transform.rotation);
-                piercingInstance.transform.parent = transform;
-                Destroy(piercingInstance, 0.5f);
+                foreach (GameObject start in projectileStart)
+                {
+                    Destroy(piercingInstance);
+                    piercingInstance = Instantiate(piercingAnimation, start.transform.position, start.transform.rotation);
+                    piercingInstance.transform.parent = transform;
+                    Destroy(piercingInstance, 0.5f);
+                }
             }
         }
 

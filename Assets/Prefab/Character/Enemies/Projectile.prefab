@@ -214,6 +214,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6944456373705352415, guid: 9a95808365b5bbd418bb9630eeb1dae9,
         type: 3}
+    - target: {fileID: -5202244463018623556, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: attackDirections.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5202244463018623556, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: projectileStart.Array.data[0]
+      value: 
+      objectReference: {fileID: 2873594443732912501}
     - target: {fileID: -3402009541125080230, guid: 014ede208cc899e4ca1367e7c0162a5a,
         type: 3}
       propertyPath: currentState
@@ -331,6 +341,12 @@ PrefabInstance:
 --- !u!4 &4152578443565990345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7380319928014160663, guid: 014ede208cc899e4ca1367e7c0162a5a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6903109795406365406}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2873594443732912501 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8659801009948445611, guid: 014ede208cc899e4ca1367e7c0162a5a,
     type: 3}
   m_PrefabInstance: {fileID: 6903109795406365406}
   m_PrefabAsset: {fileID: 0}

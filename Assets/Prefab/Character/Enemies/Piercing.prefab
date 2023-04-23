@@ -28,6 +28,16 @@ PrefabInstance:
       propertyPath: characterClass
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -5202244463018623556, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: attackDirections.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5202244463018623556, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: projectileStart.Array.data[0]
+      value: 
+      objectReference: {fileID: 2873594443732912501}
     - target: {fileID: -3402009541125080230, guid: 014ede208cc899e4ca1367e7c0162a5a,
         type: 3}
       propertyPath: currentState
@@ -113,3 +123,9 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 014ede208cc899e4ca1367e7c0162a5a, type: 3}
+--- !u!1 &2873594443732912501 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8659801009948445611, guid: 014ede208cc899e4ca1367e7c0162a5a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6903109795406365406}
+  m_PrefabAsset: {fileID: 0}

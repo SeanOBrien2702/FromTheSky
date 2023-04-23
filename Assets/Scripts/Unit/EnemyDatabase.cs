@@ -11,6 +11,7 @@ namespace FTS.Characters
         [SerializeField] Enemy piercingPrefab;
         [SerializeField] Enemy projectilePrefab;
         [SerializeField] Enemy trajectoryPrefab;
+        [SerializeField] Enemy multiProjectilePrefab;
         //[SerializeField] Enemy StunnerPrefab;
 
         #region MonoBehaviour Callbacks
@@ -18,6 +19,7 @@ namespace FTS.Characters
         {
             enemies.Add(piercingPrefab);
             enemies.Add(projectilePrefab);
+            enemies.Add(multiProjectilePrefab);
             enemies.Add(trajectoryPrefab);
             //enemies.Add(StunnerPrefab);
         }
@@ -37,7 +39,7 @@ namespace FTS.Characters
         internal Character GetRandomEnemy()
         {
             //TODO: add terjectory enemy to possible options
-            int randomNumber = UnityEngine.Random.Range(0, 100);
+            int randomNumber = UnityEngine.Random.Range(0, 105);
             Enemy enemy;
             if (randomNumber <= 65)
             {
@@ -46,6 +48,10 @@ namespace FTS.Characters
             else if (randomNumber > 65 && randomNumber <= 100)
             {
                 enemy = piercingPrefab;
+            }
+            else if (randomNumber > 100 && randomNumber <= 105)
+            {
+                enemy = multiProjectilePrefab;
             }
             else
             {
