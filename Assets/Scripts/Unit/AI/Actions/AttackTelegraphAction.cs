@@ -22,12 +22,12 @@ namespace FTS.Characters
         {
             if(machine.enemy.AttackType == AttackTypes.Trajectory)
             {
-                machine.gridController.TelegraphTrajectoryAttack(machine.enemy);
+                machine.attackIndicator.TelegraphTrajectoryAttack(machine.enemy);
 
             }
             else
             {
-                machine.gridController.TelegraphAttack(machine.enemy);
+                machine.attackIndicator.TelegraphAttack(machine.enemy);
             }
             
             machine.enemy.IsAttacking = true;

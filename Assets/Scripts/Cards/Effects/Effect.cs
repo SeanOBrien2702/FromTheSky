@@ -15,12 +15,14 @@ namespace FTS.Cards
         protected CardController cardController;
         protected ForetellController foretell;
         protected UnitController unitController;
+        protected AttackIndicatorController indicatorController;
         [HideInInspector] public bool effectFoldout;
 
         public void Initialize()
         {
             grid = FindObjectOfType<HexGrid>().GetComponent<HexGrid>();
             gridController = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
+            indicatorController= FindObjectOfType<AttackIndicatorController>().GetComponent<AttackIndicatorController>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
             unitController= FindObjectOfType<UnitController>().GetComponent<UnitController>();
             foretell = FindObjectOfType<ForetellController>().GetComponent<ForetellController>();

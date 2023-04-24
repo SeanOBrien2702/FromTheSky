@@ -23,11 +23,11 @@ namespace FTS.Characters
             }
             if (machine.enemy.AttackType != AttackTypes.Projectile)
             {
-                machine.gridController.Attack(machine.enemy);            
+                machine.attackIndicator.Attack(machine.enemy);            
             }
             else
             {
-                machine.gridController.RemoveIndicator(machine.enemy);
+                machine.attackIndicator.RemoveIndicator(machine.enemy);
             }
         }
     }

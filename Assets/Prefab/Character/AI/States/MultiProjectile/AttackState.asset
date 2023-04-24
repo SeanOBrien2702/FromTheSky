@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AttackState
   m_EditorClassIdentifier: 
   transitions:
-  - decision: {fileID: 11400000, guid: d271822b5cd508d4a993255684c4747c, type: 2}
+  - decision: {fileID: 11400000, guid: 193905b7e3ac8e142b35a9ae59dae3e1, type: 2}
     trueState: {fileID: 11400000, guid: 53c8ab92cf584014486f1dcfd34c8dcc, type: 2}
     falseState: {fileID: 11400000, guid: 4c6c3fc1cf4613a4282f1c68f9d3accd, type: 2}
   actions:

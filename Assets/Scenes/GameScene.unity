@@ -3637,8 +3637,8 @@ Transform:
   m_LocalPosition: {x: -45, y: 200, z: 47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 759592415}
   - {fileID: 1714614382}
+  - {fileID: 759592415}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3807,7 +3807,7 @@ Transform:
   m_LocalScale: {x: 3, y: 10, z: 3}
   m_Children: []
   m_Father: {fileID: 1678303041}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &1714614383
 ParticleSystemRenderer:
@@ -9898,34 +9898,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
-      propertyPath: width
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
-      propertyPath: height
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
-      propertyPath: maxSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
-      propertyPath: minSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 992893204, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
-      propertyPath: grassland
+    - target: {fileID: 502949612, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
+      propertyPath: cardController
       value: 
-      objectReference: {fileID: 2100000, guid: 9c3435b7cf3210044b3a24266d8aebf1, type: 2}
+      objectReference: {fileID: 641517308}
     - target: {fileID: 1601976389, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
       propertyPath: startButton
       value: 
       objectReference: {fileID: 1541824755}
-    - target: {fileID: 1601976389, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
-      propertyPath: characterInfo
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1601976389, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a, type: 3}
       propertyPath: cameraController
       value: 
@@ -9985,57 +9965,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
-        type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 6704699207053019554, guid: 5509c7786732f36408786ad6f8576d90,
-        type: 3}
-    - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
-        type: 3}
-      propertyPath: maxSpawn
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
-        type: 3}
-      propertyPath: minSpawn
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
-        type: 3}
-      propertyPath: characterInfo
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1867353417224850158, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
-        type: 3}
-      propertyPath: enemiesToSpawn
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1867353417224850159, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}
       propertyPath: dropPod
       value: 
       objectReference: {fileID: 759592416}
-    - target: {fileID: 1867353417224850159, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
-        type: 3}
-      propertyPath: maxSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1867353417224850159, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
-        type: 3}
-      propertyPath: minSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1867353417224850159, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1867353417224850159, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
-        type: 3}
-      propertyPath: spawnLimit
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1867353417224850159, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
         type: 3}
       propertyPath: dropPodPosotion

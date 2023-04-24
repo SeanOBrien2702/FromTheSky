@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1867353417224850158}
   - component: {fileID: 1867353417224850159}
   - component: {fileID: 1867353417224850161}
+  - component: {fileID: 502949612}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -47,23 +48,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ededc420a3b36c5488b3a1a1f94782ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 13
-  height: 13
+  width: 9
+  height: 9
   cellPrefab: {fileID: 5138482395789491347, guid: 25b172e32351cdf44849376a65efc2ed,
     type: 3}
   startHex: {fileID: 1233889998786750, guid: 78f1277a93dae4847844292d206f6a5f, type: 3}
   mountainModel: {fileID: 1082868720469738, guid: 81d0b563b01a9e54da5fb7a2190d0dc1,
     type: 3}
-  grassland: {fileID: 2100000, guid: 63205fd0b3a0e04498355d67cea6fb23, type: 2}
+  grassland: {fileID: 2100000, guid: 9c3435b7cf3210044b3a24266d8aebf1, type: 2}
   water: {fileID: 2100000, guid: 1aac6dc6087e880419100f314d441d29, type: 2}
   mountain: {fileID: 2100000, guid: 3ad7d49c376e7b0499a7182bd29e8878, type: 2}
   DestinationUI: {fileID: 6464508352238980620, guid: 789ec8c4a901d7f44a14ddc020d53834,
     type: 3}
   cellLabel: {fileID: 0}
-  minSpawn: 2
-  maxSpawn: 4
-  building: {fileID: 6704699207053019554, guid: 5509c7786732f36408786ad6f8576d90,
-    type: 3}
 --- !u!114 &1601976389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,9 +89,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28601c109138f44e9936c64f8d7322f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesToSpawn: 2
-  characterInfo: {fileID: 0}
-  vehiclePrefab: {fileID: 3775709426359113830, guid: f61f14558ecc5c04d951708812476863,
+  enemiesToSpawn: 1
+  minSpawn: 3
+  maxSpawn: 3
+  building: {fileID: 6704699207053019554, guid: 5509c7786732f36408786ad6f8576d90,
     type: 3}
 --- !u!114 &1867353417224850159
 MonoBehaviour:
@@ -111,6 +109,10 @@ MonoBehaviour:
   minSpawn: 2
   maxSpawn: 3
   spawnLimit: 2
+  maxEnemiesAtOnce: 4
+  cameraController: {fileID: 0}
+  dropPodPosotion: {fileID: 0}
+  dropPod: {fileID: 0}
 --- !u!114 &1867353417224850161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,3 +125,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd3bacc3addff3419137a34de6f4b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &502949612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4335076343168363342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 454b3028d887bda43abe30541b838b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardController: {fileID: 0}

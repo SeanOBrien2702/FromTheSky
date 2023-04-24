@@ -33,8 +33,6 @@ namespace FTS.Characters
         PlayerDatabase playerDatabase;
         EnemyDatabase enemyDatabase;
         TurnController turnController;
-        CardController cardController;
-        StateController stateController;
         List<Character> enemyList = new List<Character>();
         List <StateMachine> stateMachines = new List<StateMachine>();
         List<Unit> units = new List<Unit>();
@@ -136,10 +134,8 @@ namespace FTS.Characters
         {
             grid = GetComponent<HexGrid>();
             gridController = GetComponent<HexGridController>();
-            stateController = GetComponent<StateController>();
             playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             enemyDatabase = FindObjectOfType<EnemyDatabase>().GetComponent<EnemyDatabase>();
-            cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
@@ -324,8 +320,7 @@ namespace FTS.Characters
         {
             --numberOfUnits;
             if (unit is Enemy)
-            {
-                gridController.RemoveIndicator((Enemy)unit);
+            {              
                 OnEnemyKilled?.Invoke((Enemy)unit);
                 stateMachines.Remove(unit.GetComponent<StateMachine>());
                 enemyList.Remove((Enemy)unit);

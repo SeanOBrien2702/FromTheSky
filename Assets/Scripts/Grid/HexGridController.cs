@@ -34,7 +34,6 @@ namespace FTS.Grid
         Mover mover;
         bool unitsPlaced = false;
         List<HexCell> targetArea = new List<HexCell>();
-        Dictionary<Enemy, AttackIndicator> attackIndicators = new Dictionary<Enemy, AttackIndicator>();
 
         int projectileRange = 9999;
 
@@ -58,8 +57,8 @@ namespace FTS.Grid
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
-            Unit.OnHover += Unit_OnHover;
-            Unit.OnHoverExit += Unit_OnHoverExit;
+            Mover.OnMoved += Mover_OnMoved;
+            
             grid.ShowPlacementArea(placementArea);
             currentUnit = unitController.PlacePlayer(grid.GetCell(new HexCoordinates(grid.Width / 2, 0)));
         }
@@ -82,9 +81,8 @@ namespace FTS.Grid
             UnitController.OnSelectUnit += UnitController_OnSelectUnit;
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
-            TurnController.OnCombatStart -= TurnController_OnCombatStart;
-            Unit.OnHover += Unit_OnHover;
-            Unit.OnHoverExit += Unit_OnHoverExit;
+            TurnController.OnCombatStart -= TurnController_OnCombatStart; 
+            Mover.OnMoved -= Mover_OnMoved;
         }
         #endregion
 
@@ -171,7 +169,6 @@ namespace FTS.Grid
             }
             return overGrid;
         }
-
 
         void DoSelection()
         {
@@ -267,11 +264,9 @@ namespace FTS.Grid
         {
             if (grid.HasPath)
             {
-                grid.ClearReachable();
                 Travel(mover);
                 unitController.MovementChanged(mover.MovementLeft);
                 grid.ClearPath(mover.MovementLeft);
-                grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
             }
         }
 
@@ -319,54 +314,9 @@ namespace FTS.Grid
             }
         }
 
-        public void UpdateIndicators(Enemy enemy)
-        {
-            if(attackIndicators.ContainsKey(enemy))
-                UpdateLine(enemy, attackIndicators[enemy]);
-        }
-
-        public void UpdateIndicators(HexCell oldLocation, HexCell newLocation)
-        {
-            foreach (var indicator in attackIndicators)
-            {
-                if (indicator.Value.Line.Contains(oldLocation) ||
-                    indicator.Value.Line.Contains(newLocation))
-                {
-                    UpdateLine(indicator.Key, indicator.Value);
-                }          
-            }
-        }
-
-        private void UpdateLine(Enemy enemy, AttackIndicator indicator)
-        {
-            foreach (HexCell cell in indicator.Line)
-            {
-                cell.SetDangerIndicator(false);
-                cell.SetDangerous(false);
-            }
-
-            if (enemy.IsPiercieing())
-            {
-                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, enemy.Range, false);
-                foreach (HexCell cell in indicator.Line)
-                {
-                    cell.SetDangerIndicator(true);
-                }
-            }
-            else
-            {
-                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, projectileRange, true);
-                indicator.Line.Last().SetDangerIndicator(true);
-            }
-            foreach (HexCell cell in indicator.Line)
-            {
-                cell.SetDangerous(true);
-            }
-        }
-
         void Travel(Mover mover)
         {
-            UpdateIndicators(mover.Location, mover.Travel(grid.GetPath(mover.MovementLeft)));
+            mover.Travel(grid.GetPath(mover.MovementLeft));
         }
         #endregion
 
@@ -445,7 +395,6 @@ namespace FTS.Grid
         {
             mover = AIMover;
             grid.FindPathAway(mover.Location, GetClosesPlayerDrection(mover), mover.MovementLeft);
-            //mover.Travel(grid.GetPath(mover.MovementLeft), unitController.GetVehiclePosition().transform.position);
         }
 
         private HexDirection GetClosesPlayerDrection(Mover mover)
@@ -507,10 +456,7 @@ namespace FTS.Grid
             Mover mover = target.GetComponent<Mover>();
             HexDirection direction = grid.GetDirection(attacker, mover.Location);
             Push(target, direction);
-            if(target is Enemy)
-                UpdateIndicators((Enemy)target);
         }
-
 
         internal void AreaPush(HexCell target)
         {
@@ -537,7 +483,6 @@ namespace FTS.Grid
             }
             return playerInRange;
         }
-
 
         internal bool CanReachAttackRange(Enemy enemy, HexCell targetCell)
         {
@@ -576,71 +521,6 @@ namespace FTS.Grid
 
 
             return isAttackNotBlocked;
-        }
-
-        public void TelegraphTrajectoryAttack(Enemy enemy)
-        {
-            AttackIndicator indicator = new AttackIndicator(enemy.Target.Location, enemy.Direction);
-
-            enemy.Target.Location.SetDangerIndicator(true);
-
-
-            attackIndicators.Add(enemy, indicator);
-        }
-
-        public void TelegraphAttack(Enemy enemy)
-        {
-            AttackIndicator indicator;
-            if (enemy.IsPiercieing())
-            {
-                indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction, enemy.Range, false), enemy.Direction);
-                foreach (HexCell cell in indicator.Line)
-                {
-                    cell.SetDangerIndicator(true);
-                }
-            }
-            else
-            {
-                indicator = new AttackIndicator(grid.GetLine(enemy.Location, enemy.Direction, projectileRange, true), enemy.Direction);
-                indicator.Line.Last().SetDangerIndicator(true);
-            }
-
-            foreach (HexCell cell in indicator.Line)
-            {
-                cell.SetDangerous(true);
-            }
-            attackIndicators.Add(enemy, indicator);
-        }
-
-        internal void RemoveIndicator(Enemy unit)
-        {
-            if (!attackIndicators.ContainsKey(unit))
-            {
-                return;
-            }
-            foreach (HexCell cell in attackIndicators[unit].Line.ToList())
-            {
-                cell.SetDangerIndicator(false);
-            }
-            attackIndicators.Remove(unit);
-        }
-
-        public void Attack(Enemy enemy)
-        {
-            if(!attackIndicators.ContainsKey(enemy))
-            {
-                return;
-            }
-            foreach (HexCell cell in attackIndicators[enemy].Line.ToList())
-            {
-                cell.SetDangerIndicator(false);
-                if(cell.Unit)
-                {
-                    int damage = enemy.Stats.GetStat(Stat.Damage, enemy.CharacterClass);
-                    cell.Unit.CalculateDamageTaken(damage);
-                }
-            } 
-            attackIndicators.Remove(enemy);
         }
 
         public void UpdateReachable()
@@ -690,50 +570,12 @@ namespace FTS.Grid
             grid.ClearReachable();
         }
 
-        private void Unit_OnHoverExit(Unit unit)
+        private void Mover_OnMoved(HexCell cell, HexCell newCell)
         {
-            if(unit is Enemy)
+            if (turnController.TurnPhase == TurnPhases.PlayerTurn)
             {
-                Enemy enemy = (Enemy)unit;
-                if (cardController.CardSelected)
-                {
-                    enemy.ShowDamage(0);
-                }
-                else if (attackIndicators.ContainsKey(enemy))
-                {
-                    foreach (HexCell cell in attackIndicators[enemy].Line.ToList())
-                    {
-                        if (cell.Unit)
-                        {
-                            cell.Unit.ShowDamage(0);
-                        }
-                    }
-                }
-            }                         
-        }
-
-        private void Unit_OnHover(Unit unit)
-        {
-            if (unit is Enemy)
-            {
-                Enemy enemy = (Enemy)unit;
-                if(cardController.CardSelected &&
-                   cardController.CardSelected.Targeting == CardTargeting.Unit)
-                {
-                    enemy.ShowDamage(cardController.GetDamage());
-                }
-                else if (attackIndicators.ContainsKey(enemy))
-                {
-                    foreach (HexCell cell in attackIndicators[enemy].Line.ToList())
-                    {
-                        if (cell.Unit)
-                        {
-                            int damage = enemy.Stats.GetStat(Stat.Damage, enemy.CharacterClass);
-                            cell.Unit.ShowDamage(damage);
-                        }
-                    }
-                }
-            }       
+                UpdateReachable();
+            }
         }
         #endregion
     }

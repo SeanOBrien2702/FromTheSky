@@ -15,8 +15,6 @@ namespace FTS.Cards
             unitController.CurrentPlayer.GetComponent<Mover>().Location = targetPos;
             target.GetComponent<Mover>().Location = playerPos;
             gridController.UpdateReachable();
-            if(target is Enemy)
-                gridController.UpdateIndicators((Enemy)target);
         }
 
         public override string GetEffectText()

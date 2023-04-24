@@ -3,9 +3,7 @@ using FTS.Grid;
 using FTS.Turns;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 #endregion
 
@@ -14,8 +12,7 @@ namespace FTS.Characters
     [RequireComponent(typeof(Character))]
     public class Mover : MonoBehaviour
     {
-
-        HexGridController gridController;
+        public static event System.Action<HexCell, HexCell> OnMoved = delegate { };
         CameraController cameraController;
         Character character;
         StateController stateController;
@@ -44,12 +41,12 @@ namespace FTS.Characters
                 {
                     location.Unit = null;
                 }
-                //gridController.UpdateIndicators(location, value);
+                HexCell oldLocation = location;
                 location = value;
                 character.Location = value;
                 value.Unit = character;
                 transform.localPosition = value.transform.localPosition;
-                Debug.Log("set position");    
+                OnMoved?.Invoke(oldLocation, location);   
             }
         }
 
@@ -71,8 +68,7 @@ namespace FTS.Characters
         void Start()
         {
             cameraController = FindObjectOfType<CameraController>().GetComponent<CameraController>();
-            stateController = FindObjectOfType<StateController>().GetComponent<StateController>();   
-            gridController = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();           
+            stateController = FindObjectOfType<StateController>().GetComponent<StateController>();          
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }
@@ -100,13 +96,12 @@ namespace FTS.Characters
         #endregion
 
         #region Public Methods
-        internal HexCell Travel(List<HexCell> path)//, Vector3 lookTowards)
+        internal HexCell Travel(List<HexCell> path)
         {
             movementLeft -= DistanceTraveled(path);
            
             if (path != null)
             {
-                //Location = path[path.Count - 1];
                 pathToTravel = path;
                 StopAllCoroutines();
                 StartCoroutine(TravelPath(Vector3.zero));

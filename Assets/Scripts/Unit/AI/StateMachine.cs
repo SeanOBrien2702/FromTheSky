@@ -23,6 +23,7 @@ namespace FTS.Characters
         [HideInInspector] public Mover mover;
         [HideInInspector] public Enemy enemy;
         [HideInInspector] public HexGridController gridController;
+        [HideInInspector] public AttackIndicatorController attackIndicator;
         [HideInInspector] public UnitController unitController;
         [HideInInspector] public TurnController turnController;
         //[HideInInspector] public Unit Target;
@@ -45,6 +46,7 @@ namespace FTS.Characters
         {
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             gridController = FindObjectOfType<HexGridController>().GetComponent<HexGridController>();
+            attackIndicator = FindObjectOfType<AttackIndicatorController>().GetComponent<AttackIndicatorController>();
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             stateController = FindObjectOfType<StateController>().GetComponent<StateController>();
             cameraController = FindObjectOfType<CameraController>().GetComponent<CameraController>();
