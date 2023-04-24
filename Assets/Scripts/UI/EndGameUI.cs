@@ -18,7 +18,7 @@ public class EndGameUI : MonoBehaviour
     void Start()
     {
         Time.timeScale = 0;
-        UpdateUI(FindObjectOfType<RunController>().HasWon);
+        UpdateUI(RunController.Instance.HasWon);
     }
 
     void UpdateUI(bool hasWon)

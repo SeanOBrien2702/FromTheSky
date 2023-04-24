@@ -15,7 +15,6 @@ namespace FTS.UI
     public class ShopUI : MonoBehaviour
     {
         CardDatabase cardDB;
-        RunController runController;
 
         [SerializeField] GameObject shopCardPrefab;
         [SerializeField] Transform cardPanel;
@@ -29,7 +28,6 @@ namespace FTS.UI
         void Start()
         {
             cardDB = FindObjectOfType<CardDatabase>().GetComponent<CardDatabase>();
-            runController = FindObjectOfType<RunController>().GetComponent<RunController>();
             FillShopPanel();
         }
         #endregion
@@ -54,9 +52,9 @@ namespace FTS.UI
 
         public void BuyCard(GameObject go ,Card card, int cost) 
         {
-            if (runController.Cinder >= cost)
+            if (RunController.Instance.Cinder >= cost)
             {
-                runController.Cinder -= cost;
+                RunController.Instance.Cinder -= cost;
                 cardDB.AddCardToDeck(card);
                 Destroy(go);
             }
@@ -77,20 +75,20 @@ namespace FTS.UI
 
         public void ConvertCinder()
         {
-            if (runController.Cinder >= 50)
+            if (RunController.Instance.Cinder >= 50)
             {
-                runController.Cinder -= 50;
-                runController.Health += 10;
+                RunController.Instance.Cinder -= 50;
+                RunController.Instance.Health += 10;
                 DisableButtons();
             }
         }
 
         public void ConvertHealth()
         {
-            if (runController.Health >= 15)
+            if (RunController.Instance.Health >= 15)
             {
-                runController.Health -= 15;
-                runController.Cinder += 25;
+                RunController.Instance.Health -= 15;
+                RunController.Instance.Cinder += 25;
                 DisableButtons();
             }
         }

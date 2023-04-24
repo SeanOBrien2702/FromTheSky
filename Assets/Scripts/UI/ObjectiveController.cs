@@ -80,7 +80,7 @@ namespace FTS.Core
             {
                 if (objectives[1].IsComplete)
                 {
-                    FindObjectOfType<RunController>().GetComponent<RunController>().Cinder += 50;
+                    RunController.Instance.Cinder += 50;
                 }
                 SceneController.Instance.LoadScene(Scenes.DraftScene, true);
             }

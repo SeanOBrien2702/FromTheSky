@@ -13,7 +13,7 @@ namespace FTS.UI
         void Start()
         {
             cinderText = GetComponent<TextMeshProUGUI>();
-            cinderText.text = FindObjectOfType<RunController>().GetComponent<RunController>().Cinder.ToString();
+            cinderText.text = RunController.Instance.Cinder.ToString();
             RunController.OnCinderChanged += CinderController_OnValueChanged;
         }
 

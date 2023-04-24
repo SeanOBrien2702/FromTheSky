@@ -13,7 +13,7 @@ namespace FTS.UI
         void Start()
         {
             hearthText = GetComponent<TextMeshProUGUI>();
-            hearthText.text = FindObjectOfType<RunController>().GetComponent<RunController>().Health.ToString();
+            hearthText.text = RunController.Instance.Health.ToString();
             RunController.OnHealthChanged += HeartController_OnValueChanged;
         }
 

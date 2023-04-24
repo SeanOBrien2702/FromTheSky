@@ -13,7 +13,7 @@ namespace FTS.UI
         void Start()
         {
             dayText = GetComponent<TextMeshProUGUI>();
-            dayText.text = "Days left: " + FindObjectOfType<RunController>().GetComponent<RunController>().Day.ToString();
+            dayText.text = "Days left: " + RunController.Instance.Day.ToString();
             RunController.OnDayChanged += RunController_OnDayChanged;
         }
 

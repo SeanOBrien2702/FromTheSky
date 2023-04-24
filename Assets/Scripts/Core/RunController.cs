@@ -25,6 +25,8 @@ namespace FTS.Core
         int cinder;
         bool hasWon = false;
 
+        public static RunController Instance { get; private set; }
+
         public int Health
         {
             get { return health; }
@@ -65,9 +67,16 @@ namespace FTS.Core
 
         void Awake()
         {
-            Health = startingHealth;
-            day = startingDay;
-            Cinder = startingCinder;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
+
+            StartValues();
             UnitController.OnDamageTaken += UnitController_OnDamageTaken;
             UnitController.OnEnemyLost += UnitController_OnEnemyLost;
             UnitController.OnPlayerLost += UnitController_OnPlayerLost;
@@ -93,6 +102,13 @@ namespace FTS.Core
             {
                 SceneController.Instance.LoadScene(Scenes.EndGameScene, true);
             }
+        }
+
+        public void StartValues()
+        {
+            Health = startingHealth;
+            day = startingDay;
+            Cinder = startingCinder;
         }
 
         #region Saving Methods

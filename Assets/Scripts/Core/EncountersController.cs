@@ -5,7 +5,7 @@ namespace FTS.Core
 {
     public class EncountersController : MonoBehaviour
     {
-        [SerializeField] RunController runController;
+        //[SerializeField] RunController runController;
 
         int encounterNumber = 3;
         [SerializeField] Encounter combatEncounter;
@@ -81,16 +81,16 @@ namespace FTS.Core
         internal List<Encounter> GetEncounters()
         {
             numCombatEncounters = 0;
-            runController.Day--;
+            RunController.Instance.Day--;
             List<Encounter> encounters = new List<Encounter>();
-            if (runController.Day > 1)
+            if (RunController.Instance.Day > 1)
             {
                 for (int i = 0; i < encounterNumber; i++)
                 {
                     encounters.Add(GetRandomEnccounters());
                 }
             }
-            else if (runController.Day == 1)
+            else if (RunController.Instance.Day == 1)
             {
                 for (int i = 0; i < encounterNumber; i++)
                 {

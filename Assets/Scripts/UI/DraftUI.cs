@@ -77,7 +77,7 @@ namespace FTS.UI
 
         public void Skip()
         {
-            FindObjectOfType<RunController>().GetComponent<RunController>().Cinder += skipCinder;
+            RunController.Instance.Cinder += skipCinder;
             SceneController.Instance.LoadScene(Scenes.HubScene);
         }
 
