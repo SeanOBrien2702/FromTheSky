@@ -47,6 +47,12 @@ MonoBehaviour:
   deck:
   - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
   - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
+  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
+  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
+  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
+  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
+  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
+  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
   - {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4, type: 2}
   - {fileID: 11400000, guid: 30ad7bb32aa201d429aecf73ccf9a6ab, type: 2}
   - {fileID: 11400000, guid: 30ad7bb32aa201d429aecf73ccf9a6ab, type: 2}

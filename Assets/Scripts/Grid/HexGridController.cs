@@ -20,6 +20,7 @@ namespace FTS.Grid
 
         [SerializeField] Vector2Int placementArea;
         [SerializeField] Button startButton;
+        [SerializeField] int collisionDamage = 1;
 
         TurnController turnController;
 
@@ -78,7 +79,7 @@ namespace FTS.Grid
         private void OnDestroy()
         {
             UnitController.OnSelectPlayer -= UnitController_OnSelectPlayer;
-            UnitController.OnSelectUnit += UnitController_OnSelectUnit;
+            UnitController.OnSelectUnit -= UnitController_OnSelectUnit;
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart; 
@@ -265,7 +266,6 @@ namespace FTS.Grid
             if (grid.HasPath)
             {
                 Travel(mover);
-                unitController.MovementChanged(mover.MovementLeft);
                 grid.ClearPath(mover.MovementLeft);
             }
         }
@@ -292,26 +292,44 @@ namespace FTS.Grid
             }
         }
 
-        internal void Push(Character character, HexDirection direction)
+        internal void Push(Character character, HexDirection direction, int distance)
         {
-            Mover mover = character.GetComponent<Mover>();
-            Debug.Log("Target to be moved " + mover.Location.Unit);
-            HexCell neighbor = mover.Location.GetNeighbor(direction);
-            if (neighbor != null)
+            if(distance == 0)
             {
-                if (!neighbor.IsObstacle && !neighbor.Unit)
-                {
-                    mover.Push(direction);
+                distance = projectileRange;
+            }
+
+            HexCell buffer = character.Location;
+            HexCell destination = buffer;
+            for (int i = 0; i < distance; i++)
+            {
+                buffer = buffer.GetNeighbor(direction);
+                if (buffer)
+                {                  
+                    if (buffer.IsCellAvailable())
+                    {
+                        destination = buffer;
+                    }
+                    else
+                    {
+                        if (distance < projectileRange)
+                        {
+                            character.Health -= collisionDamage;
+                            if (buffer.Unit)
+                            {
+                                buffer.Unit.Health -= collisionDamage;
+                            }
+                        }
+                        break;
+                    }
                 }
                 else
                 {
-                    character.Health -= 2;
-                    if (neighbor.Unit)
-                    {
-                        neighbor.Unit.Health -= 2;
-                    }
+                    break;
                 }
             }
+
+            character.Mover.Push(destination);
         }
 
         void Travel(Mover mover)
@@ -450,22 +468,25 @@ namespace FTS.Grid
             return closetUnit;
         }
 
-        internal void TargetPush(Character target)
+        internal void TargetPush(Character target, int distance, bool isPull)
         {
             HexCell attacker = unitController.CurrentUnit.GetComponent<Mover>().Location;
-            Mover mover = target.GetComponent<Mover>();
-            HexDirection direction = grid.GetDirection(attacker, mover.Location);
-            Push(target, direction);
+            HexDirection direction = grid.GetDirection(attacker, target.Mover.Location);
+            if(isPull)
+            {
+                direction = HexDirectionExtensions.Opposite(direction);
+            }
+            Push(target, direction, distance);            
         }
 
-        internal void AreaPush(HexCell target)
+        internal void AreaPush(HexCell target, int distance)
         {
             for (HexDirection direction = HexDirection.NE; direction <= HexDirection.NW; direction++)
             {
                 HexCell neighbor = target.GetNeighbor(direction);
                 if (neighbor.Unit is Character)
                 {
-                    Push((Character)neighbor.Unit, direction);
+                    Push((Character)neighbor.Unit, direction, distance);
                 }
             }
         }

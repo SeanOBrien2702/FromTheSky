@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9399efeb3d4499b42a22f7d0f61f26cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runController: {fileID: 6683323229632558652}
   combatEncounter: {fileID: 11400000, guid: 3f428a809b9f33942b725996092c96d5, type: 2}
   eliteEncounter: {fileID: 11400000, guid: 6d5671e86391f4149859b45201fe3261, type: 2}
   bossEnccounter: {fileID: 11400000, guid: ebd9d976cdb74654ca78d9ab9bd0b0d6, type: 2}
@@ -562,6 +561,64 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: deck.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: deck.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: ff76d65cf6b249b4fa559d2b06199c5f,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: deck.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: deck.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: deck.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 96b89b9efd5d52e459d97bb61d068228,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: characterClassCards.Array.data[1].cards.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: characterClassCards.Array.data[1].cards.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: characterClassCards.Array.data[1].cards.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 96b89b9efd5d52e459d97bb61d068228,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: characterClassCards.Array.data[1].cards.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: characterClassCards.Array.data[1].cards.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: ff76d65cf6b249b4fa559d2b06199c5f,
+        type: 2}
     - target: {fileID: 8990577267346574125, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: m_Name

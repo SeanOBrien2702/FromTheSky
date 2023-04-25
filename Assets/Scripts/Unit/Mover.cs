@@ -4,6 +4,7 @@ using FTS.Turns;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 #endregion
 
@@ -13,9 +14,11 @@ namespace FTS.Characters
     public class Mover : MonoBehaviour
     {
         public static event System.Action<HexCell, HexCell> OnMoved = delegate { };
+        public static event System.Action<int> OnMovementChanged = delegate { };
         CameraController cameraController;
         Character character;
         StateController stateController;
+        UnitController unitController;
 
         [SerializeField] float travelSpeed = 2f;
         [SerializeField] float pushSpeed = 0.1f;
@@ -54,12 +57,18 @@ namespace FTS.Characters
 
         public int Speed { get => speed; set => speed = value; }
 
-        public int MovementLeft { get => movementLeft; set => movementLeft = value; }
+        public int MovementLeft { get => movementLeft; set {
+                movementLeft = value;
+                unitController.MovementChanged(movementLeft);
+                OnMovementChanged?.Invoke(movementLeft); 
+            } 
+        }
         #endregion
 
         #region MonoBehaviour Callbacks
         private void Awake()
         {
+            unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             character = GetComponent<Character>();
             speed = character.Stats.GetStat(Stat.Movement, character.CharacterClass);
             movementLeft = speed;
@@ -98,8 +107,7 @@ namespace FTS.Characters
         #region Public Methods
         internal HexCell Travel(List<HexCell> path)
         {
-            movementLeft -= DistanceTraveled(path);
-           
+            MovementLeft -= DistanceTraveled(path);
             if (path != null)
             {
                 pathToTravel = path;
@@ -119,9 +127,8 @@ namespace FTS.Characters
             return !cell.Unit;
         }
 
-        internal void Push(HexDirection direction)
+        internal void Push(HexCell newLocation)
         {
-            HexCell newLocation = Location.GetNeighbor(direction);
             StartCoroutine(TravelPush(newLocation.transform.localPosition));
             Location = newLocation;
         }

@@ -10,25 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
-  m_Name: Accelerate
+  m_Name: ProximityMine
   m_EditorClassIdentifier: 
-  cardName: Accelerate
+  cardName: Proximity Mine
   flavourText: 
-  image: {fileID: 21300000, guid: 3badc36b64caa4a488f1844f15056e3a, type: 3}
-  border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
+  image: {fileID: 21300000, guid: 3b794b095db8e724bbe566b217ee0c0c, type: 3}
+  border: {fileID: 0}
   cost: 1
-  range: 2
+  range: 3
   area: 1
   cardRarity: 0
   characterClass: 0
-  type: 1
-  targeting: 0
+  type: 0
+  targeting: 2
   isAtomize: 0
   isTemporary: 0
   isInherent: 0
   cinderCost: 10
   onDrawEffects: []
-  effects:
-  - {fileID: 11400000, guid: 163cf91f2bba9174f84057b4879623c3, type: 2}
-  - {fileID: 11400000, guid: 1e5fdeedcdb219445903bf15c16aefd3, type: 2}
+  effects: []
   onDiscardEffects: []

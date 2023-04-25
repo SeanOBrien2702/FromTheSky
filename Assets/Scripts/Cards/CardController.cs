@@ -349,7 +349,7 @@ namespace FTS.Cards
                 if (playedCard.Targeting == CardTargeting.None)
                 {
                     CardPlayed(playedCard);
-                    playedCard.Play(player);
+                    playedCard.Play();
                 }
                 else
                 {

@@ -11,11 +11,12 @@ namespace FTS.Cards
     public class MoveEffect : Effect
     {
         [SerializeField] int distance = 1;
+        [SerializeField] bool isPull;
         public override void ActivateEffect(Unit target)
         {
             //TODO: allow characters to be moved different distances
             if(target is Character)
-                gridController.TargetPush((Character)target);
+                gridController.TargetPush((Character)target, distance, isPull);
         }
 
         public override void ActivateEffect(HexCell target)
@@ -24,19 +25,24 @@ namespace FTS.Cards
             List<HexCell> line = grid.GetLine(unitController.CurrentPlayer.Location, direction, projectileRange, true);
 
             if (line.Last().Unit && line.Last().Unit is Character)
-                gridController.TargetPush((Character)line.Last().Unit);
+                gridController.TargetPush((Character)line.Last().Unit, distance, isPull);
         }
 
         public override string GetEffectText()
         {
-            string effectText;
-            if (distance == 1)
+            string effectText = "Move target ";
+            if (distance != 0)
             {
-                effectText = "Move target " + distance + " hex away from you";
+                effectText += distance + " hexs";
+            }
+
+            if(isPull)
+            {
+                effectText += " towards from you";
             }
             else
             {
-                effectText = "Move target " + distance + " hexes away from you";
+                effectText += " away from you";
             }
             return effectText;
         }
