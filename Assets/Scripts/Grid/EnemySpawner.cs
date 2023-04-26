@@ -91,11 +91,9 @@ namespace FTS.Grid
                 {
                     cell.Unit.Die();
                 }
-                if (!cell.Unit)
-                {
-                    unitController.CreateUnit(enemyDatabase.GetRandomEnemy(), cell);
-                    cell.SetSpawningHighlight(false);
-                }
+
+                unitController.CreateUnit(enemyDatabase.GetRandomEnemy(), cell);
+                cell.SetSpawningHighlight(false);
                 Invoke(nameof(ResetDropPod), 1.5f);
                 yield return new WaitForSeconds(0.25f);
                 dropPod.SetActive(false);
