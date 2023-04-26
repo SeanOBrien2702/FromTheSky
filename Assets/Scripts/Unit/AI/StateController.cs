@@ -12,7 +12,7 @@ namespace FTS.Characters
     {
         UnitController unitController;
         TurnController turnController;
-
+        List<StateMachine> stateMachines = new List<StateMachine>();
         bool areActionsConplete = false;
         #region Properties
         public bool ActionDone  // property
@@ -48,8 +48,7 @@ namespace FTS.Characters
         #region Coroutines
         IEnumerator UpdateEnemyStateMachines()
         {     
-            List<StateMachine> stateMachines = unitController.GetStateMachines();
-            //Debug.Log("Start state machine " + stateMachines.Count);
+            stateMachines = unitController.GetStateMachines();
             foreach (StateMachine machine in stateMachines.ToList())
             {
                 yield return StartCoroutine(machine.UpdateState());
@@ -62,6 +61,11 @@ namespace FTS.Characters
         private void TurnController_OnEnemyTurn(bool isTelegraph)
         {
             StartCoroutine(UpdateEnemyStateMachines());
+        }
+
+        internal int GetTurnOrder(StateMachine machine)
+        {
+            return stateMachines.FindIndex(item => item == machine) + 1;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace FTS.UI
         [SerializeField] TextMeshProUGUI turnText;
         [SerializeField] GameObject playerMessagePanel;
         [SerializeField] TextMeshProUGUI playerMessageText;
+        [SerializeField] GameObject turnOrder;
 
         [Header("Buttons")]
         [SerializeField] GameObject startCombatButton;
@@ -90,7 +91,7 @@ namespace FTS.UI
             atomized.SetActive(enable);
             energy.SetActive(enable);
             endTurnButton.SetActive(enable);
-            //turnCounter.SetActive(enable);
+            turnOrder.SetActive(enable);
             playerMessageText.text = "";
         }
 

@@ -16,7 +16,6 @@ namespace FTS.Turns
         [SerializeField] Button endTurnButton;
         [SerializeField] TextMeshProUGUI turnText;
         [SerializeField] Text turnInfoText;
-        [SerializeField] TurnOrderUI turnOrderUI;
         bool hasCombatStarted = false;
         TurnPhases turnPhase;
 

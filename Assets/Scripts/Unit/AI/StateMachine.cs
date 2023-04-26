@@ -7,6 +7,7 @@ using FTS.Grid;
 using FTS.Turns;
 using FTS.UI;
 using WalldoffStudios.Indicators;
+using System;
 #endregion
 
 namespace FTS.Characters
@@ -85,6 +86,11 @@ namespace FTS.Characters
             //Debug.Log("action complete");
 
             
+        }
+
+        internal string GetTurnOrder()
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

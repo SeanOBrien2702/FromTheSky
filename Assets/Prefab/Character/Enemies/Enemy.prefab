@@ -323,6 +323,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2401928346551089451, guid: b955708cfc370964fbe80b7a36a1bca4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2945816245395077665, guid: b955708cfc370964fbe80b7a36a1bca4,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -338,6 +343,11 @@ PrefabInstance:
       propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6221455728569914002, guid: b955708cfc370964fbe80b7a36a1bca4,
+        type: 3}
+      propertyPath: unit
+      value: 
+      objectReference: {fileID: -3402009541125080230}
     - target: {fileID: 8344629008717816395, guid: b955708cfc370964fbe80b7a36a1bca4,
         type: 3}
       propertyPath: m_IsActive
@@ -393,20 +403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36658e8ed22b9e642ad85c18946a98f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5238737796892697449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7317473650354441608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8f0fdf1899c1e4c869a464a9f3d2f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageText: {fileID: 2939503355338548272}
-  damageImage: {fileID: 3473082553686382527}
 --- !u!114 &-5202244463018623556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,6 +454,21 @@ MonoBehaviour:
   mover: {fileID: 0}
   enemy: {fileID: 0}
   gridController: {fileID: 0}
+  attackIndicator: {fileID: 0}
   unitController: {fileID: 0}
   turnController: {fileID: 0}
   newEnemyPosition: {fileID: 0}
+--- !u!114 &5238737796892697449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317473650354441608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8f0fdf1899c1e4c869a464a9f3d2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageText: {fileID: 2939503355338548272}
+  damageImage: {fileID: 3473082553686382527}
