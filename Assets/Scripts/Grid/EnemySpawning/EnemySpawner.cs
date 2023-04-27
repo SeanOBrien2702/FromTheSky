@@ -44,10 +44,11 @@ namespace FTS.Grid
 
             dropPodStartPos = dropPodPosotion.transform.position;
             dropPodSmoke = dropPodPosotion.GetComponentInChildren<ParticleSystem>();
-
+            bool isFirst = true;
             for (int i = 0; i < settings.StartingEnemies; i++)
             {
-                CreateUnitInRandomPosition();
+                CreateUnitInRandomPosition(isFirst);
+                isFirst = false;
                 enemiesSpawned++;
             }
         }
@@ -61,10 +62,17 @@ namespace FTS.Grid
 
         #region Private Methods
 
-        void CreateUnitInRandomPosition()
+        void CreateUnitInRandomPosition(bool isFirst)
         {
             HexCell cell = hexGrid.GetRandomPosition(1)[0];
-            unitController.CreateUnit(enemyDatabase.GetRandomEnemy(), cell);
+            if(isFirst)
+            {
+                unitController.CreateUnit(enemyDatabase.GetCombatType(), cell);
+            }
+            else
+            {
+                unitController.CreateUnit(enemyDatabase.GetRandomEnemy(), cell);
+            }           
         }
 
         private void SetSpawnPositions()

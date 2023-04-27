@@ -22,6 +22,7 @@ namespace FTS.Core
         int currentDay = 2;     
         int cinder;
         bool hasWon = false;
+        CombatType combatType;
 
         public static RunController Instance { get; private set; }
 
@@ -64,6 +65,7 @@ namespace FTS.Core
         }
 
         public bool HasWon { get => hasWon; set => hasWon = value; }
+        public CombatType CombatType { get => combatType; set => combatType = value; }
 
         void Awake()
         {

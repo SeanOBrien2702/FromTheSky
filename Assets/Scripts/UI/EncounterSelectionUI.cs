@@ -38,7 +38,9 @@ public class EncounterSelectionUI : MonoBehaviour
                 ui.ObjectiveText.text = objectives[0].SetDescription(true) + "\n" +
                                         objectives[1].SetDescription(true);
                 ui.Button.onClick.AddListener(() => {
-                    SelectEncounter(encounter, objectives);
+                    RunController.Instance.CombatType = encounter.CombatType;
+                    Debug.Log(RunController.Instance.CombatType);
+                    SelectEncounter(encounter, objectives);                  
                 });
             }
             else

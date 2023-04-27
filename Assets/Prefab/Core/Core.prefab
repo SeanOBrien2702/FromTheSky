@@ -1410,5 +1410,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingCinder: 100
   startingHealth: 25
-  startingDay: 10
+  startingDay: 2
   difficultyIntervals: 3

@@ -62,7 +62,7 @@ namespace FTS.Characters
         internal Character GetRandomEnemy()
         {
             settings = databaseSettings[RunController.Instance.GetDifficultyScale()];
-            //TODO: add terjectory enemy to possible options
+
             int randomNumber = UnityEngine.Random.Range(0, settings.GetChanceTotal());
             Enemy enemy;
             if (randomNumber <= settings.GetCommonChance())
@@ -82,6 +82,26 @@ namespace FTS.Characters
                 enemy = commonEnemies[Random.Range(0, commonEnemies.Count)];;
             }
 
+            return enemy;
+        }
+
+        internal Character GetCombatType()
+        {
+            Enemy enemy = null;
+            switch (RunController.Instance.CombatType)
+            {
+                case CombatType.Normal:
+                    enemy = commonEnemies[Random.Range(0, commonEnemies.Count)];
+                    break;
+                case CombatType.Elite:
+                    enemy = rareEnemies[Random.Range(0, rareEnemies.Count)];
+                    break;
+                case CombatType.Boss:
+                    enemy = bossEnemies[Random.Range(0, bossEnemies.Count)];
+                    break;
+                default:
+                    break;
+            }
             return enemy;
         }
         #endregion

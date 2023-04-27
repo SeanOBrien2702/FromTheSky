@@ -55,6 +55,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 185d2dbcdf93dea40a832381b295ff78,
         type: 2}
+    - target: {fileID: 7380319928027599473, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ee2a8933f17b3354782a22a8b63ac01f, type: 2}
+    - target: {fileID: 7380319928027599475, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ee2a8933f17b3354782a22a8b63ac01f, type: 2}
+    - target: {fileID: 7380319928027599477, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ee2a8933f17b3354782a22a8b63ac01f, type: 2}
+    - target: {fileID: 7380319928027599479, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ee2a8933f17b3354782a22a8b63ac01f, type: 2}
+    - target: {fileID: 7380319928027599485, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ee2a8933f17b3354782a22a8b63ac01f, type: 2}
+    - target: {fileID: 7380319928027599487, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ee2a8933f17b3354782a22a8b63ac01f, type: 2}
     - target: {fileID: 7758025873454216370, guid: 014ede208cc899e4ca1367e7c0162a5a,
         type: 3}
       propertyPath: m_RootOrder
@@ -113,7 +143,7 @@ PrefabInstance:
     - target: {fileID: 7758025873454216373, guid: 014ede208cc899e4ca1367e7c0162a5a,
         type: 3}
       propertyPath: m_Name
-      value: Piercing 1
+      value: Elite Soldier
       objectReference: {fileID: 0}
     - target: {fileID: 7758025873454216374, guid: 014ede208cc899e4ca1367e7c0162a5a,
         type: 3}

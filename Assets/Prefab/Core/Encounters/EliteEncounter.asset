@@ -15,3 +15,5 @@ MonoBehaviour:
   encounterName: Elite Combat
   encounterSprite: {fileID: 21300000, guid: a87a5960e6d664497852b563bd4a17e1, type: 3}
   nextScene: 3
+  isSceneAddative: 0
+  combatType: 1

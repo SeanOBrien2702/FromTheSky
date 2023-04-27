@@ -15,3 +15,5 @@ MonoBehaviour:
   encounterName: Boss
   encounterSprite: {fileID: 21300000, guid: a0c718d3398df407895a018d0587d84f, type: 3}
   nextScene: 3
+  isSceneAddative: 0
+  combatType: 2
