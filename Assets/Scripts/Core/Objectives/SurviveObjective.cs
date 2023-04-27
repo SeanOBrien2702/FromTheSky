@@ -8,12 +8,14 @@ namespace FTS.Core
     [CreateAssetMenu(menuName = "Objectives/SurviveObjective", fileName = "SurviveObjective.asset")]
     public class SurviveObjective : Objective
     {
-        [SerializeField] int turnsToSurvive;
+        int turnsToSurvive; 
+        [SerializeField] int[] turnThreshholds;
         TurnController turnController;
 
         public override void EnableObjective()
         {
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
+            turnsToSurvive = turnThreshholds[RunController.Instance.GetDifficultyScale()];
         }
 
         public override void UpdateObjective()

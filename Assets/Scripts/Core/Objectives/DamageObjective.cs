@@ -7,12 +7,14 @@ namespace FTS.Core
     [CreateAssetMenu(menuName = "Objectives/DamageObjective", fileName = "DamageObjective.asset")]
     public class DamageObjective : Objective
     {
-        [SerializeField] int damageThreshhold;
+        [SerializeField] int[] damageThreshholds;
+        int damageThreshhold = 0;
         int totalDamage;
 
         public override void EnableObjective()
         {
             totalDamage = 0;
+            damageThreshhold = damageThreshholds[RunController.Instance.GetDifficultyScale()];
             UpdateObjective(totalDamage);
         }
 

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bde9ece060546c44a8643089e5a91938, type: 3}
-  m_Name: UnitObjective
+  m_Script: {fileID: 11500000, guid: 6466dcf3ad78e4f45966636c20325986, type: 3}
+  m_Name: MediumEnemyDataBaseSettings
   m_EditorClassIdentifier: 
-  cinderReward: 0
-  isOptional: 1
-  unitThreshholds: 02000000020000000300000004000000
+  commonChance: 75
+  rareChance: 25
+  bossChance: 5

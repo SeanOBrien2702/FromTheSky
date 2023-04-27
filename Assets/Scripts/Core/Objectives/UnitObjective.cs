@@ -11,17 +11,20 @@ namespace FTS.Core
     [CreateAssetMenu(menuName = "Objectives/UnitObjective", fileName = "UnitObjective.asset")]
     public class UnitObjective : Objective
     {
-        [SerializeField] int unitThreshhold;
+        [SerializeField] int[] unitThreshholds;
+
         UnitController unitController;
+        int unitsToControl = 1;
 
         public override void EnableObjective()
         {
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
+            unitsToControl = unitThreshholds[RunController.Instance.GetDifficultyScale()];
         }
 
         public override void UpdateObjective()
         {
-            if (unitController.NumberOfPlayers <= unitThreshhold)
+            if (unitController.NumberOfPlayers <= unitsToControl)
             {
                 isComplete = true;
             }
@@ -33,10 +36,10 @@ namespace FTS.Core
 
         public override string SetDescription(bool isEncounter = false)
         {
-            string description = "Control " + unitThreshhold + " units";
+            string description = "Control " + unitsToControl + " units";
             if (!isEncounter)
             {
-                description += " (" + unitController.NumberOfPlayers + "/" + unitThreshhold + ")";
+                description += " (" + unitController.NumberOfPlayers + "/" + unitsToControl + ")";
             }
             return description;
         }

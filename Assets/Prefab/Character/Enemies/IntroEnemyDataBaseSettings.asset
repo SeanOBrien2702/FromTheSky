@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0a1a776048738849be82c2da25597af, type: 3}
-  m_Name: DamageObjective 1
+  m_Script: {fileID: 11500000, guid: 6466dcf3ad78e4f45966636c20325986, type: 3}
+  m_Name: IntroEnemyDataBaseSettings
   m_EditorClassIdentifier: 
-  cinderReward: 50
-  isOptional: 1
-  damageThreshhold: 4
+  commonChance: 100
+  rareChance: 0
+  bossChance: 0

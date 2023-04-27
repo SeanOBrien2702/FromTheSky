@@ -501,11 +501,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8697713050240454995}
     m_Modifications:
-    - target: {fileID: 3048186788251823961, guid: b1a586b67a531014d84bd3cd2f5282b3,
-        type: 3}
-      propertyPath: id
-      value: 86e21004-b643-4644-9bce-d79bd63753f0
-      objectReference: {fileID: 0}
     - target: {fileID: 5137199243803290258, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: m_RootOrder
@@ -564,17 +559,17 @@ PrefabInstance:
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: deck.Array.size
-      value: 9
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
-      propertyPath: deck.Array.data[1]
+      propertyPath: deck.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: ff76d65cf6b249b4fa559d2b06199c5f,
+      objectReference: {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
-      propertyPath: deck.Array.data[4]
+      propertyPath: deck.Array.data[6]
       value: 
       objectReference: {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6,
         type: 2}
@@ -582,50 +577,62 @@ PrefabInstance:
         type: 3}
       propertyPath: deck.Array.data[7]
       value: 
-      objectReference: {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f,
+      objectReference: {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: deck.Array.data[8]
       value: 
-      objectReference: {fileID: 11400000, guid: 96b89b9efd5d52e459d97bb61d068228,
+      objectReference: {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
-      propertyPath: characterClassCards.Array.data[1].cards.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
-        type: 3}
-      propertyPath: characterClassCards.Array.data[1].cards.Array.data[8]
-      value: 
-      objectReference: {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f,
-        type: 2}
-    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
-        type: 3}
-      propertyPath: characterClassCards.Array.data[1].cards.Array.data[9]
-      value: 
-      objectReference: {fileID: 11400000, guid: 96b89b9efd5d52e459d97bb61d068228,
-        type: 2}
-    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
-        type: 3}
-      propertyPath: characterClassCards.Array.data[1].cards.Array.data[10]
+      propertyPath: deck.Array.data[9]
       value: 
       objectReference: {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
-      propertyPath: characterClassCards.Array.data[1].cards.Array.data[11]
+      propertyPath: deck.Array.data[10]
       value: 
-      objectReference: {fileID: 11400000, guid: ff76d65cf6b249b4fa559d2b06199c5f,
+      objectReference: {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: deck.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: deck.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: deck.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: a3bd02136889c084f8bd9f51e4549c7a,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: deck.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f,
+        type: 2}
+    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
+        type: 3}
+      propertyPath: deck.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: 96b89b9efd5d52e459d97bb61d068228,
         type: 2}
     - target: {fileID: 8990577267346574125, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: m_Name
       value: CardDatabase
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3048186788251823961, guid: b1a586b67a531014d84bd3cd2f5282b3, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1a586b67a531014d84bd3cd2f5282b3, type: 3}
 --- !u!4 &6187855896716172873 stripped
 Transform:
@@ -1240,18 +1247,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8697713050240454995}
     m_Modifications:
-    - target: {fileID: -8926737911862489323, guid: ecef7deabba8c034fb70a67adfbff800,
-        type: 3}
-      propertyPath: testCard
-      value: 
-      objectReference: {fileID: 11400000, guid: 7912dd72f45dc91458e984dd9da68e5f,
-        type: 2}
-    - target: {fileID: -5549242988494232735, guid: ecef7deabba8c034fb70a67adfbff800,
-        type: 3}
-      propertyPath: multiProjectilePrefab
-      value: 
-      objectReference: {fileID: 1670150138801462171, guid: 2812271664bd7ef479058c27c732d721,
-        type: 3}
     - target: {fileID: 594256940964850180, guid: ecef7deabba8c034fb70a67adfbff800,
         type: 3}
       propertyPath: m_RootOrder
@@ -1416,3 +1411,4 @@ MonoBehaviour:
   startingCinder: 100
   startingHealth: 25
   startingDay: 10
+  difficultyIntervals: 3

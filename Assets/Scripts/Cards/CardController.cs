@@ -42,8 +42,6 @@ namespace FTS.Cards
 
         Card lastCardPlayed;
         Card cardSelected;
-        //int energy;
-        //int totalEnergy = 4;
         private CharacterClass characterClass;
 
         bool handleDiscard = false;
@@ -55,20 +53,6 @@ namespace FTS.Cards
             get { return cardSelected; }   // get method
             set { cardSelected = value; }  // set method
         }
-
-        //public int Energy   // property
-        //{
-        //    get { return energy; }   // get method
-        //    set { energy = value;
-        //        OnEnergyChanged?.Invoke();
-        //    }  // set method
-        //}
-
-        //public int TotalEnergy   // property
-        //{
-        //    get { return totalEnergy; }   // get method
-        //    set { totalEnergy = value; }  // set method
-        //}
 
         public int MaxHandSize   // property
         {
@@ -106,19 +90,6 @@ namespace FTS.Cards
             FillDeck();
         }
 
-        /*
-        * FUNCTION    : Start()
-        * DESCRIPTION : Start is called once before the first frame update.
-        * PARAMETERS  :
-        *		VOID
-        * RETURNS     :
-        *		VOID
-        */
-        private void Start()
-        {
-
-        }
-
         private void Update()
         {
             if (handleDiscard && Input.GetMouseButtonDown(0))
@@ -133,14 +104,6 @@ namespace FTS.Cards
                 {
                     handleDiscard = false;
                     gameUI.DisablePlayerInfo();
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                List<Card> inDeck = deck.FindAll(item => item.Location == CardLocation.Deck);
-                foreach (var item in inDeck)
-                {
-                    Debug.Log(item.name);
                 }
             }
         }

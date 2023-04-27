@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinderReward: 50
   isOptional: 1
-  damageThreshhold: 5
+  damageThreshholds: 08000000060000000500000003000000

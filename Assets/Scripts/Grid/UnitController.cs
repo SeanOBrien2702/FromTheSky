@@ -1,5 +1,4 @@
 #region Using Statements
-using FTS.Cards;
 using FTS.Core;
 using FTS.Grid;
 using FTS.Turns;
@@ -7,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.UI.CanvasScaler;
 #endregion
 
 namespace FTS.Characters
@@ -40,7 +38,6 @@ namespace FTS.Characters
         
         List<Player> playerList = new List<Player>();
         [Range(1, 10)]
-        [SerializeField] int enemiesToSpawn = 5;
 
         [Header("Buildings")]
         [SerializeField] int minSpawn = 2;
@@ -143,11 +140,7 @@ namespace FTS.Characters
 
         private void Start()
         {
-            SpawnBuildings();
-            for (int i = 0; i < enemiesToSpawn; i++)
-            {
-                CreateUnitInRandomPosition(GetRandomCharacter());
-            }
+            SpawnBuildings();       
         }
 
         private void Update()
@@ -191,22 +184,10 @@ namespace FTS.Characters
         #endregion
 
         #region Private Methods
-        private Character GetRandomCharacter()
+        public Character GetRandomCharacter()
         {
-;            return enemyDatabase.GetRandomEnemy();
+            return enemyDatabase.GetRandomEnemy();
         }
-
-        void CreateUnitInRandomPosition(Character newCharacter)
-        {
-            HexCell[] cells = grid.GetGrid();
-            HexCell cell;
-            do
-            {
-                cell = cells[UnityEngine.Random.Range(grid.Width * 4, cells.Length)];
-            } while (cell.Unit != null || cell.IsObstacle);
-            CreateUnit(newCharacter, cell);
-        }
-
 
         /*
         * FUNCTION    : SpawnBuildings
@@ -413,7 +394,7 @@ namespace FTS.Characters
 
         private void TurnController_OnCombatStart()
         {
-            currentUnit = enemyList.First();
+            //currentUnit = enemyList.First();
         }
         #endregion
     }

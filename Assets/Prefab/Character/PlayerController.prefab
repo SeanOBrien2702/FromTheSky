@@ -62,9 +62,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed54fcd94ba33f4896d21eb7ab2cea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  databaseSettings:
+  - {fileID: 11400000, guid: 054fa041f135b0d42a4f67df7ef08406, type: 2}
+  - {fileID: 11400000, guid: 50da824e079b72d4f8d639ec04b5812f, type: 2}
+  - {fileID: 11400000, guid: f9be1ed5e73f3d341ba34f0e1e1a344d, type: 2}
+  - {fileID: 11400000, guid: 26d59e99af5aa3049828f774abfcb0ef, type: 2}
   piercingPrefab: {fileID: 7494323970741600098, guid: 163e612583c9e7e438693911de0491fc,
     type: 3}
   projectilePrefab: {fileID: 7494323970741600098, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
     type: 3}
-  trajectoryPrefab: {fileID: 7494323970741600098, guid: 8b6d6777928cbba4b88c7275ee57c2ce,
+  elitePiercingPrefab: {fileID: 7494323970741600098, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
+    type: 3}
+  eliteProjectilePrefab: {fileID: 7494323970741600098, guid: bbaac80b61fff894a8a5a69110a6cd87,
+    type: 3}
+  bossPrefab: {fileID: 1670150138801462171, guid: 2812271664bd7ef479058c27c732d721,
+    type: 3}
+  zealotPrefab: {fileID: 7494323970741600098, guid: f2263d9307bf1fc43ad1e037dad65469,
     type: 3}

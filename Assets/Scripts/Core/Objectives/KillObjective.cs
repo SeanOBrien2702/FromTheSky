@@ -7,13 +7,15 @@ namespace FTS.Core
     [CreateAssetMenu(menuName = "Objectives/KillObjective", fileName = "KillObjective.asset")]
     public class KillObjective : Objective
     {
-        [SerializeField] int enemiesToKill;
+        int enemiesToKill;
+        [SerializeField] int[] killThreshholds;
         [SerializeField] Enemy enemy = null;
         int currentKills = 0;
 
         public override void EnableObjective()
         {
             currentKills = 0;
+            enemiesToKill = killThreshholds[RunController.Instance.GetDifficultyScale()];
         }
 
         public override void UpdateObjective(Enemy enemyKilled)

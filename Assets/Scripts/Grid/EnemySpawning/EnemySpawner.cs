@@ -16,10 +16,9 @@ namespace FTS.Grid
         EnemyDatabase enemyDatabase;
         TurnController turnController;
         List<HexCell> spawnLocations = new List<HexCell>();
-        [SerializeField] int minSpawn = 1;
-        [SerializeField] int maxSpawn = 3;
-        [SerializeField] int spawnLimit = 8;
-        [SerializeField] int maxEnemiesAtOnce = 4;
+        [SerializeField] SpawningSettings[] spawningSettings;
+        SpawningSettings settings;
+
         [SerializeField] CameraController cameraController;
         int enemiesSpawned = 0;
 
@@ -35,14 +34,22 @@ namespace FTS.Grid
         #region MonoBehaviour Callbacks
         void Start()
         {
+            settings = spawningSettings[RunController.Instance.GetDifficultyScale()];
             hexGrid = GetComponent<HexGrid>();
             unitController = GetComponent<UnitController>();
             enemyDatabase = FindObjectOfType<EnemyDatabase>().GetComponent<EnemyDatabase>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
+
             dropPodStartPos = dropPodPosotion.transform.position;
             dropPodSmoke = dropPodPosotion.GetComponentInChildren<ParticleSystem>();
+
+            for (int i = 0; i < settings.StartingEnemies; i++)
+            {
+                CreateUnitInRandomPosition();
+                enemiesSpawned++;
+            }
         }
 
         private void OnDestroy()
@@ -53,17 +60,24 @@ namespace FTS.Grid
         #endregion
 
         #region Private Methods
+
+        void CreateUnitInRandomPosition()
+        {
+            HexCell cell = hexGrid.GetRandomPosition(1)[0];
+            unitController.CreateUnit(enemyDatabase.GetRandomEnemy(), cell);
+        }
+
         private void SetSpawnPositions()
         {
             spawnLocations.Clear();
-            int numEnemiesToSpawm = Random.Range(minSpawn, maxSpawn);
+            int numEnemiesToSpawm = Random.Range(settings.MinSpawn, settings.MaxSpawn);
             for (int i = 0; i < numEnemiesToSpawm; i++)
-            {
-                enemiesSpawned++;
-                if(enemiesSpawned > spawnLimit)
+            {               
+                if(enemiesSpawned >= settings.SpawnLimit)
                 {
                     break;
                 }
+                enemiesSpawned++;
                 HexCell cell = hexGrid.GetRandomPosition(1)[0];
                 cell.IsSpawn = true;
                 cell.SetSpawningHighlight(true);
@@ -125,12 +139,14 @@ namespace FTS.Grid
         #region Events
         private void TurnController_OnNewTurn()
         {
-            if(unitController.GetEnemyUnits().Count <= maxEnemiesAtOnce)
+            Debug.Log(unitController.GetEnemyUnits().Count + " "+ settings.MaxEnemiesAtOnce);
+            if (unitController.GetEnemyUnits().Count < settings.MaxEnemiesAtOnce)
                 SetSpawnPositions();
         }
 
         private void TurnController_OnEnemySpawn()
-        {         
+        {
+            Debug.Log("spawn?");
             StartCoroutine(SpawnEnemies());
         }
         #endregion

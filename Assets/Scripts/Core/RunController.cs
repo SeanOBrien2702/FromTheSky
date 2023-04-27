@@ -2,26 +2,24 @@ using FTS.Characters;
 using FTS.Saving;
 using FTS.Turns;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace FTS.Core
 { 
     public class RunController : MonoBehaviour, ISaveable
     {
-        public static event System.Action<int> OnHealthChanged = delegate { };
-        public static event System.Action<int> OnCinderChanged = delegate { };
-        public static event System.Action<int> OnDayChanged = delegate { };
+        public static event Action<int> OnHealthChanged = delegate { };
+        public static event Action<int> OnCinderChanged = delegate { };
+        public static event Action<int> OnDayChanged = delegate { };
 
         [SerializeField] int startingCinder = 50;
         [SerializeField] int startingHealth = 50;
         [SerializeField] int startingDay = 10;
+        [SerializeField] int difficultyIntervals = 3;
         RunInfo runInfo = new RunInfo();
         int health;
         int day;
+        int currentDay = 2;     
         int cinder;
         bool hasWon = false;
 
@@ -43,11 +41,13 @@ namespace FTS.Core
             set
             {
                 day = value;
+                currentDay++;
                 OnDayChanged.Invoke(day);
                 if(day <= 0)
                 {
                     hasWon = true;
                     day = startingDay;
+                    currentDay = 0;
                     SceneController.Instance.LoadScene(Scenes.EndGameScene, true);
                 }
             }
@@ -78,20 +78,13 @@ namespace FTS.Core
 
             StartValues();
             UnitController.OnDamageTaken += UnitController_OnDamageTaken;
-            UnitController.OnEnemyLost += UnitController_OnEnemyLost;
             UnitController.OnPlayerLost += UnitController_OnPlayerLost;
         }
 
         private void OnDestroy()
         {
             UnitController.OnDamageTaken -= UnitController_OnDamageTaken;
-            UnitController.OnEnemyLost -= UnitController_OnEnemyLost;
             UnitController.OnPlayerLost -= UnitController_OnPlayerLost;
-        }
-
-        private void UnitController_OnEnemyLost()
-        {
-            //throw new NotImplementedException();
         }
 
         private void TakeDamage(int damage)
@@ -109,6 +102,12 @@ namespace FTS.Core
             Health = startingHealth;
             day = startingDay;
             Cinder = startingCinder;
+        }
+
+        public int GetDifficultyScale()
+        {
+            Debug.Log("difficulty " + Mathf.FloorToInt(currentDay / difficultyIntervals));
+            return Mathf.FloorToInt(currentDay / difficultyIntervals);
         }
 
         #region Saving Methods

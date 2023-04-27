@@ -46,19 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deck:
   - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
-  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
-  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
-  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
-  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
-  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
-  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
-  - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
+  - {fileID: 11400000, guid: ff76d65cf6b249b4fa559d2b06199c5f, type: 2}
   - {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4, type: 2}
   - {fileID: 11400000, guid: 30ad7bb32aa201d429aecf73ccf9a6ab, type: 2}
-  - {fileID: 11400000, guid: 30ad7bb32aa201d429aecf73ccf9a6ab, type: 2}
+  - {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6, type: 2}
   - {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4, type: 2}
   - {fileID: 11400000, guid: a3bd02136889c084f8bd9f51e4549c7a, type: 2}
-  - {fileID: 11400000, guid: a3bd02136889c084f8bd9f51e4549c7a, type: 2}
+  - {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f, type: 2}
+  - {fileID: 11400000, guid: 96b89b9efd5d52e459d97bb61d068228, type: 2}
   cardBorders:
   - characterClass: 0
     border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
@@ -89,6 +84,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4, type: 2}
     - {fileID: 11400000, guid: d45e03fe1d37eaa42bf2401c5dcc781b, type: 2}
     - {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3, type: 2}
+    - {fileID: 11400000, guid: d8f69e97f89b9344b851d741f9e9121f, type: 2}
+    - {fileID: 11400000, guid: 96b89b9efd5d52e459d97bb61d068228, type: 2}
+    - {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6, type: 2}
+    - {fileID: 11400000, guid: ff76d65cf6b249b4fa559d2b06199c5f, type: 2}
   - characterClass: 2
     cards:
     - {fileID: 11400000, guid: e5eaad70fa5f6f54791ab4be85b118c6, type: 2}

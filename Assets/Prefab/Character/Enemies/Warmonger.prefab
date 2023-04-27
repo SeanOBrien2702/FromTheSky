@@ -383,7 +383,7 @@ PrefabInstance:
     - target: {fileID: 3775932547694884459, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
         type: 3}
       propertyPath: m_Name
-      value: MultiProjectile
+      value: Warmonger
       objectReference: {fileID: 0}
     - target: {fileID: 3775932547694884460, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
         type: 3}
@@ -470,6 +470,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a4cb3849020a42f499eee15abf665ecf, type: 2}
+    - target: {fileID: 4152578443565990345, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152578443565990345, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152578443565990345, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6939778197861625316, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -479,6 +494,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attackType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494323970741600098, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
+        type: 3}
+      propertyPath: characterClass
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7494323970741600098, guid: e2ee1d308e6c6c04a97533dd1083f8b9,
         type: 3}

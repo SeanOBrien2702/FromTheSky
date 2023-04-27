@@ -1,4 +1,6 @@
 ﻿#region Using Statements
+using FTS.Core;
+using FTS.Turns;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
@@ -7,55 +9,77 @@ namespace FTS.Characters
 {
     public class EnemyDatabase : MonoBehaviour
     {
-        List<Enemy> enemies = new List<Enemy>();
+        [SerializeField] EnemyDatabaseSettings[] databaseSettings;
+        EnemyDatabaseSettings settings;
+
+        [Header("Common enemies")]        
         [SerializeField] Enemy piercingPrefab;
         [SerializeField] Enemy projectilePrefab;
-        [SerializeField] Enemy trajectoryPrefab;
-        [SerializeField] Enemy multiProjectilePrefab;
+        // [SerializeField] Enemy trajectoryPrefab;
+        List<Enemy> commonEnemies = new List<Enemy>();
+
+        [Header("Rare enemies")]
+        [SerializeField] Enemy elitePiercingPrefab;
+        [SerializeField] Enemy eliteProjectilePrefab;
         //[SerializeField] Enemy StunnerPrefab;
+        List<Enemy> rareEnemies = new List<Enemy>();
+
+        //[Header("Support enemies")]
+        //[SerializeField] Enemy medicPrefab;
+        //List<Enemy> supportEnemies = new List<Enemy>();
+
+        [Header("Boss enemies")]        
+        [SerializeField] Enemy bossPrefab;
+        [SerializeField] Enemy zealotPrefab;
+        List<Enemy> bossEnemies = new List<Enemy>();
 
         #region MonoBehaviour Callbacks
         private void Start()
         {
-            enemies.Add(piercingPrefab);
-            enemies.Add(projectilePrefab);
-            enemies.Add(multiProjectilePrefab);
-            enemies.Add(trajectoryPrefab);
-            //enemies.Add(StunnerPrefab);
+            commonEnemies.Add(piercingPrefab);
+            commonEnemies.Add(projectilePrefab);
+            //commonEnemies.Add(trajectoryPrefab);
+
+            rareEnemies.Add(elitePiercingPrefab);
+            rareEnemies.Add(eliteProjectilePrefab);
+
+            bossEnemies.Add(bossPrefab);
+            bossEnemies.Add(zealotPrefab);
         }
         #endregion
 
         #region Public Methods
-        internal List<Enemy> GetEnemies()
-        {
-            return enemies;
-        }
+        //internal List<Enemy> GetEnemies()
+        //{
+        //    return enemies;
+        //}
 
         internal Enemy GetEnemy(int index)
         {
-            return enemies[index];
+            return commonEnemies[index];
         }
 
         internal Character GetRandomEnemy()
         {
+            settings = databaseSettings[RunController.Instance.GetDifficultyScale()];
             //TODO: add terjectory enemy to possible options
-            int randomNumber = UnityEngine.Random.Range(0, 105);
+            int randomNumber = UnityEngine.Random.Range(0, settings.GetChanceTotal());
             Enemy enemy;
-            if (randomNumber <= 65)
+            if (randomNumber <= settings.GetCommonChance())
             {
-                enemy = projectilePrefab;
+                enemy = commonEnemies[Random.Range(0, commonEnemies.Count)];
             }
-            else if (randomNumber > 65 && randomNumber <= 100)
+            else if (randomNumber > settings.GetCommonChance() && randomNumber <= settings.GetRareChance())
             {
-                enemy = piercingPrefab;
-            }
-            else if (randomNumber > 100 && randomNumber <= 105)
+                enemy = rareEnemies[Random.Range(0, rareEnemies.Count)];
+            }       
+            else if (randomNumber > settings.GetRareChance())
             {
-                enemy = multiProjectilePrefab;
-            }
+                enemy = bossEnemies[Random.Range(0, bossEnemies.Count)];
+            }      
             else
             {
-                enemy = projectilePrefab;
+                enemy = commonEnemies[Random.Range(0, commonEnemies.Count)];;
             }
 
             return enemy;

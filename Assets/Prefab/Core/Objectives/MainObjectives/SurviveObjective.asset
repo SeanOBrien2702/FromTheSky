@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinderReward: 50
   isOptional: 0
-  turnsToSurvive: 5
+  turnThreshholds: 03000000040000000500000006000000

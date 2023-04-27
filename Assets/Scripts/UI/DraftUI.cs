@@ -70,7 +70,6 @@ namespace FTS.UI
         //When clicking on card to select. Add card to card data base
         public void SelectCard(Card card)
         {
-            Debug.Log(card.name);
             cardDB.AddCardToDeck(card);
             SceneController.Instance.LoadScene(Scenes.HubScene);
         }
