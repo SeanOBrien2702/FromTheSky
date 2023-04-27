@@ -178,6 +178,7 @@ namespace FTS.Cards
         #region Public Methods
         public void Play()
         {
+            Debug.Log("player effect?");
             foreach (Effect effect in Effects)
             {
                 effect.ActivateEffect();
@@ -186,6 +187,7 @@ namespace FTS.Cards
 
         public void Play(Unit target)
         {
+            Debug.Log("target effect");
             foreach (Effect effect in Effects)
             {
                 effect.ActivateEffect(target);

@@ -730,7 +730,7 @@ namespace FTS.Grid
             {
                 foreach(var cell in GetLine(location, direction, range, isProjectile))
                 {
-                    cell.SetHighlight(HighlightIndex.Highlight);
+                    cell.SetHighlight(HighlightIndex.CardRange);
                     currentArea.Add(cell);
                 }
             }

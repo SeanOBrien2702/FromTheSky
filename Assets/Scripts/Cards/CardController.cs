@@ -319,9 +319,9 @@ namespace FTS.Cards
                     if (IsInRange(playedCard.Range) && IsTargetValid(playedCard.Targeting))
                     {
                         CardPlayed(playedCard);
-
-                        if(playedCard.Targeting == CardTargeting.Unit)
-                        {
+                        playedCard.Play();
+                        if (playedCard.Targeting == CardTargeting.Unit)
+                        {                           
                             playedCard.Play(target.Unit);
                         }
                         else if(playedCard.Targeting != CardTargeting.Projectile)

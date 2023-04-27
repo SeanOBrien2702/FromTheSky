@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectFoldout: 0
   numAttacks: 1
-  length: 3
-  friendlyFire: 0
+  length: 99
+  damage: 2

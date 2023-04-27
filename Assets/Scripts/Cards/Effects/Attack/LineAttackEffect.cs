@@ -11,7 +11,7 @@ namespace FTS.Cards
     {
         [SerializeField] int numAttacks = 1;
         [SerializeField] int length = 2;
-        int damage = 5;
+        [SerializeField] int damage = 5;
 
         public override void ActivateEffect(HexCell target)
         {
@@ -41,7 +41,15 @@ namespace FTS.Cards
             {
                 effectText = "Deal " + damage + " damage " + numAttacks + " times";
             }
-            effectText += " " + length + " hexes forward";
+            if(length > 10)
+            {
+                effectText += " to each unit in that direction";
+            }
+            else
+            {
+                effectText += " " + length + " hexes forward";
+            }
+            
             return effectText;
         }
 

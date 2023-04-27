@@ -9,9 +9,10 @@ namespace FTS.Cards
     {
         [SerializeField] int armourAmount;
 
-        public override void ActivateEffect(Unit target)
+        public override void ActivateEffect()
         {
-            target.Armour += armourAmount;
+            Debug.Log("armour effect?");
+            unitController.CurrentPlayer.Armour += armourAmount;
         }
 
         public override string GetEffectText()

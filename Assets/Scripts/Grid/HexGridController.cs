@@ -215,6 +215,11 @@ namespace FTS.Grid
                 if (cardController.IsFreeAim())
                 {
                     grid.ShowArea(currentUnit.Location, card.Range, HighlightIndex.CardRange);
+
+                    if (GetDistance(currentCell) <= card.Range)
+                    {
+                        currentCell.SetHighlight(HighlightIndex.Attack);
+                    }
                     if (card.Type == CardType.Attack)
                     {
                         grid.ShowAvalibleTargets(currentUnit.Location, cardController.CardSelected.Range);

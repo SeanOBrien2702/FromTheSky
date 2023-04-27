@@ -10,6 +10,11 @@ namespace FTS.Cards
         [Header("Heal")]
         [SerializeField] int healAmount;
 
+        public override void ActivateEffect()
+        {
+            unitController.CurrentPlayer.Health += healAmount;
+        }
+
         public override void ActivateEffect(Unit target)
         {
             target.Health += healAmount;

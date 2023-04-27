@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c33566ac7fa5ee42a1e74e4527e5d9b, type: 3}
   m_Name: DiscardEffect
   m_EditorClassIdentifier: 
-  cardsDiscarded: 2
-  random: 0
+  effectFoldout: 0
+  cardsDiscarded: 1
+  random: 1

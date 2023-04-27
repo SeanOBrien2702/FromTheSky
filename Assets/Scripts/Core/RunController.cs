@@ -108,7 +108,6 @@ namespace FTS.Core
 
         public int GetDifficultyScale()
         {
-            Debug.Log("difficulty " + Mathf.FloorToInt(currentDay / difficultyIntervals));
             return Mathf.FloorToInt(currentDay / difficultyIntervals);
         }
 

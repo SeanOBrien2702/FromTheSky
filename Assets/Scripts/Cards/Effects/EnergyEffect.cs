@@ -8,9 +8,9 @@ namespace FTS.Cards
     public class EnergyEffect : Effect
     {
         [SerializeField] int energyGained;
-        public override void ActivateEffect(Unit character)
+        public override void ActivateEffect()
         {
-            //cardController.Energy += energyGained;
+            unitController.CurrentPlayer.Energy += energyGained;
         }
 
         public override string GetEffectText()

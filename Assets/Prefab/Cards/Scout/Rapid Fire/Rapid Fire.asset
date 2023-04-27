@@ -31,4 +31,5 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 057ffe8fe61ea01458f6ec77cec93f88, type: 2}
   - {fileID: 11400000, guid: f16fece52c7eccb4ca76c0cbccc9a098, type: 2}
+  - {fileID: 11400000, guid: 553498ce0f9cd7c47bf70c8bec967f7b, type: 2}
   onDiscardEffects: []

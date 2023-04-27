@@ -20,6 +20,11 @@ namespace FTS.Cards
             if (cardsDrawn > 1)
                 effectText += "s";
 
+            if(cardsDrawn >= 10)
+            {
+                effectText = "Draw until hand is full";
+            }
+
             return effectText;
         }
     }

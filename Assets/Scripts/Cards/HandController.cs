@@ -315,6 +315,7 @@ namespace FTS.Cards
                                          Quaternion.Euler(Vector3.zero)));
             cardUI.RemoveAll(item => item.CardID == card.Id);
             handPrefabs.Remove(handPrefab);
+            SpaceHand();
         }
 
         public void AddCard(Card card)
