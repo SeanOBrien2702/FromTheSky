@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DrawEffect
   m_EditorClassIdentifier: 
   effectFoldout: 0
-  cardsDrawn: 11
+  cardsDrawn: 3

@@ -18,6 +18,11 @@ namespace FTS.Core
             turnsToSurvive = turnThreshholds[RunController.Instance.GetDifficultyScale()];
         }
 
+        public override void EnableEncounter()
+        {
+            turnsToSurvive = turnThreshholds[RunController.Instance.GetDifficultyScale()];
+        }
+
         public override void UpdateObjective()
         {
             if(turnController.Turn >= turnsToSurvive)
@@ -28,6 +33,7 @@ namespace FTS.Core
 
         public override string SetDescription(bool isEncounter = false)
         {
+            
             string description = "Survive for " + turnsToSurvive + " turns";
             if (!isEncounter)
             {

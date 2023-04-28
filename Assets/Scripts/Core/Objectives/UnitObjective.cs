@@ -22,6 +22,11 @@ namespace FTS.Core
             unitsToControl = unitThreshholds[RunController.Instance.GetDifficultyScale()];
         }
 
+        public override void EnableEncounter()
+        {
+            unitsToControl = unitThreshholds[RunController.Instance.GetDifficultyScale()];
+        }
+
         public override void UpdateObjective()
         {
             if (unitController.NumberOfPlayers <= unitsToControl)

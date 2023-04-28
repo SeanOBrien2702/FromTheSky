@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using FTS.Turns;
 using FTS.Core;
-using static UnityEditor.FilePathAttribute;
 #endregion
+
 namespace FTS.Grid
 {
     public class EnemySpawner : MonoBehaviour

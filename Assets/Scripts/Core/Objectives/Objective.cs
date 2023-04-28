@@ -38,6 +38,10 @@ namespace FTS.Core
             Debug.Log("enable objective");
         }
 
+        public virtual void EnableEncounter()
+        {
+            Debug.Log("enable objective");
+        }
 
         public virtual void UpdateObjective(Enemy enemy)
         {

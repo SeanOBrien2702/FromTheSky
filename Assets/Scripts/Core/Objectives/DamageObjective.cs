@@ -18,6 +18,11 @@ namespace FTS.Core
             UpdateObjective(totalDamage);
         }
 
+        public override void EnableEncounter()
+        {
+            damageThreshhold = damageThreshholds[RunController.Instance.GetDifficultyScale()];
+        }
+
         public override void UpdateObjective(int damage)
         {
             totalDamage += damage;

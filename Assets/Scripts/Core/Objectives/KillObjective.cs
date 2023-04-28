@@ -18,6 +18,11 @@ namespace FTS.Core
             enemiesToKill = killThreshholds[RunController.Instance.GetDifficultyScale()];
         }
 
+        public override void EnableEncounter()
+        {
+            enemiesToKill = killThreshholds[RunController.Instance.GetDifficultyScale()];
+        }
+
         public override void UpdateObjective(Enemy enemyKilled)
         {
             if (enemy)

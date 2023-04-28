@@ -35,6 +35,10 @@ public class EncounterSelectionUI : MonoBehaviour
             if(encounter.NextScene == Scenes.GameScene)
             {
                 List<Objective> objectives = objectives = objectiveDatabase.GenerateObjectives();
+                foreach (Objective objective in objectives)
+                {
+                    objective.EnableEncounter();
+                }
                 ui.ObjectiveText.text = objectives[0].SetDescription(true) + "\n" +
                                         objectives[1].SetDescription(true);
                 ui.Button.onClick.AddListener(() => {
