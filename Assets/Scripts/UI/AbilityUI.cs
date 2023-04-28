@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ namespace FTS.UI
     {
         [SerializeField] Image abilityImage;
         [SerializeField] Button abilityButton;
+        [SerializeField] GameObject tooltip;
+        [SerializeField] TextMeshProUGUI tooltipText;
 
         void Start()
         {
@@ -43,7 +46,11 @@ namespace FTS.UI
             if (player.Abilty != null)
             {
                 ToggleUI(true);
-                abilityImage.sprite = player.Abilty.AbiltyImage;
+                abilityImage.sprite = player.Abilty.AbiltyImage;               
+                tooltipText.text = player.Abilty.GetDescription();
+                tooltip.SetActive(true);
+                Canvas.ForceUpdateCanvases();
+                tooltip.SetActive(false);
                 abilityButton.onClick.RemoveAllListeners();
                 abilityButton.onClick.AddListener(player.Abilty.ActivateEffect);
                 abilityButton.onClick.AddListener(DiableButton);
