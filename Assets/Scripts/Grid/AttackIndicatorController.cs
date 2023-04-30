@@ -238,7 +238,7 @@ namespace FTS.Grid
                 if (cardController.CardSelected &&
                    cardController.CardSelected.Targeting == CardTargeting.Unit)
                 {
-                    enemy.ShowDamage(cardController.GetDamage());
+                    enemy.ShowDamage(cardController.GetDamage(enemy.Location));
                 }
                 else if (attackIndicators.ContainsKey(enemy))
                 {

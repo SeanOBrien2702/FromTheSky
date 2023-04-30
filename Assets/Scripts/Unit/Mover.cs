@@ -212,7 +212,7 @@ namespace FTS.Characters
             pathToTravel = null;
             cameraController.StopCharacterFollow();
             stateController.ActionDone = true;
-            Debug.Log("position " + transform.position);
+
             if (movementLeft >= 1)
                 canMove = true;
         }

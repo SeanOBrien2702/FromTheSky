@@ -1,4 +1,6 @@
+using FTS.Grid;
+
 public interface IDamageEffect
 {
-    int GetTotalDamage();
+    int GetTotalDamage(HexCell target);
 }

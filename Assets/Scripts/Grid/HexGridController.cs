@@ -251,8 +251,7 @@ namespace FTS.Grid
                         {
                             if (cell.Unit)
                             {
-                                Debug.Log(cell.Unit.name + " " + cardController.GetDamage());
-                                cell.Unit.ShowDamage(cardController.GetDamage());
+                                cell.Unit.ShowDamage(cardController.GetDamage(cell));
                             }
                         }
                     }

@@ -53,7 +53,7 @@ namespace FTS.Cards
             return effectText;
         }
 
-        public int GetTotalDamage()
+        public int GetTotalDamage(HexCell target)
         {
             return numAttacks * damage;
         }

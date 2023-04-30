@@ -170,9 +170,7 @@ namespace FTS.UI
             cardId = card.Id;
             targeting = card.Targeting;
             type = card.Type;
-            Debug.Log("second");
             rarity.color = cardRarityColour[(int)card.Rarity];
-            Debug.Log(card.RarityColor);
 
             foreach (var item in card.Effects)
             {

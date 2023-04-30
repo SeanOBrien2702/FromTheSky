@@ -321,7 +321,7 @@ namespace FTS.Cards
                         CardPlayed(playedCard);
                         playedCard.Play();
                         if (playedCard.Targeting == CardTargeting.Unit)
-                        {                           
+                        {
                             playedCard.Play(target.Unit);
                         }
                         else if(playedCard.Targeting != CardTargeting.Projectile)
@@ -533,12 +533,12 @@ namespace FTS.Cards
             cardsPerTurn += cardsDrawn;
         }
 
-        internal int GetDamage()
+        internal int GetDamage(HexCell target)
         {
             int damage = 0;
             foreach (IDamageEffect item in CardSelected.Effects.OfType<IDamageEffect>())
             {
-                damage += item.GetTotalDamage();
+                damage += item.GetTotalDamage(target);
             }
             return damage;
         }
