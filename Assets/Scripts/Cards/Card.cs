@@ -26,6 +26,7 @@ namespace FTS.Cards
         [SerializeField] int range = 2;
         [SerializeField] int area = 1;
         [SerializeField] CardRarity cardRarity;
+        Color rarityColor;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] CardType type;
         List<DraftArchetypes> draftArchetypes;
@@ -165,6 +166,7 @@ namespace FTS.Cards
         }
 
         public int CinderCost { get => cinderCost; set => cinderCost = value; }
+        public Color RarityColor { get => rarityColor; set => rarityColor = value; }
         #endregion
 
         #region MonoBehaviour Callbacks

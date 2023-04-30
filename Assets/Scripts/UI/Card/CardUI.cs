@@ -14,6 +14,7 @@ namespace FTS.UI
         //[SerializeField] Text rulesText;
         [SerializeField] Image border;
         [SerializeField] Image cardArt;
+        [SerializeField] Image rarity;
 
         [Header("Range")]
         [SerializeField] GameObject rangeSymbol;
@@ -22,6 +23,9 @@ namespace FTS.UI
         [Header("Energy")]
         [SerializeField] GameObject energySymbol;
         [SerializeField] TextMeshProUGUI cost;
+
+        [Header("Colour")]
+        [SerializeField] Color[] cardRarityColour;
         private CardTargeting targeting;
         private CardType type;
         private string cardId;
@@ -166,6 +170,9 @@ namespace FTS.UI
             cardId = card.Id;
             targeting = card.Targeting;
             type = card.Type;
+            Debug.Log("second");
+            rarity.color = cardRarityColour[(int)card.Rarity];
+            Debug.Log(card.RarityColor);
 
             foreach (var item in card.Effects)
             {

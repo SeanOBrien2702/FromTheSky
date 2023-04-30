@@ -34494,7 +34494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b38f0e6537f8804fafe6f2573e279a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particle: {fileID: 539288119177167510}
   isObstacle: 0
   neighbors:
   - {fileID: 0}
@@ -35445,6 +35444,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4500957101581790391, guid: 4aab3faf3040f42baaa7366ecab3cdb9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4500957101940800468, guid: 4aab3faf3040f42baaa7366ecab3cdb9,
         type: 3}
       propertyPath: m_Pivot.x
@@ -35573,12 +35577,17 @@ PrefabInstance:
     - target: {fileID: 4500957101940800471, guid: 4aab3faf3040f42baaa7366ecab3cdb9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4500957103415754402, guid: 4aab3faf3040f42baaa7366ecab3cdb9,
         type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500957103415754402, guid: 4aab3faf3040f42baaa7366ecab3cdb9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aab3faf3040f42baaa7366ecab3cdb9, type: 3}

@@ -6,6 +6,8 @@ using FTS.Characters;
 using FTS.Saving;
 using FTS.Turns;
 using FTS.UI;
+using FTS.Core;
+
 #endregion
 
 namespace FTS.Cards
@@ -17,6 +19,7 @@ namespace FTS.Cards
         Dictionary<CharacterClass, List<Card>> lookupTable = null;
         [SerializeField] List<Card> deck = new List<Card>();
         [SerializeField] List<CardBorder> cardBorders;
+        [SerializeField] List<CardRaritySettings> cardRaritySettings;     
         [SerializeField] CharacterClassCards[] characterClassCards;
         [SerializeField] Card testCard;
         CharacterClass[] classList;
@@ -61,8 +64,38 @@ namespace FTS.Cards
         #region Public Methods
         public List<Card> GetMultipleCards(int numPicks)
         {
-            System.Random random = new System.Random();
-            return lookupTable[CharacterClass.Scout].OrderBy(item => random.Next()).Take(numPicks).ToList();
+            CardRaritySettings settings = cardRaritySettings[RunController.Instance.GetDifficultyScale()];
+
+            List<Card> cards = new List<Card>();
+            while(cards.Count < numPicks)
+            {
+
+                int randomNumber = Random.Range(0, settings.GetChanceTotal());
+                Card card;
+                if (randomNumber <= settings.GetCommonChance())
+                {
+                    card = lookupTable[CharacterClass.Scout].Where(item => item.Rarity == CardRarity.Common).OrderBy(a => System.Guid.NewGuid()).FirstOrDefault();
+                }
+                else if (randomNumber > settings.GetCommonChance() && randomNumber <= settings.GetUncommonChance())
+                {
+                    card = lookupTable[CharacterClass.Scout].Where(item => item.Rarity == CardRarity.Uncommon).OrderBy(a => System.Guid.NewGuid()).FirstOrDefault();
+                }
+                else if (randomNumber > settings.GetUncommonChance() && randomNumber <= settings.GetRareChance())
+                {
+                    card = lookupTable[CharacterClass.Scout].Where(item => item.Rarity == CardRarity.Rare).OrderBy(a => System.Guid.NewGuid()).FirstOrDefault();
+                }
+                else
+                {
+                    card = lookupTable[CharacterClass.Scout].Where(item => item.Rarity == CardRarity.Ledendary).OrderBy(a => System.Guid.NewGuid()).FirstOrDefault();
+                }
+
+                if(!cards.Contains(card))
+                {
+                    cards.Add(card);
+                }
+            }
+
+            return cards; // .OrderBy(item => random.Next()).Take(numPicks).ToList();
         }
 
         internal List<Card> GetOrbitalCards()
@@ -89,6 +122,9 @@ namespace FTS.Cards
             {
                 card.Id = cardID.ToString();
                 card.Border = cardBorders.Find(item => item.characterClass == card.CharacterClass).border;
+                //Debug.Log("sdfsdfs " + cardRarityColour[(int)card.Rarity]);
+                //Debug.Log("first");
+                
                 cardID++;
             }
             return deck;

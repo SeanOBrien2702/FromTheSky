@@ -65,6 +65,16 @@ MonoBehaviour:
   - characterClass: 2
     border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
     draftColor: {r: 1, g: 1, b: 1, a: 1}
+  cardRarityColour:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.2040608, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.23511362, a: 1}
+  - {r: 1, g: 0.48463878, b: 0, a: 1}
+  cardRaritySettings:
+  - {fileID: 11400000, guid: e3334f761dd310a44aa00f9239837b6d, type: 2}
+  - {fileID: 11400000, guid: 579c0dfff8285874d922cf11969a02db, type: 2}
+  - {fileID: 11400000, guid: 7554ead6dcde8674a9a3976a05e550ad, type: 2}
+  - {fileID: 11400000, guid: 56593d2d337d25546aeef94a8cca985c, type: 2}
   characterClassCards:
   - characterClass: 0
     cards:
