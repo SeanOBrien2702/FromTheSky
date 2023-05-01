@@ -23,7 +23,6 @@ public class EncounterSelectionUI : MonoBehaviour
 
     void FillPanel()
     {
-
         List<Encounter> encounters = encountersController.GetEncounters();
 
         foreach (Encounter encounter in encounters)
@@ -51,8 +50,18 @@ public class EncounterSelectionUI : MonoBehaviour
             {
                 ui.Button.onClick.AddListener(() => {
                     SelectEncounter(encounter);
+                    ClearPanel();
+                    FillPanel();
                 });
             }         
+        }
+    }
+
+    private void ClearPanel()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 
