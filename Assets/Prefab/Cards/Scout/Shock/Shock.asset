@@ -10,24 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
-  m_Name: ProximityMine
+  m_Name: Shock
   m_EditorClassIdentifier: 
-  cardName: Proximity Mine
+  cardName: Shock
   flavourText: 
-  image: {fileID: 21300000, guid: 95be3321420b0f242809cdbb11d1957d, type: 3}
-  border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
+  image: {fileID: 21300000, guid: 6172d1c82c272484d973b1ce54178ee5, type: 3}
+  border: {fileID: 0}
   cost: 1
-  range: 3
+  range: 2
   area: 1
   cardRarity: 0
   characterClass: 0
   type: 0
-  targeting: 2
+  targeting: 3
   isAtomize: 0
   isTemporary: 0
   isInherent: 0
   cinderCost: 10
   onDrawEffects: []
   effects:
-  - {fileID: 11400000, guid: cde7ebc5b8eec8240a4580dbed3913f8, type: 2}
+  - {fileID: 11400000, guid: 74c060e4d3bba714f8de5634da01196c, type: 2}
+  - {fileID: 11400000, guid: 39197d68995e48b41bd8027b9bdc106e, type: 2}
   onDiscardEffects: []

@@ -4,6 +4,7 @@ using FTS.Grid;
 using FTS.UI;
 using WalldoffStudios.Indicators;
 using AeLa.EasyFeedback.APIs;
+using static UnityEngine.EventSystems.EventTrigger;
 #endregion
 
 namespace FTS.Characters
@@ -93,6 +94,24 @@ namespace FTS.Characters
         #endregion
 
         #region Public Methods
+        public override void Die()
+        {
+            canAttack = false;
+            base.Die();
+        }
+
+        public override void Stunned()
+        {
+            base.Stunned();
+            if (indicator)
+            {
+                indicator.ToggleAim(false);
+            }
+            intentUI.ClearIntent();
+            unitController.EnemyStunned(this);
+            canAttack = false;
+        }
+
         public void Attack()
         {
             animator.SetTrigger("Shoot");
@@ -122,6 +141,10 @@ namespace FTS.Characters
             return attackType == AttackTypes.Piercing ? true : false; 
         }
         #endregion
+        protected override void TurnController_OnEnemySpawn()
+        {
+            canAttack = true;
+        }
     }
 
     public enum EnemyTargeting

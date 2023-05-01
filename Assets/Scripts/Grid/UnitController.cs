@@ -13,6 +13,7 @@ namespace FTS.Characters
     public class UnitController : MonoBehaviour
     {
         public static event Action<Character> OnEnemyKilled = delegate { };
+        public static event Action<Enemy> OnEnemyStunned = delegate { };
         public static event Action<Character> OnPlayerKilled = delegate { };
         public static event Action<Character> OnPlayerSpawned = delegate { };
 
@@ -371,6 +372,11 @@ namespace FTS.Characters
         internal void DamageTaken(Unit unit, int damage)
         {
             OnDamageTaken?.Invoke(unit, damage);
+        }
+
+        internal void EnemyStunned(Enemy unit)
+        {
+            OnEnemyStunned?.Invoke(unit);
         }
 
         internal void EnergyChanged(Player player, int energy)

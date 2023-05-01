@@ -49,7 +49,7 @@ namespace FTS.Characters
             base.Awake();
             mover = GetComponent<Mover>();
             Health = maxHealth = stats.GetStat(Stat.Health, characterClass);
-            TurnController.OnPlayerTurn += TurnController_OnNewTurn;
+            //TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }
 
         protected virtual void Start()
@@ -59,7 +59,7 @@ namespace FTS.Characters
 
         private void OnDestroy()
         {
-            TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
+            //TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
         }
         #endregion
 
@@ -83,8 +83,15 @@ namespace FTS.Characters
         public override void Die()
         {
             Debug.Log("Die character");
+            
+            mover.EndMovement();
             unitController.RemoveUnit(this);
-            StartCoroutine(DeathAnimation());
+            StartCoroutine(DeathAnimation());          
+        }
+
+        public override void Stunned()
+        {
+            mover.EndMovement();
         }
 
         internal virtual void StartRound()

@@ -28,10 +28,7 @@ namespace FTS.UI
         #endregion
         #region Private Methods
 
-        void ClearIntent()
-        {
-            damageImage.gameObject.SetActive(false);
-        }
+        
         #endregion
 
         #region Public Methods
@@ -39,6 +36,11 @@ namespace FTS.UI
         {
             damageImage.gameObject.SetActive(true);
             damageText.text = attack.ToString();
+        }
+
+        public void ClearIntent()
+        {
+            damageImage.gameObject.SetActive(false);
         }
         #endregion
 

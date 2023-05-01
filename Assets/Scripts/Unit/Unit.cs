@@ -101,13 +101,16 @@ namespace FTS.Characters
         protected virtual void Awake()
         {
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
+            TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }
 
         private void OnDestroy()
         {
+            TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
         }
+
         protected virtual void OnMouseEnter()
         {
             SFXManager.Main.Play(hoverSound);
@@ -206,6 +209,12 @@ namespace FTS.Characters
             Destroy(gameObject);
         }
 
+
+        public virtual void Stunned()
+        {
+            Debug.Log("unit stunned");
+        }
+
         internal virtual void StartRound()
         {
             //Debug.Log("Character turn");
@@ -242,6 +251,11 @@ namespace FTS.Characters
         {
             //energy = maxEnergy;
             //armour = 0;
+        }
+
+        protected virtual void TurnController_OnEnemySpawn()
+        {
+            
         }
         #endregion
     }

@@ -25,6 +25,7 @@ namespace FTS.Grid
             Unit.OnHover += Unit_OnHover;
             Unit.OnHoverExit += Unit_OnHoverExit;
             UnitController.OnEnemyKilled += UnitController_OnEnemyKilled;
+            UnitController.OnEnemyStunned += UnitController_OnEnemyStunned;
         }
 
         private void OnDestroy()
@@ -33,6 +34,7 @@ namespace FTS.Grid
             Unit.OnHover -= Unit_OnHover;
             Unit.OnHoverExit -= Unit_OnHoverExit;
             UnitController.OnEnemyKilled -= UnitController_OnEnemyKilled;
+            UnitController.OnEnemyStunned -= UnitController_OnEnemyStunned;
         }
 
         public void UpdateIndicators(Enemy enemy)
@@ -203,6 +205,11 @@ namespace FTS.Grid
         {
             Debug.Log("enemy killed? " + enemy.name);
             RemoveIndicator((Enemy)enemy);
+        }
+
+        private void UnitController_OnEnemyStunned(Enemy enemy)
+        {
+            RemoveIndicator(enemy);
         }
 
         private void Unit_OnHoverExit(Unit unit)

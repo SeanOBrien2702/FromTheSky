@@ -65,11 +65,6 @@ MonoBehaviour:
   - characterClass: 2
     border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
     draftColor: {r: 1, g: 1, b: 1, a: 1}
-  cardRarityColour:
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.2040608, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0.23511362, a: 1}
-  - {r: 1, g: 0.48463878, b: 0, a: 1}
   cardRaritySettings:
   - {fileID: 11400000, guid: e3334f761dd310a44aa00f9239837b6d, type: 2}
   - {fileID: 11400000, guid: 579c0dfff8285874d922cf11969a02db, type: 2}
@@ -97,6 +92,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e3bffa75c30a54d4798a9e7192ea27f6, type: 2}
     - {fileID: 11400000, guid: ff76d65cf6b249b4fa559d2b06199c5f, type: 2}
     - {fileID: 11400000, guid: d67599096cd93524aa6c67d6e17f64dd, type: 2}
+    - {fileID: 11400000, guid: 4898531f8e7f96d43aca8a2f0103050a, type: 2}
+    - {fileID: 11400000, guid: f4daf131a401bed43937355013639fba, type: 2}
+    - {fileID: 11400000, guid: 1d3aac4920f127f4e9a3e023b0f95bd3, type: 2}
   - characterClass: 2
     cards:
     - {fileID: 11400000, guid: e5eaad70fa5f6f54791ab4be85b118c6, type: 2}

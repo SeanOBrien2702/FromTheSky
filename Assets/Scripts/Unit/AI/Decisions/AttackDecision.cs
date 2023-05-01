@@ -9,10 +9,9 @@ namespace FTS.Characters
     [CreateAssetMenu(menuName = "PluggableAI/Decisions/Attack")]
     public class AttackDecision : Decision
     {
-
         public override bool Decide(StateMachine controller)
         {
-            return IsAttacking(controller) && CanAttack(controller) && IsAttackPhase(controller); 
+            return CanAttack(controller);// IsAttacking(controller) && CanAttack(controller) && IsAttackPhase(controller); 
         }
 
         private bool IsAttackPhase(StateMachine controller)

@@ -556,46 +556,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
-        type: 3}
-      propertyPath: deck.Array.size
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
-        type: 3}
-      propertyPath: deck.Array.data[7]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4898531f8e7f96d43aca8a2f0103050a,
-        type: 2}
-    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
-        type: 3}
-      propertyPath: deck.Array.data[8]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4898531f8e7f96d43aca8a2f0103050a,
-        type: 2}
-    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
-        type: 3}
-      propertyPath: deck.Array.data[9]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4898531f8e7f96d43aca8a2f0103050a,
-        type: 2}
-    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
-        type: 3}
-      propertyPath: deck.Array.data[10]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4898531f8e7f96d43aca8a2f0103050a,
-        type: 2}
-    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
-        type: 3}
-      propertyPath: characterClassCards.Array.data[1].cards.Array.size
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
-        type: 3}
-      propertyPath: characterClassCards.Array.data[1].cards.Array.data[13]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4898531f8e7f96d43aca8a2f0103050a,
-        type: 2}
     - target: {fileID: 8990577267346574125, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: m_Name

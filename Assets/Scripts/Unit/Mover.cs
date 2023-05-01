@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using FTS.Grid;
 using FTS.Turns;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,6 @@ using UnityEngine;
 
 namespace FTS.Characters
 {
-    [RequireComponent(typeof(Character))]
     public class Mover : MonoBehaviour
     {
         public static event System.Action<HexCell, HexCell> OnMoved = delegate { };
@@ -143,6 +143,13 @@ namespace FTS.Characters
             int angle = HexDirectionExtensions.Angle(direction);
             StartCoroutine(RotateToTarget(angle));
         }
+
+        internal void EndMovement()
+        {
+            cameraController.StopCharacterFollow();
+            stateController.ActionDone = true;
+            StopAllCoroutines();
+        }
         #endregion
 
         #region Coroutines
@@ -190,6 +197,7 @@ namespace FTS.Characters
                     animator.transform.localRotation = Quaternion.LookRotation(d);
                     yield return null;
                 }
+                CheckTraps(pathToTravel[i]);
                 time -= 1f;
             }
             if (animator != null)
@@ -215,6 +223,14 @@ namespace FTS.Characters
 
             if (movementLeft >= 1)
                 canMove = true;
+        }
+
+        private void CheckTraps(HexCell hexCell)
+        {
+            if(hexCell.Trap && character is Enemy)
+            {
+                hexCell.Trap.ActivateTrap(character);
+            }
         }
 
         IEnumerator RotateToTarget(float targetAngle)

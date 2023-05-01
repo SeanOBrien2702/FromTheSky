@@ -67,6 +67,7 @@ namespace FTS.Grid
         MeshRenderer meshRenderer;
         UnitController unitController;
 
+        Trap trap;
 
         #region Properties
         public int SearchPriority
@@ -156,6 +157,8 @@ namespace FTS.Grid
             get { return isEdge; }
             set { isEdge = value; }
         }
+
+        public Trap Trap { get => trap; set => trap = value; }
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -186,6 +189,13 @@ namespace FTS.Grid
             {
                 destination.ReachedDestination(location);
             }
+            //Debug.Log(" trap " + trap.name + " unit " + unit);
+            //if(trap && unit && unit is Enemy)
+            //{
+            //    Debug.Log(" trap activate!!!!!!!!!!!!!!!!");
+            //    trap.ActivateTrap(unit);
+            //    trap = null;
+            //}
         }
         #endregion
 
