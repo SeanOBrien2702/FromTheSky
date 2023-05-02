@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
+using FTS.Core;
 #endregion
 
 namespace FTS.UI
@@ -61,6 +62,10 @@ namespace FTS.UI
         private void Start()
         {
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
+            if(!TutorialController.Instance.IsTutorialComplete)
+            {
+                StartCombat();
+            }
         }
 
         private void OnDestroy()

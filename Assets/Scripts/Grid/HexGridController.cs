@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using FTS.Cards;
 using FTS.Characters;
+using FTS.Core;
 using FTS.Turns;
 using System;
 using System.Collections.Generic;
@@ -61,7 +62,16 @@ namespace FTS.Grid
             Mover.OnMoved += Mover_OnMoved;
             
             grid.ShowPlacementArea(placementArea);
-            currentUnit = unitController.PlacePlayer(grid.GetCell(new HexCoordinates(grid.Width / 2, 0)));
+            
+            if(!TutorialController.Instance.IsTutorialComplete)
+            {
+                unitsPlaced = true;
+                currentUnit = unitController.PlacePlayer(grid.GetCell(new HexCoordinates(2, 2)));
+            }
+            else
+            {
+                currentUnit = unitController.PlacePlayer(grid.GetCell(new HexCoordinates(grid.Width / 2, 0)));
+            }
         }
 
         void Update()

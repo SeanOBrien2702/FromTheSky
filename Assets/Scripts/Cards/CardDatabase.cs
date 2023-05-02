@@ -149,6 +149,7 @@ namespace FTS.Cards
 
         private void TurnController_OnCombatStart()
         {
+            Debug.Log("start@!!!!!");
             foreach(CharacterClassCards characterClass in characterClassCards)
             {
                 foreach (Card card in characterClass.cards)
