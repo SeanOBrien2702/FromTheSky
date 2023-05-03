@@ -15,4 +15,4 @@ MonoBehaviour:
   windowPos: {x: 140, y: 30}
   windowSize: {x: 175, y: 250}
   text: Buildings must be protected in order to survive. Damage to a building or
-    friendly unit will loose you Core Health
+    friendly unit will lower your Core Health

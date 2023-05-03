@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86fb842edaeae8042b08e7cea9f493e4, type: 3}
-  m_Name: CoreHealth
+  m_Name: Atomized
   m_EditorClassIdentifier: 
-  windowPos: {x: 0, y: 490}
-  windowSize: {x: 300, y: 100}
-  text: 'Core Health: When a friendly unit or building is damaged, the core is also
-    damaged. You lose when there is no friendly units left or the Core Health is
-    0.'
+  windowPos: {x: 860, y: -440}
+  windowSize: {x: 150, y: 150}
+  text: The number of cards in the atomized pile. Atomized cards are one time use
+    and are not reshuffled into the deck during a battle .

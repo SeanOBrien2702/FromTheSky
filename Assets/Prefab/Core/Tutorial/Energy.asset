@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windowPos: {x: -825, y: -325}
   windowSize: {x: 150, y: 150}
-  text: Energy represents how many actions a unit can make per turn. Each unit has
-    its own energy.
+  text: Energy represents how many cards a unit can use per turn. Each unit has its
+    own energy.

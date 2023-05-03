@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windowPos: {x: 700, y: 375}
   windowSize: {x: 500, y: 325}
-  text: The battle is won when the main objective is complete.  Bonus Cinder if the
-    optional objective is also completed.
+  text: You win when the main objective is complete.  Completing the optional objective
+    earns bonuses.

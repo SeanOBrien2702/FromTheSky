@@ -611,6 +611,10 @@ namespace FTS.Grid
             {
                 UpdateReachable();
             }
+            if(newCell.Trap && newCell.Unit && newCell.Unit is Enemy)
+            {
+                newCell.Trap.ActivateTrap(newCell.Unit);
+            }
         }
         #endregion
     }

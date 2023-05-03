@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fb842edaeae8042b08e7cea9f493e4, type: 3}
   m_Name: Discard
   m_EditorClassIdentifier: 
-  windowPos: {x: 815, y: -440}
-  windowSize: {x: 225, y: 150}
-  text: Displays the current number of cards in the discard and atomized pile. Atomized
-    cards are one time uses per battle.
+  windowPos: {x: 780, y: -440}
+  windowSize: {x: 150, y: 150}
+  text: The number of cards in the discard pile. Discarded cards are reshuffled into
+    the deck when there are no cards to draw. Atomized cards are one time uses per
+    battle.

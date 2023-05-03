@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windowPos: {x: -830, y: -150}
   windowSize: {x: 150, y: 150}
-  text: 'Curtain units have special abilities that can be activated once per turn. '
+  text: 'Certain units have special abilities that can be activated once per turn. '

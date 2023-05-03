@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windowPos: {x: 0, y: -415}
   windowSize: {x: 1225, y: 250}
-  text: Drag cards to play onto grid to play them. Only highlighted cards are avalible
-    to be played.
+  text: Drag cards onto the board to play them. Only highlighted cards can be played.

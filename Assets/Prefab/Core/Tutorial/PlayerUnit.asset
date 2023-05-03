@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windowPos: {x: 0, y: 30}
   windowSize: {x: 175, y: 250}
-  text: Right click to select a unit and move selected unit. Press Tab and Shift
-    to cycle throught units
+  text: Left click selects and moves a unit. Right click to deselect. Press Tab or
+    Shift to cycle through units.
