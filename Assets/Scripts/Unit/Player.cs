@@ -5,6 +5,7 @@ using FTS.Saving;
 using System.Collections.Generic;
 using System;
 using FTS.Turns;
+using System.Collections;
 #endregion
 
 namespace FTS.Characters
@@ -104,6 +105,14 @@ namespace FTS.Characters
             {
                 return;
             }
+            StartCoroutine(AttackAnimation(card));          
+        }
+
+        #endregion
+
+        IEnumerator AttackAnimation(Card card)
+        {
+            yield return new WaitUntil(() => Mover.IsRotating == false || Input.GetKeyDown(KeyCode.M));
             animator.SetTrigger("Shoot");
             if (card.Targeting == CardTargeting.Projectile)
             {
@@ -118,8 +127,6 @@ namespace FTS.Characters
                 Destroy(piercingInstance, 0.5f);
             }
         }
-
-        #endregion
 
         #region Saving Methods
         public object CaptureState()

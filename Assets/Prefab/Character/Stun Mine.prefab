@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3183480897670209216}
   - component: {fileID: 3191819950871276570}
   - component: {fileID: 3201711813600891952}
-  - component: {fileID: 3233113665046144740}
   m_Layer: 0
   m_Name: SM_Prop_Drone_Ball_01
   m_TagString: Untagged
@@ -82,20 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3233113665046144740
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3188216726318209394}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43214367423207870, guid: 68bfa4eb0b6417549a51fb3a269dc553, type: 2}
 --- !u!1 &5227015851115183651
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +90,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227015851115183652}
-  - component: {fileID: 3222414077572348665}
   - component: {fileID: 822055350299657374}
   m_Layer: 0
   m_Name: Stun Mine
@@ -129,19 +113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3222414077572348665
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5227015851115183651}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.734595, z: 1}
-  m_Center: {x: 0, y: 0.7722791, z: 0}
 --- !u!114 &822055350299657374
 MonoBehaviour:
   m_ObjectHideFlags: 0

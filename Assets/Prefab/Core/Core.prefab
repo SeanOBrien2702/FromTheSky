@@ -1219,7 +1219,7 @@ PrefabInstance:
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: deck.Array.size
-      value: 16
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}

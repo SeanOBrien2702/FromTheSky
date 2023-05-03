@@ -133,10 +133,8 @@ namespace FTS.Grid
             {
                 List<AttackIndicator> indicators = new List<AttackIndicator>();
                 foreach (AttackDirections direction in enemy.AttackDirections)
-                {
-                    
+                {                  
                     HexDirection localDirection = HexDirectionExtensions.LocalDirection(enemy.Direction, direction);
-                    Debug.Log(localDirection + " " + enemy.Direction + " " + direction);
                     AttackIndicator indicatorBuff = new AttackIndicator(grid.GetLine(enemy.Location, localDirection, projectileRange, true), localDirection);
                     if (indicatorBuff.Line.Count > 0)
                     {

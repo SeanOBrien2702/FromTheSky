@@ -34,7 +34,7 @@ namespace FTS.Characters
         List<Enemy> bossEnemies = new List<Enemy>();
 
         #region MonoBehaviour Callbacks
-        private void Start()
+        private void Awake()
         {
             commonEnemies.Add(piercingPrefab);
             commonEnemies.Add(projectilePrefab);

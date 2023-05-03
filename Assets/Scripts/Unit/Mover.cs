@@ -31,6 +31,7 @@ namespace FTS.Characters
         List<HexCell> pathToTravel;
 
         bool canMove = true;
+        bool isRotating = false;
         int speed;
         int movementLeft;
 
@@ -63,6 +64,8 @@ namespace FTS.Characters
                 OnMovementChanged?.Invoke(movementLeft); 
             } 
         }
+
+        public bool IsRotating { get => isRotating; set => isRotating = value; }
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -140,6 +143,7 @@ namespace FTS.Characters
 
         public void LookAt(HexDirection direction)
         {
+            isRotating = true;
             int angle = HexDirectionExtensions.Angle(direction);
             StartCoroutine(RotateToTarget(angle));
         }
@@ -246,6 +250,7 @@ namespace FTS.Characters
             }
             animator.transform.eulerAngles = targetRotation;
             stateController.ActionDone = true;
+            isRotating = false;
         }
        
         #endregion
