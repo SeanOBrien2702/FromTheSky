@@ -3,6 +3,7 @@ using FTS.Characters;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using FTS.Core;
 #endregion
 
 namespace FTS.Turns
@@ -16,7 +17,7 @@ namespace FTS.Turns
         [SerializeField] Button endTurnButton;
         [SerializeField] TextMeshProUGUI turnText;
         [SerializeField] Text turnInfoText;
-        bool hasCombatStarted = false;
+        bool isCombatOver = false;
         TurnPhases turnPhase;
 
         public static event System.Action OnCombatStart = delegate { };
@@ -49,6 +50,18 @@ namespace FTS.Turns
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             turnPhase = TurnPhases.Placement;
             turnInfoText.text = "Place Units";
+            isCombatOver = false;
+            ObjectiveController.OnPlayerWon += ObjectiveController_OnPlayerWon;
+            UnitController.OnPlayerLost += UnitController_OnPlayerLost;
+            RunController.OnPlayerLost += RunController_OnPlayerLost;
+        }
+
+
+        private void OnDestroy()
+        {
+            ObjectiveController.OnPlayerWon -= ObjectiveController_OnPlayerWon;
+            UnitController.OnPlayerLost -= UnitController_OnPlayerLost;
+            RunController.OnPlayerLost -= RunController_OnPlayerLost;
         }
         #endregion
 
@@ -94,6 +107,10 @@ namespace FTS.Turns
 
         public void UpdatePhase()
         {
+            if(isCombatOver)
+            {
+                return;
+            }
             turnPhase++;
             if (turnPhase > TurnPhases.EnemySpawn)
             {
@@ -137,7 +154,22 @@ namespace FTS.Turns
             OnCombatStart?.Invoke();
             //turnOrderUI.FillUI();
             UpdatePhase();
-            hasCombatStarted = true;
+        }
+
+        private void ObjectiveController_OnPlayerWon()
+        {
+            isCombatOver = true;
+        }
+
+        private void RunController_OnPlayerLost()
+        {
+            Debug.Log("player lost?");
+            isCombatOver = true;
+        }
+
+        private void UnitController_OnPlayerLost()
+        {
+            isCombatOver = true;
         }
         #endregion
     }

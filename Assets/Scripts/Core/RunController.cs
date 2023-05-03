@@ -8,6 +8,7 @@ namespace FTS.Core
 { 
     public class RunController : MonoBehaviour, ISaveable
     {
+        public static event System.Action OnPlayerLost = delegate { };
         public static event Action<int> OnHealthChanged = delegate { };
         public static event Action<int> OnCinderChanged = delegate { };
         public static event Action<int> OnDayChanged = delegate { };
@@ -95,6 +96,7 @@ namespace FTS.Core
             Debug.Log("take damage " + damage);
             if(Health <= 0)
             {
+                OnPlayerLost?.Invoke();
                 SceneController.Instance.LoadScene(Scenes.EndGameScene, true);
             }
         }

@@ -15,6 +15,7 @@ namespace FTS.Core
 {
     public class ObjectiveController : MonoBehaviour
     {
+        public static event System.Action OnPlayerWon = delegate { };
         ObjectiveDatabase objectiveDatabase;
         ObjectiveUIController objectiveUI;
         List<Objective> objectives = new List<Objective>();
@@ -82,6 +83,7 @@ namespace FTS.Core
                 {
                     RunController.Instance.Cinder += 50;
                 }
+                OnPlayerWon?.Invoke();
                 SceneController.Instance.LoadScene(Scenes.DraftScene, true);
             }
         }

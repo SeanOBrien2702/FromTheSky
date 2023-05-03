@@ -319,8 +319,8 @@ namespace FTS.Characters
                     OnPlayerKilled?.Invoke((Player)unit);
                     if (playerList.Count <= 0 && gridController.UnitsPlaced)
                     {
-                        SceneController.Instance.LoadScene(Scenes.EndGameScene, true);
                         OnPlayerLost?.Invoke();
+                        SceneController.Instance.LoadScene(Scenes.EndGameScene, true);                      
                     }
                 }
                 targetableUnits.Remove(unit);

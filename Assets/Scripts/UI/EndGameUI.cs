@@ -17,7 +17,6 @@ public class EndGameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 0;
         UpdateUI(RunController.Instance.HasWon);
     }
 

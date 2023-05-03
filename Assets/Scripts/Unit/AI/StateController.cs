@@ -1,4 +1,5 @@
 #region Using Statements
+using FTS.Core;
 using FTS.Turns;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,11 +29,17 @@ namespace FTS.Characters
             unitController = GetComponent<UnitController>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
+            ObjectiveController.OnPlayerWon += ObjectiveController_OnPlayerWon;
+            UnitController.OnPlayerLost += UnitController_OnPlayerLost;
+            RunController.OnPlayerLost += RunController_OnPlayerLost;
         }
 
         private void OnDestroy()
         {
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
+            ObjectiveController.OnPlayerWon -= ObjectiveController_OnPlayerWon;
+            UnitController.OnPlayerLost -= UnitController_OnPlayerLost;
+            RunController.OnPlayerLost -= RunController_OnPlayerLost;
         }
         #endregion
 
@@ -58,6 +65,7 @@ namespace FTS.Characters
         }
         #endregion
 
+        #region Events
         private void TurnController_OnEnemyTurn(bool isTelegraph)
         {
             StartCoroutine(UpdateEnemyStateMachines());
@@ -67,5 +75,21 @@ namespace FTS.Characters
         {
             return stateMachines.FindIndex(item => item == machine) + 1;
         }
+
+        private void ObjectiveController_OnPlayerWon()
+        {
+            StopAllCoroutines();
+        }
+
+        private void RunController_OnPlayerLost()
+        {
+            StopAllCoroutines();
+        }
+
+        private void UnitController_OnPlayerLost()
+        {
+            StopAllCoroutines();
+        }
+        #endregion
     }
 }
