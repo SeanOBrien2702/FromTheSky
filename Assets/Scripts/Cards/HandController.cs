@@ -56,6 +56,8 @@ namespace FTS.Cards
         [SerializeField] int zoomHeight = 300;
         [Range(1f, 1.5f)]
         [SerializeField] float zoomInScaling = 1.1f;
+        [SerializeField] float zoomInSpeed = 0.5f;
+        [SerializeField] float zoomoutSpeed = 1f;
         Vector3 zoomScale = new Vector3(1.25f, 1.25f, 1);
         Vector3 handScale = new Vector3(1f, 1f, 1);
         Vector3 discardScale = new Vector3(0.05f, 0.05f, 1);
@@ -151,7 +153,8 @@ namespace FTS.Cards
                     StartCoroutine(LerpCard(child.CardGameObject,
                                               startPosition,
                                               handScale,
-                                              Quaternion.Euler(0, 0, rotation)));
+                                              Quaternion.Euler(0, 0, rotation),
+                                              duration));
 
                     rotation += rotationIncrement;
                     position -= increment;                              
@@ -215,7 +218,8 @@ namespace FTS.Cards
                 StartCoroutine(LerpCard(handPrefab.CardGameObject,
                                           handPrefab.StartPosition,
                                           handScale,
-                                          Quaternion.Euler(0, 0, handPrefab.Tilt)));
+                                          Quaternion.Euler(0, 0, handPrefab.Tilt),
+                                          zoomoutSpeed));
             }
         }
 
@@ -229,7 +233,8 @@ namespace FTS.Cards
                 StartCoroutine(LerpCard(handPrefab.CardGameObject,
                                           handPrefab.ZoomPosition,
                                           zoomScale,
-                                          Quaternion.Euler(Vector3.zero)));
+                                          Quaternion.Euler(Vector3.zero),
+                                          zoomInSpeed));
             }
         }
 
@@ -243,7 +248,8 @@ namespace FTS.Cards
             StartCoroutine(LerpCard(handPrefab.CardGameObject,
                           targetingPosition.position,
                           zoomScale,
-                          Quaternion.Euler(Vector3.zero)));
+                          Quaternion.Euler(Vector3.zero),
+                          zoomInSpeed));
         }
 
 
@@ -364,7 +370,8 @@ namespace FTS.Cards
         IEnumerator LerpCard(GameObject gameObject,
                                Vector3 targetPosition,
                                Vector3 targetScale,
-                               Quaternion targetRotation)
+                               Quaternion targetRotation,
+                               float duration)
         {
             lerping = true;
             float time = 0;
@@ -396,7 +403,8 @@ namespace FTS.Cards
             yield return LerpCard(gameObject,
                                    targetPosition,
                                    targetScale,
-                                   targetRotation);
+                                   targetRotation,
+                                   duration);
             Destroy(gameObject);
         }
 
