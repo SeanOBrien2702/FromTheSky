@@ -2478,6 +2478,25 @@ MonoBehaviour:
   cardController: {fileID: 641517308}
   cardPrefab: {fileID: 5163219125349451374, guid: 4e5fc58954e46224d96ec153132aef7f,
     type: 3}
+--- !u!1 &1169061779 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4335076343168363342, guid: 01e9aa5f4df7e9a4ab6cd17b33ce5a5a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1867353417224850156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1169061784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169061779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a004bc8f6159e549bbdaea7e88f4624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardController: {fileID: 641517308}
 --- !u!224 &1269445595 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3379142128138919169, guid: df8cb08f736b8c64996c2bb978d5cc11,
@@ -2975,6 +2994,26 @@ PrefabInstance:
       propertyPath: m_ShowMaskGraphic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 509821769751423618, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 509821769751423618, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 509821769751423618, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 509821769751423618, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -175
+      objectReference: {fileID: 0}
     - target: {fileID: 733038718008786522, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3104,6 +3143,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164457978420791661, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164457978420791661, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2164457978420791662, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
@@ -3273,7 +3322,12 @@ PrefabInstance:
     - target: {fileID: 5032368343533046174, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039065495066380797, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 5727863290547447413, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
@@ -3532,10 +3586,20 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9219846088679873128, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219846088679873128, guid: 59eb9589a92fdbe4aa22a8a39b390710,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 125
+      objectReference: {fileID: 0}
     - target: {fileID: 9219846088679873129, guid: 59eb9589a92fdbe4aa22a8a39b390710,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1345432399, guid: 59eb9589a92fdbe4aa22a8a39b390710, type: 3}
@@ -3891,7 +3955,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1867353417224850156}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1169061779}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e229fd48ffcdf24b8881122af8e9fec, type: 3}
@@ -4085,7 +4149,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -830, y: -154}
+  m_AnchoredPosition: {x: -835, y: -175}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1681483359
@@ -10662,7 +10726,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1867353417224850156}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1169061779}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c28601c109138f44e9936c64f8d7322f, type: 3}
@@ -10674,7 +10738,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1867353417224850156}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1169061779}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ededc420a3b36c5488b3a1a1f94782ce, type: 3}
@@ -11535,8 +11599,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 580, y: -140}
-  m_SizeDelta: {x: 700, y: 500}
+  m_AnchoredPosition: {x: -573, y: 133}
+  m_SizeDelta: {x: 700, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &5888026805529271871
 RectTransform:
@@ -11554,8 +11618,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 5.000014}
-  m_SizeDelta: {x: -150, y: -190}
+  m_AnchoredPosition: {x: 0, y: 10.000008}
+  m_SizeDelta: {x: -150, y: -199.99998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5953537191601442490
 CanvasRenderer:
@@ -11709,7 +11773,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 38.7
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1

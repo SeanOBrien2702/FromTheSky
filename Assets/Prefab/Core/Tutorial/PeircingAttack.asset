@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fb842edaeae8042b08e7cea9f493e4, type: 3}
   m_Name: PeircingAttack
   m_EditorClassIdentifier: 
-  windowPos: {x: 385, y: 215}
+  windowPos: {x: 230, y: 115}
   windowSize: {x: 450, y: 225}
   text: Other enemies attack all units multiple hexes in front of them.

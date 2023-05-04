@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fb842edaeae8042b08e7cea9f493e4, type: 3}
   m_Name: Building
   m_EditorClassIdentifier: 
-  windowPos: {x: 140, y: 30}
+  windowPos: {x: 205, y: 100}
   windowSize: {x: 175, y: 250}
   text: Buildings must be protected in order to survive. Damage to a building or
     friendly unit will lower your Core Health

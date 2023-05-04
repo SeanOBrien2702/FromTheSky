@@ -5,7 +5,7 @@ public class SeedController : MonoBehaviour
 {
     bool isRandom = true;
     int seed;
-    int tutorialSeed = 20;
+    int tutorialSeed = 7;
 
     public bool IsRandom { get => isRandom; set => isRandom = value; }
     public int Seed { get => seed; set => seed = value; }

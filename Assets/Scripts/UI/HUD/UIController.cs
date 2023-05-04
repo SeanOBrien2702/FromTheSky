@@ -62,7 +62,7 @@ public class UIController : MonoBehaviour
 
     public void GameOver()
     {
-        EnableHUD("GameHUD");
+        SceneController.Instance.LoadScene(Scenes.MainMenu);
     }
 
     public void Win()
@@ -87,6 +87,9 @@ public class UIController : MonoBehaviour
 
     public void Exit()
     {
+        #if UNITY_WEBGL
+                SceneController.Instance.LoadScene(Scenes.MainMenu);
+        #endif       
         Application.Quit();
     }
     #endregion

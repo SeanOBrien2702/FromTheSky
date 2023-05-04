@@ -18,8 +18,8 @@ namespace FTS.UI
         {
             if(Input.GetKeyDown(KeyCode.Escape))
             {
-                if(SceneManager.GetActiveScene().name !=  Scenes.GameScene.ToString())
-                    ToggleSettings();
+                if(settingsUI.activeSelf)
+                    ToggleSettings();      
             }
         }
 

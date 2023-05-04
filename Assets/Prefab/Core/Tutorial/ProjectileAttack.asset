@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fb842edaeae8042b08e7cea9f493e4, type: 3}
   m_Name: ProjectileAttack
   m_EditorClassIdentifier: 
-  windowPos: {x: -75, y: 37}
-  windowSize: {x: 600, y: 250}
+  windowPos: {x: 75, y: 250}
+  windowSize: {x: 400, y: 450}
   text: Enemies must prepare their action. Red lines show the attack's affected area.

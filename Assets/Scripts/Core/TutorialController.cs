@@ -25,9 +25,15 @@ namespace FTS.Core
 
             if (!PlayerPrefs.HasKey("IsTutorialComplete"))
             {
-                PlayerPrefs.SetInt("IsTutorialComplete", 1);
+                Debug.Log("tutorial key not found ");
+                PlayerPrefs.SetInt("IsTutorialComplete", 0);
+            }
+            else
+            {
+                Debug.Log("tutorial key found ");
             }
             isTutorialComplete = (PlayerPrefs.GetInt("IsTutorialComplete") != 0);
+            Debug.Log("tutorial complete " + isTutorialComplete);
         }
 
 
@@ -42,5 +48,10 @@ namespace FTS.Core
             isTutorialComplete = setTutorial;
             PlayerPrefs.SetInt("IsTutorialComplete", (setTutorial ? 1 : 0));
         }
+
+        //public bool GetTutorial()
+        //{
+        //    return isTutorialComplete;
+        //}
     }
 }

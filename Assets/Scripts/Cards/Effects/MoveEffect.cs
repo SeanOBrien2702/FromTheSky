@@ -38,7 +38,7 @@ namespace FTS.Cards
 
             if(isPull)
             {
-                effectText += " towards from you";
+                effectText += " towards you";
             }
             else
             {

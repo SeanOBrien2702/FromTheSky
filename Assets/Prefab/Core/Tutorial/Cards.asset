@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fb842edaeae8042b08e7cea9f493e4, type: 3}
   m_Name: Cards
   m_EditorClassIdentifier: 
-  windowPos: {x: 0, y: -415}
-  windowSize: {x: 1225, y: 250}
+  windowPos: {x: 0, y: -400}
+  windowSize: {x: 1225, y: 280}
   text: Drag cards onto the board to play them. Only highlighted cards can be played.

@@ -18,12 +18,12 @@ namespace FTS.Grid
 
         int projectileRange = 9999;
 
+        public Dictionary<Enemy, AttackIndicator> AttackIndicators { get => attackIndicators; set => attackIndicators = value; }
+
         private void Awake()
         {
             grid = GetComponent<HexGrid>();
             Mover.OnMoved += Mover_OnMoved;
-            Unit.OnHover += Unit_OnHover;
-            Unit.OnHoverExit += Unit_OnHoverExit;
             UnitController.OnEnemyKilled += UnitController_OnEnemyKilled;
             UnitController.OnEnemyStunned += UnitController_OnEnemyStunned;
         }
@@ -31,8 +31,6 @@ namespace FTS.Grid
         private void OnDestroy()
         {
             Mover.OnMoved -= Mover_OnMoved;
-            Unit.OnHover -= Unit_OnHover;
-            Unit.OnHoverExit -= Unit_OnHoverExit;
             UnitController.OnEnemyKilled -= UnitController_OnEnemyKilled;
             UnitController.OnEnemyStunned -= UnitController_OnEnemyStunned;
         }
@@ -210,56 +208,6 @@ namespace FTS.Grid
             RemoveIndicator(enemy);
         }
 
-        private void Unit_OnHoverExit(Unit unit)
-        {
-            if (unit is Enemy)
-            {
-                Enemy enemy = (Enemy)unit;
-                if (cardController.CardSelected)
-                {
-                    enemy.ShowDamage(0);
-                }
-                else if (attackIndicators.ContainsKey(enemy))
-                {
-                    foreach (var lines in attackIndicators[enemy].Lines)
-                    {
-                        foreach (HexCell cell in lines.Line)
-                        {
-                            if (cell.Unit)
-                            {
-                                cell.Unit.ShowDamage(0);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private void Unit_OnHover(Unit unit)
-        {
-            if (unit is Enemy)
-            {
-                Enemy enemy = (Enemy)unit;
-                if (cardController.CardSelected &&
-                   cardController.CardSelected.Targeting == CardTargeting.Unit)
-                {
-                    enemy.ShowDamage(cardController.GetDamage(enemy.Location));
-                }
-                else if (attackIndicators.ContainsKey(enemy))
-                {
-                    foreach (var lines in attackIndicators[enemy].Lines)
-                    {
-                        foreach (HexCell cell in lines.Line)
-                        {
-                            if (cell.Unit)
-                            {
-                                int damage = enemy.Stats.GetStat(Stat.Damage, enemy.CharacterClass);
-                                cell.Unit.ShowDamage(damage);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        
     }
 }
