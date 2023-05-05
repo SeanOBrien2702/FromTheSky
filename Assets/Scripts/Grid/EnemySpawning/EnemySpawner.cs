@@ -41,6 +41,9 @@ namespace FTS.Grid
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
+            ObjectiveController.OnPlayerWon += ObjectiveController_OnPlayerWon;
+            UnitController.OnPlayerLost += UnitController_OnPlayerLost;
+            RunController.OnPlayerLost += RunController_OnPlayerLost;          
 
             dropPodStartPos = dropPodPosotion.transform.position;
             dropPodSmoke = dropPodPosotion.GetComponentInChildren<ParticleSystem>();
@@ -57,6 +60,9 @@ namespace FTS.Grid
         {
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnEnemySpawn -= TurnController_OnEnemySpawn;
+            ObjectiveController.OnPlayerWon -= ObjectiveController_OnPlayerWon;
+            UnitController.OnPlayerLost -= UnitController_OnPlayerLost;
+            RunController.OnPlayerLost -= RunController_OnPlayerLost;
         }
         #endregion
 
@@ -156,6 +162,21 @@ namespace FTS.Grid
         {
             Debug.Log("spawn?");
             StartCoroutine(SpawnEnemies());
+        }
+
+        private void ObjectiveController_OnPlayerWon()
+        {
+            StopAllCoroutines();
+        }
+
+        private void RunController_OnPlayerLost()
+        {
+            StopAllCoroutines();
+        }
+
+        private void UnitController_OnPlayerLost()
+        {
+            StopAllCoroutines();
         }
         #endregion
     }

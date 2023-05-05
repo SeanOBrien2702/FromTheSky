@@ -74,7 +74,7 @@ namespace FTS.Turns
 
         private void PlayerTurn()
         {
-            NewTurn();
+            OnPlayerTurn?.Invoke();
             turnInfoText.text = "Player Turn";
         }
 
@@ -85,14 +85,14 @@ namespace FTS.Turns
         }
 
         private void NewTurn()
-        {
-            OnPlayerTurn?.Invoke();
+        { 
             turn++;
             turnText.text = "Turn: " + turn.ToString();
         }
 
         private void SpawnEnemies()
         {
+            NewTurn();
             OnEnemySpawn?.Invoke();
         }
         #endregion

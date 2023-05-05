@@ -35,7 +35,7 @@ namespace FTS.Core
 
             if (objectives[0] is SurviveObjective)
             {
-                TurnController.OnPlayerTurn += TurnController_OnNewTurn;
+                TurnController.OnEnemySpawn += TurnController_OnNewTurn;
             }
             UnitController.OnPlayerSpawned += UnitController_OnPlayerSpawned;
             UnitController.OnPlayerKilled += UnitController_OnPlayerKilled;
@@ -54,7 +54,7 @@ namespace FTS.Core
         {
             if (objectives[0] is SurviveObjective)
             {
-                TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
+                TurnController.OnEnemySpawn -= TurnController_OnNewTurn;
             }
             UnitController.OnPlayerSpawned -= UnitController_OnPlayerSpawned;
             UnitController.OnPlayerKilled -= UnitController_OnPlayerKilled;
