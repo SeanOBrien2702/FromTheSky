@@ -24,7 +24,7 @@ namespace FTS.UI
 
         private void CinderController_OnValueChanged(int value)
         {
-            cinderText.text = value.ToString();
+            cinderText.text = RunController.Instance.Cinder.ToString();
         }
     }
 }

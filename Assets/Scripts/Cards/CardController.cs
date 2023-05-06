@@ -398,7 +398,7 @@ namespace FTS.Cards
                 newCard.Cost = 0;
             }
             if(cardLocation == CardLocation.Hand)
-                hand.AddCard(newCard);
+                hand.DrawAnimation(newCard);
             OnCardCreated?.Invoke();
             deck.Add(newCard);
         }
@@ -433,7 +433,7 @@ namespace FTS.Cards
             {
                 Card card = deck.FirstOrDefault(item => item.Location == CardLocation.Deck);
                 card.Location = CardLocation.Hand;
-                hand.AddCard(card);
+                hand.DrawAnimation(card);
                 OnCardDrawn?.Invoke();
                 foreach (var effect in card.OnDrawEffects)
                 {

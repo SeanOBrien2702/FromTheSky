@@ -324,7 +324,7 @@ namespace FTS.Cards
             SpaceHand();
         }
 
-        public void AddCard(Card card)
+        public void DrawAnimation(Card card)
         {
             GameObject drawnCard = Instantiate<GameObject>(cardPrefab);
             drawnCard.transform.SetParent(handPosition.transform, false);

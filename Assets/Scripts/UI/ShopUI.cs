@@ -20,15 +20,23 @@ namespace FTS.UI
         [SerializeField] Transform cardPanel;
         [SerializeField] int numberShopCards = 4;
 
+        [Header("Remove card")]
+        [SerializeField] GameObject removeCardPanel;
+        [SerializeField] Button removeCardButton;
+
         [Header("Convertions")]
-        [SerializeField] Button convertHealth;
-        [SerializeField] Button convertCinder;
+        [SerializeField] Button convertHealthButton;
+        [SerializeField] Button convertCinderButton;
 
         #region MonoBehaviour Callbacks
         void Start()
         {
             cardDB = FindObjectOfType<CardDatabase>().GetComponent<CardDatabase>();
             FillShopPanel();
+            removeCardPanel.SetActive(false);
+            convertCinderButton.onClick.AddListener(ConvertCinder);
+            convertHealthButton.onClick.AddListener(ConvertHealth);
+            removeCardButton.onClick.AddListener(RemoveCard);
         }
         #endregion
 
@@ -41,7 +49,7 @@ namespace FTS.UI
             {
                 GameObject go = (GameObject)Instantiate(shopCardPrefab);
                 go.transform.SetParent(cardPanel, false);
-                go.GetComponentInChildren<CardUI>().SaveCardData(card);
+                go.GetComponentInChildren<CardUI>().FillCardUI(card);
                 int cost = go.GetComponentInChildren<ShopCardUI>().CardCost;
                 Button btn = go.GetComponent<Button>();
                 btn.onClick.AddListener(() => {
@@ -62,8 +70,8 @@ namespace FTS.UI
 
         void DisableButtons()
         {
-            convertHealth.interactable = false;
-            convertCinder.interactable = false;
+            convertHealthButton.interactable = false;
+            convertCinderButton.interactable = false;
         }
         #endregion
 
@@ -75,21 +83,33 @@ namespace FTS.UI
 
         public void ConvertCinder()
         {
-            if (RunController.Instance.Cinder >= 50)
+            Debug.Log("Cinder " + RunController.Instance.Cinder);
+            if (RunController.Instance.Cinder > 50)
             {
                 RunController.Instance.Cinder -= 50;
-                RunController.Instance.Health += 10;
+                RunController.Instance.Health += 5;
                 DisableButtons();
             }
+            Debug.Log("Cinder " + RunController.Instance.Cinder);
         }
 
         public void ConvertHealth()
         {
-            if (RunController.Instance.Health >= 15)
+            if (RunController.Instance.Health > 10)
             {
-                RunController.Instance.Health -= 15;
+                RunController.Instance.Health -= 10;
                 RunController.Instance.Cinder += 25;
                 DisableButtons();
+            }
+        }
+
+        public void RemoveCard()
+        {
+            if (RunController.Instance.Cinder >= 100)
+            {
+                removeCardPanel.SetActive(true);
+                RunController.Instance.Cinder -= 100;
+                removeCardButton.interactable = false;
             }
         }
         #endregion

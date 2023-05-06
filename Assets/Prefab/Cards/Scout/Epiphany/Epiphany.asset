@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
   m_Name: Epiphany
   m_EditorClassIdentifier: 
-  cardName: Accelerate
+  cardName: Epiphany
   flavourText: 
   image: {fileID: 21300000, guid: cf8ecf90a0fda2f4b91c7ca02a8b8a07, type: 3}
   border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}

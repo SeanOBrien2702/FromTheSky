@@ -83,6 +83,7 @@ namespace FTS.Core
                 {
                     RunController.Instance.Cinder += 50;
                 }
+                RunController.Instance.Cinder += 25;
                 OnPlayerWon?.Invoke();
                 SceneController.Instance.LoadScene(Scenes.DraftScene, true);
             }

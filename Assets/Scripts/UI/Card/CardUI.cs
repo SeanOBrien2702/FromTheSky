@@ -160,6 +160,7 @@ namespace FTS.UI
 
         public void SaveCardData(Card card)
         {
+            cardInfo = card;
             cardName.text = card.CardName;
             cost.text = card.Cost.ToString();
             border.sprite = card.Border;
@@ -172,20 +173,15 @@ namespace FTS.UI
             type = card.Type;
             rarity.color = cardRarityColour[(int)card.Rarity];
 
-            foreach (var item in card.Effects)
-            {
-                rulesText.text += item.GetEffectText() + ". ";
-            }
             if (shopUI)
             {
                 shopUI.SetCost(card.Rarity);
             }
         }
 
-        //TODO: have the card text only intilized once
         public void FillCardUI(Card card)
         {
-            cost.text = card.Cost.ToString();
+            SaveCardData(card);
             ConfigureCardType(card);
             string cardText = FillCardText(card);
             tooltipUI.CreateTooltips(cardText);

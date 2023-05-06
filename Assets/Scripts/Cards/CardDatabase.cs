@@ -119,12 +119,9 @@ namespace FTS.Cards
         internal List<Card> GetDeck()
         {
             foreach (var card in deck)
-            {
+            {        
                 card.Id = cardID.ToString();
                 card.Border = cardBorders.Find(item => item.characterClass == card.CharacterClass).border;
-                //Debug.Log("sdfsdfs " + cardRarityColour[(int)card.Rarity]);
-                //Debug.Log("first");
-                
                 cardID++;
             }
             return deck;
@@ -133,6 +130,11 @@ namespace FTS.Cards
         internal void AddCardToDeck(Card selectedCard)
         {
             deck.Add(selectedCard);
+        }
+
+        internal void RemoveCardFromDeck(Card selectedCard)
+        {
+            deck.Remove(selectedCard);
         }
 
         public object CaptureState()
@@ -159,7 +161,7 @@ namespace FTS.Cards
                     }
                 }
             }  
-        }
+        }   
     }
 
     [System.Serializable]

@@ -140,7 +140,7 @@ namespace FTS.UI
                     drawnCard.transform.localScale = new Vector3(0.5f, 0.5f, 1);
 
                     CardUI newCardUI = drawnCard.GetComponent<CardUI>();
-                    newCardUI.SaveCardData(card);
+                    //newCardUI.SaveCardData(card);
                     newCardUI.FillCardUI(card);
                 }
                 EnablePlayerInfo("Place on top ");

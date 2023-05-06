@@ -57,7 +57,7 @@ namespace FTS.UI
             {
                 GameObject go = (GameObject)Instantiate(cardPrefab);
                 go.transform.SetParent(cardPanel, false);
-                go.GetComponentInChildren<CardUI>().SaveCardData(card);
+                go.GetComponentInChildren<CardUI>().FillCardUI(card);
                 Button btn = go.GetComponent<Button>();
                 btn.onClick.AddListener(() => {
                     SelectCard(card);
