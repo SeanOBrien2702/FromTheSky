@@ -114,15 +114,16 @@ namespace FTS.UI
             possibleDamageBar.fillAmount = 1 - ((float)bufferHealth / (float)maxHealth);
         }
 
-        internal void HideDamage()
+        internal void HideDamage(int armour)
         {
+            UpdateArmour(armour);
             possibleDamageBar.enabled = false;
         }
         #endregion
 
         private void UnitController_OnEnemyKilled(Character obj)
         {
-            HideDamage();
+            HideDamage(0);
         }
 
         private void TurnOrderUI_OnHover(bool isHover)

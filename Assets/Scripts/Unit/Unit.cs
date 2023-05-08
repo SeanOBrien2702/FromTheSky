@@ -25,6 +25,7 @@ namespace FTS.Characters
         int health = 0;
         protected int maxHealth = 0;
         int armour = 0;
+        int highlightArmour = 0;
         bool hasBarrier = false;
         bool isFriendly = true;
         protected HexCell location;
@@ -172,12 +173,14 @@ namespace FTS.Characters
         {
             if (damage == 0)
             {
-                unitUI.HideDamage();
+                unitUI.HideDamage(highlightArmour);
+                armour = highlightArmour;
             }
             else
             { 
                 if (armour > 0)
                 {
+                    highlightArmour = armour;
                     if (damage <= armour)
                     {
                         Armour -= damage;
