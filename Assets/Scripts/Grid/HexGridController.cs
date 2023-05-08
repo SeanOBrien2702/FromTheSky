@@ -140,7 +140,7 @@ namespace FTS.Grid
             {
                 return;
             }
-            if (Input.GetMouseButtonDown(0) && MouseOverGrid())
+            if (Input.GetMouseButtonDown(0) && MouseOverGrid() && !cardController.CardSelected)
             {
                 DoMove();
             }
@@ -219,11 +219,15 @@ namespace FTS.Grid
         private void DoCardArea(bool overrideUpdateCell = false)
         {
             if (UpdateCurrentCell() || overrideUpdateCell)
-            {
+            {                             
+                Card card = cardController.CardSelected;
+                if(card.Targeting == CardTargeting.None)
+                {
+                    return;
+                }
                 grid.ClearReachable();
                 grid.ClearArea();
-                
-                Card card = cardController.CardSelected;
+
                 if (cardController.IsFreeAim())
                 {
                     grid.ShowArea(currentUnit.Location, card.Range, HighlightIndex.CardRange);

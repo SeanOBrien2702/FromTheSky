@@ -157,7 +157,7 @@ namespace FTS.UI
 
         void Dragging()
         {
-            if (cardPrefab != null)
+            if (cardPrefab != null && isDragging)
             {
                 if (cardInfo.Targeting != CardTargeting.None)
                 {
@@ -200,7 +200,14 @@ namespace FTS.UI
 
         public void OnDrag(PointerEventData eventData)
         {
-            Dragging();
+            if (cardInfo.Targeting != CardTargeting.None)
+            {
+                Dragging();
+            }
+            else
+            {
+                SetDraggedPosition(eventData);
+            }
         }
 
 
