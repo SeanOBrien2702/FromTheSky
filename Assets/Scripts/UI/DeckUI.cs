@@ -1,10 +1,7 @@
-using AeLa.EasyFeedback.APIs;
 using FTS.Cards;
 using FTS.UI;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class DeckUI : MonoBehaviour

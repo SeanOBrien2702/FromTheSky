@@ -609,6 +609,8 @@ namespace FTS.Grid
             if(card == null)
             {
                 UpdateReachable();
+                currentCell = null;
+                DoPathfinding();
             }
             else
             {

@@ -168,6 +168,8 @@ namespace FTS.UI
 
         void EndDrag(bool isPlayed)
         {
+            handController.SelectedCard = null;
+            handController.SelectCard(null);
             Cursor.visible = true;
             isDragging = false;
             HideArrow();
@@ -186,7 +188,6 @@ namespace FTS.UI
                     }
                 }
             }
-            handController.ReadjustHand();
             handController.SetTagetingZoom(false);
         }
         #endregion

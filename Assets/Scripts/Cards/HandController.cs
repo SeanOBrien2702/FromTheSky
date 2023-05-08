@@ -1,15 +1,11 @@
 ﻿#region Using Statements
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using FTS.Characters;
 using FTS.UI;
 using System;
 using UnityEngine.EventSystems;
-using AMPInternal;
-using FTS.Grid;
-using UnityEditorInternal;
 #endregion
 
 namespace FTS.Cards
@@ -117,8 +113,7 @@ namespace FTS.Cards
         }
 
         private void Update()
-        {
-            
+        {         
             if (!unitController.CurrentPlayer)
             {
                 return;
@@ -266,7 +261,7 @@ namespace FTS.Cards
             }
         }
 
-        void SelectCard(string cardID)
+        public void SelectCard(string cardID)
         {
             OnCardSelected?.Invoke(cardID);
             SpaceHand(cardID);
@@ -380,7 +375,10 @@ namespace FTS.Cards
         public void RemoveCard(Card card)
         {
             HandPrefab handPrefab = handPrefabs.Find(item => item.CardID == card.Id);
-            Debug.Log("Hand prefab "+ handPrefab.CardGameObject);
+            if(handPrefab == null)
+            {
+                return;
+            }
             StartCoroutine(LerpToDiscard(handPrefab.CardGameObject,
                                          discardPosition.position,
                                          discardScale,

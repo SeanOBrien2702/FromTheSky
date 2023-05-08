@@ -380,7 +380,7 @@ namespace FTS.Grid
 
         internal void SetLabel(int turns)
         {
-            label.text = turns == 0 ? "" : turns.ToString();
+            //label.text = turns == 0 ? "" : turns.ToString();
         }
 
         internal bool IsFrendlyUnit()
