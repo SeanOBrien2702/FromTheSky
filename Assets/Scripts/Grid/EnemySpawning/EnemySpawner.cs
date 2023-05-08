@@ -153,7 +153,6 @@ namespace FTS.Grid
         #region Events
         private void TurnController_OnNewTurn()
         {
-            Debug.Log(unitController.GetEnemyUnits().Count + " "+ settings.MaxEnemiesAtOnce);
             if (unitController.GetEnemyUnits().Count < settings.MaxEnemiesAtOnce)
                 SetSpawnPositions();
         }

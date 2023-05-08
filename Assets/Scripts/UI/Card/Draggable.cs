@@ -37,9 +37,13 @@ namespace FTS.UI
         bool select = false;
 
         #region Properties
-        public bool IsDragging
-        {
-            get { return isDragging; }
+        public bool IsDragging { get => isDragging;
+            set 
+            { 
+                isDragging = value; 
+                if(!isDragging)
+                    HideArrow();
+            } 
         }
         #endregion
 
@@ -70,41 +74,15 @@ namespace FTS.UI
 
         private void Update()
         {
-            //if (isDragging)
-            //{
-            //    if (cardPrefab != null)
-            //    {
-            //        if (cardInfo.Targeting != CardTargeting.None)
-            //        {
-            //            DrawTargetLine(pointerData);
-            //            cardController.CardSelecte(cardId);
-            //            //handController.Targeting();
-
-            //        }
-            //        else
-            //        {
-            //            //DrawTargetLine(pointerData);
-
-            //            //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //            //mousePosition.z = Camera.main.transform.position.z + Camera.main.nearClipPlane;
-            //            //transform.position = mousePosition;
-            //            //SetDraggedPosition(pointerData);
-            //        }
-            //    }
-            //    if (Input.GetMouseButtonDown(0))
-            //    {
-            //        if (select)
-            //        {
-            //            Debug.Log("select");
-            //            DeSelect();
-            //        }
-            //        else
-            //        {
-            //            select = true;
-            //        }
-
-            //    }
-            //}
+            if(isDragging)
+            {
+                Dragging();
+                if(Input.GetMouseButtonDown(1))
+                {
+                    isDragging = false;
+                    EndDrag(false);
+                }
+            }
         }
         #endregion
 
@@ -117,7 +95,7 @@ namespace FTS.UI
             }
         }
 
-        private void DrawTargetLine(PointerEventData data)
+        private void DrawTargetLine()
         {
             controlPoints[0] = new Vector2(arrowStart.position.x, arrowStart.position.y);
             controlPoints[3] = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -162,103 +140,79 @@ namespace FTS.UI
                 //rt.rotation = m_DraggingPlane.rotation;
             }
         }
-        #endregion
 
-        #region Public Methods
-
-        //public void Selected()
-        //{
-        //    Debug.Log("selected " + cardId);
-        //    Cursor.visible = false;
-        //    isDragging = true;
-        //    startPosition = new Vector2(arrowStart.position.x, arrowStart.position.y);
-        //    if (cardInfo.Targeting != CardTargeting.None)
-        //    {
-        //        handController.Targeting(cardId);
-        //    }
-
-        //}
-
-        //public void DeSelect()
-        //{
-        //    Cursor.visible = true;
-        //    isDragging = false;
-        //    HideArrow();
-        //    cardController.CardSelected = null;
-        //    if (cardInfo.Targeting != CardTargeting.None)
-        //    {
-        //        cardController.PlayCard(cardInfo.CardID);
-        //    }
-        //    else
-        //    {
-        //        if (transform.position.y > Screen.height / 3)
-        //        {
-        //            cardController.PlayCard(cardInfo.CardID);
-        //        }
-        //        else
-        //        {
-        //            //handController.ReadjustHand();
-        //        }
-        //    }
-        //    handController.ReadjustHand();
-        //}
-
-
-        public void OnBeginDrag(PointerEventData eventData)
+        void BeginDragging()
         {
-            //Debug.Log("drag");
+            handController.SelectedCard = cardId;
             Cursor.visible = false;
             isDragging = true;
             startPosition = new Vector2(arrowStart.position.x, arrowStart.position.y);
             handController.SetTagetingZoom(true);
+            cardController.CardSelect(cardId);
             if (cardInfo.Targeting != CardTargeting.None)
             {
                 handController.Targeting(cardId);
             }
         }
 
-        public void OnDrag(PointerEventData eventData)
+        void Dragging()
         {
             if (cardPrefab != null)
             {
                 if (cardInfo.Targeting != CardTargeting.None)
                 {
-                    DrawTargetLine(eventData);
-                    cardController.CardSelecte(cardId);
-
-
-                }
-                else
-                {
-                    SetDraggedPosition(eventData);
+                    DrawTargetLine();
                 }
             }
         }
 
-
-        public void OnEndDrag(PointerEventData eventData)
+        void EndDrag(bool isPlayed)
         {
             Cursor.visible = true;
             isDragging = false;
             HideArrow();
             cardController.CardSelected = null;
-            if (cardInfo.Targeting != CardTargeting.None)
+            if (isPlayed)
             {
-                cardController.PlayCard(cardInfo.CardID);
-            }
-            else
-            {
-                if (transform.position.y > Screen.height / 3)
+                if (cardInfo.Targeting != CardTargeting.None)
                 {
                     cardController.PlayCard(cardInfo.CardID);
                 }
                 else
                 {
-                    //handController.ReadjustHand();
+                    if (transform.position.y > Screen.height / 3)
+                    {
+                        cardController.PlayCard(cardInfo.CardID);
+                    }
                 }
             }
             handController.ReadjustHand();
             handController.SetTagetingZoom(false);
+        }
+        #endregion
+
+        #region Public Methods
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            BeginDragging();
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            Dragging();
+        }
+
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            if (isDragging)
+            {
+                EndDrag(true);
+            }
+            else
+            {
+                EndDrag(false);
+            }
         }
         #endregion
     }

@@ -26,7 +26,6 @@ public class DeckUI : MonoBehaviour
             CardUI go = Instantiate(cardPrefab);
             go.transform.SetParent(contentPanel, false);
             go.FillCardUI(card);
-            Debug.Log("card.Id " + go.CardID);
             cards.Add(go);
         }
     }

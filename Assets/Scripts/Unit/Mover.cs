@@ -161,7 +161,6 @@ namespace FTS.Characters
         {           
             float time = 0;
             Vector3 startPosition = transform.position;
-            Debug.Log("Push?" + startPosition + "  " + targetPosition);
             while (time < pushSpeed)
             {
                 float t = time / pushSpeed;
@@ -171,7 +170,6 @@ namespace FTS.Characters
                 yield return null;
             }
             transform.position = targetPosition;
-            Debug.Log("Push?" + startPosition + "  " + targetPosition);
         }
 
         IEnumerator TravelPath(Vector3 lookTowards)

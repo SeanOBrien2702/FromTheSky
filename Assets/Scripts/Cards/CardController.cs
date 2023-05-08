@@ -87,6 +87,7 @@ namespace FTS.Cards
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
             UnitController.OnSelectUnit += UnitController_OnSelectUnit;
+            HandController.OnCardSelected += HandController_OnCardSelected;
             FillDeck();
         }
 
@@ -112,8 +113,9 @@ namespace FTS.Cards
         {
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
-            UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
-            UnitController.OnSelectUnit += UnitController_OnSelectUnit;
+            UnitController.OnSelectPlayer -= UnitController_OnSelectPlayer;
+            UnitController.OnSelectUnit -= UnitController_OnSelectUnit;
+            HandController.OnCardSelected -= HandController_OnCardSelected;
         }
         #endregion
 
@@ -134,8 +136,9 @@ namespace FTS.Cards
             {
                 playedCard.Location = CardLocation.Discard;
             }
+            //cardSelected = null;
             gameUI.UpdateDeckList();
-            OnCardPlayed?.Invoke(playedCard, player);
+            OnCardPlayed?.Invoke(playedCard, player);          
             lastCardPlayed = playedCard;
         }
 
@@ -165,7 +168,6 @@ namespace FTS.Cards
             bool isInRange = false;
             //check grid if position is valid
             target = grid.GetCardTarget();
-            Debug.Log("range " + range);
             if (target != null && grid.GetDistance(target) <= range)
             {
                 isInRange = true;
@@ -304,6 +306,7 @@ namespace FTS.Cards
 
         public void PlayCard(string cardId)
         {
+            cardSelected = null;
             Card playedCard = deck.Find(item => item.Id == cardId);
             if(player &&
                 HasEnergy(playedCard.Cost) && 
@@ -500,9 +503,16 @@ namespace FTS.Cards
 
 
 
-        internal void CardSelecte(string cardId)
+        internal void CardSelect(string cardId)
         {
-            cardSelected = deck.Find(item => item.Id == cardId);
+            if(cardId != null)
+            {
+                cardSelected = deck.Find(item => item.Id == cardId);
+            }
+            else
+            {
+                cardSelected = null;
+            }
         }
 
         public int GetCardCountInDeck()
@@ -542,6 +552,18 @@ namespace FTS.Cards
             }
             return damage;
         }
+
+        internal bool IsFreeAim()
+        {
+            if ((int)cardSelected.Targeting < (int)CardTargeting.Projectile)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
 
         #region Events
@@ -572,16 +594,9 @@ namespace FTS.Cards
             DrawNewHand();
         }
 
-        internal bool IsFreeAim()
+        private void HandController_OnCardSelected(string cardID)
         {
-            if((int)cardSelected.Targeting < (int)CardTargeting.Projectile)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }            
+            CardSelect(cardID);
         }
         #endregion
     }

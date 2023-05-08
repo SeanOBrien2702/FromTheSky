@@ -48,7 +48,7 @@ namespace FTS.Grid
         #endregion
 
         #region MonoBehaviour Callbacks
-        private void Start()
+        private void Awake()
         {
             grid = GetComponent<HexGrid>();
             unitController = GetComponent<UnitController>();
@@ -59,10 +59,12 @@ namespace FTS.Grid
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
+            HandController.OnCardSelected += HandController_OnCardSelected;
             Mover.OnMoved += Mover_OnMoved;
-            
-            grid.ShowPlacementArea(placementArea);
-            
+        }
+
+        private void Start()
+        {                                      
             if(!TutorialController.Instance.IsTutorialComplete)
             {
                 unitsPlaced = true;
@@ -71,6 +73,7 @@ namespace FTS.Grid
             else
             {
                 currentUnit = unitController.PlacePlayer(grid.GetCell(new HexCoordinates(grid.Width / 2, 0)));
+                grid.ShowPlacementArea(placementArea);
             }
         }
 
@@ -92,7 +95,8 @@ namespace FTS.Grid
             UnitController.OnSelectUnit -= UnitController_OnSelectUnit;
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
-            TurnController.OnCombatStart -= TurnController_OnCombatStart; 
+            TurnController.OnCombatStart -= TurnController_OnCombatStart;
+            HandController.OnCardSelected -= HandController_OnCardSelected;
             Mover.OnMoved -= Mover_OnMoved;
         }
         #endregion
@@ -118,43 +122,40 @@ namespace FTS.Grid
 
         private void DoUnitControl()
         {
-            if (CanControlUnit())
-            {
-                if (Input.GetMouseButtonDown(0) && MouseOverGrid())
-                {
-                    DoSelection();
-                    Debug.Log(mover);
-                }
-                if (mover)
-                {
-                    if (Input.GetMouseButtonDown(0) && MouseOverGrid())
-                    {
-                        DoMove();
-                    }
-                    else
-                    {
-                        if (cardController.CardSelected)
-                        {
-                            DoCardArea();
-                        }
-                        else
-                        {
-
-                            if (mover.CanMove)
-                            {
-                                if (MouseOverGrid())
-                                {
-                                    DoPathfinding();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && cardController.CardSelected)
             {
                 unitController.SetCurrentUnit(null);
             }
+            if (!CanControlUnit())
+            {
+                return;                
+            }
+            if (Input.GetMouseButtonDown(0) && MouseOverGrid())
+            {
+                DoSelection();
+            }
+            if (!mover)
+            {
+                return;
+            }
+            if (Input.GetMouseButtonDown(0) && MouseOverGrid())
+            {
+                DoMove();
+            }
+            else
+            {
+                if (cardController.CardSelected)
+                {
+                    DoCardArea();
+                }
+                else
+                {
+                    if (mover.CanMove && MouseOverGrid())
+                    {
+                        DoPathfinding();                       
+                    }
+                }
+            }          
         }
 
         private bool CanControlUnit()
@@ -213,9 +214,9 @@ namespace FTS.Grid
             }
         }
 
-        private void DoCardArea()
+        private void DoCardArea(bool overrideUpdateCell = false)
         {
-            if (UpdateCurrentCell())
+            if (UpdateCurrentCell() || overrideUpdateCell)
             {
                 grid.ClearReachable();
                 grid.ClearArea();
@@ -246,23 +247,24 @@ namespace FTS.Grid
                         grid.ShowLines(currentUnit.Location, card.Range, false);
                     }
                     HexDirection direction = grid.GetDirection(currentUnit.Location, currentCell);
-                    if (direction != HexDirection.None)
+                    if (direction == HexDirection.None)
                     {
-                        mover.LookAt(direction);
-                        if (card.Targeting == CardTargeting.Projectile)
+                        return;
+                    }
+                    mover.LookAt(direction);
+                    if (card.Targeting == CardTargeting.Projectile)
+                    {
+                        targetArea = grid.ShowLine(currentUnit.Location, direction, projectileRange, true);
+                    }
+                    else
+                    {
+                        targetArea = grid.ShowLine(currentUnit.Location, direction, card.Range, false);
+                    }
+                    foreach (var cell in targetArea)
+                    {
+                        if (cell.Unit)
                         {
-                            targetArea = grid.ShowLine(currentUnit.Location, direction, projectileRange, true);
-                        }
-                        else
-                        {
-                            targetArea = grid.ShowLine(currentUnit.Location, direction, card.Range, false);
-                        }
-                        foreach (var cell in targetArea)
-                        {
-                            if (cell.Unit)
-                            {
-                                cell.Unit.ShowDamage(cardController.GetDamage(cell));
-                            }
+                            cell.Unit.ShowDamage(cardController.GetDamage(cell));
                         }
                     }
                 }
@@ -560,6 +562,7 @@ namespace FTS.Grid
 
         public void UpdateReachable()
         {
+            grid.ClearArea();
             grid.ClearReachable();
             grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
         }
@@ -614,6 +617,21 @@ namespace FTS.Grid
             if(newCell.Trap && newCell.Unit && newCell.Unit is Enemy)
             {
                 newCell.Trap.ActivateTrap(newCell.Unit);
+            }
+        }
+
+        private void HandController_OnCardSelected(string card)
+        {
+            if(card == null)
+            {
+                UpdateReachable();
+            }
+            else
+            {
+                if (mover)
+                {
+                    DoCardArea(true);
+                }            
             }
         }
         #endregion
