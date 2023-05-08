@@ -12,6 +12,7 @@ namespace FTS.Grid
     {
         [SerializeField] CardController cardController;
         AttackIndicatorController indicatorController;
+        List<Unit> highlights = new List<Unit>();
 
         #region MonoBehaviour Callbacks
         private void Awake()
@@ -19,37 +20,46 @@ namespace FTS.Grid
             indicatorController = GetComponent<AttackIndicatorController>();
             Unit.OnHover += Unit_OnHover;
             Unit.OnHoverExit += Unit_OnHoverExit;
+            HandController.OnCardSelected += HandController_OnCardSelected;
         }
 
         private void OnDestroy()
         {
             Unit.OnHover -= Unit_OnHover;
             Unit.OnHoverExit -= Unit_OnHoverExit;
+            HandController.OnCardSelected -= HandController_OnCardSelected;
         }
         #endregion
 
         #region Private Methods
-        private void ApplyHighlights(AttackIndicator lines, Enemy enemy)
+        internal void UpdateHighlight(List<HexCell> targetArea, Enemy enemy = null)
         {
-            foreach (HexCell cell in lines.Line)
+            foreach (var cell in targetArea)
             {
-                if (cell.Unit)
+                if (!cell.Unit)
                 {
+                    continue;
+                }
+                if (enemy)
+                {                 
                     int damage = enemy.Stats.GetStat(Stat.Damage, enemy.CharacterClass);
                     cell.Unit.ShowDamage(damage);
                 }
+                else
+                {
+                    cell.Unit.ShowDamage(cardController.GetDamage(cell));                    
+                }
+                highlights.Add(cell.Unit);
             }
         }
 
-        private void ClearHighlights(AttackIndicator lines, Enemy enemy)
+        void ClearHighlights()
         {
-            foreach (HexCell cell in lines.Line)
+            foreach (Unit unit in highlights)
             {
-                if (cell.Unit)
-                {
-                    cell.Unit.ShowDamage(0);
-                }
+                unit.ShowDamage(0);
             }
+            highlights.Clear();
         }
         #endregion
 
@@ -60,20 +70,7 @@ namespace FTS.Grid
             {
                 return;
             }
-            Enemy enemy = (Enemy)unit;
-
-            if (cardController.CardSelected)// &&
-                //cardController.CardSelected.Targeting == CardTargeting.Unit)
-            {
-                enemy.ShowDamage(0);
-            }
-            else if (indicatorController.AttackIndicators.ContainsKey(enemy))
-            {
-                foreach (var lines in indicatorController.AttackIndicators[enemy].Lines)
-                {
-                    ClearHighlights(lines, enemy);                
-                }
-            }
+            ClearHighlights();
         }
 
         private void Unit_OnHover(Unit unit)
@@ -82,21 +79,27 @@ namespace FTS.Grid
             {
                 return;
             }
-
             Enemy enemy = (Enemy)unit;
             if (cardController.CardSelected)// &&
                 //cardController.CardSelected.Targeting == CardTargeting.Unit)
             {
                 enemy.ShowDamage(cardController.GetDamage(enemy.Location));
+                highlights.Add(enemy);
             }
             else if (indicatorController.AttackIndicators.ContainsKey(enemy))
             {
+                ClearHighlights();
                 foreach (var lines in indicatorController.AttackIndicators[enemy].Lines)
                 {
-                    ApplyHighlights(lines, enemy);                   
+                    UpdateHighlight(lines.Line, enemy);                 
                 }
             }        
-        }        
+        }
+
+        private void HandController_OnCardSelected(string obj)
+        {
+            ClearHighlights();
+        }
         #endregion
     }
 }

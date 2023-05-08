@@ -27,6 +27,7 @@ namespace FTS.Grid
 
         HexGrid grid;
         UnitController unitController;
+        DamageHighlightController highlightController;
         CardController cardController;
 
         HexCell currentCell;
@@ -52,6 +53,7 @@ namespace FTS.Grid
         {
             grid = GetComponent<HexGrid>();
             unitController = GetComponent<UnitController>();
+            highlightController = GetComponent<DamageHighlightController>();
             turnController = FindObjectOfType<TurnController>().GetComponent<TurnController>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
             UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
@@ -220,7 +222,6 @@ namespace FTS.Grid
             {
                 grid.ClearReachable();
                 grid.ClearArea();
-                ClearTargetArea();
                 
                 Card card = cardController.CardSelected;
                 if (cardController.IsFreeAim())
@@ -260,13 +261,7 @@ namespace FTS.Grid
                     {
                         targetArea = grid.ShowLine(currentUnit.Location, direction, card.Range, false);
                     }
-                    foreach (var cell in targetArea)
-                    {
-                        if (cell.Unit)
-                        {
-                            cell.Unit.ShowDamage(cardController.GetDamage(cell));
-                        }
-                    }
+                    highlightController.UpdateHighlight(targetArea);
                 }
                               
                 //if (cardController.CardSelected.Area > 0 &&
@@ -295,17 +290,6 @@ namespace FTS.Grid
                 return true;
             }
             return false;
-        }
-
-        void ClearTargetArea()
-        {
-            foreach (var cell in targetArea)
-            {
-                if(cell.Unit)
-                {
-                    cell.Unit.ShowDamage(0);
-                }
-            }
         }
 
         internal void Push(Character character, HexDirection direction, int distance)
