@@ -843,7 +843,7 @@ namespace FTS.Grid
         public HexDirection GetDirection(HexCell pivot, HexCell target)
         {
             HexDirection direction = HexDirection.None;
-            if(pivot == target)
+            if(target == null || pivot == target)
             {
                 return direction;
             }

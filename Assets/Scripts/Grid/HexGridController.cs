@@ -218,7 +218,7 @@ namespace FTS.Grid
 
         private void DoCardArea(bool overrideUpdateCell = false)
         {
-            if (UpdateCurrentCell() || overrideUpdateCell)
+            if (UpdateCurrentCell() || (overrideUpdateCell && currentCell))
             {                             
                 Card card = cardController.CardSelected;
                 if(card.Targeting == CardTargeting.None)

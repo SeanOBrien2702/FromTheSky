@@ -564,6 +564,11 @@ namespace FTS.Cards
                 return false;
             }
         }
+
+        internal bool IsTargeting(string cardID)
+        {
+            return deck.Find(item => item.Id == cardID).Targeting == CardTargeting.None ? true : false;
+        }
         #endregion
 
         #region Events

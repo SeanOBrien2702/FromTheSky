@@ -144,7 +144,6 @@ namespace FTS.UI
         void BeginDragging()
         {
             handController.SelectedCard = cardId;
-            Cursor.visible = false;
             isDragging = true;
             startPosition = new Vector2(arrowStart.position.x, arrowStart.position.y);
             handController.SetTagetingZoom(true);
@@ -170,7 +169,6 @@ namespace FTS.UI
         {
             handController.SelectedCard = null;
             handController.SelectCard(null);
-            Cursor.visible = true;
             isDragging = false;
             HideArrow();
             cardController.CardSelected = null;
@@ -200,12 +198,17 @@ namespace FTS.UI
 
         public void OnDrag(PointerEventData eventData)
         {
+            
             if (cardInfo.Targeting != CardTargeting.None)
             {
                 Dragging();
             }
             else
             {
+                if (!isDragging)
+                {
+                    return;
+                }
                 SetDraggedPosition(eventData);
             }
         }

@@ -92,7 +92,21 @@ namespace FTS.Cards
             set { lerping = value; }  // set method
         }
 
-        public string SelectedCard { get => selectedCard; set => selectedCard = value; }
+        public string SelectedCard { get => selectedCard;
+            set 
+            {
+                selectedCard = value;
+                if(selectedCard == null)
+                {
+                    Cursor.visible = true;
+                }
+                else
+                {
+                    Cursor.visible = false;
+                }
+                    
+            }  
+        }
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -123,7 +137,15 @@ namespace FTS.Cards
                 if (currentZoom >= 0)
                     ZoomIn(currentZoom);
             }
+            DoHotkeys();
+            DoSelection();
+            DoDeselection();
+        }
+        #endregion
 
+        #region Private Methods
+        private void DoHotkeys()
+        {
             for (int i = 0; i < handPrefabs.Count; ++i)
             {
                 if (Input.GetKeyDown(keyCodes[i]))
@@ -136,35 +158,58 @@ namespace FTS.Cards
                     if (selectedCard == handPrefabs[positionSelected].CardID)
                     {
                         handPrefabs[positionSelected].draggable.IsDragging = false;
-                        selectedCard = null;
+                        SelectedCard = null;
                     }
                     else
                     {
                         handPrefabs[positionSelected].draggable.IsDragging = true;
-                        selectedCard = handPrefabs[positionSelected].CardID;
+                        SelectedCard = handPrefabs[positionSelected].CardID;
                     }
-                    SelectCard(selectedCard);
+                    SelectCard(selectedCard, false);
                 }
             }
+        }
 
-            if (selectedCard != null && Input.GetMouseButtonDown(0))
+        void DoSelection()
+        {
+            if (!Input.GetMouseButtonDown(0))
             {
-                cardController.PlayCard(selectedCard);
-                selectedCard = null;
-                OnCardSelected?.Invoke(selectedCard);
+                return;
             }
 
-            if (selectedCard != null && Input.GetMouseButtonDown(1))
-            {               
-                handPrefabs.Find(item => item.CardID == selectedCard).draggable.IsDragging = false;
-                selectedCard = null;
-                SpaceHand();                   
+            if (selectedCard == null)
+            {
+                Vector2 mousePos = Input.mousePosition;
+                foreach (var handPrefab in handPrefabs)
+                {
+                    if(RectTransformUtility.RectangleContainsScreenPoint(handPrefab.ZoomArea, mousePos))
+                    {
+                        handPrefab.draggable.IsDragging = true;
+                        SelectedCard = handPrefab.CardID;
+                        SelectCard(selectedCard, false);
+                        //break;
+                    }
+                }
+            }
+            else
+            {
+                cardController.PlayCard(selectedCard);
+                SelectedCard = null;
                 OnCardSelected?.Invoke(selectedCard);
             }
         }
-        #endregion
 
-        #region Private Methods
+        void DoDeselection()
+        {
+            if (selectedCard != null && Input.GetMouseButtonDown(1))
+            {
+                handPrefabs.Find(item => item.CardID == selectedCard).draggable.IsDragging = false;
+                SelectedCard = null;
+                SpaceHand();
+                OnCardSelected?.Invoke(selectedCard);
+            }
+        }
+
         private void SpaceHand(string ignoredCard = null)
         {
             int handSize = handPrefabs.Count;
@@ -261,11 +306,27 @@ namespace FTS.Cards
             }
         }
 
-        public void SelectCard(string cardID)
+        bool CanTargetZoom(string cardID, bool isDragging)
+        {
+            bool canZoom = true;
+
+            if (cardID == null)
+            {
+                return false;
+            }
+            if (cardController.IsTargeting(cardID))
+            {
+                if(isDragging)
+                    canZoom = false;
+            }
+            return canZoom;
+        }
+
+        public void SelectCard(string cardID, bool isDragging = true)
         {
             OnCardSelected?.Invoke(cardID);
             SpaceHand(cardID);
-            if (cardID != null)
+            if (CanTargetZoom(cardID, isDragging))
                 Targeting(cardID);
         }
 
@@ -312,7 +373,6 @@ namespace FTS.Cards
                           zoomInSpeed));
         }
 
-
         private bool UpdateCurrentZoom()
         {
             int zoom = MouseOverZoom();
@@ -344,6 +404,7 @@ namespace FTS.Cards
             }
             return index;
         }
+
         void SpaceHandStager()
         {
             if (!isDrawing)
@@ -370,7 +431,6 @@ namespace FTS.Cards
         {
             return cardUI;
         }
-
 
         public void RemoveCard(Card card)
         {
@@ -428,11 +488,6 @@ namespace FTS.Cards
         {
             isTargetingZoom = zoom;
         }
-
-        public void SetCard(string cardID)
-        {
-            SelectCard(cardID);
-        }
         #endregion
 
         #region Coroutines
@@ -476,11 +531,9 @@ namespace FTS.Cards
                                    duration);
             Destroy(gameObject);
         }
-
         #endregion
 
         #region Events
-
         private void UnitController_OnSelectPlayer(Player player)
         {
             if (unitController.CurrentPlayer == player)

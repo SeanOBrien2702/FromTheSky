@@ -23,6 +23,17 @@ namespace FTS.Cards
             }
         }
 
+        public override void ActivateEffect(HexCell target)
+        {
+            if (target.Unit)
+            {
+                for (int i = 0; i < numAttacks; i++)
+                {
+                    target.Unit.CalculateDamageTaken(damage);
+                }
+            }          
+        }
+
         //public override void ActivateEffect(HexCell target)
         //{
         //    //TODO: allow characters to be moved different distances

@@ -20,6 +20,7 @@ namespace FTS.Grid
             indicatorController = GetComponent<AttackIndicatorController>();
             Unit.OnHover += Unit_OnHover;
             Unit.OnHoverExit += Unit_OnHoverExit;
+            UnitController.OnEnemyKilled += UnitController_OnEnemyKilled;
             HandController.OnCardSelected += HandController_OnCardSelected;
         }
 
@@ -27,6 +28,7 @@ namespace FTS.Grid
         {
             Unit.OnHover -= Unit_OnHover;
             Unit.OnHoverExit -= Unit_OnHoverExit;
+            UnitController.OnEnemyKilled += UnitController_OnEnemyKilled;
             HandController.OnCardSelected -= HandController_OnCardSelected;
         }
         #endregion
@@ -99,6 +101,14 @@ namespace FTS.Grid
         private void HandController_OnCardSelected(string obj)
         {
             ClearHighlights();
+        }
+
+        private void UnitController_OnEnemyKilled(Character enemy)
+        {
+            if(highlights.Contains(enemy))
+            {
+                highlights.Remove(enemy);
+            }
         }
         #endregion
     }

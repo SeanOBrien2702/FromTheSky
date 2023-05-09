@@ -32,6 +32,7 @@ namespace FTS.Characters
 
         bool canMove = true;
         bool isRotating = false;
+        bool canRotate = true;
         int speed;
         int movementLeft;
 
@@ -66,6 +67,7 @@ namespace FTS.Characters
         }
 
         public bool IsRotating { get => isRotating; set => isRotating = value; }
+        public bool CanRotate { get => canRotate; set => canRotate = value; }
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -143,6 +145,10 @@ namespace FTS.Characters
 
         public void LookAt(HexDirection direction)
         {
+            if(!canRotate)
+            {
+                return;
+            }
             isRotating = true;
             int angle = HexDirectionExtensions.Angle(direction);
             StartCoroutine(RotateToTarget(angle));

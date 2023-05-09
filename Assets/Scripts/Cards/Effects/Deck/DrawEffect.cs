@@ -1,3 +1,4 @@
+using FTS.Characters;
 using UnityEngine;
 
 namespace FTS.Cards
@@ -10,6 +11,11 @@ namespace FTS.Cards
         [SerializeField] int cardsDrawn;
 
         public override void ActivateEffect()
+        {
+            cardController.DrawCard(cardsDrawn);
+        }
+
+        public override void ActivateEffect(Unit target)
         {
             cardController.DrawCard(cardsDrawn);
         }

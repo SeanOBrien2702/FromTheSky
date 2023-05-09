@@ -113,6 +113,7 @@ namespace FTS.Characters
         IEnumerator AttackAnimation(Card card)
         {
             yield return new WaitUntil(() => Mover.IsRotating == false || Input.GetKeyDown(KeyCode.M));
+            Mover.CanRotate = false;           
             animator.SetTrigger("Shoot");
             if (card.Targeting == CardTargeting.Projectile)
             {
@@ -126,6 +127,8 @@ namespace FTS.Characters
                 piercingInstance.transform.parent = transform;
                 Destroy(piercingInstance, 0.5f);
             }
+            yield return new WaitForSeconds(0.15f);
+            Mover.CanRotate = true;
         }
 
         #region Saving Methods
