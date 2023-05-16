@@ -236,7 +236,6 @@ namespace FTS.Characters
         internal void CreateHeathBar()
         {
             MaxHealth = health;
-            unitUI.UpdateHealth(health, maxHealth);
         }
         #endregion
 

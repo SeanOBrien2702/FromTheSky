@@ -24,7 +24,6 @@ namespace FTS.UI
         [Header("Buttons")]
         [SerializeField] Button continueButton;     
         [SerializeField] GameObject newGameButton;
-        [SerializeField] TextMeshProUGUI newGameText;
 
         private void Start()
         {
@@ -34,12 +33,10 @@ namespace FTS.UI
             if(saving.HasCurrentGame == 0)
             {
                 continueButton.interactable = false;
-                newGameText.text = "Start New Game";
             }
             else
             {
                 continueButton.interactable = true;
-                newGameText.text = "Start over";
             }
             panel.SetActive(false);
         }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45073467, g: 0.500681, b: 0.57484215, a: 1}
+  m_IndirectSpecularColor: {r: 0.45073414, g: 0.50067866, b: 0.57484204, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -36871,7 +36871,7 @@ PrefabInstance:
     - target: {fileID: 4858931988544309130, guid: 67c8298076be44bcc9e4a33e688194bf,
         type: 3}
       propertyPath: m_text
-      value: Start New Game
+      value: New Game
       objectReference: {fileID: 0}
     - target: {fileID: 4858931988544309130, guid: 67c8298076be44bcc9e4a33e688194bf,
         type: 3}
@@ -38752,18 +38752,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1604625600}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1610752165 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4858931988544309130, guid: 67c8298076be44bcc9e4a33e688194bf,
-    type: 3}
-  m_PrefabInstance: {fileID: 1527452128}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1611033210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47716,7 +47704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1969410582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47823,7 +47811,6 @@ MonoBehaviour:
   fadeDuration: 0.35
   continueButton: {fileID: 1958128252}
   newGameButton: {fileID: 1134901684}
-  newGameText: {fileID: 1610752165}
 --- !u!225 &1969410587
 CanvasGroup:
   m_ObjectHideFlags: 0

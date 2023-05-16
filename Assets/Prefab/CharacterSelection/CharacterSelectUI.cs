@@ -49,7 +49,6 @@ namespace FTS.UI
 
         void InitializeModels(Player player)
         {
-            Debug.Log("player " + player);
             PlayerModel newPlayerModel = new PlayerModel();
             newPlayerModel.model = Instantiate(player.transform.GetChild(player.transform.childCount - 1).gameObject);
             newPlayerModel.model.transform.SetParent(playerPosition, false);

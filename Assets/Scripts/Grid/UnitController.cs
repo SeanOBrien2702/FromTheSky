@@ -237,7 +237,7 @@ namespace FTS.Characters
             
             cell.Unit = newCharacter;
             //newCharacter.RollInitive();
-            newCharacter.CreateHeathBar();
+            //newCharacter.CreateHeathBar();
 
             ++numberOfUnits;
 

@@ -36,6 +36,7 @@ namespace FTS.Grid
         #region Private Methods
         internal void UpdateHighlight(List<HexCell> targetArea, Enemy enemy = null)
         {
+            ClearHighlights();
             foreach (var cell in targetArea)
             {
                 if (!cell.Unit)

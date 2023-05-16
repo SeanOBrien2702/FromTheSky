@@ -1,6 +1,9 @@
 ﻿#region Using Statements
+using AeLa.EasyFeedback.APIs;
 using FTS.Characters;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,11 +14,13 @@ namespace FTS.UI
     public class UnitUI : MonoBehaviour
     {
         [Header("Health")]
-        [SerializeField] Text lblHealth;
-        [SerializeField] Image healthBar;
-        [SerializeField] Image possibleDamageBar;
-        [SerializeField] GameObject tick;
-        [SerializeField] Transform start;
+        [SerializeField] Color healthColour;
+        [SerializeField] Color damageColour;
+        [SerializeField] Color potentialDamageColour;
+        [SerializeField] Transform healthGrid;
+        [SerializeField] GameObject healthSegment;
+        List<Image> healthBar = new List<Image>();
+        int currentHealth;
 
         [Header("Armour")]
         [SerializeField] GameObject sheild;
@@ -57,44 +62,51 @@ namespace FTS.UI
         #endregion
 
         #region Private Methods
-        private void UpdateTicks()
+        void UpdateMaxHealth()
         {
-            float healthBarWidth = healthBar.GetComponent<RectTransform>().sizeDelta.x;
-            float increment = healthBarWidth / maxHealth;
-            float position = 0;
-            for (int i = 1; i < maxHealth; i++)
+
+            for (int i = 0; i < maxHealth; i++)
             {
-                position -= increment;
-                GameObject newTick = Instantiate(tick);
-                newTick.transform.SetParent(start, false);
-                newTick.transform.localPosition = new Vector3(position, 0, 0);
-                //if (i % 5 == 0)
-                //{
-                //    newTick.transform.localScale += new Vector3(1, 0, 0);
-                //}
+                GameObject newHealthSegment = Instantiate(healthSegment, healthGrid);
+                healthBar.Add(newHealthSegment.transform.GetChild(0).GetComponent<Image>());
+                if(i % 2 != 0)
+                {
+                    newHealthSegment.transform.localRotation = new Quaternion(180, 0, 0, 0); 
+                }
             }
+            Debug.Log(healthBar.Count);
         }
         #endregion
 
         #region Public Methods
         public void UpdateHealth(int health)
         {
-            lblHealth.text = "Health: " + health;
+            int index = 0;
 
-            healthBar.fillAmount = (float)health / (float)maxHealth;
+            foreach (var item in healthBar)
+            {
+                if (index < health)
+                {
+                    item.color = healthColour;
+                }
+                else
+                {
+                    item.color = damageColour;
+                }
+                index++;
+            }
+            currentHealth = health;
         }
 
         public void UpdateHealth(int health, int newMax)
         {
             maxHealth = newMax;
-            lblHealth.text = "Health: " + health;
-            healthBar.fillAmount = health / maxHealth;
-            UpdateTicks();
+            UpdateMaxHealth();
+            UpdateHealth(health);
         }
 
         public void UpdateArmour(int armour)
         {
-            Debug.Log("update armour " + armour);
             lblArmour.text = armour.ToString();
             if (armour > 0)
             {
@@ -109,15 +121,29 @@ namespace FTS.UI
 
         internal void ShowDamage(int health, int maxHealth, int damage)
         {
-            possibleDamageBar.enabled = true;
-            int bufferHealth = health - damage;
-            possibleDamageBar.fillAmount = 1 - ((float)bufferHealth / (float)maxHealth);
+            int index = 0;
+            foreach (var item in healthBar)
+            {
+                if (index < health - damage)
+                {
+                    item.color = healthColour;
+                }
+                else if (index < health)
+                {
+                    item.color = potentialDamageColour;
+                }
+                else
+                {
+                    item.color = damageColour;
+                }
+                index++;
+            }
         }
 
         internal void HideDamage(int armour)
         {
             UpdateArmour(armour);
-            possibleDamageBar.enabled = false;
+            UpdateHealth(currentHealth);
         }
         #endregion
 
