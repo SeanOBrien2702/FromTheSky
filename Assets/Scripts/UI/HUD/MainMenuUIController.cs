@@ -5,15 +5,21 @@ using UnityEngine.SceneManagement;
 using FTS.Saving;
 using TMPro;
 using FTS.Core;
+using System.Collections;
+using System;
 #endregion
 
 namespace FTS.UI
 {
     public class MainMenuUIController : MonoBehaviour
     {
-        [SerializeField] Animator transition;
+        public static event System.Action OnCharacterSelect = delegate { };
+
         [SerializeField] GameObject panel;
+        [SerializeField] float fadeDuration;
         SavingSystem saving;
+        CanvasFader canvasFader;
+        bool isLerping;
 
         [Header("Buttons")]
         [SerializeField] Button continueButton;     
@@ -22,7 +28,9 @@ namespace FTS.UI
 
         private void Start()
         {
+            CharacterSelectUI.OnReturn += CharacterSelectUI_OnReturn;
             saving = FindObjectOfType<SavingSystem>().GetComponent<SavingSystem>();
+            canvasFader = GetComponent<CanvasFader>();
             if(saving.HasCurrentGame == 0)
             {
                 continueButton.interactable = false;
@@ -36,6 +44,10 @@ namespace FTS.UI
             panel.SetActive(false);
         }
 
+        private void OnDestroy()
+        {
+            CharacterSelectUI.OnReturn -= CharacterSelectUI_OnReturn;
+        }
         #region Public Methods
         public void Continue()
         {
@@ -45,8 +57,15 @@ namespace FTS.UI
 
         public void NewGame()
         {
+            canvasFader.FadeCanvas(0);
             saving.NewGame();
-            SceneController.Instance.LoadScene(Scenes.CharacterSelectScene);
+            OnCharacterSelect?.Invoke();
+            SceneController.Instance.LoadScene(Scenes.CharacterSelectScene, true);           
+        }
+
+        public void ReturnToMainMenu()
+        {
+            canvasFader.FadeCanvas(1);
         }
 
         public void Settings()
@@ -63,5 +82,10 @@ namespace FTS.UI
             Application.Quit();
         }
         #endregion
+
+        private void CharacterSelectUI_OnReturn()
+        {
+            canvasFader.FadeCanvas(1);
+        }
     }
 }

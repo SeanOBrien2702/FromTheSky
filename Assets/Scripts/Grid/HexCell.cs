@@ -221,8 +221,8 @@ namespace FTS.Grid
         public void SetMeshMaterial(Material material)
         {
 
-            hexMesh.Triangulate(this);
-            meshRenderer.material = material;
+            //hexMesh.Triangulate(this);
+            //meshRenderer.material = material;
 
             //DestroyModel();
             //hexModel = Instantiate(gameObject);

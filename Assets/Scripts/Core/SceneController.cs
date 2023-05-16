@@ -38,6 +38,10 @@ namespace FTS.Core
         {
             if (isAddative)
             {
+                if(addativeScene == scene.ToString())
+                {
+                    return;
+                }
                 baseScene = 
                 addativeScene = scene.ToString();
                 SceneManager.LoadScene(addativeScene, LoadSceneMode.Additive);
