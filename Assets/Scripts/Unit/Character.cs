@@ -10,6 +10,7 @@ namespace FTS.Characters
     public class Character : Unit
     {
         [SerializeField] protected Animator animator;
+        [SerializeField] AnimatorOverrideController animatorOverride;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] CharacterStats stats;
         Mover mover;
@@ -49,6 +50,10 @@ namespace FTS.Characters
             base.Awake();
             mover = GetComponent<Mover>();
             Health = maxHealth = stats.GetStat(Stat.Health, characterClass);
+            if(animatorOverride)
+            {
+                animator.runtimeAnimatorController = animatorOverride;
+            }
             //TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }
 
@@ -60,6 +65,14 @@ namespace FTS.Characters
         private void OnDestroy()
         {
             //TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
+        }
+        #endregion
+
+        #region Public Methods
+        protected override void TakeDamage()
+        {
+            base.TakeDamage();
+            animator.SetTrigger("Hit");
         }
         #endregion
 

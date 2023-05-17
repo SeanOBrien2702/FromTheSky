@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MeleePlayerAnimation
+  m_Controller: {fileID: 9100000, guid: fd0500cd49202ad489c0800b57d0d692, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 3428360450820423568, guid: d765969cc22a7a74a80d3ee5a4c34b64,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 13ab8dde3dd566a4bafc28db81d48e8c,
+      type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: b5e4d7e5e6765734f86069300ca4280b,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 810f9a3414ba562418bf370d344b84e1,
+      type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 621a88d2c5790134aa2508df4a44107a,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: d086fe096de771a40876d18507ed68bf,
+      type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 2f47f893fbb6d3e44b01528614038f43,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 1e7830748ae46a947b9db636f8b7b52e,
+      type: 3}

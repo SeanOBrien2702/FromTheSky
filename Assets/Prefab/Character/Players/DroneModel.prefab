@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 95256343710928478}
   - component: {fileID: 1117714426452798355}
   m_Layer: 0
-  m_Name: VangaurdModel
+  m_Name: DroneModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

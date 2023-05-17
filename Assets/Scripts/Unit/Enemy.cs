@@ -3,8 +3,6 @@ using UnityEngine;
 using FTS.Grid;
 using FTS.UI;
 using WalldoffStudios.Indicators;
-using AeLa.EasyFeedback.APIs;
-using static UnityEngine.EventSystems.EventTrigger;
 #endregion
 
 namespace FTS.Characters
@@ -126,13 +124,13 @@ namespace FTS.Characters
             }
             else if(attackType == AttackTypes.Piercing)
             {
-                foreach (GameObject start in projectileStart)
-                {
-                    Destroy(piercingInstance);
-                    piercingInstance = Instantiate(piercingAnimation, start.transform.position, start.transform.rotation);
-                    piercingInstance.transform.parent = transform;
-                    Destroy(piercingInstance, 0.5f);
-                }
+                //foreach (GameObject start in projectileStart)
+                //{
+                //    Destroy(piercingInstance);
+                //    piercingInstance = Instantiate(piercingAnimation, start.transform.position, start.transform.rotation);
+                //    piercingInstance.transform.parent = transform;
+                //    Destroy(piercingInstance, 0.5f);
+                //}
             }
         }
 

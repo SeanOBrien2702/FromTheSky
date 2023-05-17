@@ -153,12 +153,21 @@ namespace FTS.Grid
             attackIndicators.Add(enemy, indicator);
         }
 
-        public void Attack(Enemy enemy)
+        //TODO: make this based on animation
+        public void Attack(StateController controller, Enemy enemy)
         {
             if (!attackIndicators.ContainsKey(enemy))
             {
+                controller.ActionDone = true;
                 return;
             }
+            
+            StartCoroutine(DelayAttack(controller, enemy));
+        }
+
+        private IEnumerator DelayAttack(StateController controller, Enemy enemy)
+        {
+            yield return new WaitForSeconds(0.75f);
             foreach (AttackIndicator lines in attackIndicators[enemy].Lines)
             {
                 foreach (HexCell cell in lines.Line)
@@ -170,8 +179,9 @@ namespace FTS.Grid
                         cell.Unit.CalculateDamageTaken(damage);
                     }
                 }
-            }         
+            }
             attackIndicators.Remove(enemy);
+            controller.ActionDone = true;
         }
 
         internal void RemoveIndicator(Enemy unit)

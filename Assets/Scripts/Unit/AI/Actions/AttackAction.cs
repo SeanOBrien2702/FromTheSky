@@ -9,11 +9,14 @@ namespace FTS.Characters
     {
         public override void Act(StateController controller, StateMachine machine)
         {
-            Attack(machine);
-            controller.ActionDone = true;
+            Attack(controller, machine);
+            if (machine.enemy.AttackType != AttackTypes.Piercing)
+            {
+                controller.ActionDone = true;
+            }
         }
 
-        private void Attack(StateMachine machine)
+        private void Attack(StateController controller, StateMachine machine)
         {
             machine.enemy.Attack();
             machine.enemy.IsAttacking = false;          
@@ -23,7 +26,7 @@ namespace FTS.Characters
             }
             if (machine.enemy.AttackType != AttackTypes.Projectile)
             {
-                machine.attackIndicator.Attack(machine.enemy);            
+                machine.attackIndicator.Attack(controller, machine.enemy);            
             }
             else
             {
