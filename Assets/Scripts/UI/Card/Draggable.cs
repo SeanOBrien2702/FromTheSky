@@ -1,5 +1,6 @@
 ﻿#region Using Statements
 using FTS.Cards;
+using FTS.Characters;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,6 +14,7 @@ namespace FTS.UI
         [SerializeField] bool dragOnSurfaces = true;
         CardController cardController;
         HandController handController;
+        UnitController unitController;
         CardUI cardInfo;
         Transform cardPrefab;
         RectTransform draggingPlane;
@@ -54,6 +56,7 @@ namespace FTS.UI
             cardPrefab = GetComponent<RectTransform>();
             cardController = FindObjectOfType<CardController>().GetComponent<CardController>();
             handController = FindObjectOfType<HandController>().GetComponent<HandController>();
+            unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             cardInfo = GetComponent<CardUI>();
             pointerData = new PointerEventData(EventSystem.current);
             rectTransform = GetComponent<RectTransform>();
@@ -143,6 +146,10 @@ namespace FTS.UI
 
         void BeginDragging()
         {
+            if (!unitController.CurrentPlayer)
+            {
+                return;
+            }
             handController.SelectedCard = cardId;
             isDragging = true;
             startPosition = new Vector2(arrowStart.position.x, arrowStart.position.y);
@@ -167,6 +174,10 @@ namespace FTS.UI
 
         void EndDrag(bool isPlayed)
         {
+            if (!unitController.CurrentPlayer)
+            {
+                return;
+            }
             handController.SelectedCard = null;
             handController.SelectCard(null);
             isDragging = false;

@@ -223,10 +223,15 @@ PrefabInstance:
       propertyPath: highlight
       value: 
       objectReference: {fileID: 4452234658373327730}
-    - target: {fileID: 3600609896639172863, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
+    - target: {fileID: 2572171169486547124, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
         type: 3}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3600609896639172863, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5921444663996253023, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
         type: 3}

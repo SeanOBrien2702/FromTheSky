@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4817212270759470, guid: 37b8b6a4d9cf5b54cb4a2a45b57d7a5e, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4817212270759470, guid: 37b8b6a4d9cf5b54cb4a2a45b57d7a5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -130,11 +130,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: f0f6b8f1c52418e41b0b96399e134022,
         type: 2}
+    - target: {fileID: 931417803719189201, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: statuses.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 931417803719189201, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: statuses.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5db4f7ff326183d46b6287a0e129cf5f,
+        type: 2}
+    - target: {fileID: 3473082553686382527, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3e25c2c33ef2144eda39933daeb77c67,
+        type: 3}
     - target: {fileID: 4141323274225437201, guid: 014ede208cc899e4ca1367e7c0162a5a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e2336cc4b51c4f9439fcf080c4bf25f2, type: 2}
+    - target: {fileID: 5013549403937266224, guid: 014ede208cc899e4ca1367e7c0162a5a,
+        type: 3}
+      propertyPath: m_Name
+      value: Intent
+      objectReference: {fileID: 0}
     - target: {fileID: 7334407785802736305, guid: 014ede208cc899e4ca1367e7c0162a5a,
         type: 3}
       propertyPath: stats

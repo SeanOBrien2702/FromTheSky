@@ -271,7 +271,6 @@ namespace FTS.Characters
         public void SetCurrentUnit(Unit unit)
         {
             currentUnit = unit;
-            Debug.Log(currentUnit);
             if(unit is Player)
             {
                 OnSelectPlayer?.Invoke(unit as Player);

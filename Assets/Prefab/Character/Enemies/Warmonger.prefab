@@ -283,7 +283,8 @@ PrefabInstance:
       propertyPath: attackDirections.Array.data[2]
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9023253583528785602, guid: e2ee1d308e6c6c04a97533dd1083f8b9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e2ee1d308e6c6c04a97533dd1083f8b9, type: 3}
 --- !u!4 &2319137392392373991 stripped
 Transform:

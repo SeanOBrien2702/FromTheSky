@@ -2,6 +2,7 @@
 using AeLa.EasyFeedback.APIs;
 using FTS.Characters;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using TMPro;
@@ -32,6 +33,13 @@ namespace FTS.UI
         [SerializeField] StateMachine unit;
         StateController stateController;
 
+        [Header("Attribute")]
+        [SerializeField] TextMeshProUGUI attributeText;
+        [SerializeField] Transform startPosition;
+        [SerializeField] Transform endPosition;
+        [SerializeField] float duration = 0.5f;
+        float textAlpha = 0.25f;
+
         int maxHealth = 0;
         #region MonoBehaviour Callbacks
         void Start()
@@ -49,6 +57,11 @@ namespace FTS.UI
         public void FixedUpdate()
         {
             transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("test");
+                ShowAttribute("test", "#FF0000");
+            }
         }
 
         private void OnDestroy()
@@ -64,7 +77,6 @@ namespace FTS.UI
         #region Private Methods
         void UpdateMaxHealth()
         {
-
             for (int i = 0; i < maxHealth; i++)
             {
                 GameObject newHealthSegment = Instantiate(healthSegment, healthGrid);
@@ -74,7 +86,6 @@ namespace FTS.UI
                     newHealthSegment.transform.localRotation = new Quaternion(180, 0, 0, 0); 
                 }
             }
-            Debug.Log(healthBar.Count);
         }
         #endregion
 
@@ -145,8 +156,42 @@ namespace FTS.UI
             UpdateArmour(armour);
             UpdateHealth(currentHealth);
         }
+
+        internal void ShowAttribute(string attributeName, string hexColour)
+        {
+            if (ColorUtility.TryParseHtmlString(hexColour, out Color colour))
+            {
+                attributeText.color = colour;
+                StartCoroutine(LerpText(attributeName));
+            }            
+        }
+
+
         #endregion
 
+        #region Coroutines
+        IEnumerator LerpText(string attributeName)
+        {
+            float time = 0;
+            attributeText.text = attributeName;
+            attributeText.transform.position = startPosition.position;
+            attributeText.alpha = 1;
+
+            while (time < duration)
+            {
+                attributeText.transform.position = Vector3.Lerp(startPosition.position, endPosition.position, time / duration);
+                attributeText.alpha = Mathf.Lerp(1, textAlpha, time / duration);
+
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            attributeText.transform.position = endPosition.position;
+            attributeText.alpha = 0;
+        }
+        #endregion
+
+        #region Events
         private void UnitController_OnEnemyKilled(Character obj)
         {
             HideDamage(0);
@@ -160,5 +205,6 @@ namespace FTS.UI
                 turnOrderText.text = stateController.GetTurnOrder(unit).ToString();
             }          
         }
+        #endregion
     }
 }

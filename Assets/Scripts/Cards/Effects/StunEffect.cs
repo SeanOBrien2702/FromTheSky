@@ -9,6 +9,7 @@ namespace FTS.Cards
     {
         public override void ActivateEffect(Unit target)
         {
+            target.StatusController.AddStatus(StatusType.Stunned);
             target.Stunned();
         }
 
@@ -16,6 +17,5 @@ namespace FTS.Cards
         {
             return "Stun unit this turn";
         }
-
     }
 }

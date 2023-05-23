@@ -298,6 +298,10 @@ namespace FTS.Grid
 
         internal void Push(Character character, HexDirection direction, int distance)
         {
+            if(!character.Mover.CanBePushed())
+            {
+                return;
+            }
             if(distance == 0)
             {
                 distance = projectileRange;

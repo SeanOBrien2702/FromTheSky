@@ -4,6 +4,7 @@ using FTS.Grid;
 using FTS.Turns;
 using FTS.UI;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 #endregion
 
@@ -20,6 +21,7 @@ namespace FTS.Characters
         [SerializeField] string description;
         [SerializeField] SFXObject hoverSound;
         protected UnitController unitController;
+        StatusController statusController;
 
         string fullName;
         int health = 0;
@@ -29,6 +31,7 @@ namespace FTS.Characters
         bool hasBarrier = false;
         bool isFriendly = true;
         protected HexCell location;
+        
 
         #region Properties
         public string Names   // property
@@ -96,12 +99,14 @@ namespace FTS.Characters
         }
 
         public string Description { get => description; }
+        public StatusController StatusController { get => statusController; }
         #endregion
 
         #region MonoBehaviour Callbacks
         protected virtual void Awake()
         {
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
+            statusController = GetComponent<StatusController>();
             TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }
@@ -215,6 +220,7 @@ namespace FTS.Characters
 
         public virtual void Stunned()
         {
+            statusController.AddStatus(StatusType.Stunned);
             Debug.Log("unit stunned");
         }
 
@@ -258,6 +264,11 @@ namespace FTS.Characters
         protected virtual void TurnController_OnEnemySpawn()
         {
             
+        }
+
+        internal List<Status> GetStatuses()
+        {
+            return statusController.GetStatuses();
         }
         #endregion
     }

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32b524c1f79c124897182d7ce637140, type: 3}
+  m_Name: Precarious
+  m_EditorClassIdentifier: 
+  statusType: 1
+  statusName: 
+  statusImage: {fileID: 21300000, guid: 13919867b140948b1b0aed3847846b7e, type: 3}
+  statusDescription: Takes one damage when moved

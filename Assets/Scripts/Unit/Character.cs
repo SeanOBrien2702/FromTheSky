@@ -18,6 +18,7 @@ namespace FTS.Characters
         bool busy = false;
         int initiative = 0;
         int maxInitiative = 20;
+        bool isHealthSet = false;
 
         #region Properties
         public int Initiative   // property
@@ -49,8 +50,10 @@ namespace FTS.Characters
         {
             base.Awake();
             mover = GetComponent<Mover>();
+            animator.enabled = false;
             Health = maxHealth = stats.GetStat(Stat.Health, characterClass);
-            if(animatorOverride)
+            animator.enabled = true;
+            if (animatorOverride)
             {
                 animator.runtimeAnimatorController = animatorOverride;
             }
@@ -72,7 +75,15 @@ namespace FTS.Characters
         protected override void TakeDamage()
         {
             base.TakeDamage();
-            animator.SetTrigger("Hit");
+            Debug.Log("hello? " + animator.isActiveAndEnabled);
+            if(isHealthSet)
+            {
+                animator.SetTrigger("Hit");
+            }
+            else
+            {
+                isHealthSet = true;
+            }         
         }
         #endregion
 

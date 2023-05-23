@@ -29,6 +29,7 @@ namespace FTS.Characters
 
         HexCell location;
         List<HexCell> pathToTravel;
+        StatusController statusController;
 
         bool canMove = true;
         bool isRotating = false;
@@ -82,7 +83,8 @@ namespace FTS.Characters
         void Start()
         {
             cameraController = FindObjectOfType<CameraController>().GetComponent<CameraController>();
-            stateController = FindObjectOfType<StateController>().GetComponent<StateController>();          
+            stateController = FindObjectOfType<StateController>().GetComponent<StateController>();
+            statusController = GetComponent<StatusController>();
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }
@@ -132,10 +134,21 @@ namespace FTS.Characters
             return !cell.Unit;
         }
 
+        public bool CanBePushed()
+        {
+            if(statusController.DoesStatusExist(StatusType.Immoveable))
+            {
+                statusController.TriggerStatus(StatusType.Immoveable);
+                return false;
+            }
+            return true;
+        }
+
         internal void Push(HexCell newLocation)
         {
             StartCoroutine(TravelPush(newLocation.transform.localPosition));
             Location = newLocation;
+            statusController.TriggerStatus(StatusType.Shaken);
         }
 
         public void LookAt(int angle)
