@@ -457,15 +457,15 @@ namespace FTS.Grid
             return direction;
         }
 
-        internal Unit GetClosestPlayer(Mover mover)
+        internal Player GetClosestPlayer(HexCell position)
         {
-            Unit closetUnit = null;
+            Player closetUnit = null;
             int closesDistance = 1000;
             int distanceBuffer = 0;
-            foreach (var item in unitController.GetTargetableUnits())
+            foreach (var item in unitController.GetPlayerUnits())
             {
-                Unit buffer = item;
-                distanceBuffer = mover.Location.Location.DistanceTo(item.Location.Location);
+                Player buffer = item;
+                distanceBuffer = position.Location.DistanceTo(item.Location.Location);
                 if (closesDistance > distanceBuffer)
                 {
                     closetUnit = buffer;

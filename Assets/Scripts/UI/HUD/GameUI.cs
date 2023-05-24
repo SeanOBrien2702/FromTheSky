@@ -51,7 +51,7 @@ namespace FTS.UI
             CardController.OnCardPlayed += CardController_OnCardPlayed;
             CardController.OnCardDrawn += CardController_OnCardDrawn;
             CardController.OnCardCreated += CardController_OnCardCreated;
-            //CardController.OnEnergyChanged += CardController_OnEnergyChanged;
+            UnitController.OnEnergyChanged += UnitController_OnEnergyChanged;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             UnitController.OnSelectPlayer += UnitController_OnPlayerSelected;
@@ -73,7 +73,7 @@ namespace FTS.UI
             CardController.OnCardPlayed -= CardController_OnCardPlayed;
             CardController.OnCardDrawn -= CardController_OnCardDrawn;
             CardController.OnCardCreated -= CardController_OnCardCreated;
-            //CardController.OnEnergyChanged -= CardController_OnEnergyChanged;
+            UnitController.OnEnergyChanged -= UnitController_OnEnergyChanged;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             UnitController.OnSelectPlayer -= UnitController_OnPlayerSelected;
@@ -180,7 +180,7 @@ namespace FTS.UI
             UpdateDeckList();
         }
 
-        private void CardController_OnEnergyChanged()
+        private void UnitController_OnEnergyChanged(Player arg1, int arg2)
         {
             UpdateEnergy();
         }

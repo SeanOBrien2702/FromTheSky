@@ -264,7 +264,7 @@ Material:
     - _GlossyReflections: 1
     - _Ground_Detail_Power: 1
     - _Ground_Detail_Scale: 0.074
-    - _Ground_Falloff: 118
+    - _Ground_Falloff: 311
     - _Ground_Noise_Scale: 0.0181
     - _Ground_Pebble_Scale: 0.0204
     - _MEtallic: 0.421
@@ -301,7 +301,7 @@ Material:
     - _EmissiveColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissiveColor1: {r: 1, g: 1, b: 1, a: 0}
     - _GroundColour: {r: 1, g: 1, b: 1, a: 0}
-    - _Ground_Colour: {r: 0.6392157, g: 0.0627451, b: 0.2901961, a: 1}
+    - _Ground_Colour: {r: 0.4433962, g: 0, b: 0.1749455, a: 1}
     - _Ground_Detail_Colour: {r: 0.09233382, g: 0.052335635, b: 0.16176468, a: 0}
     - _RimColor: {r: 0.2555147, g: 1, b: 0.9269017, a: 0}
     - _RimColor1: {r: 0.1614143, g: 0.1380298, b: 0.8161765, a: 0}

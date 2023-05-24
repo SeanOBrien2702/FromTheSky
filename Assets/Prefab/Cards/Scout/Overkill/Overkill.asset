@@ -19,7 +19,7 @@ MonoBehaviour:
   cost: 1
   range: 5
   area: 1
-  cardRarity: 0
+  cardRarity: 1
   characterClass: 1
   type: 0
   targeting: 3
