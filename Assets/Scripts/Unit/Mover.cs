@@ -23,6 +23,7 @@ namespace FTS.Characters
         [SerializeField] float travelSpeed = 2f;
         [SerializeField] float pushSpeed = 0.1f;
         float rotationSpeed = 0.5f;
+        Vector3 roation;
         [SerializeField] Animator animator;
 
         [SerializeField] SFXGroup movementSounds;
@@ -257,19 +258,17 @@ namespace FTS.Characters
         IEnumerator RotateToTarget(float targetAngle)
         {
             float time = 0;
-            Vector3 targetRotation = new Vector3(0, targetAngle, 0);
-
             while (time < rotationSpeed)
             {
-                animator.transform.eulerAngles = Vector3.Lerp(animator.transform.rotation.eulerAngles, targetRotation, time / rotationSpeed);
+                roation.y = Mathf.LerpAngle(animator.transform.eulerAngles.y, targetAngle, time / rotationSpeed);
+                animator.transform.eulerAngles = roation; 
                 time += Time.deltaTime;
                 yield return null;
             }
-            animator.transform.eulerAngles = targetRotation;
+            animator.transform.eulerAngles = roation;
             stateController.ActionDone = true;
             isRotating = false;
-        }
-       
+        }     
         #endregion
 
         #region Events
