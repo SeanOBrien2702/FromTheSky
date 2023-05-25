@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusType: 2
   statusName: 
-  statusImage: {fileID: 21300000, guid: ec00643a281f2924283fc5b9961ac9a0, type: 3}
-  statusDescription: 'Prevent '
+  statusImage: {fileID: 21300000, guid: 1c7513304c0aff04396dc3cbc3cba866, type: 3}
+  statusDescription: Prevent actions

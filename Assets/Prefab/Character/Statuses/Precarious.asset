@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusType: 1
   statusName: 
-  statusImage: {fileID: 21300000, guid: 13919867b140948b1b0aed3847846b7e, type: 3}
+  statusImage: {fileID: 21300000, guid: e70292d1d3d9c304bbe24b160c2c9244, type: 3}
   statusDescription: Takes one damage when moved
