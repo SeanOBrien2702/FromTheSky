@@ -3,9 +3,11 @@ using FTS.Cards;
 using FTS.Grid;
 using FTS.Turns;
 using FTS.UI;
+using HighlightPlus;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 #endregion
 
 namespace FTS.Characters
@@ -22,6 +24,7 @@ namespace FTS.Characters
         [SerializeField] SFXObject hoverSound;
         protected UnitController unitController;
         StatusController statusController;
+        HighlightEffect highlight;
 
         string fullName;
         int health = 0;
@@ -107,13 +110,18 @@ namespace FTS.Characters
         {
             unitController = FindObjectOfType<UnitController>().GetComponent<UnitController>();
             statusController = GetComponent<StatusController>();
+            highlight = GetComponent<HighlightEffect>();
+            UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
+            UnitController.OnSelectUnit += UnitController_OnSelectUnit;
             TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
         }
 
         private void OnDestroy()
         {
-            TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
+            UnitController.OnSelectPlayer -= UnitController_OnSelectPlayer;
+            UnitController.OnSelectUnit -= UnitController_OnSelectUnit;
+            TurnController.OnEnemySpawn -= TurnController_OnEnemySpawn;
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
         }
 
@@ -269,6 +277,31 @@ namespace FTS.Characters
         internal List<Status> GetStatuses()
         {
             return statusController.GetStatuses();
+        }
+
+        private void UnitController_OnSelectUnit(Unit unit)
+        {
+            if (unit == this)
+            {
+                highlight.highlighted = true;
+            }
+            else
+            {
+                highlight.highlighted = false;
+            }
+            
+        }
+
+        private void UnitController_OnSelectPlayer(Player player)
+        {
+            if (player == this)
+            {
+                highlight.highlighted = true;
+            }
+            else
+            {
+                highlight.highlighted = false;
+            }
         }
         #endregion
     }
