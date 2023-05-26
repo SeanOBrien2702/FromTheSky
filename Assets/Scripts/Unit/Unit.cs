@@ -281,6 +281,10 @@ namespace FTS.Characters
 
         private void UnitController_OnSelectUnit(Unit unit)
         {
+            if (!highlight)
+            {
+                return;
+            }
             if (unit == this)
             {
                 highlight.highlighted = true;
@@ -294,6 +298,10 @@ namespace FTS.Characters
 
         private void UnitController_OnSelectPlayer(Player player)
         {
+            if(!highlight)
+            {
+                return;
+            }
             if (player == this)
             {
                 highlight.highlighted = true;

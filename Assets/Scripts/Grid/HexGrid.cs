@@ -117,7 +117,7 @@ namespace FTS.Grid
             HexCell cell;
             //Create cell position
             cell = cells[i] = Instantiate<HexCell>(cellPrefab);
-            int randomNumber = UnityEngine.Random.Range(0, 80);
+            int randomNumber = UnityEngine.Random.Range(0, 60);
 
             if (randomNumber <= 70)
             {

@@ -155,6 +155,10 @@ namespace FTS.Cards
             {
                 foreach (Card card in characterClass.cards)
                 {
+                    foreach (Effect effect in card.OnDrawEffects)
+                    {
+                        effect.Initialize();
+                    }
                     foreach (Effect effect in card.Effects)
                     {
                         effect.Initialize();

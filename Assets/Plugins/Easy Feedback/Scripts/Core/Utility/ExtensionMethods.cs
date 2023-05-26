@@ -34,7 +34,7 @@ namespace AeLa.EasyFeedback.Utility
 			Graphics.DrawTexture(new Rect(0, 0, 1, 1), tex);
 
 			// apply to texture
-			tex.Resize(width, height);
+			tex.Reinitialize(width, height);
 			tex.ReadPixels(new Rect(0, 0, width, height), 0, 0, updateMipMaps);
 			tex.Apply(updateMipMaps);
 		}

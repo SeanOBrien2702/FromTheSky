@@ -40,7 +40,7 @@ namespace FTS.Cards
         HexGridController grid;
         HexCell target;
 
-        Card lastCardPlayed;
+        Card lastCardUsed;
         Card cardSelected;
         private CharacterClass characterClass;
 
@@ -139,7 +139,7 @@ namespace FTS.Cards
             //cardSelected = null;
             gameUI.UpdateDeckList();
             OnCardPlayed?.Invoke(playedCard, player);          
-            lastCardPlayed = playedCard;
+            lastCardUsed = playedCard;
         }
 
         private void CardDiscarded(Card discardedCard)
@@ -438,9 +438,10 @@ namespace FTS.Cards
                 card.Location = CardLocation.Hand;
                 hand.DrawAnimation(card);
                 OnCardDrawn?.Invoke();
+                lastCardUsed = card;
                 foreach (var effect in card.OnDrawEffects)
                 {
-                    effect.ActivateEffect(player);
+                    effect.ActivateEffect();
                 }
             }
         }
@@ -465,7 +466,7 @@ namespace FTS.Cards
             switch (costTarget)
             {
                 case CostTarget.AllCopies:
-                    foreach (var item in deck.FindAll(item => item.name == lastCardPlayed.name))
+                    foreach (var item in deck.FindAll(item => item.name == lastCardUsed.name))
                     {
                         item.Cost += costChange;
                         if(item.Cost <= 0)
@@ -475,10 +476,10 @@ namespace FTS.Cards
                     }
                     break;
                 case CostTarget.ThisCard:
-                    lastCardPlayed.Cost += costChange;
-                    if (lastCardPlayed.Cost <= 0)
+                    lastCardUsed.Cost += costChange;
+                    if (lastCardUsed.Cost <= 0)
                     {
-                        lastCardPlayed.Cost = 0;
+                        lastCardUsed.Cost = 0;
                     }
                     break;
                 case CostTarget.Random:

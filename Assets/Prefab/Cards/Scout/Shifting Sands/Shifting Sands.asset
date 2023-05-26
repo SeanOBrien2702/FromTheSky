@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
+  m_Name: Shifting Sands
+  m_EditorClassIdentifier: 
+  cardName: Shifting Sands
+  flavourText: 
+  image: {fileID: 21300000, guid: 623afa775c0a7df49a0edbca34f966ab, type: 3}
+  border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
+  cost: 1
+  range: 2
+  area: 1
+  cardRarity: 0
+  characterClass: 0
+  type: 0
+  targeting: 0
+  isAtomize: 0
+  isTemporary: 0
+  isInherent: 0
+  cinderCost: 10
+  onDrawEffects: []
+  effects:
+  - {fileID: 11400000, guid: 717fe2783536dbb42b676c62ce0548f4, type: 2}
+  onDiscardEffects: []
