@@ -23,13 +23,13 @@ namespace FTS.Cards
 
         public override string GetEffectText()
         {
-            string effectText = costChange > 0 ? "+" : "-";
+            string effectText = costChange > 0 ? "+" : "";
 
-            effectText += costChange + " <link=energy><color=\"red\">energy</color></link> cost  ";
+            effectText += costChange + " <link=energy><color=\"red\">energy</color></link> cost";
             switch (costTarget)
             {
                 case CostTarget.AllCopies:
-                    effectText += "of all copies ";
+                    effectText += " of all copies ";
                     break;
                 case CostTarget.Random:
                     effectText += "to random card";

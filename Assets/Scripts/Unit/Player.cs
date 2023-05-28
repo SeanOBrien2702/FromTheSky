@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System;
 using FTS.Turns;
 using System.Collections;
+using UnityEngine.Animations.Rigging;
 #endregion
 
 namespace FTS.Characters
@@ -99,13 +100,18 @@ namespace FTS.Characters
             return range;
         }
 
-        public void Attack(Card card)
+        public void PlayCardAnimation(Card card)
         {
-            if(card.Type != CardType.Attack)
+            if (card.Targeting == CardTargeting.Projectile ||
+                card.Targeting == CardTargeting.Piercing)
             {
-                return;
+                StartCoroutine(AttackAnimation(card));
             }
-            StartCoroutine(AttackAnimation(card));          
+            else
+            {
+                animator.SetTrigger("Ability");
+            }
+                     
         }
 
         #endregion
@@ -154,7 +160,7 @@ namespace FTS.Characters
         private void CardController_OnCardPlayed(Card card, Player player)
         {
             if(player == this)
-                Attack(card);
+                PlayCardAnimation(card);
         }
         #endregion
     }

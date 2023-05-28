@@ -159,11 +159,7 @@ namespace FTS.Characters
 
         public void LookAt(HexDirection direction)
         {
-            if(!canRotate)
-            {
-                return;
-            }
-            isRotating = true;
+            StopAllCoroutines();
             int angle = HexDirectionExtensions.Angle(direction);
             StartCoroutine(RotateToTarget(angle));
         }
@@ -257,6 +253,7 @@ namespace FTS.Characters
 
         IEnumerator RotateToTarget(float targetAngle)
         {
+            isRotating = true;
             float time = 0;
             while (time < rotationSpeed)
             {
