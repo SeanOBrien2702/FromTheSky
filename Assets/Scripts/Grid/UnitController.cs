@@ -164,13 +164,6 @@ namespace FTS.Characters
             }
             if (Application.isEditor)
             {
-                if (Input.GetKeyDown(KeyCode.P))
-                {
-                    SceneController.Instance.LoadScene(Scenes.DraftScene, true);
-                    //SceneManager.LoadScene(Scenes.DraftScene.ToString());
-                    //OnEnemyLost?.Invoke();
-                }
-
                 if (Input.GetKeyDown(KeyCode.O))
                 {
                     OnPlayerLost?.Invoke();

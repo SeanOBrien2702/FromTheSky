@@ -50,6 +50,18 @@ namespace FTS.Core
             objectiveUI.CreateObjectiveText(objectives);
         }
 
+        private void Update()
+        {
+            if (Application.isEditor)
+            {
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    RunController.Instance.Cinder += 25;
+                    OnPlayerWon?.Invoke();
+                }
+            }
+        }
+
         private void OnDestroy()
         {
             if (objectives[0] is SurviveObjective)
@@ -84,8 +96,7 @@ namespace FTS.Core
                     RunController.Instance.Cinder += 50;
                 }
                 RunController.Instance.Cinder += 25;
-                OnPlayerWon?.Invoke();
-                SceneController.Instance.LoadScene(Scenes.DraftScene, true);
+                OnPlayerWon?.Invoke();            
             }
         }
 
@@ -93,8 +104,7 @@ namespace FTS.Core
         {
             foreach (var objective in objectives.FindAll(item => item is KillObjective))
             {
-                objective.UpdateObjective((Enemy)enemy);
-                
+                objective.UpdateObjective((Enemy)enemy);               
             }
             CheckObjectives();
         }

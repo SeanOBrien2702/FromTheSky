@@ -1,13 +1,17 @@
+using FTS.Characters;
+using FTS.UI;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace FTS.Core
 {
     public class EncountersController : MonoBehaviour
     {
-        //[SerializeField] RunController runController;
-
         int encounterNumber = 3;
+        int encounterColumns = 3;
+        int numEncounterLayers = 3;
         [SerializeField] Encounter combatEncounter;
         [SerializeField] Encounter eliteEncounter;
         [SerializeField] Encounter bossEnccounter;
@@ -15,18 +19,35 @@ namespace FTS.Core
         [SerializeField] Encounter shopEncounter;
         [SerializeField] Encounter lootEncounter;
 
+        int currentEncounter;
         int numCombatEncounters = 0;
         int numShopEncounters = 0;
         int numLootEncounters = 0;
-        List<Encounter> encounterList = new List<Encounter>();
+        List<Encounter> encounters = new List<Encounter>();
 
-        void Start()
+        private void Awake()
         {
-            encounterList.Add(combatEncounter);
-            encounterList.Add(eliteEncounter);
-            encounterList.Add(eventEncounter);
-            encounterList.Add(shopEncounter);
-            encounterList.Add(lootEncounter);
+            if (encounters.Count <= 0)
+            {
+                GenerateEncounters();
+            }
+            MainMenuUIController.OnCharacterSelect += MainMenuUIController_OnCharacterSelect;
+        }
+
+        private void Update()
+        {
+            if (Application.isEditor)
+            {
+                if (Input.GetKeyDown(KeyCode.Y))
+                {
+                    SceneController.Instance.LoadScene(Scenes.DraftScene, true);
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            MainMenuUIController.OnCharacterSelect -= MainMenuUIController_OnCharacterSelect;
         }
 
         private Encounter GetRandomEnccounters()
@@ -34,7 +55,7 @@ namespace FTS.Core
             Encounter newEncounter;
             int randomNumber = UnityEngine.Random.Range(0, 100);
 
-            if (randomNumber <= 65)
+            if (randomNumber <= 40)
             {
                 numCombatEncounters++;
                 if(numCombatEncounters >= encounterNumber)
@@ -46,11 +67,11 @@ namespace FTS.Core
                     newEncounter = combatEncounter;
                 }
             }
-            else if (randomNumber > 65 && randomNumber <= 75)
+            else if (randomNumber > 40 && randomNumber <= 70)
             {
                 newEncounter = eliteEncounter;
             }
-            else if (randomNumber > 75 && randomNumber <= 90)
+            else if (randomNumber > 70 && randomNumber <= 90)
             {
                 numShopEncounters++;
                 if(numShopEncounters > 1)
@@ -78,26 +99,59 @@ namespace FTS.Core
             return newEncounter;
         }
 
-        internal List<Encounter> GetEncounters()
+        private void GenerateEncounters()
         {
             numCombatEncounters = 0;
-            RunController.Instance.Day--;
-            List<Encounter> encounters = new List<Encounter>();
-            if (RunController.Instance.Day > 1)
+
+            for (int i = 0; i < encounterColumns; i++)
             {
-                for (int i = 0; i < encounterNumber; i++)
-                {
-                    encounters.Add(GetRandomEnccounters());
-                }
+                encounters.Add(Instantiate(bossEnccounter));
             }
-            else if (RunController.Instance.Day == 1)
+
+            for (int i = 0; i < encounterColumns * numEncounterLayers; i++)
             {
-                for (int i = 0; i < encounterNumber; i++)
-                {
-                    encounters.Add(bossEnccounter);
-                }
-            }          
+                encounters.Add(Instantiate(GetRandomEnccounters()));
+            }
+
+            for (int i = 0; i < encounterColumns; i++)
+            {
+                encounters.Add(Instantiate(combatEncounter));
+            }
+            int id = 0;
+            foreach (var encounter in encounters)
+            {
+                encounter.Id = id++;
+                encounter.IsSelected = false;
+                encounter.IsAvailable = false;
+            }
+            for (int i = encounters.Count - encounterColumns; i < encounters.Count; i++)
+            {
+                encounters[i].IsAvailable = true;
+            }
+        }
+
+
+        internal List<Encounter> GetEncounters()
+        {      
             return encounters;
         }
+
+        internal void SelectEncounter(int id)
+        {
+            currentEncounter = id;
+            encounters[id].IsSelected = true;
+            if (id >= encounterColumns)
+            {
+                encounters[id - encounterColumns].IsAvailable = true;
+            }
+        }
+
+        private void MainMenuUIController_OnCharacterSelect()
+        {
+            if (encounters.Count <= 0)
+            {
+                GenerateEncounters();
+            }
+        }   
     }
 }

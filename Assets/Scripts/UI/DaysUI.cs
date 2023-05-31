@@ -13,13 +13,13 @@ namespace FTS.UI
         void Start()
         {
             dayText = GetComponent<TextMeshProUGUI>();
-            dayText.text = "Days left: " + RunController.Instance.Day.ToString();
-            RunController.OnDayChanged += RunController_OnDayChanged;
+            //dayText.text = "Days left: " + RunController.Instance.Day.ToString();
+            //RunController.OnDayChanged += RunController_OnDayChanged;
         }
 
         private void OnDestroy()
         {
-            RunController.OnDayChanged -= RunController_OnDayChanged;
+            //RunController.OnDayChanged -= RunController_OnDayChanged;
         }
 
         private void RunController_OnDayChanged(int days)

@@ -11,18 +11,16 @@ namespace FTS.Core
         public static event System.Action OnPlayerLost = delegate { };
         public static event Action<int> OnHealthChanged = delegate { };
         public static event Action<int> OnCinderChanged = delegate { };
-        public static event Action<int> OnDayChanged = delegate { };
 
         [SerializeField] int startingCinder = 50;
         [SerializeField] int startingHealth = 50;
         [SerializeField] int startingDay = 10;
-        [SerializeField] int difficultyIntervals = 3;
+        [SerializeField] int difficultyIntervals = 2;
         RunInfo runInfo = new RunInfo();
         int health;
-        int day;
-        int currentDay = 2;     
+        int encounterCount = 0;   
         int cinder;
-        bool hasWon = false;
+        bool hasWon = true;
         CombatType combatType;
 
         public static RunController Instance { get; private set; }
@@ -34,24 +32,6 @@ namespace FTS.Core
             {
                 health = value;
                 OnHealthChanged.Invoke(health);
-            }
-        }
-
-        public int Day
-        {
-            get { return day; }
-            set
-            {
-                day = value;
-                currentDay++;
-                OnDayChanged.Invoke(day);
-                if(day <= 0)
-                {
-                    hasWon = true;
-                    day = startingDay;
-                    currentDay = 0;
-                    SceneController.Instance.LoadScene(Scenes.EndGameScene, true);
-                }
             }
         }
 
@@ -82,12 +62,14 @@ namespace FTS.Core
             StartValues();
             UnitController.OnDamageTaken += UnitController_OnDamageTaken;
             UnitController.OnPlayerLost += UnitController_OnPlayerLost;
+            ObjectiveController.OnPlayerWon += ObjectiveController_OnPlayerWon;
         }
 
         private void OnDestroy()
         {
             UnitController.OnDamageTaken -= UnitController_OnDamageTaken;
             UnitController.OnPlayerLost -= UnitController_OnPlayerLost;
+            ObjectiveController.OnPlayerWon -= ObjectiveController_OnPlayerWon;
         }
 
         private void TakeDamage(int damage)
@@ -104,20 +86,31 @@ namespace FTS.Core
         public void StartValues()
         {
             Health = startingHealth;
-            day = startingDay;
+            encounterCount = 0;
             Cinder = startingCinder;
         }
 
         public int GetDifficultyScale()
         {
-            return Mathf.FloorToInt(currentDay / difficultyIntervals);
+            int difficulty = Mathf.FloorToInt(encounterCount / difficultyIntervals);
+            if (difficulty > 3)
+            {
+                difficulty = 3;
+            }
+            return difficulty;
+        }
+
+        internal void SetCombatType(CombatType type)
+        {
+            combatType = type;
+            encounterCount++;
         }
 
         #region Saving Methods
         public object CaptureState()
         {
             runInfo.Health = Health;
-            runInfo.Day = Day;
+            runInfo.EncounterCount = encounterCount;
             runInfo.Cinder = Cinder;
 
             return runInfo;
@@ -127,7 +120,7 @@ namespace FTS.Core
         {
             runInfo = (RunInfo)state;
             health = runInfo.Health;
-            day = runInfo.Day;
+            encounterCount = runInfo.EncounterCount;
             cinder = runInfo.Cinder;
         }
         #endregion
@@ -143,12 +136,24 @@ namespace FTS.Core
         {
             hasWon = false;
         }
+
+        private void ObjectiveController_OnPlayerWon()
+        {
+            if (combatType == CombatType.Boss)
+            {
+                SceneController.Instance.LoadScene(Scenes.EndGameScene, true);
+            }
+            else
+            {
+                SceneController.Instance.LoadScene(Scenes.DraftScene, true);
+            }
+        }
     }
 
     struct RunInfo
     {
         public int Health;
-        public int Day;
+        public int EncounterCount;
         public int Cinder;
     }
 }

@@ -28,6 +28,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7093676096138810246}
   m_RootOrder: 1
@@ -166,6 +167,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 414.36566, y: 693.6786, z: -700.2341}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8697713050240454995}
   m_RootOrder: 6
@@ -268,6 +270,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8697713050240454995}
   m_RootOrder: 11
@@ -310,6 +313,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 246.63432, y: -376.6786, z: 700.2341}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3332741409789555599}
   - {fileID: 6187855896716172873}
@@ -356,6 +360,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3893395586026294368}
   - {fileID: 3262235279490761594}
@@ -480,6 +485,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 235.36568, y: 647.6786, z: -700.2341}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8697713050240454995}
   m_RootOrder: 12
@@ -527,6 +533,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 414.36566, y: 693.6786, z: -700.2341}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8697713050240454995}
   m_RootOrder: 9
@@ -571,6 +578,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7093676096138810246}
   m_RootOrder: 0
@@ -645,6 +653,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7093676096138810246}
   m_Father: {fileID: 8133896297369191906}
@@ -690,6 +699,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 414.36566, y: 693.6786, z: -700.2341}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8697713050240454995}
   m_RootOrder: 7
@@ -1146,18 +1156,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30e2f224ffe1c8340a9b4dc53b4d1a88, type: 3}
---- !u!224 &8133896297369191906 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8710054175328209070, guid: 30e2f224ffe1c8340a9b4dc53b4d1a88,
-    type: 3}
-  m_PrefabInstance: {fileID: 576798893775703372}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8133896297369191907 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8710054175328209071, guid: 30e2f224ffe1c8340a9b4dc53b4d1a88,
-    type: 3}
-  m_PrefabInstance: {fileID: 576798893775703372}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2209548079146328981 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1632792139349831385, guid: 30e2f224ffe1c8340a9b4dc53b4d1a88,
@@ -1170,9 +1168,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 576798893775703372}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8941400330896497833 stripped
+--- !u!224 &8133896297369191906 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8710054175328209070, guid: 30e2f224ffe1c8340a9b4dc53b4d1a88,
+    type: 3}
+  m_PrefabInstance: {fileID: 576798893775703372}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8133896297369191907 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8365172096618435045, guid: 30e2f224ffe1c8340a9b4dc53b4d1a88,
+  m_CorrespondingSourceObject: {fileID: 8710054175328209071, guid: 30e2f224ffe1c8340a9b4dc53b4d1a88,
     type: 3}
   m_PrefabInstance: {fileID: 576798893775703372}
   m_PrefabAsset: {fileID: 0}
@@ -1189,6 +1193,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialToggle: {fileID: 7651287371720065555}
+--- !u!1 &8941400330896497833 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8365172096618435045, guid: 30e2f224ffe1c8340a9b4dc53b4d1a88,
+    type: 3}
+  m_PrefabInstance: {fileID: 576798893775703372}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7634896881498724185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2130,35 +2140,13 @@ PrefabInstance:
     - target: {fileID: 7780800430916748264, guid: cf0f52b06163acd44816a8309db2ccd9,
         type: 3}
       propertyPath: m_Name
-      value: HeartController
+      value: RunController
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf0f52b06163acd44816a8309db2ccd9, type: 3}
---- !u!1 &1865782247146104354 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7780800430916748264, guid: cf0f52b06163acd44816a8309db2ccd9,
-    type: 3}
-  m_PrefabInstance: {fileID: 8223119740359435722}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3813705008834952228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5112539584128637422, guid: cf0f52b06163acd44816a8309db2ccd9,
     type: 3}
   m_PrefabInstance: {fileID: 8223119740359435722}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6683323229632558652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865782247146104354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a621f657cb9ca6c459bcd9aed68588ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingCinder: 100
-  startingHealth: 25
-  startingDay: 10
-  difficultyIntervals: 3

@@ -75,7 +75,6 @@ namespace FTS.Characters
         protected override void TakeDamage()
         {
             base.TakeDamage();
-            Debug.Log("hello? " + animator.isActiveAndEnabled);
             if(isHealthSet)
             {
                 animator.SetTrigger("Hit");

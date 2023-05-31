@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,7 @@ namespace FTS.Core
 {
     public class SceneController : MonoBehaviour
     {
+        public static event Action OnAdditiveSceneLoaded = delegate { };
         string addativeScene = null;
         string baseScene = null;
         public static SceneController Instance { get; private set; }
@@ -30,6 +32,7 @@ namespace FTS.Core
             else
             {
                 baseScene = sceneName;
+                addativeScene = null;
                 SceneManager.LoadScene(sceneName);
             }
         }
@@ -44,7 +47,8 @@ namespace FTS.Core
                 }
                 baseScene = 
                 addativeScene = scene.ToString();
-                SceneManager.LoadScene(addativeScene, LoadSceneMode.Additive);
+                OnAdditiveSceneLoaded?.Invoke();
+                SceneManager.LoadScene(addativeScene, LoadSceneMode.Additive);               
             }
             else
             {
@@ -56,6 +60,7 @@ namespace FTS.Core
         {
             if (encounter.IsSceneAddative)
             {
+                OnAdditiveSceneLoaded?.Invoke();
                 addativeScene = encounter.NextScene.ToString();
                 SceneManager.LoadScene(addativeScene, LoadSceneMode.Additive);
             }
