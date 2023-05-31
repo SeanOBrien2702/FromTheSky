@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] float normalMoveSpeed;
     [SerializeField] float fastMoveSpeed;
-    float movementScaler = 0.0075f;
+    float movementScaler = 0.0055f;
 
     [Header("Rotation Settings")]
     [SerializeField] float rotateSpeed;

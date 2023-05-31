@@ -20,7 +20,7 @@ namespace FTS.Characters
         StateController stateController;
         UnitController unitController;
 
-        [SerializeField] float travelSpeed = 2f;
+        float travelSpeed = 4.5f;
         [SerializeField] float pushSpeed = 0.1f;
         float rotationSpeed = 0.5f;
         Vector3 roation;
