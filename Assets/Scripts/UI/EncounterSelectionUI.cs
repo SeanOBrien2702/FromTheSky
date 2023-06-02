@@ -5,99 +5,106 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class EncounterSelectionUI : MonoBehaviour
+namespace FTS.UI
 {
-    [SerializeField] GameObject buttonPrefab;
-    EncountersController encountersController;
-    ObjectiveDatabase objectiveDatabase;
-
-    void Start()
+    public class EncounterSelectionUI : MonoBehaviour
     {
-        encountersController = FindObjectOfType<EncountersController>().GetComponent<EncountersController>();
-        objectiveDatabase = FindObjectOfType<ObjectiveDatabase>().GetComponent<ObjectiveDatabase>();
-        SceneController.OnAdditiveSceneLoaded += SceneController_OnAdditiveSceneLoaded;
-        
-        FillPanel();
-    }
+        [SerializeField] GameObject buttonPrefab;
+        EncountersController encountersController;
+        ObjectiveDatabase objectiveDatabase;
 
-    private void OnDestroy()
-    {
-        SceneController.OnAdditiveSceneLoaded -= SceneController_OnAdditiveSceneLoaded;
-    }
-
-    void FillPanel()
-    {
-        List<Encounter> encounters = encountersController.GetEncounters();
-        foreach (Encounter encounter in encounters)
+        void Start()
         {
-            GameObject newButton = Instantiate(buttonPrefab);
-            EncounterUI ui = newButton.GetComponentInChildren<EncounterUI>();
-            newButton.transform.SetParent(transform, false);
-            if (encounter.IsSelected)
-            {
-                newButton.transform.GetChild(0).gameObject.SetActive(false);
-                continue;
-            }
-            ui.NameText.text = encounter.EncounterName;
-            ui.Image.sprite = encounter.EncounterSprite;
+            encountersController = FindObjectOfType<EncountersController>().GetComponent<EncountersController>();
+            objectiveDatabase = FindObjectOfType<ObjectiveDatabase>().GetComponent<ObjectiveDatabase>();
+            SceneController.OnAdditiveSceneLoaded += SceneController_OnAdditiveSceneLoaded;
 
-            if(!encounter.IsAvailable)
-            {
-                ui.Button.interactable = false;
-                continue;
-            }         
+            FillPanel();
+        }
 
-            if (encounter.NextScene == Scenes.GameScene)
+        private void OnDestroy()
+        {
+            SceneController.OnAdditiveSceneLoaded -= SceneController_OnAdditiveSceneLoaded;
+        }
+
+        void FillPanel()
+        {
+            List<Encounter> encounters = encountersController.GetEncounters();
+            foreach (Encounter encounter in encounters)
             {
-                List<Objective> objectives = objectives = objectiveDatabase.GenerateObjectives();
-                foreach (Objective objective in objectives)
+                GameObject newButton = Instantiate(buttonPrefab);
+                EncounterUI ui = newButton.GetComponentInChildren<EncounterUI>();
+                newButton.transform.SetParent(transform, false);
+                if (encounter.IsSelected)
                 {
-                    objective.EnableEncounter();
+                    newButton.transform.GetChild(0).gameObject.SetActive(false);
+                    continue;
                 }
-                ui.ObjectiveText.text = objectives[0].SetDescription(true) + "\n" +
-                                        objectives[1].SetDescription(true);
-                ui.Button.onClick.AddListener(() =>
+                ui.NameText.text = encounter.EncounterName;
+                ui.GetComponent<TooltipUI>().CreateTooltips(encounter.EncounterName);          
+                ui.Image.sprite = encounter.EncounterSprite;
+
+                if (!encounter.IsAvailable)
                 {
-                    newButton.transform.GetChild(0).gameObject.SetActive(false);
-                    encountersController.SelectEncounter(encounter.Id);
-                    RunController.Instance.SetCombatType(encounter.CombatType);
-                    //Debug.Log(RunController.Instance.CombatType);
-                    SelectEncounter(encounter, objectives);
-                });
+                    ui.Button.interactable = false;
+                    continue;
+                }
+
+                if (encounter.NextScene == Scenes.GameScene)
+                {
+                    List<Objective> objectives = objectives = objectiveDatabase.GenerateObjectives();
+                    foreach (Objective objective in objectives)
+                    {
+                        objective.EnableEncounter();
+                    }
+                    ui.ObjectiveText.text = objectives[0].SetDescription(true) + "\n" +
+                                            objectives[1].SetDescription(true);
+                    ui.Button.onClick.AddListener(() =>
+                    {
+                        newButton.transform.GetChild(0).gameObject.SetActive(false);
+                        encountersController.SelectEncounter(encounter.Id);
+                        RunController.Instance.SetCombatType(encounter.CombatType);
+                        //Debug.Log(RunController.Instance.CombatType);
+                        SelectEncounter(encounter, objectives);
+                    });
+                }
+                else
+                {
+                    ui.Button.onClick.AddListener(() =>
+                    {
+                        newButton.transform.GetChild(0).gameObject.SetActive(false);
+                        encountersController.SelectEncounter(encounter.Id);
+                        SelectEncounter(encounter);
+                    });
+                }
+                //LayoutRebuilder.ForceRebuildLayoutImmediate(ui.GetComponent<RectTransform>());
             }
-            else
+           
+        }
+
+        private void ClearPanel()
+        {
+            foreach (Transform child in transform)
             {
-                ui.Button.onClick.AddListener(() =>
-                {
-                    newButton.transform.GetChild(0).gameObject.SetActive(false);
-                    encountersController.SelectEncounter(encounter.Id);
-                    SelectEncounter(encounter);
-                });
+                Destroy(child.gameObject);
             }
         }
-    }
 
-    private void ClearPanel()
-    {
-        foreach (Transform child in transform)
+        private void SelectEncounter(Encounter encounter, List<Objective> objectives = null)
         {
-            Destroy(child.gameObject);
+            if (objectives != null)
+            {
+                objectiveDatabase.SetObjectives(objectives);
+            }
+            SceneController.Instance.LoadScene(encounter);
         }
-    }
 
-    private void SelectEncounter(Encounter encounter, List<Objective> objectives = null)
-    {
-        if(objectives != null)
+        private void SceneController_OnAdditiveSceneLoaded()
         {
-            objectiveDatabase.SetObjectives(objectives);
+            ClearPanel();
+            FillPanel();
         }
-        SceneController.Instance.LoadScene(encounter);
-    }
-
-    private void SceneController_OnAdditiveSceneLoaded()
-    {
-        ClearPanel();
-        FillPanel();
     }
 }

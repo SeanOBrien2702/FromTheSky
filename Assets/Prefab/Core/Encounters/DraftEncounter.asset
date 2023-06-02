@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7643846c847f58c448703aecc9f504d8, type: 3}
   m_Name: DraftEncounter
   m_EditorClassIdentifier: 
-  encounterName: Draft Cards
+  encounterName: Draft
   encounterSprite: {fileID: 21300000, guid: 0082198af801842be84138f830322bdf, type: 3}
   nextScene: 4
   isSceneAddative: 1
+  combatType: 0

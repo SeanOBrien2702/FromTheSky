@@ -16,5 +16,10 @@ public static class Keywords
         {"FORETELL", "Select one of the top 3 cards the deck. Shuffle then put the select card on top"},
         {"INHERENT", "Starts in your opening hand"},
         {"HEAT", "Deal damage to all units around equal to heat than reduce damage by one"},
+        {"BOSS", "Final fight for your home"},
+        {"SHOP", "Buy cards, remove cards and exchange health/cinder"},
+        {"DRAFT", "Add a new card to your deck"},
+        {"ELITE", "Tougher enemies for a better reward"},
+        {"COMBAT", "Fight off the invading forces"},
     };
 }

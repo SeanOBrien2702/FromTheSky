@@ -21,6 +21,7 @@ namespace FTS.Core
 
         int currentEncounter;
         int numCombatEncounters = 0;
+        int numEliteEncounters = 0;
         int numShopEncounters = 0;
         int numLootEncounters = 0;
         List<Encounter> encounters = new List<Encounter>();
@@ -69,12 +70,21 @@ namespace FTS.Core
             }
             else if (randomNumber > 40 && randomNumber <= 70)
             {
-                newEncounter = eliteEncounter;
+                numEliteEncounters++;
+                if (numEliteEncounters > 3)
+                {
+                    newEncounter = combatEncounter;
+                }
+                else
+                {
+                    newEncounter = eliteEncounter;
+                }
+                
             }
             else if (randomNumber > 70 && randomNumber <= 90)
             {
                 numShopEncounters++;
-                if(numShopEncounters > 1)
+                if(numShopEncounters > 2)
                 {
                     newEncounter = combatEncounter;
                 }
@@ -86,7 +96,7 @@ namespace FTS.Core
             else
             {
                 numLootEncounters++;
-                if (numLootEncounters > 1)
+                if (numLootEncounters > 2)
                 {
                     newEncounter = combatEncounter;
                 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7643846c847f58c448703aecc9f504d8, type: 3}
   m_Name: EliteEncounter
   m_EditorClassIdentifier: 
-  encounterName: Elite Combat
+  encounterName: Elite
   encounterSprite: {fileID: 21300000, guid: a87a5960e6d664497852b563bd4a17e1, type: 3}
   nextScene: 3
   isSceneAddative: 0

@@ -11,7 +11,7 @@ namespace FTS.UI
     {
         [SerializeField] Tooltip tooltipPrefab;
         [SerializeField] Transform tooltipPosition;
-
+        [SerializeField] bool isEncounters = false;
         //[SerializeField] RectTransform canvasRectTransform;
         //[SerializeField] RectTransform background;
 
@@ -80,14 +80,26 @@ namespace FTS.UI
 
         internal void CreateTooltips(string rulesText)
         {
-            foreach (string word in rulesText.ToUpper().Split('>', '<'))
-            { 
+            string[] words;
+            if (isEncounters)
+            {
+                words = rulesText.ToUpper().Split(" ");
+            }
+            else
+            {
+                words = rulesText.ToUpper().Split('>', '<');
+            }
+
+            foreach (string word in words)
+            {
+                Debug.Log(word);
                 if(Keywords.KeywordTerms.Keys.Contains(word))
                 {
                     Tooltip tooltip = Instantiate(tooltipPrefab, tooltipPosition.transform);
                     tooltip.SetToolTip(word, Keywords.KeywordTerms[word]);
                 }
             }
+            Canvas.ForceUpdateCanvases();
             tooltipPosition.gameObject.SetActive(false);
             //foreach (var keyword in Keywords.KeywordTerms)
             //{
