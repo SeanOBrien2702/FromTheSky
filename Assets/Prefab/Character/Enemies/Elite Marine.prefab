@@ -5,17 +5,22 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 3775932547694884460}
+    m_TransformParent: {fileID: 2102924383658340132}
     m_Modifications:
     - target: {fileID: 1344600475728286914, guid: 13a412044b948634ca57825afe0189b1,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3194208608885212606, guid: 13a412044b948634ca57825afe0189b1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3866697043596957436, guid: 13a412044b948634ca57825afe0189b1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3866697043596957436, guid: 13a412044b948634ca57825afe0189b1,
         type: 3}
@@ -45,7 +50,7 @@ PrefabInstance:
     - target: {fileID: 3866697043596957436, guid: 13a412044b948634ca57825afe0189b1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.29
       objectReference: {fileID: 0}
     - target: {fileID: 3866697043596957436, guid: 13a412044b948634ca57825afe0189b1,
         type: 3}
@@ -156,11 +161,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2471153704888819103, guid: e52461628f3069a479a0fafcaf15fabf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.762
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e52461628f3069a479a0fafcaf15fabf, type: 3}
 --- !u!95 &2049972488751760648 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95256343710928478, guid: e52461628f3069a479a0fafcaf15fabf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2098849215754095446}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2102924383658340132 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4374579268494450, guid: e52461628f3069a479a0fafcaf15fabf,
     type: 3}
   m_PrefabInstance: {fileID: 2098849215754095446}
   m_PrefabAsset: {fileID: 0}
@@ -222,7 +238,7 @@ PrefabInstance:
     - target: {fileID: 1785404799917439837, guid: 014ede208cc899e4ca1367e7c0162a5a,
         type: 3}
       propertyPath: rmsCount
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4141323274225437201, guid: 014ede208cc899e4ca1367e7c0162a5a,
         type: 3}
