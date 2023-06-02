@@ -33,15 +33,15 @@ namespace FTS.Saving
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                Load(defaultFile);
-            }
+            //if (Input.GetKeyDown(KeyCode.L))
+            //{
+            //    Load(defaultFile);
+            //}
 
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                Save(defaultFile);
-            }
+            //if (Input.GetKeyDown(KeyCode.K))
+            //{
+            //    Save(defaultFile);
+            //}
         }
         internal void Continue()
         {

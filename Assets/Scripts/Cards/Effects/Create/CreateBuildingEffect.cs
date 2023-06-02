@@ -19,7 +19,7 @@ namespace FTS.Cards
 
         public override string GetEffectText()
         {
-            string effectText = "";
+            string effectText = "Create a Battery.\nTurn Start: cloest ally gains 1 energy";
 
             return effectText;
         }

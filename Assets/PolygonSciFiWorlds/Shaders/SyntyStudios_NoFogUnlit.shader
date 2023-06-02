@@ -441,9 +441,10 @@ Shader "SyntyStudios/NoFogUnlit"
 				UNITY_SETUP_INSTANCE_ID(IN);
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
 
-				#ifdef LOD_FADE_CROSSFADE
-					LODDitheringTransition( IN.clipPos.xyz, unity_LODFade.x );
-				#endif
+				//#ifdef LOD_FADE_CROSSFADE
+				//TODO: look into this
+				//	LODDitheringTransition( IN.clipPos.xyz, unity_LODFade.x );
+				//#endif
 
 				#if defined(ENABLE_TERRAIN_PERPIXEL_NORMAL)
 					float2 sampleCoords = (IN.lightmapUVOrVertexSH.zw / _TerrainHeightmapRecipSize.zw + 0.5f) * _TerrainHeightmapRecipSize.xy;
@@ -917,9 +918,10 @@ Shader "SyntyStudios/NoFogUnlit"
 					#endif
 				#endif
 
-				#ifdef LOD_FADE_CROSSFADE
-					LODDitheringTransition( IN.clipPos.xyz, unity_LODFade.x );
-				#endif
+				//#ifdef LOD_FADE_CROSSFADE
+				//TODO: look into this
+				//	LODDitheringTransition( IN.clipPos.xyz, unity_LODFade.x );
+				//#endif
 				#ifdef ASE_DEPTH_WRITE_ON
 					outputDepth = DepthValue;
 				#endif
@@ -1187,9 +1189,9 @@ Shader "SyntyStudios/NoFogUnlit"
 					clip(Alpha - AlphaClipThreshold);
 				#endif
 
-				#ifdef LOD_FADE_CROSSFADE
-					LODDitheringTransition( IN.clipPos.xyz, unity_LODFade.x );
-				#endif
+				//#ifdef LOD_FADE_CROSSFADE
+				//	LODDitheringTransition( IN.clipPos.xyz, unity_LODFade.x );
+				//#endif
 				#ifdef ASE_DEPTH_WRITE_ON
 				outputDepth = DepthValue;
 				#endif
