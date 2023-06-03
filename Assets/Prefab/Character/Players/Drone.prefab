@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vangaurd 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4430873977362317626, guid: 79ee6209fadd70a43b1bb1c40aa6f9e0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c9f93ad4f2d506419154ed414311926, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79ee6209fadd70a43b1bb1c40aa6f9e0, type: 3}
 --- !u!1 &3446140623991661889 stripped
