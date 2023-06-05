@@ -27,7 +27,7 @@ MonoBehaviour:
   cameraDistanceFadeNear: 0
   cameraDistanceFadeFar: 1000
   constantWidth: 1
-  overlay: 0.296
+  overlay: 0.15
   overlayMode: 0
   overlayColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   overlayAnimationSpeed: 0.5
@@ -36,7 +36,7 @@ MonoBehaviour:
   overlayTexture: {fileID: 0}
   overlayTextureUVSpace: 0
   overlayTextureScale: 1
-  outline: 0.6
+  outline: 1
   outlineColor: {r: 1, g: 0.8314501, b: 0, a: 1}
   outlineColorStyle: 0
   outlineGradient:
