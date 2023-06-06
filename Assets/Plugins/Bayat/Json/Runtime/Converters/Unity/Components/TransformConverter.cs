@@ -1,5 +1,7 @@
-using Bayat.Json.Serialization;
 using System;
+
+using Bayat.Core;
+using Bayat.Json.Serialization;
 
 namespace Bayat.Json.Converters
 {
@@ -20,7 +22,20 @@ namespace Bayat.Json.Converters
         public override void WriteProperties(JsonObjectContract contract, JsonWriter writer, object value, Type objectType, JsonSerializerWriter internalWriter)
         {
             var instance = (UnityEngine.Transform)value;
-            internalWriter.SerializeProperty(writer, "parent", instance.parent);
+
+            // We just store the reference instead of the whole transform
+            //internalWriter.SerializeProperty(writer, "parent", instance.parent);
+            if (SceneReferenceResolver.Current != null)
+            {
+                if (instance.parent != null)
+                {
+                    var unityGuid = SceneReferenceResolver.Current.Get(instance.parent);
+                    if (!string.IsNullOrEmpty(unityGuid))
+                    {
+                        writer.WriteProperty("parentRef", unityGuid);
+                    }
+                }
+            }
             internalWriter.SerializeProperty(writer, "position", instance.position);
             internalWriter.SerializeProperty(writer, "rotation", instance.rotation);
             internalWriter.SerializeProperty(writer, "localScale", instance.localScale);
@@ -33,7 +48,20 @@ namespace Bayat.Json.Converters
             switch (memberName)
             {
                 case "parent":
+
+                    // Handles old data
                     instance.parent = internalReader.DeserializeProperty<UnityEngine.Transform>(reader);
+                    break;
+                case "parentRef":
+                    string unityGuid = reader.ReadAsString();
+                    if (SceneReferenceResolver.Current != null)
+                    {
+                        var parent = (UnityEngine.Transform)SceneReferenceResolver.Current.Get(unityGuid);
+                        if (parent != null)
+                        {
+                            instance.SetParent(parent, true);
+                        }
+                    }
                     break;
                 case "position":
                     instance.position = internalReader.DeserializeProperty<UnityEngine.Vector3>(reader);
