@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Bayat.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
-using Bayat.Json;
-
 using UnityEngine;
 
 namespace Bayat.SaveSystem.Storage
@@ -105,7 +103,7 @@ namespace Bayat.SaveSystem.Storage
         public virtual async Task CommitWriteStream(IStorageStream stream)
         {
             await CommitWriteStreamInternal(stream);
-            if (UseCatalog)
+            if (this.UseCatalog)
             {
                 await AddToCatalog(stream.Identifier);
             }
@@ -122,7 +120,7 @@ namespace Bayat.SaveSystem.Storage
         public virtual async Task WriteAllText(string identifier, string data)
         {
             await WriteAllTextInternal(identifier, data);
-            if (UseCatalog)
+            if (this.UseCatalog)
             {
                 await AddToCatalog(identifier);
             }
@@ -140,7 +138,7 @@ namespace Bayat.SaveSystem.Storage
         public virtual async Task WriteAllBytes(string identifier, byte[] data)
         {
             await WriteAllBytesInternal(identifier, data);
-            if (UseCatalog)
+            if (this.UseCatalog)
             {
                 await AddToCatalog(identifier);
             }
@@ -160,7 +158,7 @@ namespace Bayat.SaveSystem.Storage
         public virtual async Task<StorageDeleteOperationResult> Delete(string identifier)
         {
             StorageDeleteOperationResult result = await DeleteInternal(identifier);
-            if (UseCatalog)
+            if (this.UseCatalog)
             {
                 await RemoveFromCatalog(identifier);
             }
@@ -187,7 +185,7 @@ namespace Bayat.SaveSystem.Storage
             StorageMoveOperationResult result = await MoveInternal(oldIdentifier, newIdentifier, replace);
             if (result.Succeed)
             {
-                if (UseCatalog)
+                if (this.UseCatalog)
                 {
                     await RenameInCatalog(oldIdentifier, result.ResultIdentifier);
                 }
@@ -216,7 +214,7 @@ namespace Bayat.SaveSystem.Storage
             StorageCopyOperationResult result = await CopyInternal(fromIdentifier, toIdentifier, replace);
             if (result.Succeed)
             {
-                if (UseCatalog)
+                if (this.UseCatalog)
                 {
                     await AddToCatalog(result.ResultIdentifier);
                 }
@@ -249,7 +247,7 @@ namespace Bayat.SaveSystem.Storage
 
         public virtual async Task UpdateMetaData(string identifier, bool isWrite, bool encrypted)
         {
-            if (!UseMetaData)
+            if (!this.UseMetaData)
             {
                 return;
             }
@@ -316,7 +314,7 @@ namespace Bayat.SaveSystem.Storage
             {
                 return identifier;
             }
-            return identifier + MetaSuffix;
+            return identifier + this.MetaSuffix;
         }
 
         /// <summary>
@@ -326,7 +324,7 @@ namespace Bayat.SaveSystem.Storage
         /// <returns>True if the identifier is meta otherwise false</returns>
         protected virtual bool IsMetaIdentifier(string identifier)
         {
-            return identifier.EndsWith(MetaSuffix);
+            return identifier.EndsWith(this.MetaSuffix);
         }
 
         #endregion
@@ -335,16 +333,16 @@ namespace Bayat.SaveSystem.Storage
 
         public virtual Task SaveCatalog(List<string> catalog)
         {
-            return WriteAllTextInternal(CatalogIdentifier, JsonConvert.SerializeObject(catalog));
+            return WriteAllTextInternal(this.CatalogIdentifier, JsonConvert.SerializeObject(catalog));
         }
 
         public virtual async Task<List<string>> LoadCatalog()
         {
-            if (!await Exists(CatalogIdentifier))
+            if (!await Exists(this.CatalogIdentifier))
             {
                 return new List<string>();
             }
-            string data = await ReadAllText(CatalogIdentifier);
+            string data = await ReadAllText(this.CatalogIdentifier);
             return JsonConvert.DeserializeObject<List<string>>(data);
         }
 
@@ -354,7 +352,7 @@ namespace Bayat.SaveSystem.Storage
         /// <param name="identifier">The item identifier</param>
         protected virtual async Task AddToCatalog(string identifier)
         {
-            if (identifier == CatalogIdentifier)
+            if (identifier == this.CatalogIdentifier)
             {
                 return;
             }
@@ -396,7 +394,7 @@ namespace Bayat.SaveSystem.Storage
         /// <param name="identifier">The item identifier</param>
         protected virtual async Task RenameInCatalog(string oldIdentifier, string newIdentifier)
         {
-            if (oldIdentifier == CatalogIdentifier || newIdentifier == CatalogIdentifier)
+            if (oldIdentifier == this.CatalogIdentifier || newIdentifier == this.CatalogIdentifier)
             {
                 return;
             }
@@ -419,7 +417,7 @@ namespace Bayat.SaveSystem.Storage
         /// <returns>True if the identifier is catalog identifier otherwise false</returns>
         protected virtual bool IsCatalogIdentifier(string identifier)
         {
-            return CatalogIdentifier == identifier;
+            return this.CatalogIdentifier == identifier;
         }
 
         #endregion
@@ -429,7 +427,7 @@ namespace Bayat.SaveSystem.Storage
         public virtual async Task<StorageBackup> CreateBackup(string identifier)
         {
             DateTime backupTimeUtc = DateTime.UtcNow;
-            string backupIdentifier = identifier + backupTimeUtc.Ticks + BackupSuffix;
+            string backupIdentifier = identifier + backupTimeUtc.Ticks + this.BackupSuffix;
             StorageBackup backup = new StorageBackup(backupIdentifier, backupTimeUtc);
             await Copy(identifier, backupIdentifier, false);
 

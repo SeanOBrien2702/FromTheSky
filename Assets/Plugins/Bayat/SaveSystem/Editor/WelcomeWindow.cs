@@ -1,7 +1,5 @@
 ﻿using Bayat.Core.EditorWindows;
-
 using UnityEditor;
-
 using UnityEngine;
 
 namespace Bayat.SaveSystem
@@ -62,10 +60,9 @@ namespace Bayat.SaveSystem
                 return;
             }
 #endif
-            var currentCompatiblityLevel = PlayerSettings.GetApiCompatibilityLevel(BuildPipeline.GetBuildTargetGroup(EditorUserBuildSettings.activeBuildTarget));
-            if (currentCompatiblityLevel != ApiCompatibilityLevel.NET_4_6)
+            if (PlayerSettings.GetApiCompatibilityLevel(BuildPipeline.GetBuildTargetGroup(EditorUserBuildSettings.activeBuildTarget)) != ApiCompatibilityLevel.NET_4_6)
             {
-                //UpdateScriptingRuntime();
+                UpdateScriptingRuntime();
             }
         }
 

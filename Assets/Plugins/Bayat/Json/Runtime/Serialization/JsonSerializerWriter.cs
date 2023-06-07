@@ -82,8 +82,8 @@ namespace Bayat.Json.Serialization
                 throw new ArgumentNullException(nameof(jsonWriter));
             }
 
-            this._rootType = objectType;
-            this._rootLevel = this._serializeStack.Count + 1;
+            _rootType = objectType;
+            _rootLevel = _serializeStack.Count + 1;
 
             JsonContract contract = GetContractSafe(value);
 
@@ -117,18 +117,18 @@ namespace Bayat.Json.Serialization
             {
                 // clear root contract to ensure that if level was > 1 then it won't
                 // accidently be used for non root values
-                this._rootType = null;
+                _rootType = null;
             }
         }
 
         private JsonSerializerProxy GetInternalSerializer()
         {
-            if (this.InternalSerializer == null)
+            if (InternalSerializer == null)
             {
-                this.InternalSerializer = new JsonSerializerProxy(this);
+                InternalSerializer = new JsonSerializerProxy(this);
             }
 
-            return this.InternalSerializer;
+            return InternalSerializer;
         }
 
         internal JsonContract GetContractSafe(object value)
@@ -138,7 +138,7 @@ namespace Bayat.Json.Serialization
                 return null;
             }
 
-            return this.Serializer.ContractResolver.ResolveContract(value.GetType());
+            return Serializer.ContractResolver.ResolveContract(value.GetType());
         }
 
         private void SerializePrimitive(JsonWriter writer, object value, JsonPrimitiveContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
@@ -181,7 +181,7 @@ namespace Bayat.Json.Serialization
                 ((containerProperty != null) ? containerProperty.ItemConverter : null) ??
                 ((containerContract != null) ? containerContract.ItemConverter : null) ??
                 valueContract.Converter ??
-                this.Serializer.GetMatchingConverter(valueContract.UnderlyingType) ??
+                Serializer.GetMatchingConverter(valueContract.UnderlyingType) ??
                 valueContract.InternalConverter;
 
             if (converter != null && converter.CanWrite)
@@ -227,7 +227,7 @@ namespace Bayat.Json.Serialization
                     break;
 #endif
                 case JsonContractType.Linq:
-                    ((JToken)value).WriteTo(writer, this.Serializer.Converters.ToArray());
+                    ((JToken)value).WriteTo(writer, Serializer.Converters.ToArray());
                     break;
             }
         }
@@ -281,11 +281,11 @@ namespace Bayat.Json.Serialization
             {
                 if (valueContract.ContractType == JsonContractType.Array)
                 {
-                    isReference = HasFlag(this.Serializer.PreserveReferencesHandling, PreserveReferencesHandling.Arrays);
+                    isReference = HasFlag(Serializer.PreserveReferencesHandling, PreserveReferencesHandling.Arrays);
                 }
                 else
                 {
-                    isReference = HasFlag(this.Serializer.PreserveReferencesHandling, PreserveReferencesHandling.Objects);
+                    isReference = HasFlag(Serializer.PreserveReferencesHandling, PreserveReferencesHandling.Objects);
                 }
             }
 
@@ -297,7 +297,7 @@ namespace Bayat.Json.Serialization
             Type objectType = value.GetType();
 
             // If the serialize scriptable objects option is enabled, and this object is a ScriptableObject, then its data should be serialized instead of being referenced
-            if (typeof(UnityEngine.ScriptableObject).IsAssignableFrom(objectType) && this.Serializer.SerializeScriptableObjects)
+            if (typeof(UnityEngine.ScriptableObject).IsAssignableFrom(objectType) && Serializer.SerializeScriptableObjects)
             {
                 return false;
             }
@@ -315,7 +315,7 @@ namespace Bayat.Json.Serialization
                 }
             }
 
-            if (this.Serializer.ReferenceResolver.IsReferenced(this, value))
+            if (Serializer.ReferenceResolver.IsReferenced(this, value))
             {
                 return true;
             }
@@ -325,13 +325,13 @@ namespace Bayat.Json.Serialization
 
         private bool ShouldWriteProperty(object memberValue, JsonProperty property)
         {
-            if (property.NullValueHandling.GetValueOrDefault(this.Serializer.NullValueHandling) == NullValueHandling.Ignore &&
+            if (property.NullValueHandling.GetValueOrDefault(Serializer.NullValueHandling) == NullValueHandling.Ignore &&
                 memberValue == null)
             {
                 return false;
             }
 
-            if (HasFlag(property.DefaultValueHandling.GetValueOrDefault(this.Serializer.DefaultValueHandling), DefaultValueHandling.Ignore)
+            if (HasFlag(property.DefaultValueHandling.GetValueOrDefault(Serializer.DefaultValueHandling), DefaultValueHandling.Ignore)
                 && MiscellaneousUtils.ValueEquals(memberValue, property.GetResolvedDefaultValue()))
             {
                 return false;
@@ -364,9 +364,9 @@ namespace Bayat.Json.Serialization
                 referenceLoopHandling = containerContract.ItemReferenceLoopHandling;
             }
 
-            bool exists = (this.Serializer.EqualityComparer != null)
-                ? this._serializeStack.Contains(value, this.Serializer.EqualityComparer)
-                : this._serializeStack.Contains(value);
+            bool exists = (Serializer.EqualityComparer != null)
+                ? _serializeStack.Contains(value, Serializer.EqualityComparer)
+                : _serializeStack.Contains(value);
 
             if (exists)
             {
@@ -377,21 +377,21 @@ namespace Bayat.Json.Serialization
                 }
                 message += " with type '{0}'.".FormatWith(CultureInfo.InvariantCulture, value.GetType());
 
-                switch (referenceLoopHandling.GetValueOrDefault(this.Serializer.ReferenceLoopHandling))
+                switch (referenceLoopHandling.GetValueOrDefault(Serializer.ReferenceLoopHandling))
                 {
                     case ReferenceLoopHandling.Error:
                         throw JsonSerializationException.Create(null, writer.ContainerPath, message, null);
                     case ReferenceLoopHandling.Ignore:
-                        if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Verbose)
+                        if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose)
                         {
-                            this.TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, message + ". Skipping serializing self referenced value."), null);
+                            TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, message + ". Skipping serializing self referenced value."), null);
                         }
 
                         return false;
                     case ReferenceLoopHandling.Serialize:
-                        if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Verbose)
+                        if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose)
                         {
-                            this.TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, message + ". Serializing self referenced value."), null);
+                            TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, message + ". Serializing self referenced value."), null);
                         }
 
                         return true;
@@ -412,18 +412,9 @@ namespace Bayat.Json.Serialization
                     string guid = AssetReferenceResolver.Current.Get(unityObject);
                     if (!string.IsNullOrEmpty(guid))
                     {
-                        if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Info)
+                        if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Info)
                         {
-                            this.TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Writing Unity object reference to Id '{0}' for {1}.".FormatWith(CultureInfo.InvariantCulture, guid, value.GetType())), null);
-                        }
-                        if (unityObject is UnityEngine.GameObject gameObject)
-                        {
-                            var savablePrefab = gameObject.GetComponent<ISavablePrefab>();
-                            if (savablePrefab != null && !string.IsNullOrEmpty(savablePrefab.PrefabRef))
-                            {
-                                writer.WritePropertyName(JsonTypeReflector.UnityPrefabRefPropertyName, false);
-                                writer.WriteValue(savablePrefab.PrefabRef);
-                            }
+                            TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Writing Unity object reference to Id '{0}' for {1}.".FormatWith(CultureInfo.InvariantCulture, guid, value.GetType())), null);
                         }
                         writer.WritePropertyName(JsonTypeReflector.UnityRefPropertyName, false);
                         writer.WriteValue(guid);
@@ -434,9 +425,9 @@ namespace Bayat.Json.Serialization
             }
             string reference = GetReference(writer, value);
 
-            if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Info)
+            if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Info)
             {
-                this.TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Writing object reference to Id '{0}' for {1}.".FormatWith(CultureInfo.InvariantCulture, reference, value.GetType())), null);
+                TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Writing object reference to Id '{0}' for {1}.".FormatWith(CultureInfo.InvariantCulture, reference, value.GetType())), null);
             }
 
             writer.WritePropertyName(JsonTypeReflector.RefPropertyName, false);
@@ -448,7 +439,7 @@ namespace Bayat.Json.Serialization
         {
             try
             {
-                string reference = this.Serializer.ReferenceResolver.GetReference(this, value);
+                string reference = Serializer.ReferenceResolver.GetReference(this, value);
 
                 return reference;
             }
@@ -507,29 +498,29 @@ namespace Bayat.Json.Serialization
 
         internal void OnSerializing(JsonWriter writer, JsonContract contract, object value)
         {
-            if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Info)
+            if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Info)
             {
-                this.TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Started serializing {0}".FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)), null);
+                TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Started serializing {0}".FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)), null);
             }
 
-            contract.InvokeOnSerializing(value, this.Serializer.Context);
+            contract.InvokeOnSerializing(value, Serializer.Context);
         }
 
         internal void OnSerialized(JsonWriter writer, JsonContract contract, object value)
         {
-            if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Info)
+            if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Info)
             {
-                this.TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Finished serializing {0}".FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)), null);
+                TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Finished serializing {0}".FormatWith(CultureInfo.InvariantCulture, contract.UnderlyingType)), null);
             }
 
-            contract.InvokeOnSerialized(value, this.Serializer.Context);
+            contract.InvokeOnSerialized(value, Serializer.Context);
         }
 
         public void SerializeObject(JsonWriter writer, object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
         {
             OnSerializing(writer, contract, value);
 
-            this._serializeStack.Add(value);
+            _serializeStack.Add(value);
 
             WriteObjectStart(writer, value, contract, member, collectionContract, containerProperty);
 
@@ -537,7 +528,7 @@ namespace Bayat.Json.Serialization
 
             writer.WriteEndObject();
 
-            this._serializeStack.RemoveAt(this._serializeStack.Count - 1);
+            _serializeStack.RemoveAt(_serializeStack.Count - 1);
 
             OnSerialized(writer, contract, value);
         }
@@ -629,7 +620,7 @@ namespace Bayat.Json.Serialization
             {
                 if (property.PropertyContract == null)
                 {
-                    property.PropertyContract = this.Serializer.ContractResolver.ResolveContract(property.PropertyType);
+                    property.PropertyContract = Serializer.ContractResolver.ResolveContract(property.PropertyType);
                 }
 
                 memberValue = property.ValueProvider.GetValue(value);
@@ -676,7 +667,7 @@ namespace Bayat.Json.Serialization
         {
             writer.WriteStartObject();
 
-            bool isReference = ResolveIsReference(contract, member, collectionContract, containerProperty) ?? HasFlag(this.Serializer.PreserveReferencesHandling, PreserveReferencesHandling.Objects);
+            bool isReference = ResolveIsReference(contract, member, collectionContract, containerProperty) ?? HasFlag(Serializer.PreserveReferencesHandling, PreserveReferencesHandling.Objects);
             // don't make readonly fields the referenced value because they can't be deserialized to
             if (isReference && (member == null || member.Writable) && !contract.UnderlyingType.IsValueType)
             {
@@ -701,15 +692,6 @@ namespace Bayat.Json.Serialization
                     {
                         guid = SceneReferenceResolver.Current.Add(unityObject);
                     }
-                    if (unityObject is UnityEngine.GameObject gameObject)
-                    {
-                        var savablePrefab = gameObject.GetComponent<ISavablePrefab>();
-                        if (savablePrefab != null && !string.IsNullOrEmpty(savablePrefab.PrefabRef))
-                        {
-                            writer.WritePropertyName(JsonTypeReflector.UnityPrefabRefPropertyName, false);
-                            writer.WriteValue(savablePrefab.PrefabRef);
-                        }
-                    }
                     writer.WritePropertyName(JsonTypeReflector.UnityRefPropertyName, false);
                     writer.WriteValue(guid);
                 }
@@ -720,9 +702,9 @@ namespace Bayat.Json.Serialization
         {
             string reference = GetReference(writer, value);
 
-            if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Verbose)
+            if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose)
             {
-                this.TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, "Writing object reference Id '{0}' for {1}.".FormatWith(CultureInfo.InvariantCulture, reference, type)), null);
+                TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, "Writing object reference Id '{0}' for {1}.".FormatWith(CultureInfo.InvariantCulture, reference, type)), null);
             }
 
             writer.WritePropertyName(JsonTypeReflector.IdPropertyName, false);
@@ -731,11 +713,11 @@ namespace Bayat.Json.Serialization
 
         public void WriteTypeProperty(JsonWriter writer, Type type)
         {
-            string typeName = ReflectionUtils.GetTypeName(type, this.Serializer.TypeNameAssemblyFormat, this.Serializer.Binder);
+            string typeName = ReflectionUtils.GetTypeName(type, Serializer.TypeNameAssemblyFormat, Serializer.Binder);
 
-            if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Verbose)
+            if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose)
             {
-                this.TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, "Writing type name '{0}' for {1}.".FormatWith(CultureInfo.InvariantCulture, typeName, type)), null);
+                TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, "Writing type name '{0}' for {1}.".FormatWith(CultureInfo.InvariantCulture, typeName, type)), null);
             }
 
             writer.WritePropertyName(JsonTypeReflector.TypePropertyName, false);
@@ -770,21 +752,21 @@ namespace Bayat.Json.Serialization
                     return;
                 }
 
-                this._serializeStack.Add(value);
+                _serializeStack.Add(value);
 
-                if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Info)
+                if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Info)
                 {
-                    this.TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Started serializing {0} with converter {1}.".FormatWith(CultureInfo.InvariantCulture, value.GetType(), converter.GetType())), null);
+                    TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Started serializing {0} with converter {1}.".FormatWith(CultureInfo.InvariantCulture, value.GetType(), converter.GetType())), null);
                 }
 
                 converter.WriteJson(writer, value, this);
 
-                if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Info)
+                if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Info)
                 {
-                    this.TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Finished serializing {0} with converter {1}.".FormatWith(CultureInfo.InvariantCulture, value.GetType(), converter.GetType())), null);
+                    TraceWriter.Trace(TraceLevel.Info, JsonPosition.FormatMessage(null, writer.Path, "Finished serializing {0} with converter {1}.".FormatWith(CultureInfo.InvariantCulture, value.GetType(), converter.GetType())), null);
                 }
 
-                this._serializeStack.RemoveAt(this._serializeStack.Count - 1);
+                _serializeStack.RemoveAt(_serializeStack.Count - 1);
             }
         }
 
@@ -795,7 +777,7 @@ namespace Bayat.Json.Serialization
 
             OnSerializing(writer, contract, underlyingList);
 
-            this._serializeStack.Add(underlyingList);
+            _serializeStack.Add(underlyingList);
 
             bool hasWrittenMetadataObject = WriteStartArray(writer, underlyingList, contract, member, collectionContract, containerProperty);
 
@@ -847,7 +829,7 @@ namespace Bayat.Json.Serialization
                 writer.WriteEndObject();
             }
 
-            this._serializeStack.RemoveAt(this._serializeStack.Count - 1);
+            _serializeStack.RemoveAt(_serializeStack.Count - 1);
 
             OnSerialized(writer, contract, underlyingList);
         }
@@ -856,7 +838,7 @@ namespace Bayat.Json.Serialization
         {
             OnSerializing(writer, contract, values);
 
-            this._serializeStack.Add(values);
+            _serializeStack.Add(values);
 
             bool hasWrittenMetadataObject = WriteStartArray(writer, values, contract, member, collectionContract, containerProperty);
 
@@ -867,7 +849,7 @@ namespace Bayat.Json.Serialization
                 writer.WriteEndObject();
             }
 
-            this._serializeStack.RemoveAt(this._serializeStack.Count - 1);
+            _serializeStack.RemoveAt(_serializeStack.Count - 1);
 
             OnSerialized(writer, contract, values);
         }
@@ -931,7 +913,7 @@ namespace Bayat.Json.Serialization
 
         private bool WriteStartArray(JsonWriter writer, object values, JsonArrayContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
         {
-            bool isReference = ResolveIsReference(contract, member, containerContract, containerProperty) ?? HasFlag(this.Serializer.PreserveReferencesHandling, PreserveReferencesHandling.Arrays);
+            bool isReference = ResolveIsReference(contract, member, containerContract, containerProperty) ?? HasFlag(Serializer.PreserveReferencesHandling, PreserveReferencesHandling.Arrays);
             // don't make readonly fields the referenced value because they can't be deserialized to
             isReference = (isReference && (member == null || member.Writable));
 
@@ -955,7 +937,7 @@ namespace Bayat.Json.Serialization
 
             if (contract.ItemContract == null)
             {
-                contract.ItemContract = this.Serializer.ContractResolver.ResolveContract(contract.CollectionItemType ?? typeof(object));
+                contract.ItemContract = Serializer.ContractResolver.ResolveContract(contract.CollectionItemType ?? typeof(object));
             }
 
             return writeMetadataObject;
@@ -977,12 +959,12 @@ namespace Bayat.Json.Serialization
             }
 
             OnSerializing(writer, contract, value);
-            this._serializeStack.Add(value);
+            _serializeStack.Add(value);
 
             WriteObjectStart(writer, value, contract, member, collectionContract, containerProperty);
 
             SerializationInfo serializationInfo = new SerializationInfo(contract.UnderlyingType, new FormatterConverter());
-            value.GetObjectData(serializationInfo, this.Serializer.Context);
+            value.GetObjectData(serializationInfo, Serializer.Context);
 
             foreach (SerializationEntry serializationEntry in serializationInfo)
             {
@@ -1002,7 +984,7 @@ namespace Bayat.Json.Serialization
 
             writer.WriteEndObject();
 
-            this._serializeStack.RemoveAt(this._serializeStack.Count - 1);
+            _serializeStack.RemoveAt(_serializeStack.Count - 1);
             OnSerialized(writer, contract, value);
         }
 #endif
@@ -1011,7 +993,7 @@ namespace Bayat.Json.Serialization
         private void SerializeDynamic(JsonWriter writer, IDynamicMetaObjectProvider value, JsonDynamicContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
         {
             OnSerializing(writer, contract, value);
-            this._serializeStack.Add(value);
+            _serializeStack.Add(value);
 
             WriteObjectStart(writer, value, contract, member, collectionContract, containerProperty);
 
@@ -1091,19 +1073,19 @@ namespace Bayat.Json.Serialization
 
             writer.WriteEndObject();
 
-            this._serializeStack.RemoveAt(this._serializeStack.Count - 1);
+            _serializeStack.RemoveAt(_serializeStack.Count - 1);
             OnSerialized(writer, contract, value);
         }
 #endif
 
         private bool ShouldWriteDynamicProperty(object memberValue)
         {
-            if (this.Serializer.NullValueHandling == NullValueHandling.Ignore && memberValue == null)
+            if (Serializer.NullValueHandling == NullValueHandling.Ignore && memberValue == null)
             {
                 return false;
             }
 
-            if (HasFlag(this.Serializer.DefaultValueHandling, DefaultValueHandling.Ignore) &&
+            if (HasFlag(Serializer.DefaultValueHandling, DefaultValueHandling.Ignore) &&
                 (memberValue == null || MiscellaneousUtils.ValueEquals(memberValue, ReflectionUtils.GetDefaultValue(memberValue.GetType()))))
             {
                 return false;
@@ -1118,7 +1100,7 @@ namespace Bayat.Json.Serialization
                 ((member != null) ? member.TypeNameHandling : null)
                 ?? ((containerProperty != null) ? containerProperty.ItemTypeNameHandling : null)
                 ?? ((containerContract != null) ? containerContract.ItemTypeNameHandling : null)
-                ?? this.Serializer.TypeNameHandling;
+                ?? Serializer.TypeNameHandling;
 
             if (HasFlag(resolvedTypeNameHandling, typeNameHandlingFlag))
             {
@@ -1142,9 +1124,9 @@ namespace Bayat.Json.Serialization
                         return true;
                     }
                 }
-                else if (this._rootType != null && this._serializeStack.Count == this._rootLevel)
+                else if (_rootType != null && _serializeStack.Count == _rootLevel)
                 {
-                    JsonContract rootContract = this.Serializer.ContractResolver.ResolveContract(this._rootType);
+                    JsonContract rootContract = Serializer.ContractResolver.ResolveContract(_rootType);
 
                     if (contract.UnderlyingType != rootContract.CreatedType)
                     {
@@ -1162,18 +1144,18 @@ namespace Bayat.Json.Serialization
             object underlyingDictionary = wrappedDictionary != null ? wrappedDictionary.UnderlyingDictionary : values;
 
             OnSerializing(writer, contract, underlyingDictionary);
-            this._serializeStack.Add(underlyingDictionary);
+            _serializeStack.Add(underlyingDictionary);
 
             WriteObjectStart(writer, underlyingDictionary, contract, member, collectionContract, containerProperty);
 
             if (contract.ItemContract == null)
             {
-                contract.ItemContract = this.Serializer.ContractResolver.ResolveContract(contract.DictionaryValueType ?? typeof(object));
+                contract.ItemContract = Serializer.ContractResolver.ResolveContract(contract.DictionaryValueType ?? typeof(object));
             }
 
             if (contract.KeyContract == null)
             {
-                contract.KeyContract = this.Serializer.ContractResolver.ResolveContract(contract.DictionaryKeyType ?? typeof(object));
+                contract.KeyContract = Serializer.ContractResolver.ResolveContract(contract.DictionaryKeyType ?? typeof(object));
             }
 
             int initialDepth = writer.Top;
@@ -1235,7 +1217,7 @@ namespace Bayat.Json.Serialization
 
             writer.WriteEndObject();
 
-            this._serializeStack.RemoveAt(this._serializeStack.Count - 1);
+            _serializeStack.RemoveAt(_serializeStack.Count - 1);
 
             OnSerialized(writer, contract, underlyingDictionary);
         }
@@ -1307,9 +1289,9 @@ namespace Bayat.Json.Serialization
 
             bool shouldSerialize = property.ShouldSerialize(target);
 
-            if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Verbose)
+            if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose)
             {
-                this.TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, "ShouldSerialize result for property '{0}' on {1}: {2}".FormatWith(CultureInfo.InvariantCulture, property.PropertyName, property.DeclaringType, shouldSerialize)), null);
+                TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, "ShouldSerialize result for property '{0}' on {1}: {2}".FormatWith(CultureInfo.InvariantCulture, property.PropertyName, property.DeclaringType, shouldSerialize)), null);
             }
 
             return shouldSerialize;
@@ -1324,9 +1306,9 @@ namespace Bayat.Json.Serialization
 
             bool isSpecified = property.GetIsSpecified(target);
 
-            if (this.TraceWriter != null && this.TraceWriter.LevelFilter >= TraceLevel.Verbose)
+            if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Verbose)
             {
-                this.TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, "IsSpecified result for property '{0}' on {1}: {2}".FormatWith(CultureInfo.InvariantCulture, property.PropertyName, property.DeclaringType, isSpecified)), null);
+                TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(null, writer.Path, "IsSpecified result for property '{0}' on {1}: {2}".FormatWith(CultureInfo.InvariantCulture, property.PropertyName, property.DeclaringType, isSpecified)), null);
             }
 
             return isSpecified;

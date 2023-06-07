@@ -21,21 +21,21 @@ namespace Bayat.Core
         private void OnEnable()
         {
             this.assetReferenceResolver = (AssetReferenceResolver)target;
-            this.mode = serializedObject.FindProperty("mode");
-            this.refreshDependenciesTimeoutInSeconds = serializedObject.FindProperty("refreshDependenciesTimeoutInSeconds");
-            this.ignoredTags = serializedObject.FindProperty("ignoredTags");
-            this.ignoreStatic = serializedObject.FindProperty("ignoreStatic");
+            this.mode = this.serializedObject.FindProperty("mode");
+            this.refreshDependenciesTimeoutInSeconds = this.serializedObject.FindProperty("refreshDependenciesTimeoutInSeconds");
+            this.ignoredTags = this.serializedObject.FindProperty("ignoredTags");
+            this.ignoreStatic = this.serializedObject.FindProperty("ignoreStatic");
         }
 
         public override void OnInspectorGUI()
         {
             //base.OnInspectorGUI();
-            if (this.assetReferenceResolver == null)
+            if (assetReferenceResolver == null)
             {
                 return;
             }
 
-            serializedObject.Update();
+            this.serializedObject.Update();
 
             EditorGUILayout.Space();
             EditorGUILayout.PropertyField(this.mode);
@@ -65,7 +65,7 @@ namespace Bayat.Core
 
             if (GUILayout.Button("Reset"))
             {
-                if (EditorUtility.DisplayDialog("Reset Asset Reference Database?", "This action will reset whole asset reference database and used GUIDs which makes the saved GUIDs obsolete, so there will be problems when loading previously saved data using this database.\n\nProceed at your own risk.", "Reset", "Cancel"))
+                if (EditorUtility.DisplayDialog("Reset Asset Reference Database?", "This action will reset whole asset reference database and used GUIDs which makes the saved GUIDs obsolote, so there will be problems when loading previously saved data using this database.\n\nProceed at your own risk.", "Reset", "Cancel"))
                 {
                     this.assetReferenceResolver.GuidToReference.Clear();
                     this.assetReferenceResolver.ReferenceToGuid.Clear();
@@ -73,7 +73,7 @@ namespace Bayat.Core
                 }
             }
 
-            serializedObject.ApplyModifiedProperties();
+            this.serializedObject.ApplyModifiedProperties();
         }
 
     }

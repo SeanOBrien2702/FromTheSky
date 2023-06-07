@@ -30,17 +30,14 @@ using System.Reflection;
 using System.Security;
 #if !(DOTNET || (UNITY_WSA || UNITY_WINRT) || PORTABLE40)
 using System.Security.Permissions;
-
 #endif
 using Bayat.Json.Utilities;
-
 #if NET20
 using Bayat.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
 using System.Runtime.Serialization;
-
 using Bayat.Json.Shims;
 
 using Bayat.Core.Reflection;
@@ -55,7 +52,6 @@ namespace Bayat.Json.Serialization
 
         public const string IdPropertyName = "$id";
         public const string UnityRefPropertyName = "$unityRef";
-        public const string UnityPrefabRefPropertyName = "$unityPrefabRef";
         public const string RefPropertyName = "$ref";
         public const string TypePropertyName = "$type";
         public const string ValuePropertyName = "$value";

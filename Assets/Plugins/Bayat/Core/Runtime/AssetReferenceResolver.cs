@@ -84,7 +84,7 @@ namespace Bayat.Core
         [SerializeField]
         protected List<string> guids = new List<string>();
         [SerializeField]
-        protected List<UnityObject> dependencies = new List<UnityObject>();
+        protected List<UnityEngine.Object> dependencies = new List<UnityEngine.Object>();
 
         [SerializeField]
         protected GuidToReferenceDictionary guidToReference = new GuidToReferenceDictionary();
@@ -113,7 +113,7 @@ namespace Bayat.Core
         /// Gets the project dependencies list.
         /// </summary>
         [Obsolete("This property will be removed in future releases, use GuidToReference or ReferenceToGuid instead.", false)]
-        public virtual List<UnityObject> Dependencies
+        public virtual List<UnityEngine.Object> Dependencies
         {
             get
             {
@@ -240,7 +240,7 @@ namespace Bayat.Core
         {
             RemoveNullValues();
 
-            List<UnityObject> allBuildScenesAssets = new List<UnityObject>();
+            List<UnityEngine.Object> allBuildScenesAssets = new List<UnityEngine.Object>();
             Scene activeScene = EditorSceneManager.GetActiveScene();
             for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
             {
@@ -254,7 +254,7 @@ namespace Bayat.Core
                 {
                     scene = EditorSceneManager.OpenScene(editorScene.path, OpenSceneMode.Additive);
                 }
-                UnityObject[] dependencies = EditorUtility.CollectDependencies(scene.GetRootGameObjects());
+                UnityEngine.Object[] dependencies = EditorUtility.CollectDependencies(scene.GetRootGameObjects());
                 foreach (var sceneDependency in dependencies)
                 {
                     if (EditorUtility.IsPersistent(sceneDependency))
@@ -281,7 +281,7 @@ namespace Bayat.Core
         /// </summary>
         /// <param name="objs"></param>
         /// <param name="timeoutSecs"></param>
-        public virtual void AddDependencies(UnityObject[] objs, float timeoutSecs = 2)
+        public virtual void AddDependencies(UnityEngine.Object[] objs, float timeoutSecs = 2)
         {
 
             // Empty the referenceToGuid so it has to be refreshed.
@@ -297,7 +297,7 @@ namespace Bayat.Core
                     break;
                 }
 
-                var dependencies = EditorUtility.CollectDependencies(new UnityObject[] { obj });
+                var dependencies = EditorUtility.CollectDependencies(new UnityEngine.Object[] { obj });
                 float rate = objRate / dependencies.Length;
 
                 foreach (var dependency in dependencies)
@@ -331,7 +331,7 @@ namespace Bayat.Core
         public virtual void RemoveInvalidReferences()
         {
             var removeGuids = new List<string>();
-            foreach (var item in GuidToReference)
+            foreach (var item in this.GuidToReference)
             {
                 if (!EditorUtility.IsPersistent(item.Value))
                 {
@@ -350,7 +350,7 @@ namespace Bayat.Core
             {
                 this.guidToReference.Remove(removeGuids[i]);
             }
-            ReferenceToGuid.Clear();
+            this.ReferenceToGuid.Clear();
 
             // Fix for unity serialization
             EditorUtility.SetDirty(this);
@@ -362,10 +362,10 @@ namespace Bayat.Core
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public virtual string Get(UnityObject obj)
+        public virtual string Get(UnityEngine.Object obj)
         {
             string guid;
-            if (!ReferenceToGuid.TryGetValue(obj, out guid))
+            if (!this.ReferenceToGuid.TryGetValue(obj, out guid))
                 return string.Empty;
             return guid;
         }
@@ -375,11 +375,11 @@ namespace Bayat.Core
         /// </summary>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public virtual UnityObject Get(string guid)
+        public virtual UnityEngine.Object Get(string guid)
         {
             if (string.IsNullOrEmpty(guid))
                 return null;
-            UnityObject obj;
+            UnityEngine.Object obj;
             if (!this.guidToReference.TryGetValue(guid, out obj))
                 return null;
             return obj;
@@ -390,11 +390,11 @@ namespace Bayat.Core
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public virtual string Add(UnityObject obj)
+        public virtual string Add(UnityEngine.Object obj)
         {
             string guid;
             // If it already exists in the list, do nothing.
-            if (ReferenceToGuid.TryGetValue(obj, out guid))
+            if (this.ReferenceToGuid.TryGetValue(obj, out guid))
                 return guid;
             // Add the reference to the Dictionary.
             guid = Guid.NewGuid().ToString("N");
@@ -411,7 +411,7 @@ namespace Bayat.Core
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="guid"></param>
-        public virtual void Add(UnityObject obj, string guid)
+        public virtual void Add(UnityEngine.Object obj, string guid)
         {
 
             // If the GUID is null or empty, generate a new GUID.
@@ -433,7 +433,7 @@ namespace Bayat.Core
         /// Removes the object and its GUID from the database.
         /// </summary>
         /// <param name="obj"></param>
-        public virtual void Remove(UnityObject obj)
+        public virtual void Remove(UnityEngine.Object obj)
         {
             string referenceID;
 
@@ -455,7 +455,7 @@ namespace Bayat.Core
         /// <param name="referenceID"></param>
         public virtual void Remove(string referenceID)
         {
-            UnityObject obj;
+            UnityEngine.Object obj;
             // Get the reference ID, or do nothing if it doesn't exist.
             if (!guidToReference.TryGetValue(referenceID, out obj))
                 return;
@@ -490,8 +490,8 @@ namespace Bayat.Core
             //{
             //    this.guidToReference.Remove(key);
             //}
-            GuidToReference.RemoveNullValues();
-            ReferenceToGuid.RemoveNullValues();
+            this.GuidToReference.RemoveNullValues();
+            this.ReferenceToGuid.RemoveNullValues();
 #if UNITY_EDITOR
             // Fix for unity serialization
             EditorUtility.SetDirty(this);
@@ -507,11 +507,11 @@ namespace Bayat.Core
                          .Select(group => group.First())
                          .ToDictionary(pair => pair.Key, pair => pair.Value);
             this.guidToReference.Clear();
-            ReferenceToGuid.Clear();
+            this.ReferenceToGuid.Clear();
             foreach (var item in uniqueDictionary)
             {
                 this.guidToReference.Add(item.Key, item.Value);
-                ReferenceToGuid.Add(item.Value, item.Key);
+                this.ReferenceToGuid.Add(item.Value, item.Key);
             }
 #if UNITY_EDITOR
             // Fix for unity serialization
@@ -524,7 +524,7 @@ namespace Bayat.Core
         /// </summary>
         public virtual void Clear()
         {
-            ReferenceToGuid.Clear();
+            this.ReferenceToGuid.Clear();
             this.guidToReference.Clear();
 #if UNITY_EDITOR
             // Fix for unity serialization
@@ -537,9 +537,9 @@ namespace Bayat.Core
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public virtual bool Contains(UnityObject obj)
+        public virtual bool Contains(UnityEngine.Object obj)
         {
-            return ReferenceToGuid.ContainsKey(obj);
+            return this.ReferenceToGuid.ContainsKey(obj);
         }
 
         /// <summary>
@@ -574,7 +574,7 @@ namespace Bayat.Core
         /// </summary>
         /// <param name="obj">The object</param>
         /// <returns>True if can be saved otherwise false</returns>
-        public static bool CanBeSaved(UnityObject obj)
+        public static bool CanBeSaved(UnityEngine.Object obj)
         {
             // Check if any of the hide flags determine that it should not be saved.
             if ((((obj.hideFlags & HideFlags.DontSave) == HideFlags.DontSave) ||
@@ -662,7 +662,7 @@ namespace Bayat.Core
         {
             for (int i = 0; i < this.ignoredTags.Length; i++)
             {
-                if (gameObject.CompareTag(this.ignoredTags[i]))
+                if (gameObject.CompareTag(ignoredTags[i]))
                 {
                     return true;
                 }
@@ -721,12 +721,12 @@ namespace Bayat.Core
         //                undoRecorded = true;
         //            }
 
-        //            UnityObject[] builtInExtraAssets = AssetDatabase.LoadAllAssetsAtPath("Resources/unity_builtin_extra");
-        //            UnityObject[] defaultAssets = AssetDatabase.LoadAllAssetsAtPath("Library/unity default resources");
-        //            List<UnityObject> allAssets = new List<UnityObject>();
+        //            UnityEngine.Object[] builtInExtraAssets = AssetDatabase.LoadAllAssetsAtPath("Resources/unity_builtin_extra");
+        //            UnityEngine.Object[] defaultAssets = AssetDatabase.LoadAllAssetsAtPath("Library/unity default resources");
+        //            List<UnityEngine.Object> allAssets = new List<UnityEngine.Object>();
         //            for (int i = 0; i < builtInExtraAssets.Length; i++)
         //            {
-        //                UnityObject assetObj = builtInExtraAssets[i];
+        //                UnityEngine.Object assetObj = builtInExtraAssets[i];
         //                if (assetObj == null || allAssets.Contains(assetObj))
         //                {
         //                    continue;
@@ -735,7 +735,7 @@ namespace Bayat.Core
         //            }
         //            for (int i = 0; i < defaultAssets.Length; i++)
         //            {
-        //                UnityObject assetObj = defaultAssets[i];
+        //                UnityEngine.Object assetObj = defaultAssets[i];
         //                if (assetObj == null || allAssets.Contains(assetObj))
         //                {
         //                    continue;
@@ -785,7 +785,7 @@ namespace Bayat.Core
         //                undoRecorded = true;
         //            }
 
-        //            List<UnityObject> allAssets = new List<UnityObject>();
+        //            List<UnityEngine.Object> allAssets = new List<UnityEngine.Object>();
         //            Scene activeScene = EditorSceneManager.GetActiveScene();
         //            for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
         //            {
@@ -799,7 +799,7 @@ namespace Bayat.Core
         //                {
         //                    scene = EditorSceneManager.OpenScene(editorScene.path, OpenSceneMode.Additive);
         //                }
-        //                UnityObject[] dependencies = EditorUtility.CollectDependencies(scene.GetRootGameObjects());
+        //                UnityEngine.Object[] dependencies = EditorUtility.CollectDependencies(scene.GetRootGameObjects());
         //                foreach (var sceneDependency in dependencies)
         //                {
         //                    if (EditorUtility.IsPersistent(sceneDependency))
@@ -856,9 +856,9 @@ namespace Bayat.Core
         //                undoRecorded = true;
         //            }
 
-        //            List<UnityObject> allAssets = new List<UnityObject>();
+        //            List<UnityEngine.Object> allAssets = new List<UnityEngine.Object>();
         //            Scene activeScene = EditorSceneManager.GetActiveScene();
-        //            UnityObject[] dependencies = EditorUtility.CollectDependencies(activeScene.GetRootGameObjects());
+        //            UnityEngine.Object[] dependencies = EditorUtility.CollectDependencies(activeScene.GetRootGameObjects());
         //            foreach (var sceneDependency in dependencies)
         //            {
         //                if (EditorUtility.IsPersistent(sceneDependency))
@@ -912,13 +912,13 @@ namespace Bayat.Core
         //            }
 
         //            string[] assetGuids = AssetDatabase.FindAssets("t: Object");
-        //            List<UnityObject> allAssets = new List<UnityObject>();
+        //            List<UnityEngine.Object> allAssets = new List<UnityEngine.Object>();
 
         //            for (int i = 0; i < assetGuids.Length; i++)
         //            {
         //                string assetGuid = assetGuids[i];
         //                string assetPath = AssetDatabase.GUIDToAssetPath(assetGuid);
-        //                UnityObject assetObj = AssetDatabase.LoadAssetAtPath<UnityObject>(assetPath);
+        //                UnityEngine.Object assetObj = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
         //                if (assetObj == null || allAssets.Contains(assetObj))
         //                {
         //                    continue;
@@ -1015,7 +1015,7 @@ namespace Bayat.Core
         //        /// </summary>
         //        /// <param name="obj">The object</param>
         //        /// <returns>True if has object otherwise false</returns>
-        //        public virtual bool Contains(UnityObject obj)
+        //        public virtual bool Contains(UnityEngine.Object obj)
         //        {
         //            return this.dependencies.Contains(obj);
         //        }
@@ -1025,7 +1025,7 @@ namespace Bayat.Core
         //        /// </summary>
         //        /// <param name="guid">The GUID</param>
         //        /// <returns>The object associated to this GUID</returns>
-        //        public virtual UnityObject ResolveReference(string guid)
+        //        public virtual UnityEngine.Object ResolveReference(string guid)
         //        {
         //            int index = this.guids.IndexOf(guid);
         //            if (index == -1)
@@ -1043,7 +1043,7 @@ namespace Bayat.Core
         //        /// </summary>
         //        /// <param name="obj"></param>
         //        /// <returns>The GUID associated to the object</returns>
-        //        public virtual string ResolveGuid(UnityObject obj)
+        //        public virtual string ResolveGuid(UnityEngine.Object obj)
         //        {
         //            int index = this.dependencies.IndexOf(obj);
         //            if (index == -1)
@@ -1062,7 +1062,7 @@ namespace Bayat.Core
         //        /// <param name="guid">The guid</param>
         //        /// <param name="obj">The object</param>
         //        /// <returns>The GUID or the generated GUID if the given GUID is null or empty</returns>
-        //        public virtual string Add(string guid, UnityObject obj)
+        //        public virtual string Add(string guid, UnityEngine.Object obj)
         //        {
         //            if (this.dependencies.Contains(obj))
         //            {
@@ -1091,7 +1091,7 @@ namespace Bayat.Core
         //        /// </summary>
         //        /// <param name="obj"></param>
         //        /// <returns>The generated GUID</returns>
-        //        public virtual string Add(UnityObject obj)
+        //        public virtual string Add(UnityEngine.Object obj)
         //        {
         //            if (this.dependencies.Contains(obj))
         //            {

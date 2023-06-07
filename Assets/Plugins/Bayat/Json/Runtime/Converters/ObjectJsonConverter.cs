@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 
 using Bayat.Core;
@@ -112,7 +111,6 @@ namespace Bayat.Json.Converters
 
             JsonContract contract = internalReader.GetContractSafe(objectType);
             UnityEngine.Object unityObject = null;
-            UnityEngine.GameObject unityPrefab = null;
 
             if (!reader.MoveToContent())
             {
@@ -156,12 +154,8 @@ namespace Bayat.Json.Converters
                     }
 
                     object newValue;
-                    if (internalReader.ReadMetadataPropertiesToken(tokenReader, ref resolvedObjectType, ref contract, null, null, null, existingValue, out newValue, out id, out unityGuid, out unityObject, out unityPrefab))
+                    if (internalReader.ReadMetadataPropertiesToken(tokenReader, ref resolvedObjectType, ref contract, null, null, null, existingValue, out newValue, out id, out unityGuid, out unityObject))
                     {
-                        if (unityPrefab != null)
-                        {
-                            unityObject = UnityEngine.Object.Instantiate(unityPrefab);
-                        }
                         if (SceneReferenceResolver.Current != null && !string.IsNullOrEmpty(unityGuid) && !AssetReferenceResolver.Current.Contains(unityGuid))
                         {
                             SceneReferenceResolver.Current.Add(unityObject, unityGuid);
@@ -196,12 +190,9 @@ namespace Bayat.Json.Converters
                 {
                     reader.ReadAndAssert();
                     object newValue;
-                    if (internalReader.ReadMetadataProperties(reader, ref resolvedObjectType, ref contract, null, null, null, existingValue, out newValue, out id, out unityGuid, out unityObject, out unityPrefab))
+                    if (internalReader.ReadMetadataProperties(reader, ref resolvedObjectType, ref contract, null, null, null, existingValue, out newValue, out id, out unityGuid, out unityObject))
                     {
-                        if (unityPrefab != null)
-                        {
-                            unityObject = UnityEngine.Object.Instantiate(unityPrefab);
-                        }
+
                         if (SceneReferenceResolver.Current != null && !string.IsNullOrEmpty(unityGuid) && !AssetReferenceResolver.Current.Contains(unityGuid))
                         {
                             SceneReferenceResolver.Current.Add(unityObject, unityGuid);
@@ -240,28 +231,20 @@ namespace Bayat.Json.Converters
 
                 bool createdFromNonDefaultCreator = false;
                 JsonObjectContract objectContract = (JsonObjectContract)contract;
-                object targetObject = null;
-
-                if (unityPrefab != null)
-                {
-                    targetObject = UnityEngine.Object.Instantiate(unityPrefab);
-                }
+                object targetObject;
 
                 // check that if type name handling is being used that the existing value is compatible with the specified type
-                if (targetObject == null)
+                if (existingValue != null && (resolvedObjectType == objectType || resolvedObjectType.IsAssignableFrom(existingValue.GetType())))
                 {
-                    if (existingValue != null && (resolvedObjectType == objectType || resolvedObjectType.IsAssignableFrom(existingValue.GetType())))
-                    {
-                        targetObject = existingValue;
-                    }
-                    else if (unityObject != null)
-                    {
-                        targetObject = unityObject;
-                    }
-                    else
-                    {
-                        targetObject = Create(reader, internalReader, objectContract, id, unityGuid, objectType, out createdFromNonDefaultCreator);
-                    }
+                    targetObject = existingValue;
+                }
+                else if (unityObject != null)
+                {
+                    targetObject = unityObject;
+                }
+                else
+                {
+                    targetObject = Create(reader, internalReader, objectContract, id, unityGuid, objectType, out createdFromNonDefaultCreator);
                 }
 
                 // don't populate if read from non-default creator because the object has already been read
