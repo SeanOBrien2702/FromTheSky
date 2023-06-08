@@ -12,8 +12,8 @@ namespace WalldoffStudios.Indicators
         private Coroutine drawingRoutine;
         private bool isActive;
 
-        private readonly RaycastHit2D[] rayhit2D = new RaycastHit2D[1];
-        readonly RaycastHit[] rayHit = new RaycastHit[1];
+        private readonly RaycastHit2D[] rayhit2D = new RaycastHit2D[4];
+        readonly RaycastHit[] rayHit = new RaycastHit[4];
 
         private Vector4[] vertPoints;
         private static readonly int VertPoints = Shader.PropertyToID("_VertPoints");
@@ -31,7 +31,7 @@ namespace WalldoffStudios.Indicators
         public override void OnValuesUpdated()
         {
             base.OnValuesUpdated();
-            
+
             UpdateWidth();
         }
 
@@ -51,16 +51,16 @@ namespace WalldoffStudios.Indicators
             vertPoints = meshFilter.mesh.vertices.ToVector4Array();
             SetVertPoints();
         }
-        
+
         public override void ToggleAim(bool toggle)
         {
             ToggleAimRenderer(toggle);
-            if( settings.UseHitDetection == false) return;
-            
+            if (settings.UseHitDetection == false) return;
+
             isActive = toggle;
             if (toggle == true)
             {
-                if(drawingRoutine != null) StopCoroutine(drawingRoutine);
+                if (drawingRoutine != null) StopCoroutine(drawingRoutine);
                 drawingRoutine = StartCoroutine(UpdateMeshRoutine());
             }
             else
@@ -68,7 +68,7 @@ namespace WalldoffStudios.Indicators
                 if (drawingRoutine != null) StopCoroutine(drawingRoutine);
             }
         }
-        
+
         private IEnumerator UpdateMeshRoutine()
         {
             float timer = 0.0f;
@@ -106,7 +106,7 @@ namespace WalldoffStudios.Indicators
                 vertPoints[2].z = dist;
                 vertPoints[3].z = dist;
                 vertPoints[4].z = hitDistance;
-                vertPoints[5].z = hitDistance;   
+                vertPoints[5].z = hitDistance;
             }
 
             SetVertPoints();
@@ -116,11 +116,11 @@ namespace WalldoffStudios.Indicators
         {
             float totalWidth = settings.MeshWidth - settings.EdgePadding;
             float increment = totalWidth / settings.Raycasts;
-            
+
             Transform localTransform = transform;
             Vector3 playerPos = localTransform.position;
             Vector3 right = localTransform.right;
-            
+
             Vector3 startX = right * (totalWidth * -0.5f);
             startX += right * (increment * 0.5f);
 
@@ -138,29 +138,43 @@ namespace WalldoffStudios.Indicators
                 }
                 else
                 {
-                    target = origin + localTransform.forward;    
+                    target = origin + localTransform.forward;
                 }
 
                 Vector3 direction = (target - origin).normalized;
-                
-                if(settings.DrawDebug) Debug.DrawRay(playerPos + origin, direction * settings.Range, Color.red, settings.TimeBetweenRaycasts);
+
+                if (settings.DrawDebug) Debug.DrawRay(playerPos + origin, direction * settings.Range, Color.red, settings.TimeBetweenRaycasts);
 
                 if (Is2D == true)
                 {
                     if (Physics2D.RaycastNonAlloc(playerPos + origin, direction, rayhit2D, settings.Range, settings.ObstacleMask) > 0)
                     {
-                        distance = rayhit2D[0].distance;
+                        for (int j = 0; j < rayhit2D.Length; j++)
+                        {
+                            if (rayhit2D[j].collider == null) continue;
+
+                            float dist = rayhit2D[j].distance;
+                            if (dist < distance)
+                            {
+                                distance = dist;
+                            }
+                        }
                     }
                 }
                 else
                 {
                     if (Physics.RaycastNonAlloc(playerPos + origin, direction, rayHit, settings.Range, settings.ObstacleMask) > 0)
                     {
-                        if (rayHit[0].distance < distance)
+                        for (int j = 0; j < rayHit.Length; j++)
                         {
-                            distance = rayHit[0].distance;
+                            if (rayHit[j].collider == null) continue;
+
+                            if (rayHit[j].distance < distance)
+                            {
+                                distance = rayHit[j].distance;
+                            }
                         }
-                    }   
+                    }
                 }
             }
 
@@ -169,10 +183,10 @@ namespace WalldoffStudios.Indicators
 
         private void SetVertPoints()
         {
-            if(vertPoints == null) return;
+            if (vertPoints == null) return;
             meshRenderer.GetPropertyBlock(matPropertyBlock);
             matPropertyBlock.SetVectorArray(VertPoints, vertPoints);
             meshRenderer.SetPropertyBlock(matPropertyBlock);
         }
-    }   
+    }
 }
