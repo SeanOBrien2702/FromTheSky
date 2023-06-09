@@ -11,6 +11,7 @@ namespace FTS.UI
         [SerializeField] GameObject highlight;
         [SerializeField] TextMeshProUGUI cardName;
         [SerializeField] TextMeshProUGUI rulesText;
+        [SerializeField] TextMeshProUGUI typeText;
         //[SerializeField] Text rulesText;
         [SerializeField] Image border;
         [SerializeField] Image cardArt;
@@ -162,6 +163,7 @@ namespace FTS.UI
         {
             cardInfo = card;
             cardName.text = card.CardName;
+            typeText.text = card.Type.ToString();
             cost.text = card.Cost.ToString();
             border.sprite = card.Border;
             if (card.Image)

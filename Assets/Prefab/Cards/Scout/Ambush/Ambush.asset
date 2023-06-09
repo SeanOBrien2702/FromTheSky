@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Ambush
   flavourText: 
-  image: {fileID: 21300000, guid: ec00643a281f2924283fc5b9961ac9a0, type: 3}
+  image: {fileID: 21300000, guid: 5f38ec1d3c61e7b4f87cc8a93d84e263, type: 3}
   border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
   cost: 1
   range: 2
   area: 1
   cardRarity: 0
   characterClass: 0
-  type: 0
+  type: 1
   targeting: 1
   isAtomize: 0
   isTemporary: 0

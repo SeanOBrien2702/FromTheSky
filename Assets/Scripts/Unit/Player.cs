@@ -84,10 +84,10 @@ namespace FTS.Characters
             int range = 0;
             switch (type)
             {
-                case CardType.Attack:
+                case CardType.Weapon:
                     range = Stats.GetStat(Stat.AttackRange, CharacterClass);
                     break;
-                case CardType.Support:
+                case CardType.Ability:
                     range = Stats.GetStat(Stat.SupportRange, CharacterClass);
                     break;
                 case CardType.Summon:

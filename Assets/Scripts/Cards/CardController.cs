@@ -29,9 +29,8 @@ namespace FTS.Cards
 
         [Header("CardSounds")]
         [SerializeField] SFXObject attackSFX;
-        [SerializeField] SFXObject supportSFX;
+        [SerializeField] SFXObject abilitySFX;
         [SerializeField] SFXObject summonSFX;
-
 
         GameUI gameUI;
         Player player;
@@ -180,7 +179,7 @@ namespace FTS.Cards
             return grid.IsTargetValid(target, targeting);
         }
 
-        private bool canDraw()
+        private bool CanDraw()
         {
             bool canDraw = true;
             if (deck.Count(item => item.Location == CardLocation.Hand) > maxHandSize)
@@ -199,6 +198,17 @@ namespace FTS.Cards
                     canDraw = false;
                 }
             }
+            return canDraw;
+        }
+
+        private bool CanDraw(CardType cardType)
+        {
+            bool canDraw = false;
+            if(deck.Where(item => item.Location == CardLocation.Deck).Where(item => item.Type == cardType).Count() > 0)
+            {
+                canDraw = true;
+            }
+
             return canDraw;
         }
 
@@ -265,14 +275,14 @@ namespace FTS.Cards
         {
             switch (type)
             {
-                case CardType.Attack:
+                case CardType.Weapon:
                     SFXManager.Main.Play(attackSFX);
                     break;
-                case CardType.Support:
-                    SFXManager.Main.Play(attackSFX);
+                case CardType.Ability:
+                    SFXManager.Main.Play(abilitySFX);
                     break;
                 case CardType.Summon:
-                    SFXManager.Main.Play(attackSFX);
+                    SFXManager.Main.Play(summonSFX);
                     break;
                 default:
                     break;
@@ -432,7 +442,7 @@ namespace FTS.Cards
 
         public void DrawCard()
         {
-            if (canDraw())
+            if (CanDraw())
             {
                 Card card = deck.FirstOrDefault(item => item.Location == CardLocation.Deck);
                 card.Location = CardLocation.Hand;
@@ -457,6 +467,22 @@ namespace FTS.Cards
                 else
                 {
                     break;
+                }
+            }
+        }
+
+        public void DrawCard(CardType cardType)
+        {
+            if (CanDraw(cardType))
+            {
+                Card card = deck.Where(item => item.Type == cardType).FirstOrDefault(item => item.Location == CardLocation.Deck);
+                card.Location = CardLocation.Hand;
+                hand.DrawAnimation(card);
+                OnCardDrawn?.Invoke();
+                lastCardUsed = card;
+                foreach (var effect in card.OnDrawEffects)
+                {
+                    effect.ActivateEffect();
                 }
             }
         }

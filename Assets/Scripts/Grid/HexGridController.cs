@@ -236,7 +236,7 @@ namespace FTS.Grid
                     {
                         currentCell.SetHighlight(HighlightIndex.Attack);
                     }
-                    if (card.Type == CardType.Attack)
+                    if (card.Type == CardType.Weapon)
                     {
                         grid.ShowAvalibleTargets(currentUnit.Location, cardController.CardSelected.Range);
                     }               

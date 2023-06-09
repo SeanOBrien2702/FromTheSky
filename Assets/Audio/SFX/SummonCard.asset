@@ -16,7 +16,7 @@ MonoBehaviour:
   SFXName: 
   SFXLayers:
   - LayerName: 
-    SFX: {fileID: 8300000, guid: 0f8f98258d58f75458c861f044d81f3a, type: 3}
+    SFX: {fileID: 8300000, guid: 6ab99abf35561c147b46c8f34d29a712, type: 3}
     RandomizeVolume: 0
     FixedVolume: 1
     MinVolume: 0.5

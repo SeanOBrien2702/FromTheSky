@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12c620a45fbaaa043a861b59517bc4a4, type: 3}
-  m_Name: SupportCard
+  m_Name: WeaponCard
   m_EditorClassIdentifier: 
   CollapseEditions: 0
   SFXName: 

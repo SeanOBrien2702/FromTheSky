@@ -21,7 +21,7 @@ MonoBehaviour:
   area: 1
   cardRarity: 2
   characterClass: 1
-  type: 2
+  type: 1
   targeting: 0
   isAtomize: 1
   isTemporary: 0

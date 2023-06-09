@@ -10,24 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
-  m_Name: Create Protector
+  m_Name: Run and Gun
   m_EditorClassIdentifier: 
-  cardName: Create Protector
+  cardName: Run and Gun
   flavourText: 
-  image: {fileID: 21300000, guid: 465da96ac21d7dd439eaa56c1c10ffb3, type: 3}
-  border: {fileID: 21300000, guid: cec5e44fbe4eb6f4689ac8a93fc8f14b, type: 3}
+  image: {fileID: 21300000, guid: ec00643a281f2924283fc5b9961ac9a0, type: 3}
+  border: {fileID: 21300000, guid: a5ab38f02154ab34f88aec68fb0fb2a7, type: 3}
   cost: 1
   range: 2
   area: 1
-  cardRarity: 2
-  characterClass: 1
-  type: 2
-  targeting: 2
-  isAtomize: 1
+  cardRarity: 0
+  characterClass: 0
+  type: 0
+  targeting: 3
+  isAtomize: 0
   isTemporary: 0
   isInherent: 0
   cinderCost: 10
   onDrawEffects: []
   effects:
-  - {fileID: 11400000, guid: ac38b29afad835544a31490a7468a9d3, type: 2}
+  - {fileID: 11400000, guid: b5ec4842fd6e90042a374a79578a10d8, type: 2}
+  - {fileID: 11400000, guid: d243084ec7348b54a9ad13f72800bfd4, type: 2}
   onDiscardEffects: []

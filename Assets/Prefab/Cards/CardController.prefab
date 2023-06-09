@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 636.5, y: 103.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -47,7 +48,7 @@ MonoBehaviour:
   maxHandSize: 10
   cardsPerTurn: 4
   attackSFX: {fileID: 11400000, guid: 5a92bea11e1605b4292ece7d38e0a610, type: 2}
-  supportSFX: {fileID: 11400000, guid: bf486e6f3c764e748be84399dca4be02, type: 2}
+  abilitySFX: {fileID: 11400000, guid: bf486e6f3c764e748be84399dca4be02, type: 2}
   summonSFX: {fileID: 11400000, guid: 7b8f7634c21bd104bb0666cdc329ca1a, type: 2}
 --- !u!114 &64577420
 MonoBehaviour:

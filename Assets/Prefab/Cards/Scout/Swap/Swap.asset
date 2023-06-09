@@ -21,11 +21,12 @@ MonoBehaviour:
   area: 1
   cardRarity: 2
   characterClass: 1
-  type: 0
+  type: 1
   targeting: 1
   isAtomize: 0
   isTemporary: 0
   isInherent: 1
+  cinderCost: 10
   onDrawEffects: []
   effects:
   - {fileID: 11400000, guid: 2039777f872fb7c4c99a99a5f0b0f91e, type: 2}

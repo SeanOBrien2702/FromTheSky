@@ -16,7 +16,7 @@ namespace FTS.Cards
     }
     public enum CardType
     {
-        Attack, Support, Summon
+        Weapon, Ability, Summon
     }
     public enum CardLocation
     {
