@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 9, y: 9, z: 9}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 119080830704308036}
   - {fileID: 9163519030183138017}
@@ -54,6 +55,7 @@ MonoBehaviour:
   barrier: {fileID: 7483593880638004401}
   description: 
   hoverSound: {fileID: 11400000, guid: 1bb62d10b1df2ed4c888bd3e2a5ec0a6, type: 2}
+  hitSound: {fileID: 11400000, guid: ed9f193970e422d47a0fd8d3be9674c5, type: 2}
   startingHealth: 3
 --- !u!65 &3222414077572348665
 BoxCollider:
@@ -317,15 +319,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fb4b791023f2854aa604b48849a02a1, type: 3}
---- !u!1 &7483593880638004401 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7595664352324372785, guid: 9fb4b791023f2854aa604b48849a02a1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1058953393475900800}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &119080830704308036 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1086818737876835012, guid: 9fb4b791023f2854aa604b48849a02a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1058953393475900800}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7483593880638004401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7595664352324372785, guid: 9fb4b791023f2854aa604b48849a02a1,
     type: 3}
   m_PrefabInstance: {fileID: 1058953393475900800}
   m_PrefabAsset: {fileID: 0}
@@ -498,12 +500,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19a6d881f456d8249a24726aecb22f12, type: 3}
---- !u!224 &9163519030183138017 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7495131204853363458, guid: 19a6d881f456d8249a24726aecb22f12,
-    type: 3}
-  m_PrefabInstance: {fileID: 1670644281429451235}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &442821436572470910 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1227905858029449117, guid: 19a6d881f456d8249a24726aecb22f12,
@@ -516,6 +512,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36658e8ed22b9e642ad85c18946a98f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &9163519030183138017 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7495131204853363458, guid: 19a6d881f456d8249a24726aecb22f12,
+    type: 3}
+  m_PrefabInstance: {fileID: 1670644281429451235}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6850879334813376231
 PrefabInstance:
   m_ObjectHideFlags: 0

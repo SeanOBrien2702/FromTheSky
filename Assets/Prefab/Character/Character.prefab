@@ -32,6 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5896678282033517480}
   - {fileID: 3411871185925246477}
@@ -69,6 +70,7 @@ MonoBehaviour:
   barrier: {fileID: 4010783370477371485}
   description: 
   hoverSound: {fileID: 11400000, guid: 1bb62d10b1df2ed4c888bd3e2a5ec0a6, type: 2}
+  hitSound: {fileID: 11400000, guid: ed9f193970e422d47a0fd8d3be9674c5, type: 2}
   animator: {fileID: 0}
   animatorOverride: {fileID: 0}
   characterClass: 1
@@ -85,7 +87,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e2ecbe3588f1d54384486fe728c5547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  travelSpeed: 4
   pushSpeed: 0.1
   animator: {fileID: 0}
   movementSounds: {fileID: 11400000, guid: 1e1bba9a36b70014abfedd3a7129475f, type: 2}

@@ -13,12 +13,15 @@ namespace FTS.Characters
         bool canAttack = true;
         HexDirection direction;
         Unit target;
+
+        [Header("Attack Info")]
         [SerializeField] bool isArchAttack = false;
         [SerializeField] AttackDirections[] attackDirections;
         [SerializeField] EnemyTargeting targeting;
         [SerializeField] AttackTypes attackType;
         [SerializeField] TelegraphIntentUI intentUI;
         [SerializeField] IndicatorController indicator;
+        [SerializeField] SFXObject attackSound;
 
         [Header("Attack animation")]
         [SerializeField] GameObject[] projectileStart;
@@ -115,6 +118,7 @@ namespace FTS.Characters
             animator.SetTrigger("Shoot");
             if (attackType == AttackTypes.Projectile)
             {
+                SFXManager.Main.Play(attackSound);
                 foreach (GameObject start in projectileStart)
                 {
                     Projectile proectile = Instantiate(projectileAnimation, start.transform.position, start.transform.rotation);

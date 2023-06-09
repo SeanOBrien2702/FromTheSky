@@ -189,8 +189,7 @@ namespace FTS.Characters
         }
 
         IEnumerator TravelPath(Vector3 lookTowards)
-        {
-            SFXManager.Main.Play(movementSounds);
+        {          
             yield return StartCoroutine(cameraController.MoveToPosition(transform.position, false));
             canMove = false;
             cameraController.StartCharacterFollow(this.transform);
@@ -209,12 +208,14 @@ namespace FTS.Characters
                 c = (b + pathToTravel[i].transform.localPosition) * 0.5f;
                 for (; time < 1f; time += Time.deltaTime * travelSpeed)
                 {
+                    
                     transform.localPosition = Bezier.GetPoint(a, b, c, time);
                     Vector3 d = Bezier.GetDerivative(a, b, c, time);
                     d.y = 0f;
                     animator.transform.localRotation = Quaternion.LookRotation(d);
                     yield return null;
                 }
+                SFXManager.Main.Play(movementSounds);
                 CheckTraps(pathToTravel[i]);
                 time -= 1f;
             }

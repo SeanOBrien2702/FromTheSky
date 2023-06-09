@@ -22,6 +22,7 @@ namespace FTS.Characters
 
         [SerializeField] string description;
         [SerializeField] SFXObject hoverSound;
+        [SerializeField] SFXObject hitSound;
         protected UnitController unitController;
         StatusController statusController;
         HighlightEffect highlight;
@@ -159,6 +160,7 @@ namespace FTS.Characters
         {
             if (!hasBarrier)
             {
+                SFXManager.Main.Play(hitSound);
                 if (armour > 0)
                 {
                     if (damage <= armour)
