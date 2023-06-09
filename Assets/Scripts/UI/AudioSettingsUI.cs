@@ -17,9 +17,18 @@ namespace FTS.UI
             musicVolume.onValueChanged.AddListener(delegate { UpdateMusicVolume(); });
             soundFXVolume.onValueChanged.AddListener(delegate { UpdateSoundVolume(); });
 
-            MusicManager.Main.SetVolume(PlayerPrefs.GetFloat(musicVolumeString));
+            if (!PlayerPrefs.HasKey(musicVolumeString))
+            {
+                PlayerPrefs.SetFloat(musicVolumeString, 1);
+            }
+            if (!PlayerPrefs.HasKey(sfxVolumeString))
+            {
+                PlayerPrefs.SetFloat(sfxVolumeString, 1);
+            }
+
+            MusicManager.Main.SetVolume(PlayerPrefs.GetFloat(musicVolumeString, 0.5f));
             musicVolume.value = PlayerPrefs.GetFloat(musicVolumeString);
-            SFXManager.Main.SetVolume(PlayerPrefs.GetFloat(sfxVolumeString));
+            SFXManager.Main.SetVolume(PlayerPrefs.GetFloat(sfxVolumeString, 0.5f));
             soundFXVolume.value = PlayerPrefs.GetFloat(sfxVolumeString);
 
             isMuted = PlayerPrefs.GetInt("soundMuted") == 1 ? true : false;
