@@ -12,21 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
   m_Name: Energize Ammo
   m_EditorClassIdentifier: 
-  cardName: 
+  cardName: Energize Ammo
   flavourText: 
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 1a06bd769171be1468d0c0a3e0da92bb, type: 3}
   border: {fileID: 0}
   cost: 1
   range: 2
   area: 1
   cardRarity: 0
   characterClass: 0
-  type: 0
+  type: 1
   targeting: 0
   isAtomize: 0
   isTemporary: 0
   isInherent: 0
   cinderCost: 10
   onDrawEffects: []
-  effects: []
+  effects:
+  - {fileID: 0}
   onDiscardEffects: []
