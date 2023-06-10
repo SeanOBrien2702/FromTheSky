@@ -10,7 +10,7 @@ public static class Keywords
         {"ON DRAW", "This effect happens when the card is drawn"},
         {"ON DISCARD", "This effect happens when the card is discarded"},
         {"ENERGY", "Resource used to play cards"},
-        {"ARMOUR", "Reduce damage taken for the turn"},
+        {"ARMOUR", "Midigate damage taken, 50% chance to loose armour when damaged"},
         {"BARRIER", "Absorb all damage from the next attack"},
         {"TEMPORARY", "Atomized when played or at end of turn"},
         {"FORETELL", "Select one of the top 3 cards the deck. Shuffle then put the select card on top"},

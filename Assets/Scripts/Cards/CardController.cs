@@ -162,12 +162,17 @@ namespace FTS.Cards
             return hasEnergy;
         }
 
-        private bool IsInRange(int range)
+        private bool IsInRange(Card card)
         {
             bool isInRange = false;
+          
             //check grid if position is valid
             target = grid.GetCardTarget();
-            if (target != null && grid.GetDistance(target) <= range)
+            if (card.Type == CardType.Weapon)
+            {
+                return true;
+            }
+            if (target != null && grid.GetDistance(target) <= card.Range)
             {
                 isInRange = true;
             }
@@ -329,7 +334,7 @@ namespace FTS.Cards
                 }
                 else
                 {
-                    if (IsInRange(playedCard.Range) && IsTargetValid(playedCard.Targeting))
+                    if (IsInRange(playedCard) && IsTargetValid(playedCard.Targeting))
                     {
                         CardPlayed(playedCard);
                         playedCard.Play();

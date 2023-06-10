@@ -17,7 +17,9 @@ namespace FTS.Cards
         //PlayerDatabase playerDatabase;
         //UnitController unitController;
         Dictionary<CharacterClass, List<Card>> lookupTable = null;
-        [SerializeField] List<Card> deck = new List<Card>();
+        [SerializeField] List<Card> startingDeck = new List<Card>();
+        [SerializeField] List<Card> testDeck = new List<Card>();
+        List<Card> deck = new List<Card>();
         [SerializeField] List<CardBorder> cardBorders;
         [SerializeField] List<CardRaritySettings> cardRaritySettings;     
         [SerializeField] CharacterClassCards[] characterClassCards;
@@ -30,6 +32,14 @@ namespace FTS.Cards
         {
             //playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             BuildLookup();
+            if(Application.isEditor)
+            {
+                deck = testDeck;
+            }
+            else
+            {
+                deck = startingDeck;
+            }
             TurnController.OnCombatStart += TurnController_OnCombatStart;
         }
 

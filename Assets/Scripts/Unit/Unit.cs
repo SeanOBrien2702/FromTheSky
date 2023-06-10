@@ -163,15 +163,16 @@ namespace FTS.Characters
                 SFXManager.Main.Play(hitSound);
                 if (armour > 0)
                 {
-                    if (damage <= armour)
+                    damage -= armour;
+                    if(damage <= 0)
                     {
-                        Armour -= damage;
                         damage = 0;
                     }
-                    else
+
+                    int loseChance = UnityEngine.Random.Range(0, 1);
+                    if (loseChance > 0)
                     {
-                        damage -= armour;
-                        Armour = 0;
+                        armour--;
                     }
                 }
                 Health -= damage;

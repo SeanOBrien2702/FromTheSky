@@ -23,7 +23,7 @@ MonoBehaviour:
   characterClass: 1
   type: 0
   targeting: 3
-  isAtomize: 0
+  isAtomize: 1
   isTemporary: 0
   isInherent: 0
   cinderCost: 10

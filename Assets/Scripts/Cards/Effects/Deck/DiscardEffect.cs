@@ -16,6 +16,11 @@ namespace FTS.Cards
             cardController.DiscardCard(cardsDiscarded, random);
         }
 
+        public override void ActivateEffect()
+        {
+            cardController.DiscardCard(cardsDiscarded, random);
+        }
+
         public override string GetEffectText()
         {
             string effectText = "Discard " + cardsDiscarded + " card";

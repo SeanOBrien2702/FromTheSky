@@ -507,7 +507,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: fgsdfsdfdsfds
+  m_text: Card effect
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38aecd77a18d544bfb836befe83883b7, type: 2}
   m_sharedMaterial: {fileID: 6434564289584660316, guid: 38aecd77a18d544bfb836befe83883b7,
@@ -1207,7 +1207,7 @@ PrefabInstance:
     - target: {fileID: 8877554620760026974, guid: 9264ba32c42b59f4d9f4b3543bbcd711,
         type: 3}
       propertyPath: m_text
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8877554620760026974, guid: 9264ba32c42b59f4d9f4b3543bbcd711,
         type: 3}
