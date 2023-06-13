@@ -1208,6 +1208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthColour: {r: 0, g: 0.69423604, b: 1, a: 1}
   damageColour: {r: 0, g: 0, b: 0, a: 0}
+  enemyHealthColour: {r: 1, g: 0, b: 0, a: 1}
+  enemyPotentialDamageColour: {r: 1, g: 0.48235294, b: 0, a: 1}
   potentialDamageColour: {r: 1, g: 0, b: 0, a: 1}
   healthGrid: {fileID: 4545103878086306872}
   healthSegment: {fileID: 3445785370082236916, guid: 246d73ba648c7d149b764fc539556c7d,

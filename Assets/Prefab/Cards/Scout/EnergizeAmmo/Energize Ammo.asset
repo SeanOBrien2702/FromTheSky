@@ -21,13 +21,14 @@ MonoBehaviour:
   area: 1
   cardRarity: 0
   characterClass: 0
-  type: 1
-  targeting: 0
+  type: 0
+  targeting: 3
   isAtomize: 0
   isTemporary: 0
   isInherent: 0
   cinderCost: 10
   onDrawEffects: []
   effects:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 950fde09021698a41b3ce1d79c89f5ab, type: 2}
+  - {fileID: 11400000, guid: 87f8902d4911d684d9c78e969e04b072, type: 2}
   onDiscardEffects: []

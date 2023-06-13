@@ -17,6 +17,8 @@ namespace FTS.UI
         [Header("Health")]
         [SerializeField] Color healthColour;
         [SerializeField] Color damageColour;
+        [SerializeField] Color enemyHealthColour;
+        [SerializeField] Color enemyPotentialDamageColour;
         [SerializeField] Color potentialDamageColour;
         [SerializeField] Transform healthGrid;
         [SerializeField] GameObject healthSegment;
@@ -45,10 +47,15 @@ namespace FTS.UI
         void Start()
         {
             cam = Camera.main;
-            
+                      
             UnitController.OnEnemyKilled += UnitController_OnEnemyKilled;         
             if(unit)
             {
+                if (unit.GetComponent<Unit>() is Enemy)
+                {
+                    healthColour = enemyHealthColour;
+                    potentialDamageColour = enemyPotentialDamageColour;
+                }
                 TurnOrderUI.OnHover += TurnOrderUI_OnHover;
                 stateController = FindObjectOfType<StateController>().GetComponent<StateController>();
             }
