@@ -28,7 +28,7 @@ namespace FTS.Cards
         int cardID = 0;
 
         #region MonoBehaviour Callbacks
-        private void Start()
+        private void Awake()
         {
             //playerDatabase = FindObjectOfType<PlayerDatabase>().GetComponent<PlayerDatabase>();
             BuildLookup();

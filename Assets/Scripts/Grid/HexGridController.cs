@@ -124,10 +124,10 @@ namespace FTS.Grid
 
         private void DoUnitControl()
         {
-            if (Input.GetMouseButtonDown(1) && cardController.CardSelected)
-            {
-                unitController.SetCurrentUnit(null);
-            }
+            //if (Input.GetMouseButtonDown(1) && cardController.CardSelected)
+            //{
+            //    unitController.SetCurrentUnit(null);
+            //}
             if (!CanControlUnit())
             {
                 return;                
@@ -223,6 +223,7 @@ namespace FTS.Grid
                 Card card = cardController.CardSelected;
                 if(card.Targeting == CardTargeting.None)
                 {
+                    UpdateReachable();
                     return;
                 }
                 grid.ClearReachable();

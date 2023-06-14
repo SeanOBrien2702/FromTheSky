@@ -1483,25 +1483,25 @@ PrefabInstance:
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: testDeck.Array.size
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: testDeck.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4,
+      objectReference: {fileID: 11400000, guid: 52403b824332f7c46be98ae9a7d0f2d8,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: testDeck.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4,
+      objectReference: {fileID: 11400000, guid: 52403b824332f7c46be98ae9a7d0f2d8,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: testDeck.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4,
+      objectReference: {fileID: 11400000, guid: 52403b824332f7c46be98ae9a7d0f2d8,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
@@ -1519,19 +1519,19 @@ PrefabInstance:
         type: 3}
       propertyPath: testDeck.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3,
+      objectReference: {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: testDeck.Array.data[6]
       value: 
-      objectReference: {fileID: 11400000, guid: fe06851ca616afc48beba3698c1ad42e,
+      objectReference: {fileID: 11400000, guid: f03e1c2a5da59f847bbfe0a718095db4,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: testDeck.Array.data[7]
       value: 
-      objectReference: {fileID: 11400000, guid: 90621107479c2c149a092f425f51f4f6,
+      objectReference: {fileID: 11400000, guid: fe06851ca616afc48beba3698c1ad42e,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}

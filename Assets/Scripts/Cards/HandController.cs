@@ -74,6 +74,7 @@ namespace FTS.Cards
         int rotationIncrement = 6;
         bool isDrawing = false;
         bool lerping = false;
+        bool isDragging = false;
 
         public static event System.Action OnCardsSpaced = delegate { };
         List<HandPrefab> handPrefabs = new List<HandPrefab>();
@@ -99,6 +100,8 @@ namespace FTS.Cards
                 if(selectedCard == null)
                 {
                     Cursor.visible = true;
+                    currentZoom = -1;
+                    isTargetingZoom = false;
                 }
                 else
                 {
@@ -107,6 +110,8 @@ namespace FTS.Cards
                     
             }  
         }
+
+        public bool IsDragging { get => isDragging; set => isDragging = value; }
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -127,7 +132,7 @@ namespace FTS.Cards
         }
 
         private void Update()
-        {         
+        {
             if (!unitController.CurrentPlayer)
             {
                 return;
@@ -138,8 +143,8 @@ namespace FTS.Cards
                     ZoomIn(currentZoom);
             }
             DoHotkeys();
-            DoSelection();
             DoDeselection();
+            DoSelection();         
         }
         #endregion
 
@@ -169,10 +174,15 @@ namespace FTS.Cards
                 }
             }
         }
-
+        
         void DoSelection()
         {
-            if (!Input.GetMouseButtonDown(0))
+            //button up to handle drag first
+            if (!Input.GetMouseButtonUp(0))
+            {
+                return;
+            }
+            if (IsDragging)
             {
                 return;
             }
@@ -187,7 +197,6 @@ namespace FTS.Cards
                         handPrefab.draggable.IsDragging = true;
                         SelectedCard = handPrefab.CardID;
                         SelectCard(selectedCard, false);
-                        //break;
                     }
                 }
             }
@@ -210,7 +219,7 @@ namespace FTS.Cards
             }
         }
 
-        private void SpaceHand(string ignoredCard = null)
+        public void SpaceHand(string ignoredCard = null)
         {
             int handSize = handPrefabs.Count;
             //Set position
@@ -321,6 +330,20 @@ namespace FTS.Cards
             }
             return canZoom;
         }
+
+        //bool IsDragging()
+        //{
+        //    bool isDragging = false;
+
+        //    foreach (var item in handPrefabs)
+        //    {
+        //        if(item.draggable.IsDragging)
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
 
         public void SelectCard(string cardID, bool isDragging = true)
         {

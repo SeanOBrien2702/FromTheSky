@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using FTS.Cards;
 using FTS.Characters;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -80,11 +81,6 @@ namespace FTS.UI
             if(isDragging)
             {
                 Dragging();
-                if(Input.GetMouseButtonDown(1))
-                {
-                    isDragging = false;
-                    EndDrag(false);
-                }
             }
         }
         #endregion
@@ -152,6 +148,7 @@ namespace FTS.UI
             }
             handController.SelectedCard = cardId;
             isDragging = true;
+            handController.IsDragging = true;
             startPosition = new Vector2(arrowStart.position.x, arrowStart.position.y);
             handController.SetTagetingZoom(true);
             cardController.CardSelect(cardId);
@@ -198,6 +195,7 @@ namespace FTS.UI
                 }
             }
             handController.SetTagetingZoom(false);
+            StartCoroutine(WaitDragEnd());
         }
         #endregion
 
@@ -235,6 +233,14 @@ namespace FTS.UI
             {
                 EndDrag(false);
             }
+        }
+        #endregion
+
+        #region Coroutines
+        IEnumerator WaitDragEnd()
+        {
+            yield return new WaitForSeconds(0.1f);
+            handController.IsDragging = true;
         }
         #endregion
     }

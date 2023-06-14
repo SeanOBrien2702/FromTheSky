@@ -92,7 +92,6 @@ namespace FTS.UI
 
             foreach (string word in words)
             {
-                Debug.Log(word);
                 if(Keywords.KeywordTerms.Keys.Contains(word))
                 {
                     Tooltip tooltip = Instantiate(tooltipPrefab, tooltipPosition.transform);
