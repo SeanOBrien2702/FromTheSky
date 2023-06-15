@@ -181,33 +181,15 @@ namespace FTS.Cards
         
         void DoSelection()
         {
-            //button up to handle drag first
             if (!Input.GetMouseButtonDown(0))
             {
                 return;
             }
-            Debug.Log("check if dragging");
             if (IsDragging)
             {
                 return;
             }
-            Debug.Log("not dragging");
-            if (selectedCard == null)
-            {
-                //Vector2 mousePos = Input.mousePosition;
-                //foreach (var handPrefab in handPrefabs)
-                //{
-                //    if(RectTransformUtility.RectangleContainsScreenPoint(handPrefab.ZoomArea, mousePos))
-                //    {
-                //        handPrefab.draggable.IsDragging = true;
-                //        SelectedCard = handPrefab.CardID;
-                //        SelectCard(selectedCard, false);
-                //        Debug.Log(handPrefab.CardID);
-                //        //continue;
-                //    }
-                //}
-            }
-            else
+            if (selectedCard != null)
             {
                 cardController.PlayCard(selectedCard);
                 SelectedCard = null;
