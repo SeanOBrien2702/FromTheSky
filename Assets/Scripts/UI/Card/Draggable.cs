@@ -36,7 +36,7 @@ namespace FTS.UI
         Vector2 startPosition = new Vector2(Screen.height /2, Screen.width /2);
         PointerEventData pointerData;
         string cardId;
-        bool isDragging;
+        bool isDragging = false;
         bool select = false;
 
         #region Properties
@@ -200,6 +200,13 @@ namespace FTS.UI
         #endregion
 
         #region Public Methods
+        public void ClickCard()
+        {
+            isDragging = true;
+            handController.SelectedCard = cardInfo.CardID;
+            handController.SelectCard(cardInfo.CardID, false);
+        }
+
         public void OnBeginDrag(PointerEventData eventData)
         {
             BeginDragging();
@@ -240,7 +247,7 @@ namespace FTS.UI
         IEnumerator WaitDragEnd()
         {
             yield return new WaitForSeconds(0.1f);
-            handController.IsDragging = true;
+            handController.IsDragging = false;
         }
         #endregion
     }

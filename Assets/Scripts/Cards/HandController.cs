@@ -6,6 +6,7 @@ using FTS.Characters;
 using FTS.UI;
 using System;
 using UnityEngine.EventSystems;
+using FTS.Turns;
 #endregion
 
 namespace FTS.Cards
@@ -75,6 +76,7 @@ namespace FTS.Cards
         bool isDrawing = false;
         bool lerping = false;
         bool isDragging = false;
+        bool hasCombatStarted = false;
 
         public static event System.Action OnCardsSpaced = delegate { };
         List<HandPrefab> handPrefabs = new List<HandPrefab>();
@@ -117,6 +119,7 @@ namespace FTS.Cards
         #region MonoBehaviour Callbacks
         private void Start()
         {
+            TurnController.OnPlayerTurn += TurnController_OnCombatStart;
             UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
             UnitController.OnSelectUnit += UnitController_OnSelectUnit;
             UnitController.OnEnergyChanged += UnitController_OnEnergyChanged; 
@@ -125,6 +128,7 @@ namespace FTS.Cards
 
         private void OnDestroy()
         {
+            TurnController.OnPlayerTurn += TurnController_OnCombatStart;
             UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
             UnitController.OnSelectUnit -= UnitController_OnSelectUnit;
             UnitController.OnEnergyChanged -= UnitController_OnEnergyChanged;
@@ -133,7 +137,7 @@ namespace FTS.Cards
 
         private void Update()
         {
-            if (!unitController.CurrentPlayer)
+            if (!unitController.CurrentPlayer)// || !hasCombatStarted)
             {
                 return;
             }
@@ -178,27 +182,30 @@ namespace FTS.Cards
         void DoSelection()
         {
             //button up to handle drag first
-            if (!Input.GetMouseButtonUp(0))
+            if (!Input.GetMouseButtonDown(0))
             {
                 return;
             }
+            Debug.Log("check if dragging");
             if (IsDragging)
             {
                 return;
             }
-
+            Debug.Log("not dragging");
             if (selectedCard == null)
             {
-                Vector2 mousePos = Input.mousePosition;
-                foreach (var handPrefab in handPrefabs)
-                {
-                    if(RectTransformUtility.RectangleContainsScreenPoint(handPrefab.ZoomArea, mousePos))
-                    {
-                        handPrefab.draggable.IsDragging = true;
-                        SelectedCard = handPrefab.CardID;
-                        SelectCard(selectedCard, false);
-                    }
-                }
+                //Vector2 mousePos = Input.mousePosition;
+                //foreach (var handPrefab in handPrefabs)
+                //{
+                //    if(RectTransformUtility.RectangleContainsScreenPoint(handPrefab.ZoomArea, mousePos))
+                //    {
+                //        handPrefab.draggable.IsDragging = true;
+                //        SelectedCard = handPrefab.CardID;
+                //        SelectCard(selectedCard, false);
+                //        Debug.Log(handPrefab.CardID);
+                //        //continue;
+                //    }
+                //}
             }
             else
             {
@@ -557,6 +564,11 @@ namespace FTS.Cards
         #endregion
 
         #region Events
+        private void TurnController_OnCombatStart()
+        {
+            hasCombatStarted = true;
+        }
+
         private void UnitController_OnSelectPlayer(Player player)
         {
             if (unitController.CurrentPlayer == player)

@@ -82,14 +82,17 @@ namespace FTS.UI
 
         internal void UpdateTooltips(Unit unit)
         {
-            foreach (Transform child in tooltipPosition)
+            if (unit)
             {
-                Destroy(child.gameObject);
-            }
-            foreach (var status in unit.StatusController.GetStatuses())
-            {
-                StatusTooltip tooltip = Instantiate(tooltipPrefab, tooltipPosition.transform);
-                tooltip.SetToolTip(status);;
+                foreach (Transform child in tooltipPosition)
+                {
+                    Destroy(child.gameObject);
+                }
+                foreach (var status in unit.StatusController.GetStatuses())
+                {
+                    StatusTooltip tooltip = Instantiate(tooltipPrefab, tooltipPosition.transform);
+                    tooltip.SetToolTip(status); ;
+                }
             }
         }
 
