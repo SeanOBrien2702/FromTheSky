@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88adf3bbd2817d4d8cc82979b46c7e8, type: 3}
+  m_Name: Loaded Shot
+  m_EditorClassIdentifier: 
+  cardName: Loaded Shot
+  flavourText: 
+  image: {fileID: 0}
+  border: {fileID: 0}
+  cost: 1
+  range: 2
+  area: 1
+  cardRarity: 0
+  characterClass: 0
+  type: 0
+  targeting: 5
+  isAtomize: 0
+  isTemporary: 0
+  isInherent: 0
+  cinderCost: 10
+  onDrawEffects: []
+  effects:
+  - {fileID: 11400000, guid: def271979d244224f8d997206ba5e445, type: 2}
+  onDiscardEffects: []

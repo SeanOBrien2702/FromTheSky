@@ -74,6 +74,16 @@ namespace FTS.UI
         {
             tooltipUI = GetComponent<TooltipUI>();
             shopUI= GetComponent<ShopCardUI>();
+            CardController.OnCardCreated += CardController_OnCardCreated;
+            CardController.OnCardDrawn += CardController_OnCardDrawn;
+            CardController.OnCardPlayed += CardController_OnCardPlayed;
+        }
+
+        private void OnDestroy()
+        {
+            CardController.OnCardCreated -= CardController_OnCardCreated;
+            CardController.OnCardDrawn -= CardController_OnCardDrawn;
+            CardController.OnCardPlayed -= CardController_OnCardPlayed;
         }
 
         private void Update()
@@ -194,6 +204,7 @@ namespace FTS.UI
             highlight.SetActive(enable);
         }
 
+        #region Events
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.button == PointerEventData.InputButton.Left)
@@ -224,5 +235,21 @@ namespace FTS.UI
         {
             overTooltip = false;
         }
+
+        private void CardController_OnCardPlayed(Card arg1, Characters.Player arg2)
+        {
+            FillCardText(cardInfo);
+        }
+
+        private void CardController_OnCardDrawn()
+        {
+            FillCardText(cardInfo);
+        }
+
+        private void CardController_OnCardCreated()
+        {
+            FillCardText(cardInfo);
+        }
+        #endregion
     }
 }

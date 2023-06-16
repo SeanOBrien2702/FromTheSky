@@ -318,7 +318,6 @@ namespace FTS.Cards
             return canPlay;
         }
 
-
         public void PlayCard(string cardId)
         {
             cardSelected = null;
@@ -600,6 +599,11 @@ namespace FTS.Cards
         internal bool IsTargeting(string cardID)
         {
             return deck.Find(item => item.Id == cardID).Targeting == CardTargeting.None ? true : false;
+        }
+
+        public int GetCardTypes(CardType cardType)
+        {
+            return deck.Where(item => item.Location == CardLocation.Hand).Count(item => item.Type == cardType);
         }
         #endregion
 
