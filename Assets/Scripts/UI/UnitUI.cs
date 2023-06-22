@@ -64,11 +64,6 @@ namespace FTS.UI
         public void FixedUpdate()
         {
             transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("test");
-                ShowAttribute("test", "#FF0000");
-            }
         }
 
         private void OnDestroy()

@@ -61,7 +61,7 @@ namespace FTS.Grid
             TurnController.OnPlayerTurn += TurnController_OnNewTurn;
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             TurnController.OnCombatStart += TurnController_OnCombatStart;
-            HandController.OnCardSelected += HandController_OnCardSelected;
+            CardController.OnCardSelected += CardController_OnCardSelected;
             Mover.OnMoved += Mover_OnMoved;
         }
 
@@ -98,7 +98,7 @@ namespace FTS.Grid
             TurnController.OnPlayerTurn -= TurnController_OnNewTurn;
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
             TurnController.OnCombatStart -= TurnController_OnCombatStart;
-            HandController.OnCardSelected -= HandController_OnCardSelected;
+            CardController.OnCardSelected -= CardController_OnCardSelected;
             Mover.OnMoved -= Mover_OnMoved;
         }
         #endregion
@@ -140,13 +140,13 @@ namespace FTS.Grid
             {
                 return;
             }
-            if (Input.GetMouseButtonDown(0) && MouseOverGrid() && !cardController.CardSelected)
+            if (Input.GetMouseButtonDown(0) && MouseOverGrid() && !cardController.SelectedCard)
             {
                 DoMove();
             }
             else
             {
-                if (cardController.CardSelected)
+                if (cardController.SelectedCard)
                 {
                     DoCardArea();
                 }
@@ -220,7 +220,7 @@ namespace FTS.Grid
         {
             if (UpdateCurrentCell() || (overrideUpdateCell && currentCell))
             {                             
-                Card card = cardController.CardSelected;
+                Card card = cardController.SelectedCard;
                 if(card.Targeting == CardTargeting.None)
                 {
                     UpdateReachable();
@@ -231,44 +231,37 @@ namespace FTS.Grid
 
                 if (cardController.IsFreeAim())
                 {
-                    grid.ShowArea(currentUnit.Location, card.Range, HighlightIndex.CardRange);
+                    grid.ShowArea(currentUnit.Location, card.Range, card.Targeting);
 
-                    if (GetDistance(currentCell) <= card.Range)
+                    if (currentCell && GetDistance(currentCell) <= card.Range && grid.IsValidTargeting(currentCell, card.Targeting))
                     {
                         currentCell.SetHighlight(HighlightIndex.Attack);
-                    }
-                    if (card.Type == CardType.Weapon)
-                    {
-                        grid.ShowAvalibleTargets(currentUnit.Location, cardController.CardSelected.Range);
-                    }               
+                    }             
                 }
                 else
                 {
-                    if (card.Targeting == CardTargeting.Projectile)
-                    {
-                        grid.ShowLines(currentUnit.Location, projectileRange, true);
-                    }
-                    else
-                    {
-                        grid.ShowLines(currentUnit.Location, card.Range, false);
-                    }
+                    grid.ShowLines(currentUnit.Location, projectileRange, card.Targeting);
+
                     HexDirection direction = grid.GetDirection(currentUnit.Location, currentCell);
                     if (direction == HexDirection.None)
                     {
                         return;
                     }
                     mover.LookAt(direction);
-                    if (card.Targeting == CardTargeting.Projectile)
+
+                    if (card.Targeting != CardTargeting.Trajectory)
                     {
-                        targetArea = grid.ShowLine(currentUnit.Location, direction, projectileRange, true);
+
+                        targetArea = grid.ShowLine(currentUnit.Location, direction, projectileRange, card.Targeting);
                     }
-                    else
+                    else if (grid.InCurrentArea(currentCell))
                     {
-                        targetArea = grid.ShowLine(currentUnit.Location, direction, card.Range, false);
+                        targetArea.Add(currentCell);
+                        currentCell.SetHighlight(HighlightIndex.CanReach);
                     }
+
                     highlightController.UpdateHighlight(targetArea);
-                }
-                              
+                }                             
                 //if (cardController.CardSelected.Area > 0 &&
                 //    GetDistance(currentCell) <= cardController.CardSelected.Range)
                 //{ 
@@ -364,24 +357,32 @@ namespace FTS.Grid
         internal HexCell GetCardTarget()
         {
             UpdateCurrentCell();
-            grid.ClearArea();
+            //grid.ClearArea();
             grid.ShowReachableHexes(mover.Location, mover.MovementLeft);
             return currentCell;
         }
 
-        internal bool IsTargetValid(HexCell target, CardTargeting targeting)
+        internal bool IsTargetValid(HexCell target, Card card)
         {
             bool isValidTarget = false;
+            Debug.Log("card type " + card.Type);
             if (target != null)
             {
-                if (targeting == CardTargeting.Unit)
+                if(card.Type == CardType.Weapon)
+                {
+                    if (grid.InCurrentArea(target))
+                    {
+                        isValidTarget = true;
+                    }
+                }
+                else if (card.Targeting == CardTargeting.Unit)
                 {
                     if (currentCell.Unit)
                     {
                         isValidTarget = true;
                     }
                 }
-                else if (targeting == CardTargeting.Ground)
+                else if (card.Targeting == CardTargeting.Ground)
                 {
                     if (currentCell.IsCellAvailable())
                     {
@@ -613,7 +614,7 @@ namespace FTS.Grid
             }
         }
 
-        private void HandController_OnCardSelected(string card)
+        private void CardController_OnCardSelected(string card)
         {
             if(card == null)
             {

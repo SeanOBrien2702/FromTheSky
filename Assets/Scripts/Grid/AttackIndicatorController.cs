@@ -14,7 +14,7 @@ namespace FTS.Grid
     {
         Dictionary<Enemy, AttackIndicator> attackIndicators = new Dictionary<Enemy, AttackIndicator>();
         HexGrid grid;
-        [SerializeField] CardController cardController;
+        //[SerializeField] CardController cardController;
 
         int projectileRange = 9999;
 
@@ -82,7 +82,7 @@ namespace FTS.Grid
 
             if (enemy.IsPiercieing())
             {
-                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, enemy.Range, false);
+                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, enemy.Range, CardTargeting.Piercing);
                 foreach (HexCell cell in indicator.Line)
                 {
                     cell.SetDangerIndicator(true);
@@ -90,7 +90,7 @@ namespace FTS.Grid
             }
             else
             {             
-                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, projectileRange, true);
+                indicator.Line = grid.GetLine(enemy.Location, indicator.Direction, projectileRange, CardTargeting.Projectile);
                 indicator.Line.Last().SetDangerIndicator(true);               
             }
             foreach (HexCell cell in indicator.Line)
@@ -118,7 +118,7 @@ namespace FTS.Grid
                 foreach (AttackDirections direction in enemy.AttackDirections)
                 {
                     HexDirection localDirection = HexDirectionExtensions.LocalDirection(enemy.Direction, direction);
-                    AttackIndicator indicatorBuff = new AttackIndicator(grid.GetLine(enemy.Location, localDirection, enemy.Range, false), localDirection);
+                    AttackIndicator indicatorBuff = new AttackIndicator(grid.GetLine(enemy.Location, localDirection, enemy.Range, CardTargeting.Piercing), localDirection);
                     foreach (HexCell cell in indicatorBuff.Line)
                     {
                         cell.SetDangerIndicator(true);
@@ -133,7 +133,7 @@ namespace FTS.Grid
                 foreach (AttackDirections direction in enemy.AttackDirections)
                 {                  
                     HexDirection localDirection = HexDirectionExtensions.LocalDirection(enemy.Direction, direction);
-                    AttackIndicator indicatorBuff = new AttackIndicator(grid.GetLine(enemy.Location, localDirection, projectileRange, true), localDirection);
+                    AttackIndicator indicatorBuff = new AttackIndicator(grid.GetLine(enemy.Location, localDirection, projectileRange, CardTargeting.Projectile), localDirection);
                     if (indicatorBuff.Line.Count > 0)
                     {
                         indicatorBuff.Line.Last().SetDangerIndicator(true);
@@ -216,8 +216,6 @@ namespace FTS.Grid
         private void UnitController_OnEnemyStunned(Enemy enemy)
         {
             RemoveIndicator(enemy);
-        }
-
-        
+        }       
     }
 }

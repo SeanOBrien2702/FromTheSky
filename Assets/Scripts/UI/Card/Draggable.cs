@@ -74,6 +74,7 @@ namespace FTS.UI
             {
                 controlPoints.Add(Vector2.zero);
             }
+            CardController.OnCardSelected += CardController_OnCardSelected;
         }
 
         private void Update()
@@ -82,6 +83,11 @@ namespace FTS.UI
             {
                 Dragging();
             }
+        }
+
+        private void OnDestroy()
+        {
+            CardController.OnCardSelected -= CardController_OnCardSelected;
         }
         #endregion
 
@@ -146,12 +152,11 @@ namespace FTS.UI
             {
                 return;
             }
-            handController.SelectedCard = cardId;
             isDragging = true;
             handController.IsDragging = true;
             startPosition = new Vector2(arrowStart.position.x, arrowStart.position.y);
             handController.SetTagetingZoom(true);
-            cardController.CardSelect(cardId);
+            cardController.SelectCard(cardId);
             if (cardInfo.Targeting != CardTargeting.None)
             {
                 handController.Targeting(cardId);
@@ -175,25 +180,24 @@ namespace FTS.UI
             {
                 return;
             }
-            handController.SelectedCard = null;
-            handController.SelectCard(null);
             isDragging = false;
             HideArrow();
-            cardController.CardSelected = null;
+            
             if (isPlayed)
             {
                 if (cardInfo.Targeting != CardTargeting.None)
                 {
-                    cardController.PlayCard(cardInfo.CardID);
+                    cardController.TryToPlayCard();
                 }
                 else
                 {
                     if (transform.position.y > Screen.height / 3)
                     {
-                        cardController.PlayCard(cardInfo.CardID);
+                        cardController.TryToPlayCard();
                     }
                 }
             }
+            cardController.SelectedCard = null;
             handController.SetTagetingZoom(false);
             StartCoroutine(WaitDragEnd());
         }
@@ -203,8 +207,7 @@ namespace FTS.UI
         public void ClickCard()
         {
             isDragging = true;
-            handController.SelectedCard = cardInfo.CardID;
-            handController.SelectCard(cardInfo.CardID, false);
+            cardController.SelectCard(cardInfo.CardID);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -229,7 +232,6 @@ namespace FTS.UI
             }
         }
 
-
         public void OnEndDrag(PointerEventData eventData)
         {
             if (isDragging)
@@ -250,5 +252,17 @@ namespace FTS.UI
             handController.IsDragging = false;
         }
         #endregion
+        private void CardController_OnCardSelected(string cardId)
+        {
+            if(cardId == cardInfo.CardID)
+            {
+                isDragging = true;
+            }
+            else
+            {
+                isDragging = false;
+                HideArrow();
+            }
+        }
     }
 }

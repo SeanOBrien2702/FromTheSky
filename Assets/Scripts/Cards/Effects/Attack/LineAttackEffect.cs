@@ -16,7 +16,7 @@ namespace FTS.Cards
         public override void ActivateEffect(HexCell target)
         {
             HexDirection direction = grid.GetDirection(unitController.CurrentPlayer.Location, target);
-            List<HexCell> line = grid.GetLine(unitController.CurrentPlayer.Location, direction, length, false);
+            List<HexCell> line = grid.GetLine(unitController.CurrentPlayer.Location, direction, length, CardTargeting.Piercing);
 
             foreach (var cell in line)
             {

@@ -672,10 +672,18 @@ namespace FTS.Grid
             return area;
         }
 
-        internal List<HexCell> GetLine(HexCell origin, HexDirection direction, int length, bool isProjectile)
+        internal List<HexCell> GetLine(HexCell origin, HexDirection direction, int length, CardTargeting targeting)
         {
             HexCell buffer = origin.GetNeighbor(direction);
             List<HexCell> line = new List<HexCell>();
+            if (buffer == null)
+            {
+                return line;
+            }
+            if (targeting == CardTargeting.Trajectory)
+            {
+                buffer = buffer.GetNeighbor(direction);
+            }
 
             for (int i = 0; i < length; i++)
             {
@@ -684,7 +692,7 @@ namespace FTS.Grid
                     break;
                 }
                 line.Add(buffer);
-                if (buffer.Unit && isProjectile)
+                if (buffer.Unit && targeting == CardTargeting.Projectile)
                 {
                     break;
                 }              
@@ -693,7 +701,7 @@ namespace FTS.Grid
             return line;
         }
 
-        public void ShowArea(HexCell fromCell, int range, HighlightIndex highlight)
+        public void ShowArea(HexCell fromCell, int range, CardTargeting targeting)
         {
             HexCoordinates startPos = fromCell.Location;
             for (int x = -range; x <= range; x++)
@@ -704,13 +712,52 @@ namespace FTS.Grid
                     coordinates.X += startPos.X;
                     coordinates.Z += startPos.Z;
                     HexCell cell = GetCell(coordinates);
-                    if (cell != null)
+                    if (IsValidTargeting(cell, targeting))
                     {
-                        cell.SetHighlight(highlight);
                         currentArea.Add(cell);
                     }
                 }
             }
+        }
+
+        public bool IsValidTargeting(HexCell cell, CardTargeting targeting)
+        {
+            bool isValid = false;
+            if(cell)
+            {
+                switch (targeting)
+                {
+                    case CardTargeting.None:
+                        break;
+                    case CardTargeting.Unit:
+                        isValid = true;
+                        if (cell.Unit)
+                        {
+                            cell.SetHighlight(HighlightIndex.CanReach);
+                        }
+                        else
+                        {
+                            cell.SetHighlight(HighlightIndex.CardRange);                       
+                        }                      
+                        break;
+                    case CardTargeting.Ground:
+                        if (cell.IsCellAvailable())
+                        {
+                            cell.SetHighlight(HighlightIndex.CardRange);
+                            isValid = true;
+                        }
+                        break;
+                    case CardTargeting.Projectile:
+                        break;
+                    case CardTargeting.Piercing:
+                        break;
+                    case CardTargeting.Trajectory:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return isValid;
         }
 
         internal void ShowAvalibleTargets(HexCell location, int range)
@@ -724,11 +771,11 @@ namespace FTS.Grid
             }
         }
 
-        internal void ShowLines(HexCell location, int range, bool isProjectile)
+        internal void ShowLines(HexCell location, int range, CardTargeting targeting)
         {
             for (HexDirection direction = HexDirection.NE; direction <= HexDirection.NW; direction++)
             {
-                foreach(var cell in GetLine(location, direction, range, isProjectile))
+                foreach(var cell in GetLine(location, direction, range, targeting))
                 {
                     cell.SetHighlight(HighlightIndex.CardRange);
                     currentArea.Add(cell);
@@ -736,9 +783,9 @@ namespace FTS.Grid
             }
         }
 
-        internal List<HexCell> ShowLine(HexCell location, HexDirection direction, int range, bool isProjectile)
+        internal List<HexCell> ShowLine(HexCell location, HexDirection direction, int range, CardTargeting targeting)
         {
-            List<HexCell> line = GetLine(location, direction, range, isProjectile);
+            List<HexCell> line = GetLine(location, direction, range, targeting);
             foreach (var cell in line)
             {
                 cell.SetHighlight(HighlightIndex.Attack);

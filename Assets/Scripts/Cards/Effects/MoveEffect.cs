@@ -22,7 +22,7 @@ namespace FTS.Cards
         public override void ActivateEffect(HexCell target)
         {
             HexDirection direction = grid.GetDirection(unitController.CurrentPlayer.Location, target);
-            List<HexCell> line = grid.GetLine(unitController.CurrentPlayer.Location, direction, projectileRange, true);
+            List<HexCell> line = grid.GetLine(unitController.CurrentPlayer.Location, direction, projectileRange, CardTargeting.Projectile);
 
             if (line.Last().Unit && line.Last().Unit is Character)
                 gridController.TargetPush((Character)line.Last().Unit, distance, isPull);

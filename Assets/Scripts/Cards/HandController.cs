@@ -39,7 +39,7 @@ namespace FTS.Cards
 
     public class HandController : MonoBehaviour
     {
-        public static event Action<string> OnCardSelected = delegate { };
+        //public static event Action<string> OnCardSelected = delegate { };
 
         [SerializeField] CardController cardController;
         [SerializeField] UnitController unitController;
@@ -82,7 +82,6 @@ namespace FTS.Cards
         List<HandPrefab> handPrefabs = new List<HandPrefab>();
         List<CardUI> cardUI = new List<CardUI>();
         Queue<HandPrefab> cardsToBeDrawn = new Queue<HandPrefab>();
-        string selectedCard = null;
 
         private KeyCode[] keyCodes = new KeyCode[] {KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3,
                                                     KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6,
@@ -93,24 +92,6 @@ namespace FTS.Cards
         {
             get { return lerping; }   // get method
             set { lerping = value; }  // set method
-        }
-
-        public string SelectedCard { get => selectedCard;
-            set 
-            {
-                selectedCard = value;
-                if(selectedCard == null)
-                {
-                    Cursor.visible = true;
-                    currentZoom = -1;
-                    isTargetingZoom = false;
-                }
-                else
-                {
-                    Cursor.visible = false;
-                }
-                    
-            }  
         }
 
         public bool IsDragging { get => isDragging; set => isDragging = value; }
@@ -124,6 +105,7 @@ namespace FTS.Cards
             UnitController.OnSelectUnit += UnitController_OnSelectUnit;
             UnitController.OnEnergyChanged += UnitController_OnEnergyChanged; 
             CardController.OnCardDrawn += CardController_OnCardDrawn;
+            CardController.OnCardSelected += CardController_OnCardSelected;
         }
 
         private void OnDestroy()
@@ -133,11 +115,12 @@ namespace FTS.Cards
             UnitController.OnSelectUnit -= UnitController_OnSelectUnit;
             UnitController.OnEnergyChanged -= UnitController_OnEnergyChanged;
             CardController.OnCardDrawn -= CardController_OnCardDrawn;
+            CardController.OnCardSelected -= CardController_OnCardSelected;
         }
 
         private void Update()
         {
-            if (!unitController.CurrentPlayer)// || !hasCombatStarted)
+            if (!unitController.CurrentPlayer)
             {
                 return;
             }
@@ -164,17 +147,7 @@ namespace FTS.Cards
                     {
                         item.draggable.IsDragging = false;
                     }
-                    if (selectedCard == handPrefabs[positionSelected].CardID)
-                    {
-                        handPrefabs[positionSelected].draggable.IsDragging = false;
-                        SelectedCard = null;
-                    }
-                    else
-                    {
-                        handPrefabs[positionSelected].draggable.IsDragging = true;
-                        SelectedCard = handPrefabs[positionSelected].CardID;
-                    }
-                    SelectCard(selectedCard, false);
+                    cardController.SelectCard(handPrefabs[positionSelected].CardID);
                 }
             }
         }
@@ -189,22 +162,17 @@ namespace FTS.Cards
             {
                 return;
             }
-            if (selectedCard != null)
+            if (cardController.SelectedCard != null)
             {
-                cardController.PlayCard(selectedCard);
-                SelectedCard = null;
-                OnCardSelected?.Invoke(selectedCard);
+                cardController.TryToPlayCard();
             }
         }
 
         void DoDeselection()
         {
-            if (selectedCard != null && Input.GetMouseButtonDown(1))
+            if (cardController.SelectedCard != null && Input.GetMouseButtonDown(1))
             {
-                handPrefabs.Find(item => item.CardID == selectedCard).draggable.IsDragging = false;
-                SelectedCard = null;
-                SpaceHand();
-                OnCardSelected?.Invoke(selectedCard);
+                cardController.SelectCard(null);
             }
         }
 
@@ -289,8 +257,7 @@ namespace FTS.Cards
                 {
                     item.HighlightCard(true);
                 }
-            }
-            
+            }     
         }
 
         private void DisableHighlight()
@@ -320,23 +287,8 @@ namespace FTS.Cards
             return canZoom;
         }
 
-        //bool IsDragging()
-        //{
-        //    bool isDragging = false;
-
-        //    foreach (var item in handPrefabs)
-        //    {
-        //        if(item.draggable.IsDragging)
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
-
-        public void SelectCard(string cardID, bool isDragging = true)
+        void SelectCard(string cardID, bool isDragging = true)
         {
-            OnCardSelected?.Invoke(cardID);
             SpaceHand(cardID);
             if (CanTargetZoom(cardID, isDragging))
                 Targeting(cardID);
@@ -575,6 +527,11 @@ namespace FTS.Cards
         private void UnitController_OnSelectUnit(Unit unit)
         {
             DisableHighlight();
+        }
+
+        private void CardController_OnCardSelected(string cardId)
+        {
+            SelectCard(cardId, false);
         }
         #endregion
     }

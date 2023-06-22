@@ -19,6 +19,7 @@ namespace FTS.Cards
     */
     public class CardController : MonoBehaviour
     {
+        public static event Action<string> OnCardSelected = delegate { };
         public static event System.Action<Card, Player> OnCardPlayed = delegate { };
         public static event System.Action OnCardDrawn = delegate { };
         public static event System.Action OnCardCreated = delegate { };
@@ -40,17 +41,17 @@ namespace FTS.Cards
         HexCell target;
 
         Card lastCardUsed;
-        Card cardSelected;
+        Card selectedCard;
         private CharacterClass characterClass;
 
         bool handleDiscard = false;
         int numberToDiscard = 0;
 
         #region Properties
-        public Card CardSelected   // property
+        public Card SelectedCard   // property
         {
-            get { return cardSelected; }   // get method
-            set { cardSelected = value; }  // set method
+            get { return selectedCard; }   // get method
+            set { selectedCard = value; }  // set method
         }
 
         public int MaxHandSize   // property
@@ -86,7 +87,6 @@ namespace FTS.Cards
             TurnController.OnEnemyTurn += TurnController_OnEnemyTurn;
             UnitController.OnSelectPlayer += UnitController_OnSelectPlayer;
             UnitController.OnSelectUnit += UnitController_OnSelectUnit;
-            HandController.OnCardSelected += HandController_OnCardSelected;
             FillDeck();
         }
 
@@ -114,13 +114,13 @@ namespace FTS.Cards
             TurnController.OnEnemyTurn -= TurnController_OnEnemyTurn;
             UnitController.OnSelectPlayer -= UnitController_OnSelectPlayer;
             UnitController.OnSelectUnit -= UnitController_OnSelectUnit;
-            HandController.OnCardSelected -= HandController_OnCardSelected;
         }
         #endregion
 
         #region Private Methods
         private void CardPlayed(Card playedCard)
         {
+            Debug.Log("card played");
             PlayCardSound(playedCard.Type);
             if (hand)
             {
@@ -167,7 +167,7 @@ namespace FTS.Cards
             bool isInRange = false;
           
             //check grid if position is valid
-            target = grid.GetCardTarget();
+            
             if (card.Type == CardType.Weapon)
             {
                 return true;
@@ -179,8 +179,9 @@ namespace FTS.Cards
             return isInRange;
         }
 
-        private bool IsTargetValid(CardTargeting targeting)
+        private bool IsTargetValid(Card targeting)
         {
+            Debug.Log("check area");
             return grid.IsTargetValid(target, targeting);
         }
 
@@ -318,36 +319,29 @@ namespace FTS.Cards
             return canPlay;
         }
 
-        public void PlayCard(string cardId)
+        public void TryToPlayCard()
         {
-            cardSelected = null;
-            Card playedCard = deck.Find(item => item.Id == cardId);
+            Card playedCard = selectedCard;
             if(player &&
                 HasEnergy(playedCard.Cost) && 
                 playedCard.Effects.Count > 0) 
             {
-                if (playedCard.Targeting == CardTargeting.None)
+                target = grid.GetCardTarget();
+                if (IsTargetValid(playedCard) && IsInRange(playedCard))
                 {
-                    CardPlayed(playedCard);
-                    playedCard.Play();
-                }
-                else
-                {
-                    if (IsInRange(playedCard) && IsTargetValid(playedCard.Targeting))
+                    playedCard.Play();                                   
+                    if (playedCard.Targeting == CardTargeting.Unit)
                     {
-                        CardPlayed(playedCard);
-                        playedCard.Play();
-                        if (playedCard.Targeting == CardTargeting.Unit)
-                        {
-                            playedCard.Play(target.Unit);
-                        }
-                        else if(playedCard.Targeting != CardTargeting.Projectile)
-                        {
-                            playedCard.Play(target);
-                        }
+                        playedCard.Play(target.Unit);
                     }
+                    else if (playedCard.Targeting != CardTargeting.Projectile)
+                    {
+                        playedCard.Play(target);
+                    }
+                    CardPlayed(playedCard);
                 }
             }
+            SelectCard(null);
         }
 
         public void DiscardCard(int cardsDiscarded, bool random)
@@ -525,25 +519,32 @@ namespace FTS.Cards
             }
         }
 
-
         internal void PlaceOnTopOfDeck(string cardID)
         {          
             deck = deck.OrderBy(item => Guid.NewGuid()).ToList();
             deck = deck.OrderByDescending(item => item.Id == cardID).ToList();
         }
 
-
-
-        internal void CardSelect(string cardId)
+        internal void SelectCard(string cardId)
         {
             if(cardId != null)
             {
-                cardSelected = deck.Find(item => item.Id == cardId);
+                Card card = deck.Find(item => item.Id == cardId);
+                if(card != selectedCard)
+                {
+                    selectedCard = deck.Find(item => item.Id == cardId);
+                }
+                else
+                {
+                    cardId = null;
+                    selectedCard = null;
+                }
             }
             else
             {
-                cardSelected = null;
+                selectedCard = null;
             }
+            OnCardSelected?.Invoke(cardId);
         }
 
         public int GetCardCountInDeck()
@@ -557,6 +558,7 @@ namespace FTS.Cards
             return deck.Where(item => item.Location == CardLocation.Discard)
                                         .Count();
         }
+
         //exhaust 
         public int GetCardCountAtomized()
         {
@@ -577,7 +579,7 @@ namespace FTS.Cards
         internal int GetDamage(HexCell target)
         {
             int damage = 0;
-            foreach (IDamageEffect item in CardSelected.Effects.OfType<IDamageEffect>())
+            foreach (IDamageEffect item in SelectedCard.Effects.OfType<IDamageEffect>())
             {
                 damage += item.GetTotalDamage(target);
             }
@@ -586,7 +588,7 @@ namespace FTS.Cards
 
         internal bool IsFreeAim()
         {
-            if ((int)cardSelected.Targeting < (int)CardTargeting.Projectile)
+            if ((int)selectedCard.Targeting < (int)CardTargeting.Projectile)
             {
                 return true;
             }
@@ -637,7 +639,7 @@ namespace FTS.Cards
 
         private void HandController_OnCardSelected(string cardID)
         {
-            CardSelect(cardID);
+            SelectCard(cardID);
         }
         #endregion
     }

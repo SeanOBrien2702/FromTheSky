@@ -408,7 +408,8 @@ namespace FTS.Grid
         public bool IsCellAvailable()
         {
             return (!isObstacle
-                && Unit == null);
+                && Unit == null
+                && trap == null);
         }
         #endregion
     }

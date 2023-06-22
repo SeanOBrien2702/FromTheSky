@@ -21,7 +21,7 @@ namespace FTS.Grid
             Unit.OnHover += Unit_OnHover;
             Unit.OnHoverExit += Unit_OnHoverExit;
             UnitController.OnEnemyKilled += UnitController_OnEnemyKilled;
-            HandController.OnCardSelected += HandController_OnCardSelected;
+            CardController.OnCardSelected += HandController_OnCardSelected;
         }
 
         private void OnDestroy()
@@ -29,7 +29,7 @@ namespace FTS.Grid
             Unit.OnHover -= Unit_OnHover;
             Unit.OnHoverExit -= Unit_OnHoverExit;
             UnitController.OnEnemyKilled += UnitController_OnEnemyKilled;
-            HandController.OnCardSelected -= HandController_OnCardSelected;
+            CardController.OnCardSelected -= HandController_OnCardSelected;
         }
         #endregion
 
@@ -83,8 +83,7 @@ namespace FTS.Grid
                 return;
             }
             Enemy enemy = (Enemy)unit;
-            if (cardController.CardSelected)// &&
-                //cardController.CardSelected.Targeting == CardTargeting.Unit)
+            if (cardController.SelectedCard)
             {
                 enemy.ShowDamage(cardController.GetDamage(enemy.Location));
                 highlights.Add(enemy);
@@ -99,7 +98,7 @@ namespace FTS.Grid
             }        
         }
 
-        private void HandController_OnCardSelected(string obj)
+        private void HandController_OnCardSelected(string card)
         {
             ClearHighlights();
         }
