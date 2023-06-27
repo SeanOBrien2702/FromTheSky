@@ -1501,7 +1501,7 @@ PrefabInstance:
         type: 3}
       propertyPath: testDeck.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 30ad7bb32aa201d429aecf73ccf9a6ab,
+      objectReference: {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
@@ -1513,13 +1513,13 @@ PrefabInstance:
         type: 3}
       propertyPath: testDeck.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: ad732fde9c38fd14f84992bf8cf044e9,
+      objectReference: {fileID: 11400000, guid: 30ad7bb32aa201d429aecf73ccf9a6ab,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: testDeck.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: ad732fde9c38fd14f84992bf8cf044e9,
+      objectReference: {fileID: 11400000, guid: 30ad7bb32aa201d429aecf73ccf9a6ab,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
@@ -1724,7 +1724,7 @@ PrefabInstance:
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: characterClassCards.Array.data[1].cards.Array.size
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
@@ -1766,8 +1766,7 @@ PrefabInstance:
         type: 3}
       propertyPath: characterClassCards.Array.data[1].cards.Array.data[22]
       value: 
-      objectReference: {fileID: 11400000, guid: ad732fde9c38fd14f84992bf8cf044e9,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8990577267346574125, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: m_Name

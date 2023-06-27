@@ -15,6 +15,7 @@ namespace FTS.Characters
     {
         public static event System.Action<HexCell, HexCell> OnMoved = delegate { };
         public static event System.Action<int> OnMovementChanged = delegate { };
+
         CameraController cameraController;
         Character character;
         StateController stateController;
@@ -254,6 +255,7 @@ namespace FTS.Characters
 
         IEnumerator RotateToTarget(float targetAngle)
         {
+            character.StartRotating();
             isRotating = true;
             float time = 0;
             while (time < rotationSpeed)

@@ -249,17 +249,32 @@ namespace FTS.Grid
                     }
                     mover.LookAt(direction);
 
+                    switch (card.Targeting)
+                    {
+                        case CardTargeting.Projectile:
+                            unitController.CurrentPlayer.SetIndicator(card.Targeting);
+                            targetArea = grid.ShowLine(currentUnit.Location, direction, projectileRange, card.Targeting);
+                            break;
+                        case CardTargeting.Piercing:                           
+                            targetArea = grid.ShowLine(currentUnit.Location, direction, projectileRange, card.Targeting);
+                            break;
+                        case CardTargeting.Trajectory:
+                            if (grid.InCurrentArea(currentCell))
+                            {
+                                unitController.CurrentPlayer.SetIndicator(card.Targeting);
+                                targetArea.Add(currentCell);
+                                currentCell.SetHighlight(HighlightIndex.CanReach);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
                     if (card.Targeting != CardTargeting.Trajectory)
                     {
 
                         targetArea = grid.ShowLine(currentUnit.Location, direction, projectileRange, card.Targeting);
-                    }
-                    else if (grid.InCurrentArea(currentCell))
-                    {
-                        targetArea.Add(currentCell);
-                        currentCell.SetHighlight(HighlightIndex.CanReach);
-                    }
-
+                    }                
                     highlightController.UpdateHighlight(targetArea);
                 }                             
                 //if (cardController.CardSelected.Area > 0 &&

@@ -1,6 +1,5 @@
 ﻿#region Using Statements
 using FTS.Cards;
-using FTS.Turns;
 using System.Collections;
 using UnityEngine;
 #endregion
@@ -136,6 +135,11 @@ namespace FTS.Characters
         {
             Debug.Log("card not added to deck");
         }
+
+        internal virtual void StartRotating()
+        {
+            
+        }
         #endregion
 
         #region Coroutines
@@ -145,6 +149,6 @@ namespace FTS.Characters
             yield return new WaitForSeconds(1.5f);
             Destroy(gameObject);
         }
-        #endregion  
+        #endregion
     }
 }

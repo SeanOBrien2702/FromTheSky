@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3194208608885212606
 Transform:
   m_ObjectHideFlags: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   mainTex: {fileID: 2800000, guid: 2149d349029d2614e92031e5a45586b2, type: 3}
   renderEdges: 1
   edgeTex: {fileID: 2800000, guid: b66b11d7a1393ad47a21ba8f9239dd09, type: 3}
-  range: 201
+  range: 157
   edgePadding: 0.5
   radialSize: 20
   fov: 60
@@ -120,7 +120,7 @@ MonoBehaviour:
   meshWidth: 4
   resolution: 0.02
   distortion: 0.017
-  offset: 0.074
+  offset: 1
   brightness: 1.2
   mainColor: {r: 1, g: 0.9399502, b: 0, a: 1}
   useFillEffect: 1
@@ -147,9 +147,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3866697043596957436}
-  - component: {fileID: 4361333824052557634}
   m_Layer: 9
-  m_Name: IndicatorController
+  m_Name: PlayerIndicatorController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,21 +170,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4361333824052557634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8364793826529820651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71ef38b92edfaf54980c9e93d3aadab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indicatorInfos:
-  - type: 1
-    indicator: {fileID: 5005034436856628259}
-    settings: {fileID: 1409612762017183180}
-    textureIndex: 0
-  indicatorVisuals: {fileID: 11400000, guid: cb8b7eb90e202f248908fc16ebbacd26, type: 2}

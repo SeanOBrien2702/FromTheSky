@@ -7,6 +7,7 @@ using System;
 using FTS.Turns;
 using System.Collections;
 using UnityEngine.Animations.Rigging;
+using WalldoffStudios.Indicators;
 #endregion
 
 namespace FTS.Characters
@@ -19,6 +20,10 @@ namespace FTS.Characters
         int energy = 4;
         [SerializeField] int maxEnergy = 4;
         IAbility abilty;
+
+        [SerializeField] IndicatorController lineIndicator;
+        [SerializeField] IndicatorController arcIndicator;
+        bool indicatorTest = false;
 
         [Header("Attack animation")]
         [SerializeField] GameObject projectileStart;
@@ -68,13 +73,25 @@ namespace FTS.Characters
             base.Start();         
             energy = maxEnergy;
             CardController.OnCardPlayed += CardController_OnCardPlayed;
+            CardController.OnCardSelected += CardController_OnCardSelected;
             TurnController.OnEnemySpawn += TurnController_OnEnemySpawn;
         }
 
+
         private void OnDestroy()
         {
-            CardController.OnCardPlayed += CardController_OnCardPlayed;
+            CardController.OnCardPlayed -= CardController_OnCardPlayed;
+            CardController.OnCardSelected -= CardController_OnCardSelected;
             TurnController.OnEnemySpawn -= TurnController_OnEnemySpawn;
+        }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                indicatorTest = !indicatorTest;
+                //indicator.ToggleAim(indicatorTest);
+            }
         }
         #endregion
 
@@ -114,6 +131,25 @@ namespace FTS.Characters
                      
         }
 
+        internal void SetIndicator(CardTargeting targeting)
+        {
+            if (targeting == CardTargeting.Projectile)
+            {
+                lineIndicator.ToggleAim(true);
+                //arcIndicator.ToggleAim(false);
+            }
+            else if (targeting == CardTargeting.Trajectory)
+            {
+                //lineIndicator.ToggleAim(true);
+                //arcIndicator.ToggleAim(true);
+            }
+        }
+        internal override void StartRotating()
+        {
+            Debug.Log("rotate");
+            lineIndicator.ToggleAim(false);
+            arcIndicator.ToggleAim(false);
+        }
         #endregion
 
         IEnumerator AttackAnimation(Card card)
@@ -161,6 +197,12 @@ namespace FTS.Characters
         {
             if(player == this)
                 PlayCardAnimation(card);
+        }
+
+        private void CardController_OnCardSelected(string obj)
+        {
+            lineIndicator.ToggleAim(false);
+            arcIndicator.ToggleAim(false);
         }
         #endregion
     }
