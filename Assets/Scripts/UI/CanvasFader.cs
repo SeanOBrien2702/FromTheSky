@@ -2,6 +2,7 @@ using FTS.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class CanvasFader : MonoBehaviour
@@ -15,6 +16,18 @@ public class CanvasFader : MonoBehaviour
     { 
         canvasGroup = GetComponent<CanvasGroup>();
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            FadeCanvas(1);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            FadeCanvas(0);
+        }
+    }
     #endregion
 
     public void FadeCanvas(int value)
@@ -27,7 +40,7 @@ public class CanvasFader : MonoBehaviour
     }
 
     #region Coroutines
-    IEnumerator LerpCanvas(int canvasAlpha)
+    public IEnumerator LerpCanvas(int canvasAlpha)
     {
         isLerping = true;
         float time = 0;

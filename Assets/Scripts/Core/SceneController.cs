@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,7 @@ namespace FTS.Core
 {
     public class SceneController : MonoBehaviour
     {
+        [SerializeField] CanvasFader fader;
         public static event Action OnAdditiveSceneLoaded = delegate { };
         string addativeScene = null;
         string baseScene = null;
@@ -30,11 +32,22 @@ namespace FTS.Core
                 addativeScene = null;
             }
             else
-            {
+            {             
                 baseScene = sceneName;
                 addativeScene = null;
-                SceneManager.LoadScene(sceneName);
+                StartCoroutine(StartLoad(sceneName));
             }
+        }
+
+        IEnumerator StartLoad(string sceneName)
+        {
+            yield return StartCoroutine(fader.LerpCanvas(1));
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+            while (!operation.isDone)
+            {
+                yield return null;
+            }
+            yield return StartCoroutine(fader.LerpCanvas(0));
         }
 
         public void LoadScene(Scenes scene, bool isAddative = false)
