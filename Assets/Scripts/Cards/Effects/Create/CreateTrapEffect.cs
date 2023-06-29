@@ -31,5 +31,10 @@ namespace FTS.Cards
             
             return effectText;
         }
+
+        public string GetStat(Stat stat)
+        {
+            return "";
+        }
     }
 }

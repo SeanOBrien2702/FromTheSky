@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using FTS.Characters;
 
 namespace FTS.UI
 {
@@ -18,12 +19,21 @@ namespace FTS.UI
         [SerializeField] Image rarity;
 
         [Header("Range")]
-        [SerializeField] GameObject rangeSymbol;
-        [SerializeField] Text range;
+        [SerializeField] GameObject rangeBorder;
+        [SerializeField] Image rangeSymbol;
+        [SerializeField] TextMeshProUGUI rangeText;
+        [SerializeField] Sprite projectile;
+        [SerializeField] Sprite piercing;
 
         [Header("Energy")]
         [SerializeField] GameObject energySymbol;
         [SerializeField] TextMeshProUGUI cost;
+
+        [Header("Unit")]
+        [SerializeField] GameObject healthImage;
+        [SerializeField] GameObject movementImage;
+        [SerializeField] TextMeshProUGUI healthText;
+        [SerializeField] TextMeshProUGUI movementText;
 
         [Header("Colour")]
         [SerializeField] Color[] cardRarityColour;
@@ -46,12 +56,6 @@ namespace FTS.UI
         {
             get { return cardName.text; }   // get method
             set { cardName.text = value; }  // set method
-        }
-
-        public string Range  // property
-        {
-            get { return range.text; }   // get method
-            set { range.text = value; }  // set method
         }
 
         public string CardID  // property
@@ -109,14 +113,40 @@ namespace FTS.UI
 
         private void ConfigureCardType(Card card)
         {
-            if (card.Targeting == CardTargeting.None)
+            switch (card.Targeting)
             {
-                rangeSymbol.SetActive(false);
-                range.gameObject.SetActive(false);
+                case CardTargeting.None:
+                    rangeBorder.SetActive(false);
+                    break;
+                case CardTargeting.Unit:
+                    rangeSymbol.gameObject.SetActive(false);
+                    rangeText.text = card.Range.ToString();
+                    break;
+                case CardTargeting.Ground:
+                    rangeSymbol.gameObject.SetActive(false);
+                    rangeText.text = card.Range.ToString();
+                    break;
+                case CardTargeting.Projectile:
+                    tooltipUI.CreateTooltip(projectile, "Projectile", "Damage the first unit in a direction");
+                    rangeSymbol.sprite = projectile;
+                    rangeText.gameObject.SetActive(false);
+                    break;
+                case CardTargeting.Piercing:
+                    tooltipUI.CreateTooltip(piercing, "Piercing", "Damage all units in a direction");
+                    rangeSymbol.sprite = piercing;
+                    rangeText.gameObject.SetActive(false);
+                    break;
+                case CardTargeting.Trajectory:
+                    rangeText.gameObject.SetActive(false);
+                    break;
             }
-            else
+
+            if (card.Type == CardType.Summon)
             {
-                range.text = card.Range.ToString();
+                healthImage.SetActive(true);
+                movementImage.SetActive(true);
+                healthText.text = card.GetUnitInfo(Stat.Health);
+                movementText.text = card.GetUnitInfo(Stat.Movement);
             }
 
             if (card.Effects.Count <= 0)

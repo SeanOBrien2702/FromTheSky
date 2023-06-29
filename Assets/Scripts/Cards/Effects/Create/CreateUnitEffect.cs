@@ -7,7 +7,7 @@ namespace FTS.Cards
 {
     [System.Serializable]
     [CreateAssetMenu(menuName = "Effect/Create/CreateUnit", fileName = "CreatUnitEffect.asset")]
-    public class CreateUnitEffect : Effect
+    public class CreateUnitEffect : Effect, ICreate
     {
         [SerializeField] Player unit;
 
@@ -18,12 +18,13 @@ namespace FTS.Cards
         }
 
         public override string GetEffectText()
+        { 
+            return "Energy: " + unit.Stats.GetStat(Stat.SupportRange, unit.CharacterClass);
+        }
+
+        public string GetStat(Stat stat)
         {
-            string effectText = "Movement: " + unit.Stats.GetStat(Stat.Movement, unit.CharacterClass) + 
-                                "\nHealth: " + unit.Stats.GetStat(Stat.Health, unit.CharacterClass) +
-                                "\nEnergy: " + unit.Stats.GetStat(Stat.SupportRange, unit.CharacterClass);
-            
-            return effectText;
+            return unit.GetStat(stat).ToString();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace FTS.Cards
 {
     [System.Serializable]
     [CreateAssetMenu(menuName = "Effect/Create/CreateBuilding", fileName = "CreatBuildingEffect.asset")]
-    public class CreateBuildingEffect : Effect
+    public class CreateBuildingEffect : Effect, ICreate
     {
         [SerializeField] Building building;
 
@@ -22,6 +22,16 @@ namespace FTS.Cards
             string effectText = "Create a Battery.\nTurn Start: cloest ally gains 1 energy";
 
             return effectText;
+        }
+
+        public string GetStat(Stat stat)
+        {
+            string health = "0";
+            if(stat == Stat.Health)
+            {
+                health = building.MaxHealth.ToString();
+            }
+            return health;
         }
     }
 }

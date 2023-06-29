@@ -2,6 +2,7 @@
 using FTS.Characters;
 using FTS.Grid;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 #endregion
 
@@ -210,6 +211,16 @@ namespace FTS.Cards
             {
                 effect.ActivateEffect(player, target);
             }
+        }
+
+        internal string GetUnitInfo(Stat stat)
+        {
+            if(type != CardType.Summon)
+            {
+                return "";
+            }
+
+            return effects.OfType<ICreate>().First().GetStat(stat);
         }
         #endregion
     }

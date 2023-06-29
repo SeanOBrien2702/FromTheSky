@@ -77,6 +77,12 @@ namespace FTS.UI
             //keywordText.ForceMeshUpdate();
             //keywordNameText.ForceMeshUpdate();
         }
+        internal void CreateTooltip(Sprite image, string word, string term)
+        {
+            Tooltip tooltip = Instantiate(tooltipPrefab, tooltipPosition.transform);
+            tooltip.SetToolTip(image, word, term);
+            Canvas.ForceUpdateCanvases();
+        }
 
         internal void CreateTooltips(string rulesText)
         {
@@ -95,7 +101,7 @@ namespace FTS.UI
                 if(Keywords.KeywordTerms.Keys.Contains(word))
                 {
                     Tooltip tooltip = Instantiate(tooltipPrefab, tooltipPosition.transform);
-                    tooltip.SetToolTip(word, Keywords.KeywordTerms[word]);
+                    tooltip.SetToolTip(null, word, Keywords.KeywordTerms[word]);
                 }
             }
             Canvas.ForceUpdateCanvases();

@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49bc9a7eb488ab84ea40542fcc9257d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 0.2
+  fadeDuration: 0.15
 --- !u!1 &2658605831534516234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,13 +1610,13 @@ PrefabInstance:
         type: 3}
       propertyPath: testDeck.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 3374c6cdb221b3642b489115fd35e2f3,
+      objectReference: {fileID: 11400000, guid: d45e03fe1d37eaa42bf2401c5dcc781b,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
       propertyPath: testDeck.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 30ad7bb32aa201d429aecf73ccf9a6ab,
+      objectReference: {fileID: 11400000, guid: d45e03fe1d37eaa42bf2401c5dcc781b,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
@@ -1628,7 +1628,7 @@ PrefabInstance:
         type: 3}
       propertyPath: testDeck.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: 30ad7bb32aa201d429aecf73ccf9a6ab,
+      objectReference: {fileID: 11400000, guid: 144768c176115d245b49c90e56f17d6f,
         type: 2}
     - target: {fileID: 6359161228952961844, guid: b1a586b67a531014d84bd3cd2f5282b3,
         type: 3}
