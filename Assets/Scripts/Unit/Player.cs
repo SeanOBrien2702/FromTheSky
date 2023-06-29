@@ -146,9 +146,8 @@ namespace FTS.Characters
         }
         internal override void StartRotating()
         {
-            Debug.Log("rotate");
             lineIndicator.ToggleAim(false);
-            arcIndicator.ToggleAim(false);
+            //arcIndicator.ToggleAim(false);
         }
         #endregion
 
@@ -202,7 +201,7 @@ namespace FTS.Characters
         private void CardController_OnCardSelected(string obj)
         {
             lineIndicator.ToggleAim(false);
-            arcIndicator.ToggleAim(false);
+            //arcIndicator.ToggleAim(false);
         }
         #endregion
     }
