@@ -9,7 +9,7 @@ namespace FTS.UI
 {
     public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] GameObject highlight;
+        
         [SerializeField] TextMeshProUGUI cardName;
         [SerializeField] TextMeshProUGUI rulesText;
         [SerializeField] TextMeshProUGUI typeText;
@@ -17,6 +17,11 @@ namespace FTS.UI
         [SerializeField] Image border;
         [SerializeField] Image cardArt;
         [SerializeField] Image rarity;
+
+        [Header("Highlight")]
+        [SerializeField] UIOutline highlight;
+        [SerializeField] Color defaultColour;
+        [SerializeField] Color selectedColour;
 
         [Header("Range")]
         [SerializeField] GameObject rangeBorder;
@@ -81,6 +86,7 @@ namespace FTS.UI
             CardController.OnCardCreated += CardController_OnCardCreated;
             CardController.OnCardDrawn += CardController_OnCardDrawn;
             CardController.OnCardPlayed += CardController_OnCardPlayed;
+            CardController.OnCardSelected += CardController_OnCardSelected;
         }
 
         private void OnDestroy()
@@ -88,6 +94,7 @@ namespace FTS.UI
             CardController.OnCardCreated -= CardController_OnCardCreated;
             CardController.OnCardDrawn -= CardController_OnCardDrawn;
             CardController.OnCardPlayed -= CardController_OnCardPlayed;
+            CardController.OnCardSelected -= CardController_OnCardSelected;
         }
 
         private void Update()
@@ -231,7 +238,7 @@ namespace FTS.UI
 
         public void HighlightCard(bool enable)
         {
-            highlight.SetActive(enable);
+            highlight.gameObject.SetActive(enable);
         }
 
         #region Events
@@ -279,6 +286,22 @@ namespace FTS.UI
         private void CardController_OnCardCreated()
         {
             FillCardText(cardInfo);
+        }
+
+        private void CardController_OnCardSelected(string id)
+        {
+            if(!highlight)
+            {
+                return;
+            }
+            if(id == cardId)
+            {
+                highlight.color = selectedColour;
+            }
+            else
+            {
+                highlight.color = defaultColour;
+            }
         }
         #endregion
     }

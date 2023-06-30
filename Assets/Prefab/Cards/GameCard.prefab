@@ -192,16 +192,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 1ef3362002c9e8c46a0050d69cef0922, type: 2}
-  m_Color: {r: 0.9150943, g: 0.5919226, b: 0.28057137, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.33333334, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 4d77611351db6c842982a7d45b1634fd, type: 3}
+  m_Texture: {fileID: 2800000, guid: 9837737d0a9fbec4bb2dcfc7ad0d6e9a, type: 3}
   _outlineWidth: 161
-  _cornerRadius: 18
+  _cornerRadius: 21
   _cornerSegments: 9
   _mappingBias: 0.29
   _fillCenter: 0
@@ -392,7 +392,37 @@ PrefabInstance:
         type: 3}
       propertyPath: highlight
       value: 
-      objectReference: {fileID: 4452234658373327730}
+      objectReference: {fileID: 3161912680180383581}
+    - target: {fileID: 1843335791992905390, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
+        type: 3}
+      propertyPath: defaultColour.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843335791992905390, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
+        type: 3}
+      propertyPath: defaultColour.b
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843335791992905390, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
+        type: 3}
+      propertyPath: defaultColour.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843335791992905390, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
+        type: 3}
+      propertyPath: selectedColour.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843335791992905390, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
+        type: 3}
+      propertyPath: selectedColour.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843335791992905390, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
+        type: 3}
+      propertyPath: selectedColour.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2054098631275775626, guid: 0c11f1835954e6343b7d0c2cb1e78a8a,
         type: 3}
       propertyPath: m_RootOrder
